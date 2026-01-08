@@ -60,7 +60,7 @@ FollowPath.Builder pathBuilder = new FollowPath.Builder(
     driveSubsystem::getChassisSpeeds,    // Supplier for current speeds
     driveSubsystem::drive,               // Consumer to drive the robot
     new PIDController(5.0, 0.0, 0.0),    // Translation PID
-    new PIDController(3.0, 0.0, 0.0),    // Rotation PID
+    new PIDController(5.0, 0.0, 0.0),    // Rotation PID
     new PIDController(2.0, 0.0, 0.0)     // Cross-track PID
 ).withDefaultShouldFlip()                // Auto-flip for red alliance
  .withPoseReset(driveSubsystem::resetPose);  // Reset odometry at path start
@@ -106,7 +106,7 @@ Add the follow command to your autonomous routine:
 ```java
 public Command getAutonomousCommand() {
     Path scorePath = new Path("scoreFirst");
-    Path pickupPath = new Path("pickupSecond");
+    Path pickupPath = new Path("intake");
     
     return Commands.sequence(
         pathBuilder.build(scorePath),

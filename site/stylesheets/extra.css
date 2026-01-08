@@ -1,0 +1,500 @@
+/* ===========================================
+   BLine Documentation - Custom Styles
+   =========================================== */
+
+/* -----------------------------------------
+   LEFT SIDEBAR NAVIGATION
+   ----------------------------------------- */
+
+/* Left sidebar styling */
+.md-sidebar--primary {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Remove any visible top border/padding on sidebars */
+.md-sidebar {
+  border-top: none !important;
+  padding-top: 0 !important;
+}
+
+/* Vertical divider line - left sidebar */
+.md-sidebar--primary .md-sidebar__scrollwrap {
+  border-right: 1px solid var(--md-default-fg-color--lighter);
+}
+
+/* Vertical divider line - right sidebar (more subtle) */
+.md-sidebar--secondary .md-sidebar__scrollwrap {
+  border-left: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* Left sidebar background - subtle distinction */
+[data-md-color-scheme="default"] .md-sidebar--primary .md-sidebar__scrollwrap {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-sidebar__scrollwrap {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Right sidebar (TOC) background - even more subtle */
+[data-md-color-scheme="default"] .md-sidebar--secondary .md-sidebar__scrollwrap {
+  background: rgba(0, 0, 0, 0.008);
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-sidebar__scrollwrap {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Left sidebar title (BLine Documentation) - remove box styling */
+.md-nav--primary > .md-nav__title {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Remove the weird box on the title icon/label area */
+.md-nav--primary > .md-nav__title .md-nav__icon,
+.md-nav--primary > .md-nav__title[for="__drawer"] {
+  display: none;
+}
+
+/* Remove any box artifacts from nested nav titles */
+.md-nav__title {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Fix the label element that creates visible boxes */
+label.md-nav__title {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+[data-md-color-scheme="slate"] .md-nav__title {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Navigation list reset */
+.md-nav--primary .md-nav__list {
+  padding: 0.25rem 0;
+}
+
+/* Navigation items spacing */
+.md-nav--primary .md-nav__item {
+  padding: 0;
+}
+
+/* Section labels (GETTING STARTED, CONCEPTS, etc.) */
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--md-default-fg-color--light);
+  padding: 0.6rem 0.6rem 0.3rem 0.6rem;
+  margin-top: 0.3rem;
+}
+
+/* First section label - reduced top spacing */
+.md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav__link {
+  margin-top: 0.2rem;
+  padding-top: 0.4rem;
+}
+
+/* Section labels shouldn't have hover effects */
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link:hover {
+  background: none;
+  color: var(--md-accent-fg-color);
+}
+
+/* Nested navigation links (actual page links) */
+.md-nav--primary .md-nav__item .md-nav__link {
+  font-size: 0.8rem;
+  font-weight: 400;
+  padding: 0.4rem 0.6rem 0.4rem 1rem;
+  border-radius: 0.25rem;
+  margin: 0.1rem 0.4rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Hover state for nav links */
+.md-nav--primary .md-nav__item .md-nav__link:hover {
+  background-color: var(--md-accent-fg-color--transparent);
+}
+
+/* Active page link */
+.md-nav__link--active {
+  background-color: var(--md-accent-fg-color--transparent) !important;
+  color: var(--md-accent-fg-color) !important;
+  font-weight: 500 !important;
+  border-left: 3px solid var(--md-accent-fg-color);
+  padding-left: calc(1rem - 3px) !important;
+  margin-left: 0.4rem !important;
+}
+
+/* Remove default MkDocs active underline */
+.md-nav__link--active::after {
+  display: none;
+}
+
+/* -----------------------------------------
+   RIGHT SIDEBAR (TABLE OF CONTENTS)
+   ----------------------------------------- */
+
+/* TOC sidebar styling */
+.md-sidebar--secondary {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Hide any visual artifacts at top of sidebars */
+.md-sidebar--secondary::before,
+.md-sidebar--primary::before {
+  content: none;
+  display: none;
+}
+
+/* Ensure no box-shadow on sidebars */
+.md-sidebar,
+.md-sidebar--primary,
+.md-sidebar--secondary {
+  box-shadow: none !important;
+}
+
+/* TOC title - remove box styling */
+.md-nav--secondary > .md-nav__title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--md-default-fg-color--light);
+  padding: 0.6rem;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Remove any label/button boxes in sidebars */
+.md-nav__title .md-nav__button {
+  display: none;
+}
+
+/* Sidebar inner container */
+.md-sidebar__scrollwrap {
+  margin: 0;
+  padding: 0;
+}
+
+.md-sidebar__inner {
+  padding-top: 0.5rem;
+  padding-bottom: 2rem;
+}
+
+/* Remove top margin/padding from nav in sidebar */
+.md-sidebar .md-nav {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Ensure sidebar content starts at the top edge */
+.md-sidebar[style*="top"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* TOC links */
+.md-nav--secondary .md-nav__link {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.25rem;
+  margin: 0.05rem 0.3rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.md-nav--secondary .md-nav__link:hover {
+  background-color: var(--md-accent-fg-color--transparent);
+}
+
+/* Active TOC item */
+.md-nav--secondary .md-nav__link--active {
+  background-color: var(--md-accent-fg-color--transparent);
+  color: var(--md-accent-fg-color);
+  font-weight: 500;
+  border-left: 2px solid var(--md-accent-fg-color);
+  padding-left: calc(0.6rem - 2px);
+  margin-left: 0.3rem;
+}
+
+/* -----------------------------------------
+   MAIN CONTENT AREA
+   ----------------------------------------- */
+
+/* Content headings */
+.md-content h1 {
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--md-default-fg-color);
+}
+
+.md-content h2 {
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color);
+}
+
+.md-content h3 {
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--md-default-fg-color);
+}
+
+.md-content h4 {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+  color: var(--md-default-fg-color--light);
+}
+
+/* -----------------------------------------
+   CODE BLOCKS
+   ----------------------------------------- */
+
+/* Inline code */
+.md-typeset code {
+  background-color: var(--md-code-bg-color);
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.2rem;
+  font-size: 0.85em;
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* Code blocks */
+.md-typeset pre > code {
+  border-radius: 0.4rem;
+  padding: 0.8rem 1rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* -----------------------------------------
+   TABLES
+   ----------------------------------------- */
+
+.md-typeset table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset thead th {
+  background-color: var(--md-default-fg-color--lightest);
+  font-weight: 600;
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+}
+
+.md-typeset tbody td {
+  padding: 0.5rem 0.8rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset tbody tr:hover {
+  background-color: var(--md-code-bg-color);
+}
+
+/* -----------------------------------------
+   ADMONITIONS (NOTE, TIP, WARNING, etc.)
+   ----------------------------------------- */
+
+.md-typeset .admonition {
+  border-radius: 0.4rem;
+  border-left-width: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.md-typeset .admonition-title {
+  font-weight: 600;
+}
+
+/* -----------------------------------------
+   BUTTONS
+   ----------------------------------------- */
+
+.md-button {
+  border-radius: 0.4rem;
+  font-weight: 500;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.md-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* -----------------------------------------
+   SCROLLBAR (WEBKIT)
+   ----------------------------------------- */
+
+.md-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.md-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.md-sidebar::-webkit-scrollbar-thumb {
+  background-color: var(--md-default-fg-color--lighter);
+  border-radius: 2px;
+}
+
+.md-sidebar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--md-accent-fg-color);
+}
+
+/* -----------------------------------------
+   RESPONSIVE / SCALING FIXES
+   ----------------------------------------- */
+
+/* Ensure sidebars don't break layout */
+.md-sidebar {
+  width: 12.1rem;
+  flex-shrink: 0;
+}
+
+/* On smaller screens, let content flow better */
+@media screen and (max-width: 76.1875em) {
+  .md-sidebar--secondary {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 60em) {
+  .md-sidebar--primary {
+    width: 12.1rem;
+  }
+  
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    border-right: none;
+    background: transparent !important;
+  }
+}
+
+/* Ensure main content scales properly */
+.md-main__inner {
+  max-width: 100%;
+}
+
+.md-content {
+  max-width: 100%;
+}
+
+/* -----------------------------------------
+   GIF LAZY LOADING
+   ----------------------------------------- */
+
+/* Wrapper for GIF images */
+.gif-wrapper {
+  position: relative;
+  display: inline-block;
+  background: var(--md-code-bg-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  min-height: 200px;
+  min-width: 300px;
+}
+
+/* GIF image before loading */
+.gif-lazy {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* GIF image after loading */
+.gif-lazy.gif-loaded {
+  opacity: 1;
+}
+
+/* Play icon overlay */
+.gif-play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  background: var(--md-primary-fg-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  opacity: 0.9;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.gif-play-icon svg {
+  width: 32px;
+  height: 32px;
+  margin-left: 4px; /* Optical centering for play icon */
+}
+
+/* Hide play icon when GIF is playing */
+.gif-wrapper.gif-playing .gif-play-icon {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+  pointer-events: none;
+}
+
+/* Loading shimmer animation */
+.gif-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  animation: gif-shimmer 1.5s infinite;
+}
+
+.gif-wrapper.gif-playing::before {
+  display: none;
+}
+
+@keyframes gif-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Ensure GIF images display properly */
+.gif-wrapper img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}

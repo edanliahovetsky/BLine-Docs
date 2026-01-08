@@ -14,7 +14,7 @@ FollowPath.Builder pathBuilder = new FollowPath.Builder(
     driveSubsystem::getChassisSpeeds,    // Current speeds supplier
     driveSubsystem::drive,               // Drive consumer
     new PIDController(5.0, 0.0, 0.0),    // Translation controller
-    new PIDController(3.0, 0.0, 0.0),    // Rotation controller
+    new PIDController(5.0, 0.0, 0.0),    // Rotation controller
     new PIDController(2.0, 0.0, 0.0)     // Cross-track controller
 );
 ```
@@ -54,7 +54,7 @@ Controls the robot's **holonomic rotation** toward rotation targets.
 - **Tuning**: Higher P = faster rotation response
 
 ```java
-new PIDController(3.0, 0.0, 0.0)  // Typical starting point
+new PIDController(5.0, 0.0, 0.0)  // Typical starting point
 ```
 
 ### Cross-Track Controller
@@ -135,7 +135,7 @@ public class RobotContainer {
             driveSubsystem::getChassisSpeeds,
             driveSubsystem::drive,
             new PIDController(5.0, 0.0, 0.0),
-            new PIDController(3.0, 0.0, 0.0),
+            new PIDController(5.0, 0.0, 0.0),
             new PIDController(2.0, 0.0, 0.0)
         ).withDefaultShouldFlip()
          .withPoseReset(driveSubsystem::resetPose);
@@ -173,7 +173,7 @@ public class RobotContainer {
 
 ### Rotation Controller
 
-1. Start with P = 3.0, I = 0, D = 0
+1. Start with P = 5.0, I = 0, D = 0
 2. Increase P until rotation is responsive but not oscillating
 3. Add D if you see overshoot on rotation targets
 

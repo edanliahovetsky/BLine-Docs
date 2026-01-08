@@ -71,7 +71,7 @@ FollowPath.Builder pathBuilder = new FollowPath.Builder(
     driveSubsystem::getChassisSpeeds,
     driveSubsystem::drive,
     new PIDController(5.0, 0.0, 0.0),
-    new PIDController(3.0, 0.0, 0.0),
+    new PIDController(5.0, 0.0, 0.0),
     new PIDController(2.0, 0.0, 0.0)
 ).withDefaultShouldFlip()
  .withPoseReset(driveSubsystem::resetPose);

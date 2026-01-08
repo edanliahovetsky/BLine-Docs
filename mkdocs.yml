@@ -43,6 +43,9 @@ extra:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/gif-lazy-load.js
+
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true

@@ -3,13 +3,13 @@
 #
 # GUI demos:
 - gui-demo.gif           - Overall GUI demonstration
-# - canvas-zoom.gif        - Zooming in/out
-# - canvas-pan.gif         - Panning the view
-# - canvas-drag.gif        - Dragging elements
-# - rotation-handle.gif    - Adjusting rotation handles
-# - rotation-target-drag.gif - Moving rotation targets along segments
-# - handoff-radius-canvas.gif - Handoff radius visualization
-# - constraint-overlay.gif - Constraint range visualization
+- canvas-zoom.gif        - Zooming in/out
+- canvas-pan.gif         - Panning the view
+- canvas-drag.gif        - Dragging elements
+- rotation-handle.gif    - Adjusting rotation handles
+- rotation-target-drag.gif - Moving rotation targets along segments
+- handoff-radius-canvas.gif - Handoff radius visualization
+- constraint-overlay.gif - Constraint range visualization
 #
 # Sidebar demos:
 # - sidebar-elements.gif   - Elements panel overview

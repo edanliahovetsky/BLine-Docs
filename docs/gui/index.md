@@ -91,7 +91,7 @@ my_project/
 ├── config.json          # Global constraints and robot config
 └── paths/
     ├── score_first.json
-    ├── pickup_second.json
+    ├── intake.json
     └── ...
 ```
 
