@@ -61,13 +61,13 @@ The PID controllers should be tuned in the following order: translation, rotatio
 The translation controller minimizes total path distance remaining.
 
 !!! warning "Controller Instability"
-    Avoid using the PID integral term for the translation controller. Use the integral term will cause translation controller instability. Integral term use in other controllers (Rotation and Cross-Track) is fine. 
+    Avoid using the PID integral term for the translation controller. Using the integral term will cause translation controller instability. Integral term use in other controllers (Rotation and Cross-Track) is fine. 
 
 **Starting gains:** P = 5.0, I = 0.0, D = 0.0
 
 ### Rotation Controller
 
-Controls minimizes error in holonomic heading (rotation).
+Minimizes error in holonomic heading (rotation).
 
 **Starting gains:** P = 3.0, I = 0.0, D = 0.0
 
@@ -76,7 +76,7 @@ Controls minimizes error in holonomic heading (rotation).
 Keeps the robot on the line between waypoints or translation targets. It should be used to reduce path deviation in longer path segments over time, rather than on sharp turns. 
 
 !!! warning "Controller Instability"
-    Be weary of cross-track controller over-tuning (were the controller overpowers the translation controller). An over-tuned cross track controller will cause undesirable behavior around turns, especially during high velocities. 
+    Be wary of cross-track controller over-tuning (where the controller overpowers the translation controller). An over-tuned cross-track controller will cause undesirable behavior around turns, especially during high velocities. 
 
 **Starting gains:** P = 2.0, I = 0.0, D = 0.0
 

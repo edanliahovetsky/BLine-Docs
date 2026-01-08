@@ -62,7 +62,7 @@ Waypoint(Pose2d pose)
     "translation_target": {
         "x_meters": 1.0,
         "y_meters": 1.0,
-        "intermediate_handoff_radius_meters": 0.3
+        "intermediate_handoff_radius_meters": 0.2
     },
     "rotation_target": {
         "rotation_radians": 0,
@@ -94,7 +94,7 @@ TranslationTarget(double x, double y)
     "type": "translation",
     "x_meters": 2.5,
     "y_meters": 2.0,
-    "intermediate_handoff_radius_meters": 0.3
+    "intermediate_handoff_radius_meters": 0.2
 }
 ```
 
@@ -238,13 +238,13 @@ Global configuration file (`src/main/deploy/autos/config.json`):
 
 ```json
 {
-    "default_max_velocity_meters_per_sec": 4.0,
-    "default_max_acceleration_meters_per_sec2": 3.0,
-    "default_max_velocity_deg_per_sec": 360.0,
-    "default_max_acceleration_deg_per_sec2": 720.0,
-    "default_end_translation_tolerance_meters": 0.05,
+    "default_max_velocity_meters_per_sec": 4.5,
+    "default_max_acceleration_meters_per_sec2": 12.0,
+    "default_max_velocity_deg_per_sec": 540,
+    "default_max_acceleration_deg_per_sec2": 860,
+    "default_end_translation_tolerance_meters": 0.03,
     "default_end_rotation_tolerance_deg": 2.0,
-    "default_intermediate_handoff_radius_meters": 0.3
+    "default_intermediate_handoff_radius_meters": 0.2
 }
 ```
 
@@ -260,15 +260,15 @@ Complete path file format (`src/main/deploy/autos/paths/*.json`):
         // Array of path elements (waypoint, translation, rotation)
     ],
     "constraints": {
-        "max_velocity_meters_per_sec": 4.0,
+        "max_velocity_meters_per_sec": 4.5,
         // Or ranged:
         "max_velocity_meters_per_sec": [
-            { "value": 4.0, "start_ordinal": 0, "end_ordinal": 1 }
+            { "value": 4.5, "start_ordinal": 0, "end_ordinal": 1 }
         ],
-        "max_acceleration_meters_per_sec2": 3.0,
-        "max_velocity_deg_per_sec": 360.0,
-        "max_acceleration_deg_per_sec2": 720.0,
-        "end_translation_tolerance_meters": 0.05,
+        "max_acceleration_meters_per_sec2": 12.0,
+        "max_velocity_deg_per_sec": 540,
+        "max_acceleration_deg_per_sec2": 860,
+        "end_translation_tolerance_meters": 0.03,
         "end_rotation_tolerance_deg": 2.0
     }
 }

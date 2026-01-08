@@ -6,35 +6,16 @@ BLine-Lib is the Java library that powers path following on your FRC robot. It l
 
 - **Simple API**: Minimal boilerplate to get paths running
 - **Flexible path definition**: JSON files, code, or both
-- **Automatic alliance flipping**: Paths work for both red and blue alliances
 - **Customizable constraints**: Global defaults with per-path and per-segment overrides
 - **Rate-limited motion**: Smooth velocity and acceleration control
 
 ## Architecture
 
-BLine-Lib consists of three main components:
+BLine-Lib follows a simple flow: **Builder → Path → FollowPath**
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                         Path                                 │
-│  Defines waypoints, translation targets, rotation targets    │
-│  Loaded from JSON or constructed in code                     │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                      FollowPath                              │
-│  Command that executes path following                        │
-│  Uses PID controllers for translation, rotation, cross-track │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   ChassisRateLimiter                         │
-│  Enforces velocity and acceleration constraints              │
-│  Applied per-element based on ranged constraints             │
-└─────────────────────────────────────────────────────────────┘
-```
+1. **Builder** — Configure PID controllers, pose suppliers, and drive callbacks once
+2. **Path** — Define waypoints, translation targets, and rotation targets (from JSON or code)
+3. **FollowPath** — Execute path following as a WPILib Command with rate-limited motion
 
 ## Tracking Algorithm
 
@@ -72,7 +53,7 @@ import edu.wpi.first.math.controller.PIDController;
 
 // 1. Set global constraints (once, at robot init)
 Path.setDefaultGlobalConstraints(new Path.DefaultGlobalConstraints(
-    4.0, 3.0, 360.0, 720.0, 0.05, 2.0, 0.3
+    4.5, 12.0, 540, 860, 0.03, 2.0, 0.2
 ));
 
 // 2. Create a FollowPath builder
@@ -82,7 +63,7 @@ FollowPath.Builder pathBuilder = new FollowPath.Builder(
     driveSubsystem::getChassisSpeeds,
     driveSubsystem::drive,
     new PIDController(5.0, 0.0, 0.0),
-    new PIDController(5.0, 0.0, 0.0),
+    new PIDController(3.0, 0.0, 0.0),
     new PIDController(2.0, 0.0, 0.0)
 ).withDefaultShouldFlip()
  .withPoseReset(driveSubsystem::resetPose);

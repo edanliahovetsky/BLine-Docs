@@ -14,7 +14,7 @@ FollowPath.Builder pathBuilder = new FollowPath.Builder(
     driveSubsystem::getChassisSpeeds,    // Current speeds supplier
     driveSubsystem::drive,               // Drive consumer
     new PIDController(5.0, 0.0, 0.0),    // Translation controller
-    new PIDController(5.0, 0.0, 0.0),    // Rotation controller
+    new PIDController(3.0, 0.0, 0.0),    // Rotation controller
     new PIDController(2.0, 0.0, 0.0)     // Cross-track controller
 );
 ```
@@ -54,7 +54,7 @@ Controls the robot's **holonomic rotation** toward rotation targets.
 - **Tuning**: Higher P = faster rotation response
 
 ```java
-new PIDController(5.0, 0.0, 0.0)  // Typical starting point
+new PIDController(3.0, 0.0, 0.0)  // Typical starting point
 ```
 
 ### Cross-Track Controller
@@ -122,7 +122,6 @@ Command followCommand = pathBuilder.build(myPath);
 The returned command:
 
 - Requires the drive subsystem
-- **Runs to completion** — cannot be stopped midway through the path
 - Runs until the robot reaches the end tolerances
 - Stops the drivetrain when finished
 
@@ -147,7 +146,7 @@ public class RobotContainer {
     public RobotContainer() {
         // Set global constraints
         Path.setDefaultGlobalConstraints(new Path.DefaultGlobalConstraints(
-            4.0, 3.0, 360.0, 720.0, 0.05, 2.0, 0.3
+            4.5, 12.0, 540, 860, 0.03, 2.0, 0.2
         ));
         
         // Create path builder
@@ -157,7 +156,7 @@ public class RobotContainer {
             driveSubsystem::getChassisSpeeds,
             driveSubsystem::drive,
             new PIDController(5.0, 0.0, 0.0),
-            new PIDController(5.0, 0.0, 0.0),
+            new PIDController(3.0, 0.0, 0.0),
             new PIDController(2.0, 0.0, 0.0)
         ).withDefaultShouldFlip()
          .withPoseReset(driveSubsystem::resetPose);
@@ -186,24 +185,33 @@ public class RobotContainer {
     
     Always tune within the full operating range of velocities and accelerations.
 
+### Tuning Order
+
+The PID controllers should be tuned in the following order: translation, rotation, and finally cross-track.
+
 ### Translation Controller
 
-1. Start with P = 5.0, I = 0, D = 0
-2. Increase P until the robot accelerates aggressively toward targets
-3. If you see oscillation near endpoints, add small D (0.1-0.5)
-4. I is rarely needed for path following
+The translation controller minimizes total path distance remaining.
+
+!!! warning "Controller Instability"
+    Avoid using the PID integral term for the translation controller. Using the integral term will cause translation controller instability. Integral term use in other controllers (Rotation and Cross-Track) is fine.
+
+**Starting gains:** P = 5.0, I = 0.0, D = 0.0
 
 ### Rotation Controller
 
-1. Start with P = 5.0, I = 0, D = 0
-2. Increase P until rotation is responsive but not oscillating
-3. Add D if you see overshoot on rotation targets
+Minimizes error in holonomic heading (rotation).
+
+**Starting gains:** P = 3.0, I = 0.0, D = 0.0
 
 ### Cross-Track Controller
 
-1. Start with P = 2.0, I = 0, D = 0
-2. Lower P if the robot fights itself on curved sections
-3. Higher P keeps the robot closer to the line but may cause jitter
+Keeps the robot on the line between waypoints or translation targets. It should be used to reduce path deviation in longer path segments over time, rather than on sharp turns.
+
+!!! warning "Controller Instability"
+    Be wary of cross-track controller over-tuning (where the controller overpowers the translation controller). An over-tuned cross-track controller will cause undesirable behavior around turns, especially during high velocities.
+
+**Starting gains:** P = 2.0, I = 0.0, D = 0.0
 
 ## Logging
 
@@ -220,7 +228,7 @@ FollowPath.Builder pathBuilder = new FollowPath.Builder(
     driveSubsystem::getChassisSpeeds,
     driveSubsystem::drive,
     new PIDController(5.0, 0.0, 0.0),
-    new PIDController(5.0, 0.0, 0.0),
+    new PIDController(3.0, 0.0, 0.0),
     new PIDController(2.0, 0.0, 0.0)
 ).withLoggingConsumer((key, value) -> {
     // Example: AdvantageKit logging

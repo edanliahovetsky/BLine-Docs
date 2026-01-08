@@ -25,13 +25,13 @@ Create a `config.json` file in `src/main/deploy/autos/`:
 
 ```json
 {
-    "default_max_velocity_meters_per_sec": 4.0,
-    "default_max_acceleration_meters_per_sec2": 3.0,
-    "default_max_velocity_deg_per_sec": 360.0,
-    "default_max_acceleration_deg_per_sec2": 720.0,
-    "default_end_translation_tolerance_meters": 0.05,
+    "default_max_velocity_meters_per_sec": 4.5,
+    "default_max_acceleration_meters_per_sec2": 12.0,
+    "default_max_velocity_deg_per_sec": 540,
+    "default_max_acceleration_deg_per_sec2": 860,
+    "default_end_translation_tolerance_meters": 0.03,
     "default_end_rotation_tolerance_deg": 2.0,
-    "default_intermediate_handoff_radius_meters": 0.3
+    "default_intermediate_handoff_radius_meters": 0.2
 }
 ```
 
@@ -41,13 +41,13 @@ Set global constraints programmatically in your robot initialization:
 
 ```java
 Path.setDefaultGlobalConstraints(new Path.DefaultGlobalConstraints(
-    4.0,    // maxVelocityMetersPerSec
-    3.0,    // maxAccelerationMetersPerSec2
-    360.0,  // maxVelocityDegPerSec
-    720.0,  // maxAccelerationDegPerSec2
-    0.05,   // endTranslationToleranceMeters
+    4.5,    // maxVelocityMetersPerSec
+    12.0,   // maxAccelerationMetersPerSec2
+    540,    // maxVelocityDegPerSec
+    860,    // maxAccelerationDegPerSec2
+    0.03,   // endTranslationToleranceMeters
     2.0,    // endRotationToleranceDeg
-    0.3     // intermediateHandoffRadiusMeters
+    0.2     // intermediateHandoffRadiusMeters
 ));
 ```
 
@@ -128,13 +128,13 @@ Paths can have **multiple ranged constraints of the same type**, allowing fine-g
     "path_elements": [...],
     "constraints": {
         "max_velocity_meters_per_sec": [
-            { "value": 4.0, "start_ordinal": 0, "end_ordinal": 1 },
+            { "value": 4.5, "start_ordinal": 0, "end_ordinal": 1 },
             { "value": 1.5, "start_ordinal": 2, "end_ordinal": 3 }
         ],
         "max_velocity_deg_per_sec": [
-            { "value": 360.0, "start_ordinal": 0, "end_ordinal": 3 }
+            { "value": 540, "start_ordinal": 0, "end_ordinal": 3 }
         ],
-        "end_translation_tolerance_meters": 0.05,
+        "end_translation_tolerance_meters": 0.03,
         "end_rotation_tolerance_deg": 2.0
     }
 }
@@ -145,11 +145,11 @@ Paths can have **multiple ranged constraints of the same type**, allowing fine-g
 ```java
 Path.PathConstraints constraints = new Path.PathConstraints()
     .setMaxVelocityMetersPerSec(
-        new Path.RangedConstraint(4.0, 0, 1),   // Fast approach (ordinals 0-1)
+        new Path.RangedConstraint(4.5, 0, 1),   // Fast approach (ordinals 0-1)
         new Path.RangedConstraint(1.5, 2, 3)    // Slow precision (ordinals 2-3)
     )
     .setMaxVelocityDegPerSec(
-        new Path.RangedConstraint(360.0, 0, Integer.MAX_VALUE)  // Apply to all
+        new Path.RangedConstraint(540, 0, Integer.MAX_VALUE)  // Apply to all
     );
 ```
 

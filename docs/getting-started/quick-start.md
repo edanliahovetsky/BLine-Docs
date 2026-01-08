@@ -19,10 +19,10 @@ Global constraints define default velocity/acceleration limits and tolerances fo
     ```json
     {
         "default_max_velocity_meters_per_sec": 4.5,
-        "default_max_acceleration_meters_per_sec2": 11.0,
-        "default_max_velocity_deg_per_sec": 600.0,
-        "default_max_acceleration_deg_per_sec2": 1500.0,
-        "default_end_translation_tolerance_meters": 0.05,
+        "default_max_acceleration_meters_per_sec2": 12.0,
+        "default_max_velocity_deg_per_sec": 540,
+        "default_max_acceleration_deg_per_sec2": 860,
+        "default_end_translation_tolerance_meters": 0.03,
         "default_end_rotation_tolerance_deg": 2.0,
         "default_intermediate_handoff_radius_meters": 0.2
     }
@@ -36,10 +36,10 @@ Global constraints define default velocity/acceleration limits and tolerances fo
     // Set global constraints before creating any paths
     Path.setDefaultGlobalConstraints(new Path.DefaultGlobalConstraints(
         4.5,    // maxVelocityMetersPerSec
-        11.0,   // maxAccelerationMetersPerSec2
-        600.0,  // maxVelocityDegPerSec
-        1500.0, // maxAccelerationDegPerSec2
-        0.05,   // endTranslationToleranceMeters
+        12.0,   // maxAccelerationMetersPerSec2
+        540,    // maxVelocityDegPerSec
+        860,    // maxAccelerationDegPerSec2
+        0.03,   // endTranslationToleranceMeters
         2.0,    // endRotationToleranceDeg
         0.2     // intermediateHandoffRadiusMeters
     ));
@@ -60,7 +60,7 @@ FollowPath.Builder pathBuilder = new FollowPath.Builder(
     driveSubsystem::getChassisSpeeds,    // Supplier for current speeds
     driveSubsystem::drive,               // Consumer to drive the robot
     new PIDController(5.0, 0.0, 0.0),    // Translation PID
-    new PIDController(5.0, 0.0, 0.0),    // Rotation PID
+    new PIDController(3.0, 0.0, 0.0),    // Rotation PID
     new PIDController(2.0, 0.0, 0.0)     // Cross-track PID
 ).withDefaultShouldFlip()                // Auto-flip for red alliance
  .withPoseReset(driveSubsystem::resetPose);  // Reset odometry at path start

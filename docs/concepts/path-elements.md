@@ -53,7 +53,7 @@ new Path.Waypoint(new Pose2d(1.0, 1.0, new Rotation2d(0)))
     "translation_target": {
         "x_meters": 1.0,
         "y_meters": 1.0,
-        "intermediate_handoff_radius_meters": 0.3
+        "intermediate_handoff_radius_meters": 0.2
     },
     "rotation_target": {
         "rotation_radians": 0,
@@ -91,7 +91,7 @@ new Path.TranslationTarget(2.0, 2.0)
     "type": "translation",
     "x_meters": 2.5,
     "y_meters": 2.0,
-    "intermediate_handoff_radius_meters": 0.3
+    "intermediate_handoff_radius_meters": 0.2
 }
 ```
 

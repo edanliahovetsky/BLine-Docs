@@ -26,7 +26,7 @@ Paths are loaded from `src/main/deploy/autos/paths/` by default.
             "translation_target": {
                 "x_meters": 1.0,
                 "y_meters": 1.0,
-                "intermediate_handoff_radius_meters": 0.3
+                "intermediate_handoff_radius_meters": 0.2
             },
             "rotation_target": {
                 "rotation_radians": 0,
@@ -37,7 +37,7 @@ Paths are loaded from `src/main/deploy/autos/paths/` by default.
             "type": "translation",
             "x_meters": 2.5,
             "y_meters": 2.0,
-            "intermediate_handoff_radius_meters": 0.3
+            "intermediate_handoff_radius_meters": 0.2
         },
         {
             "type": "rotation",
@@ -59,11 +59,11 @@ Paths are loaded from `src/main/deploy/autos/paths/` by default.
     ],
     "constraints": {
         "max_velocity_meters_per_sec": [
-            { "value": 4.0, "start_ordinal": 0, "end_ordinal": 1 },
+            { "value": 4.5, "start_ordinal": 0, "end_ordinal": 1 },
             { "value": 2.0, "start_ordinal": 2, "end_ordinal": 3 }
         ],
-        "max_acceleration_meters_per_sec2": 3.0,
-        "end_translation_tolerance_meters": 0.05,
+        "max_acceleration_meters_per_sec2": 12.0,
+        "end_translation_tolerance_meters": 0.03,
         "end_rotation_tolerance_deg": 2.0
     }
 }
@@ -79,7 +79,7 @@ Paths are loaded from `src/main/deploy/autos/paths/` by default.
         "translation_target": {
             "x_meters": 1.0,
             "y_meters": 1.0,
-            "intermediate_handoff_radius_meters": 0.3
+            "intermediate_handoff_radius_meters": 0.2
         },
         "rotation_target": {
             "rotation_radians": 0,
@@ -95,7 +95,7 @@ Paths are loaded from `src/main/deploy/autos/paths/` by default.
         "type": "translation",
         "x_meters": 2.5,
         "y_meters": 2.0,
-        "intermediate_handoff_radius_meters": 0.3
+        "intermediate_handoff_radius_meters": 0.2
     }
     ```
 
@@ -204,13 +204,13 @@ Create `src/main/deploy/autos/config.json`:
 
 ```json
 {
-    "default_max_velocity_meters_per_sec": 4.0,
-    "default_max_acceleration_meters_per_sec2": 3.0,
-    "default_max_velocity_deg_per_sec": 360.0,
-    "default_max_acceleration_deg_per_sec2": 720.0,
-    "default_end_translation_tolerance_meters": 0.05,
+    "default_max_velocity_meters_per_sec": 4.5,
+    "default_max_acceleration_meters_per_sec2": 12.0,
+    "default_max_velocity_deg_per_sec": 540,
+    "default_max_acceleration_deg_per_sec2": 860,
+    "default_end_translation_tolerance_meters": 0.03,
     "default_end_rotation_tolerance_deg": 2.0,
-    "default_intermediate_handoff_radius_meters": 0.3
+    "default_intermediate_handoff_radius_meters": 0.2
 }
 ```
 
@@ -218,13 +218,13 @@ Create `src/main/deploy/autos/config.json`:
 
 ```java
 Path.setDefaultGlobalConstraints(new Path.DefaultGlobalConstraints(
-    4.0,    // maxVelocityMetersPerSec
-    3.0,    // maxAccelerationMetersPerSec2
-    360.0,  // maxVelocityDegPerSec
-    720.0,  // maxAccelerationDegPerSec2
-    0.05,   // endTranslationToleranceMeters
+    4.5,    // maxVelocityMetersPerSec
+    12.0,   // maxAccelerationMetersPerSec2
+    540,    // maxVelocityDegPerSec
+    860,    // maxAccelerationDegPerSec2
+    0.03,   // endTranslationToleranceMeters
     2.0,    // endRotationToleranceDeg
-    0.3     // intermediateHandoffRadiusMeters
+    0.2     // intermediateHandoffRadiusMeters
 ));
 ```
 

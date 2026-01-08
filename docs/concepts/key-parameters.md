@@ -37,7 +37,7 @@ When the robot enters the handoff radius of the current target, the path followe
 
 ```json
 {
-    "default_intermediate_handoff_radius_meters": 0.3
+    "default_intermediate_handoff_radius_meters": 0.2
 }
 ```
 
@@ -150,7 +150,7 @@ Path.PathConstraints constraints = new Path.PathConstraints()
 ```json
 {
     "constraints": {
-        "end_translation_tolerance_meters": 0.05,
+        "end_translation_tolerance_meters": 0.03,
         "end_rotation_tolerance_deg": 2.0
     }
 }
