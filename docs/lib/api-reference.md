@@ -229,6 +229,21 @@ Builder(
 | `withPoseReset` | `Consumer<Pose2d>` | Reset pose at path start |
 | `withDefaultShouldFlip` | — | Auto-flip based on alliance |
 | `withShouldFlip` | `Supplier<Boolean>` | Custom flip logic |
+| `withLoggingConsumer` | `BiConsumer<String, Double>` | Consumer for logging internal state |
+
+---
+
+## FollowPath Command
+
+The command returned by `FollowPath.Builder.build()` provides access to internal state for logging and triggers.
+
+### Instance Methods
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `getDistanceRemaining()` | `double` | Distance to path end (meters) |
+| `getCrossTrackError()` | `double` | Current cross-track error (meters) |
+| `getCurrentSegmentIndex()` | `int` | Index of current path segment |
 
 ---
 

@@ -2,7 +2,7 @@
 
 **BLine** is an open-source path generation and tracking suite designed for **holonomic drivetrains** (swerve, mecanum, etc.) made by students for students. It's built around simplicity and performance in time-constrained environments where quick iteration and rapid empirical testing prove advantageous.
 
-BLine offers the advantages of simplicity, easy tunability, and excellent real time performance while performing at a the same (or potentially better) level as other autonomous solutions. 
+BLine offers the advantages of simplicity, easy tunability, and excellent real time performance while performing at the same (or potentially better) level as other autonomous solutions. 
 
 ![Robot Demo](assets/gifs/robot-demos/cone-demo.gif)
 

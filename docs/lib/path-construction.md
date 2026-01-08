@@ -194,6 +194,34 @@ Path variedPath = new Path(
 );
 ```
 
+## Ordinal Indexing for Ranged Constraints
+
+!!! warning "Important: Separate Ordinal Counters"
+    Translation and rotation ordinals are tracked **separately**:
+
+    - **Translation ordinal** increments for each `TranslationTarget` and each `Waypoint`
+    - **Rotation ordinal** increments for each `RotationTarget` and each `Waypoint`
+
+This means a `Waypoint` (which contains both translation and rotation) increments **both** counters, while standalone `TranslationTarget` and `RotationTarget` elements only increment their respective counter.
+
+**Example ordinal assignment:**
+
+| Path Element | Translation Ordinal | Rotation Ordinal |
+|--------------|:-------------------:|:----------------:|
+| Waypoint (start) | 0 | 0 |
+| TranslationTarget | 1 | — |
+| RotationTarget (t_ratio=0.5) | — | 1 |
+| TranslationTarget | 2 | — |
+| Waypoint (end) | 3 | 2 |
+
+When the path follower processes each element, it checks if any ranged constraint applies by testing:
+
+```
+startOrdinal <= currentOrdinal && endOrdinal >= currentOrdinal
+```
+
+If a constraint matches, that value is used; otherwise, the global default is applied.
+
 ## Global Constraints
 
 Set default constraints that apply to all paths when no path-specific constraint is set.

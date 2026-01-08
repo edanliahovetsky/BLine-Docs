@@ -75,7 +75,7 @@ The tracking control loop runs all three PID controllers each cycle:
 
 1. **Translation controller** — Minimizes total remaining path distance and drives the robot to the final path element
 2. **Rotation controller** — Either follows the profiled rotation setpoint or snaps directly to the target if no profile is specified
-3. **CTE controller** — Minimizes deviation from the line between current and previous path segments, helping reduce post-handoff cross-track error
+3. **Cross-Track Error (CTE) controller** — Minimizes deviation from the line between current and previous path segments, helping reduce post-handoff cross-track error
 
 The translation controller's speed magnitude depends on distance to the path's end, while direction depends on the next available waypoint. These values are **acceleration-limited in 2D** to provide smooth robot motion toward the target, making chassis output relatively stable even during erroneous odometry jitter.
 
