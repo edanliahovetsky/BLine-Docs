@@ -12,13 +12,13 @@
 - constraint-overlay.gif - Constraint range visualization
 #
 # Sidebar demos:
-# - sidebar-elements.gif   - Elements panel overview
-# - add-element.gif        - Adding new elements
-# - reorder-elements.gif   - Drag to reorder
-# - edit-properties.gif    - Editing element properties
-# - convert-element.gif    - Converting element types
-# - add-constraint.gif     - Adding constraints
-# - constraint-range.gif   - Adjusting constraint ranges
+- sidebar-elements.gif   - Elements panel overview
+- add-element.gif        - Adding new elements
+- reorder-elements.gif   - Drag to reorder
+- edit-properties.gif    - Editing element properties
+- convert-element.gif    - Converting element types
+- add-constraint.gif     - Adding constraints
+- constraint-range.gif   - Adjusting constraint ranges
 #
 # Simulation demos:
 - simulation-demo.gif    - Full simulation playback

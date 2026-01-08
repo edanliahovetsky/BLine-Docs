@@ -7,7 +7,7 @@ The sidebar provides detailed editing controls for path elements and constraints
 The top section lists all elements in your path in order.
 
 <!-- GIF: Path elements panel overview -->
-![Elements Panel](../assets/gifs/sidebar-elements.gif)
+![Elements Panel](../assets/gifs/sidebar/sidebar-elements.gif)
 
 ### Element List
 
@@ -23,7 +23,7 @@ Each element shows:
 Click the **"Add element"** button to insert a new element after the currently selected one.
 
 <!-- GIF: Adding a new element -->
-![Add Element](../assets/gifs/add-element.gif)
+![Add Element](../assets/gifs/sidebar/add-element.gif)
 
 If no element is selected, the new element is added at the end of the path.
 
@@ -32,7 +32,7 @@ If no element is selected, the new element is added at the end of the path.
 **Drag elements** in the list to reorder them. The path will update immediately on the canvas.
 
 <!-- GIF: Dragging to reorder elements -->
-![Reorder Elements](../assets/gifs/reorder-elements.gif)
+![Reorder Elements](../assets/gifs/sidebar/reorder-elements.gif)
 
 !!! note
     Remember that RotationTargets are positioned relative to the segment they're on. Reordering may change which segment a RotationTarget belongs to.
@@ -64,7 +64,7 @@ For Waypoints and TranslationTargets:
 | **Handoff Radius (m)** | Distance at which path advances to next element |
 
 <!-- GIF: Editing element properties -->
-![Edit Properties](../assets/gifs/edit-properties.gif)
+![Edit Properties](../assets/gifs/sidebar/edit-properties.gif)
 
 ### RotationTarget Properties
 
@@ -86,7 +86,7 @@ Use the **Type dropdown** to convert an element to a different type:
 - **TranslationTarget ↔ RotationTarget**: Swaps translation for rotation
 
 <!-- GIF: Converting element types -->
-![Convert Type](../assets/gifs/convert-element.gif)
+![Convert Type](../assets/gifs/sidebar/convert-element.gif)
 
 ## Path Constraints Panel
 
@@ -97,7 +97,7 @@ Manage velocity and acceleration constraints for your path.
 Click **"Add constraint"** to create a new ranged constraint.
 
 <!-- GIF: Adding a constraint -->
-![Add Constraint](../assets/gifs/add-constraint.gif)
+![Add Constraint](../assets/gifs/sidebar/add-constraint.gif)
 
 ### Constraint Types
 
@@ -127,11 +127,11 @@ The range slider lets you specify which elements the constraint applies to:
 - **Right handle**: End ordinal (last affected element)
 
 <!-- GIF: Adjusting constraint range -->
-![Constraint Range](../assets/gifs/constraint-range.gif)
+![Constraint Range](../assets/gifs/sidebar/constraint-range.gif)
 
 !!! info "Visual Feedback"
     Click on the slider to see a **green overlay** on the canvas highlighting the affected path segments.
 
 ### Removing Constraints
 
-Click the **✕ button** next to any constraint to remove it.
+Click the <span style="color: red; font-weight: bold;">⊖</span> button next to any constraint to remove it.
