@@ -1,0 +1,87 @@
+site_name: BLine Documentation
+site_description: Open-source path generation and tracking suite for FRC holonomic drivetrains
+site_url: https://edanliahovetsky.github.io/BLine-Docs/
+repo_url: https://github.com/edanliahovetsky/BLine-Lib
+repo_name: BLine-Lib
+
+theme:
+  name: material
+  palette:
+    - scheme: slate
+      primary: deep orange
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      primary: deep orange
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.sidebar.sticky
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+  icon:
+    repo: fontawesome/brands/github
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/edanliahovetsky/BLine-Lib
+    - icon: fontawesome/solid/comments
+      link: https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quick-start.md
+  - Concepts:
+    - Path Elements: concepts/path-elements.md
+    - Constraints: concepts/constraints.md
+    - Key Parameters: concepts/key-parameters.md
+  - GUI:
+    - Overview: gui/index.md
+    - Canvas: gui/canvas.md
+    - Sidebar: gui/sidebar.md
+    - Simulation: gui/simulation.md
+  - Library:
+    - Overview: lib/index.md
+    - Path Construction: lib/path-construction.md
+    - FollowPath Builder: lib/follow-path.md
+    - API Reference: lib/api-reference.md
+  - Usage Tips: usage-tips.md
+

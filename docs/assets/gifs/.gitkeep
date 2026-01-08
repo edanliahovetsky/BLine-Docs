@@ -1,0 +1,38 @@
+# Placeholder for GIF assets
+# Add your demonstration GIFs here:
+#
+# GUI demos:
+- gui-demo.gif           - Overall GUI demonstration
+# - canvas-zoom.gif        - Zooming in/out
+# - canvas-pan.gif         - Panning the view
+# - canvas-drag.gif        - Dragging elements
+# - rotation-handle.gif    - Adjusting rotation handles
+# - rotation-target-drag.gif - Moving rotation targets along segments
+# - handoff-radius-canvas.gif - Handoff radius visualization
+# - constraint-overlay.gif - Constraint range visualization
+#
+# Sidebar demos:
+# - sidebar-elements.gif   - Elements panel overview
+# - add-element.gif        - Adding new elements
+# - reorder-elements.gif   - Drag to reorder
+# - edit-properties.gif    - Editing element properties
+# - convert-element.gif    - Converting element types
+# - add-constraint.gif     - Adding constraints
+# - constraint-range.gif   - Adjusting constraint ranges
+#
+# Simulation demos:
+# - simulation-demo.gif    - Full simulation playback
+# - sim-play-pause.gif     - Play/pause controls
+# - sim-scrub.gif          - Timeline scrubbing
+# - sim-trail.gif          - Trajectory trail
+#
+# Concept demos:
+# - element-types.gif      - All three element types
+# - rotation-t-ratio.gif   - t_ratio adjustment
+# - handoff-radius.gif     - Handoff radius concept
+# - t-ratio-drag.gif       - Dragging to adjust t_ratio
+#
+# Robot demos:
+- cone-demo.gif          - Robot following path (from READMEs)
+- algorithm-demo.gif     - Algorithm visualization (from READMEs)
+
