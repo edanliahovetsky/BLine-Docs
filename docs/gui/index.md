@@ -15,26 +15,13 @@ BLine-GUI is a visual path planning interface for designing and editing autonomo
 
 The BLine GUI consists of three main areas:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        Menu Bar                              │
-├─────────────────────────────────┬───────────────────────────┤
-│                                 │                           │
-│                                 │                           │
-│           Canvas                │        Sidebar            │
-│      (Field + Path)             │   (Elements + Properties) │
-│                                 │                           │
-│                                 │                           │
-├─────────────────────────────────┴───────────────────────────┤
-│              Transport Controls (Simulation)                 │
-└─────────────────────────────────────────────────────────────┘
-```
-
 | Area | Purpose |
 |------|---------|
+| **Menu Bar** | Project management, path operations, editing tools, and settings |
 | **Canvas** | Visual field display with interactive path editing |
 | **Sidebar** | Element list, properties panel, and constraint editor |
 | **Transport Controls** | Simulation playback controls |
+
 
 ## Key Features
 
@@ -84,10 +71,10 @@ A typical path creation workflow:
 
 ## Project Structure
 
-BLine projects organize paths in a `paths/` directory:
+BLine organizes projects in a `deploy/autos/` directory:
 
 ```
-my_project/
+autos/
 ├── config.json          # Global constraints and robot config
 └── paths/
     ├── score_first.json
@@ -97,8 +84,15 @@ my_project/
 
 The `paths/` folder corresponds to `deploy/autos/paths/` in your robot code.
 
+!!! note "Keyboard Shortcuts"
+    - `Space` - Play/pause simulation (when canvas is focused)
+    - `Delete` / `Backspace` - Remove selected elements
+    - `Ctrl+Z` - Undo
+    - `Ctrl+Y` - Redo
+
 ## Learn More
 
+- [Menu Bar](menu-bar.md) — Project management, path operations, and settings
 - [Canvas](canvas.md) — Detailed canvas interactions and controls
 - [Sidebar](sidebar.md) — Element editing and constraint management
 - [Simulation](simulation.md) — Using the simulation preview

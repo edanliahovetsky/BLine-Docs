@@ -83,6 +83,7 @@ nav:
     - Design Philosophy: concepts/design-philosophy.md
   - GUI:
     - Overview: gui/index.md
+    - Menu Bar: gui/menu-bar.md
     - Canvas: gui/canvas.md
     - Sidebar: gui/sidebar.md
     - Simulation: gui/simulation.md

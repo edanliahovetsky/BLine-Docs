@@ -135,22 +135,3 @@ The range slider lets you specify which elements the constraint applies to:
 ### Removing Constraints
 
 Click the **✕ button** next to any constraint to remove it.
-
-## Settings
-
-Access global settings via the menu: **Settings → Robot Config**
-
-### Robot Configuration
-
-| Setting | Description |
-|---------|-------------|
-| **Default Max Velocity** | Global velocity limit (m/s) |
-| **Default Max Acceleration** | Global acceleration limit (m/s²) |
-| **Default Max Rotational Velocity** | Global angular velocity limit (deg/s) |
-| **Default Max Rotational Acceleration** | Global angular acceleration limit (deg/s²) |
-| **Default Handoff Radius** | Default radius for new elements (m) |
-| **End Translation Tolerance** | Path completion position tolerance (m) |
-| **End Rotation Tolerance** | Path completion rotation tolerance (deg) |
-
-These settings are saved to `config.json` in your project and used by BLine-Lib when loading paths.
-
