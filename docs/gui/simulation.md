@@ -21,15 +21,9 @@ Click the **▶ button** or press **Space** to start the simulation. The robot i
 
 Click **⏸** or press **Space** again to pause.
 
-<!-- GIF: Play/pause simulation -->
-![Play Pause](../assets/gifs/sim-play-pause.gif)
-
 ### Timeline Scrubbing
 
 Drag the **timeline slider** to jump to any point in the path. This lets you inspect specific moments without watching the entire simulation.
-
-<!-- GIF: Scrubbing timeline -->
-![Timeline Scrub](../assets/gifs/sim-scrub.gif)
 
 ### Time Display
 
@@ -46,9 +40,6 @@ A robot icon shows the current simulated position and heading. The icon rotates 
 ### Trajectory Trail
 
 An **orange trail** shows the path the robot has traveled during the simulation. This helps visualize the actual trajectory versus the intended path.
-
-<!-- GIF: Trajectory trail building up -->
-![Trajectory Trail](../assets/gifs/sim-trail.gif)
 
 ### Velocity Indication
 
@@ -98,6 +89,7 @@ Play the simulation while adjusting constraints to see how they affect:
 
 Watch for:
 
+- **Overshoot on corners**: May indicate overly aggressive constraints or insufficient deceleration
 - **Sharp slowdowns**: May indicate overly aggressive constraints
 - **Corner cutting**: Handoff radius might be too large
 - **Hesitation**: Handoff radius might be too small

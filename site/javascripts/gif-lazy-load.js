@@ -3,15 +3,22 @@
  * Uses Intersection Observer API for efficient detection
  */
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Find all GIF images
-  const gifs = document.querySelectorAll('img[src$=".gif"]');
+function initGifLazyLoad() {
+  // Find all GIF images that haven't been processed
+  const gifs = document.querySelectorAll('img[src$=".gif"]:not([data-gif-processed])');
   
+  if (gifs.length === 0) return;
+
   gifs.forEach(gif => {
-    // Store original src and replace with placeholder
+    // Mark as processed
+    gif.dataset.gifProcessed = 'true';
+    
+    // Store original src
     const originalSrc = gif.src;
-    gif.dataset.src = originalSrc;
-    gif.src = '';
+    gif.dataset.gifSrc = originalSrc;
+    
+    // Clear the src to stop the GIF from loading/playing
+    gif.removeAttribute('src');
     gif.classList.add('gif-lazy');
     
     // Create wrapper for loading state
@@ -30,21 +37,27 @@ document.addEventListener('DOMContentLoaded', function() {
   // Set up Intersection Observer
   const observerOptions = {
     root: null,
-    rootMargin: '50px', // Start loading slightly before visible
-    threshold: 0.1
+    rootMargin: '100px',
+    threshold: 0
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      const gif = entry.target.querySelector('img.gif-lazy');
-      if (!gif) return;
-      
       if (entry.isIntersecting) {
-        // Load and play GIF
-        if (gif.dataset.src && !gif.src) {
-          gif.src = gif.dataset.src;
+        const wrapper = entry.target;
+        const gif = wrapper.querySelector('img.gif-lazy');
+        
+        if (gif && gif.dataset.gifSrc && !gif.dataset.gifLoaded) {
+          // Mark as loaded to prevent re-triggering
+          gif.dataset.gifLoaded = 'true';
+          
+          // Set the src to start loading/playing
+          gif.src = gif.dataset.gifSrc;
           gif.classList.add('gif-loaded');
-          entry.target.classList.add('gif-playing');
+          wrapper.classList.add('gif-playing');
+          
+          // Stop observing this element
+          observer.unobserve(wrapper);
         }
       }
     });
@@ -52,56 +65,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Observe all GIF wrappers
   document.querySelectorAll('.gif-wrapper').forEach(wrapper => {
-    observer.observe(wrapper);
-  });
-});
-
-// Re-run on navigation (for MkDocs instant loading)
-document.addEventListener('DOMContentSwitch', function() {
-  // Small delay to ensure DOM is updated
-  setTimeout(() => {
-    const gifs = document.querySelectorAll('img[src$=".gif"]:not(.gif-lazy)');
-    
-    gifs.forEach(gif => {
-      const originalSrc = gif.src;
-      gif.dataset.src = originalSrc;
-      gif.src = '';
-      gif.classList.add('gif-lazy');
-      
-      const wrapper = document.createElement('div');
-      wrapper.classList.add('gif-wrapper');
-      gif.parentNode.insertBefore(wrapper, gif);
-      wrapper.appendChild(gif);
-      
-      const playIcon = document.createElement('div');
-      playIcon.classList.add('gif-play-icon');
-      playIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
-      wrapper.appendChild(playIcon);
-    });
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '50px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const gif = entry.target.querySelector('img.gif-lazy');
-        if (!gif) return;
-        
-        if (entry.isIntersecting) {
-          if (gif.dataset.src && !gif.src) {
-            gif.src = gif.dataset.src;
-            gif.classList.add('gif-loaded');
-            entry.target.classList.add('gif-playing');
-          }
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.gif-wrapper').forEach(wrapper => {
+    if (!wrapper.querySelector('img[data-gif-loaded]')) {
       observer.observe(wrapper);
-    });
-  }, 100);
+    }
+  });
+}
+
+// Run on initial page load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initGifLazyLoad);
+} else {
+  initGifLazyLoad();
+}
+
+// Re-run on MkDocs instant navigation
+document.addEventListener('DOMContentSwitch', function() {
+  setTimeout(initGifLazyLoad, 50);
 });
+
+// Also listen for the location change event (MkDocs Material)
+if (typeof location$ !== 'undefined') {
+  location$.subscribe(() => {
+    setTimeout(initGifLazyLoad, 50);
+  });
+}
