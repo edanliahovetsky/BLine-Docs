@@ -1,11 +1,10 @@
 site_name: BLine Documentation
 site_description: Open-source path generation and tracking suite for FRC holonomic drivetrains
 site_url: https://edanliahovetsky.github.io/BLine-Docs/
-repo_url: https://github.com/edanliahovetsky/BLine-Lib
-repo_name: BLine-Lib
 
 theme:
   name: material
+  custom_dir: overrides
   palette:
     - scheme: slate
       primary: deep orange
@@ -35,10 +34,15 @@ theme:
 
 extra:
   social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/edanliahovetsky/BLine-Lib
     - icon: fontawesome/solid/comments
       link: https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778
+      name: Chief Delphi Discussion
+    - icon: fontawesome/brands/github
+      link: https://github.com/edanliahovetsky/BLine-Lib
+      name: BLine-Lib (GitHub)
+    - icon: fontawesome/brands/github
+      link: https://github.com/edanliahovetsky/BLine-GUI
+      name: BLine-GUI (GitHub)
 
 extra_css:
   - stylesheets/extra.css
