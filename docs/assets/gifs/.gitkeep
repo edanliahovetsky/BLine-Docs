@@ -21,16 +21,14 @@
 # - constraint-range.gif   - Adjusting constraint ranges
 #
 # Simulation demos:
-# - simulation-demo.gif    - Full simulation playback
-# - sim-play-pause.gif     - Play/pause controls
-# - sim-scrub.gif          - Timeline scrubbing
-# - sim-trail.gif          - Trajectory trail
+- simulation-demo.gif    - Full simulation playback
+
 #
 # Concept demos:
-# - element-types.gif      - All three element types
-# - rotation-t-ratio.gif   - t_ratio adjustment
-# - handoff-radius.gif     - Handoff radius concept
-# - t-ratio-drag.gif       - Dragging to adjust t_ratio
+- element-types.gif      - All three element types
+- rotation-t-ratio.gif   - t_ratio adjustment
+- handoff-radius.gif     - Handoff radius concept
+- t-ratio-drag.gif       - Dragging to adjust t_ratio
 #
 # Robot demos:
 - cone-demo.gif          - Robot following path (from READMEs)
