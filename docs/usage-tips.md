@@ -28,7 +28,15 @@ Path.PathConstraints constraints = new Path.PathConstraints()
 | Path precision matters | Smaller handoff radius + lower velocity |
 
 !!! danger "Avoid the Worst Case"
-    If the handoff radius is too small for the robot's velocity, it may overshoot and miss the handoff zone entirely. This causes erratic path behavior. When in doubt, err on the side of larger radii.
+    If the radius is too small, the robot may overshoot and miss the handoff zone entirely at high velocities—this causes erratic path behavior and is the **worst-case scenario**. Conversely, if the handoff radius is too large, the robot will switch targets too early, causing path instability.
+
+!!! tip "Smooth Turns: Add More Elements"
+    For smoother, more accurate navigation through turns, try adding a few extra **TranslationTargets** or **Waypoints** along the curve.  
+    This approach lets the robot follow the desired path more naturally—without needing aggressive velocity constraints or oversize handoff radii.  
+    More elements create a gentler, better-controlled trajectory through each bend. 
+    Just be sure not to oversaturate your paths and keep them as sparse as possible.
+
+
 
 ## PID Tuning
 
@@ -44,47 +52,39 @@ If you limit max acceleration *after* tuning your controllers, or increase max a
 
 Always tune your controllers within the full operating range of velocities and accelerations that your path constraints allow.
 
+### Tuning Order
+
+The PID controllers should be tuned in the following order: translation, rotation, and finally cross-track. 
+
 ### Translation Controller
 
-The translation controller determines how aggressively the robot accelerates toward its destination.
+The translation controller minimizes total path distance remaining.
 
-| Symptom | Adjustment |
-|---------|------------|
-| Robot accelerates too slowly | Increase P |
-| Robot oscillates near endpoints | Add D (0.1-0.5) |
-| Robot overshoots destination | Decrease P or add D |
+!!! warning "Controller Instability"
+    Avoid using the PID integral term for the translation controller. Use the integral term will cause translation controller instability. Integral term use in other controllers (Rotation and Cross-Track) is fine. 
 
-**Starting point:** P = 5.0, I = 0.0, D = 0.0
+**Starting gains:** P = 5.0, I = 0.0, D = 0.0
 
 ### Rotation Controller
 
-Controls how quickly the robot rotates toward target headings.
+Controls minimizes error in holonomic heading (rotation).
 
-| Symptom | Adjustment |
-|---------|------------|
-| Rotation is sluggish | Increase P |
-| Robot oscillates on heading | Add D |
-| Rotation overshoots | Decrease P or add D |
-
-**Starting point:** P = 3.0, I = 0.0, D = 0.0
+**Starting gains:** P = 3.0, I = 0.0, D = 0.0
 
 ### Cross-Track Controller
 
-Keeps the robot on the line between waypoints.
+Keeps the robot on the line between waypoints or translation targets. It should be used to reduce path deviation in longer path segments over time, rather than on sharp turns. 
 
-| Symptom | Adjustment |
-|---------|------------|
-| Robot drifts off path | Increase P |
-| Robot jitters on straight paths | Decrease P |
-| Robot fights itself on curves | Decrease P |
+!!! warning "Controller Instability"
+    Be weary of cross-track controller over-tuning (were the controller overpowers the translation controller). An over-tuned cross track controller will cause undesirable behavior around turns, especially during high velocities. 
 
-**Starting point:** P = 2.0, I = 0.0, D = 0.0
+**Starting gains:** P = 2.0, I = 0.0, D = 0.0
 
 ## Path Design
 
 ### Use TranslationTargets for Path Shaping
 
-Don't overuse Waypoints. If you just need the robot to pass through a point without a specific heading, use a TranslationTarget instead:
+Don't overuse Waypoints. If you just need the robot to pass through a point without a specific rotation, use a TranslationTarget instead:
 
 ```java
 // Good: Only specify rotation where it matters
@@ -118,6 +118,18 @@ Path simpleMove = new Path(
     new Path.Waypoint(new Translation2d(3.0, 2.0), Rotation2d.fromDegrees(45))
 );
 ```
+
+!!! warning "Paths Run to Completion"
+    BLine paths cannot be stopped midway through execution. If you need the robot to stop partway through a route, break it into separate Path objects:
+
+    ```java
+    Commands.sequence(
+        pathBuilder.build(toFirstScore),     // Drive to scoring position
+        new ScoreCommand(),                  // Stop to score
+        pathBuilder.build(toPickup),         // Drive to pickup location
+        new IntakeCommand()                  // Stop to intake
+    );
+    ```
 
 ## Autonomous Performance
 
@@ -167,8 +179,6 @@ BLine is designed for rapid iteration:
 3. Adjust constraints and positions
 4. Repeat
 
-The fast path computation time (97% faster than spline-based alternatives) means you can iterate quickly without waiting.
-
 ### Use the Simulation for Quick Checks
 
 The GUI simulation provides immediate feedback, but remember its limitations:
@@ -176,52 +186,71 @@ The GUI simulation provides immediate feedback, but remember its limitations:
 - **Good for**: Rough timing estimates, path flow validation, constraint effects
 - **Not accurate for**: Exact timing, real drivetrain dynamics, PID behavior
 
-Always validate on hardware for final tuning.
+## Event Triggers
 
-## Common Issues
+!!! info "Coming Soon"
+    Built-in event trigger support is a planned feature and will be added in a future release.
 
-### Robot Overshoots at Turns
+Currently, BLine does not support event triggers built into paths. However, you can replicate trigger-like functionality using WPILib commands:
 
-**Causes:**
-- Velocity too high for handoff radius
-- Handoff radius too small
+### Using WaitUntil for Trigger Behavior
 
-**Solutions:**
-1. Add velocity constraint before the turn
-2. Increase handoff radius at that element
-3. Add an intermediate TranslationTarget to break up the path
+```java
+// Trigger an action when the robot passes a certain point
+Commands.sequence(
+    Commands.parallel(
+        pathBuilder.build(myPath),
+        Commands.waitUntil(() -> {
+            // Check if robot has passed x = 3.0 meters
+            return driveSubsystem.getPose().getX() > 3.0;
+        }).andThen(new IntakeCommand())
+    )
+);
+```
 
-### Robot Hesitates at Waypoints
+### Using Deadlines with Path Progress
 
-**Causes:**
-- Handoff radius too small
-- Velocity constraint too aggressive
+```java
+// Run intake while following path, then score
+Commands.sequence(
+    Commands.deadline(
+        pathBuilder.build(scoringPath),
+        new IntakeCommand()  // Runs until path completes
+    ),
+    new ScoreCommand()
+);
+```
 
-**Solutions:**
-1. Increase handoff radius
-2. Review velocity constraints
+### Checking Path Progress
 
-### Path Takes Longer Than Expected
+For more precise triggering, access the path follower's current state:
 
-**Causes:**
-- Constraints too conservative
-- Too many elements
-- End tolerances too tight
+```java
+// Using getter methods on the FollowPath command
+FollowPath followCommand = (FollowPath) pathBuilder.build(myPath);
 
-**Solutions:**
-1. Review constraint values
-2. Simplify path with fewer elements
-3. Loosen end tolerances if precision isn't critical
+Commands.parallel(
+    followCommand,
+    Commands.waitUntil(() -> followCommand.getCurrentSegmentIndex() >= 2)
+        .andThen(new PrepareScoreCommand())
+);
+```
 
-### Robot Doesn't Face Correct Heading
+## Why No Second Alignment Routine?
 
-**Causes:**
-- Missing rotation target
-- Profiled rotation causing slow transition
-- Rotation controller P too low
+Unlike time-parameterized path followers, BLine typically doesn't require a separate alignment routine after paths complete.
 
-**Solutions:**
-1. Add RotationTarget or Waypoint with desired heading
-2. Try non-profiled rotation for immediate heading change
-3. Tune rotation controller gains
+**Why other tools often need it:**
+
+- Time-parameterized tracking can finish "early" if the robot falls behind
+- Controller tuning affects endpoint accuracy
+- Robot may not be precisely positioned when path completes
+
+**Why BLine doesn't:**
+
+- The translation controller minimizes distance to the endpoint, not time
+- The robot continues driving until within tolerance, regardless of how long it takes
+- No penalty for "falling behind"—the greedy algorithm simply continues toward the target
+
+This means you can typically chain path commands directly without intermediate alignment steps.
 

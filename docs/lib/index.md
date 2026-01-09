@@ -47,7 +47,18 @@ The path tracking algorithm works by:
 5. **Interpolating rotation** based on progress between rotation targets
 6. **Applying rate limiting** via `ChassisRateLimiter` to respect constraints
 
-![Algorithm Demo](../assets/gifs/algorithm-demo.gif)
+![Algorithm Demo](../assets/gifs/concepts/algorithm-demo.gif)
+
+### Algorithm Robustness
+
+The BLine path tracking algorithm is **robust in its response to sharp changes in positional data**:
+
+- Speed magnitude computation depends on distance to the path's end
+- Velocity direction depends on the next available waypoint
+- All values are **acceleration-limited in 2D** for smooth robot motion
+- Chassis output remains stable even during erroneous odometry jitter
+
+**Non-time-parameterized advantage:** Unlike PathPlanner, BLine is not time-parameterized. The control cycle acts in a **greedy fashion**, making the response uniform regardless of path completion or "lag" behind an idealized path. There's no penalty for falling behind schedule—the robot simply continues toward its target.
 
 ## Installation
 

@@ -50,7 +50,7 @@ When an element is selected, its properties appear in this panel.
 | Property | Applies To | Description |
 |----------|------------|-------------|
 | **Type** | All | Dropdown to convert between element types |
-| **Rotation (deg)** | Waypoint, RotationTarget | Heading in degrees |
+| **Rotation (deg)** | Waypoint, RotationTarget | rotation in degrees |
 | **Profiled Rotation** | Waypoint, RotationTarget | Checkbox for rotation interpolation mode |
 
 ### Translation Properties
@@ -150,7 +150,7 @@ Access global settings via the menu: **Settings → Robot Config**
 | **Default Max Rotational Acceleration** | Global angular acceleration limit (deg/s²) |
 | **Default Handoff Radius** | Default radius for new elements (m) |
 | **End Translation Tolerance** | Path completion position tolerance (m) |
-| **End Rotation Tolerance** | Path completion heading tolerance (deg) |
+| **End Rotation Tolerance** | Path completion rotation tolerance (deg) |
 
 These settings are saved to `config.json` in your project and used by BLine-Lib when loading paths.
 

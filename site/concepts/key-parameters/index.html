@@ -16,7 +16,7 @@
         <link rel="prev" href="../constraints/">
       
       
-        <link rel="next" href="../../gui/">
+        <link rel="next" href="../design-philosophy/">
       
       
         
@@ -797,6 +797,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1177,6 +1205,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../common-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1439,9 +1494,9 @@
 <h2 id="handoff-radius">Handoff Radius<a class="headerlink" href="#handoff-radius" title="Permanent link">&para;</a></h2>
 <p>The <strong>intermediate handoff radius</strong> determines how close the robot must get to a translation target before advancing to the next one. On the canvas, this is visualized as a <strong>magenta dashed circle</strong> around translation elements.</p>
 <!-- GIF: Showing handoff radius circles on canvas -->
-<p><img alt="Handoff Radius Visualization" src="../assets/gifs/handoff-radius.gif" /></p>
+<p><img alt="Handoff Radius Visualization" src="../../assets/gifs/concepts/handoff-radius.gif" /></p>
 <h3 id="how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h3>
-<p>When the robot enters the handoff radius of the current target, the path follower advances to the next element. This creates smooth transitions between segments without requiring the robot to come to a complete stop at each point.</p>
+<p>When the robot enters the handoff radius of the current target, the path follower advances to the next element, creating smooth transitions between segments.</p>
 <h3 id="tuning-guidelines">Tuning Guidelines<a class="headerlink" href="#tuning-guidelines" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1466,7 +1521,14 @@
 </table>
 <div class="admonition danger">
 <p class="admonition-title">Critical Warning</p>
-<p>If the radius is too small, the robot may overshoot and miss the handoff zone entirely at high velocities—this causes erratic path behavior and is the <strong>worst-case scenario</strong>.</p>
+<p>If the radius is too small, the robot may overshoot and miss the handoff zone entirely at high velocities—this causes erratic path behavior and is the <strong>worst-case scenario</strong>. Conversely, if the handoff radius is too large, the robot will switch targets too early, causing path instability.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Smooth Turns: Add More Elements</p>
+<p>For smoother, more accurate navigation through turns, try adding a few extra <strong>TranslationTargets</strong> or <strong>Waypoints</strong> along the curve.<br />
+This approach lets the robot follow the desired path more naturally—without needing aggressive velocity constraints or oversize handoff radii.<br />
+More elements create a gentler, better-controlled trajectory through each bend. 
+Just be sure not to oversaturate your paths and keep them as sparse as possible.</p>
 </div>
 <h3 id="setting-handoff-radius">Setting Handoff Radius<a class="headerlink" href="#setting-handoff-radius" title="Permanent link">&para;</a></h3>
 <p><strong>Per-element</strong> in the GUI sidebar, or via the <code>intermediate_handoff_radius_meters</code> field in JSON.</p>
@@ -1502,17 +1564,17 @@
 </table>
 <h3 id="how-its-used">How It's Used<a class="headerlink" href="#how-its-used" title="Permanent link">&para;</a></h3>
 <p>The path follower calculates the robot's progress along the current segment as a ratio (0.0 to 1.0). Rotation targets are processed when the robot's progress exceeds the target's t_ratio.</p>
-<p>For <strong>profiled rotation</strong>, the rotation setpoint interpolates smoothly based on progress. For <strong>non-profiled rotation</strong>, the robot immediately adopts the target heading upon reaching the t_ratio threshold.</p>
+<p>For <strong>profiled rotation</strong>, the rotation setpoint interpolates smoothly based on progress. For <strong>non-profiled rotation</strong>, the robot immediately adopts the target rotation upon reaching the t_ratio threshold.</p>
 <h3 id="gui-interaction">GUI Interaction<a class="headerlink" href="#gui-interaction" title="Permanent link">&para;</a></h3>
 <p>In the GUI, simply drag the RotationTarget along its connecting line to adjust the t_ratio visually. The element snaps to positions along the segment.</p>
 <!-- GIF: Dragging rotation target to adjust t_ratio -->
-<p><img alt="Adjusting t_ratio" src="../assets/gifs/t-ratio-drag.gif" /></p>
+<p><img alt="Adjusting t_ratio" src="../../assets/gifs/concepts/t-ratio-drag.gif" /></p>
 <h2 id="profiled-rotation">Profiled Rotation<a class="headerlink" href="#profiled-rotation" title="Permanent link">&para;</a></h2>
 <p>The <strong>profiled rotation</strong> setting controls how the robot transitions to a target rotation.</p>
 <h3 id="profiled-default-true">Profiled (Default: <code>true</code>)<a class="headerlink" href="#profiled-default-true" title="Permanent link">&para;</a></h3>
-<p>The robot smoothly interpolates its heading based on t-ratio progression along the path:</p>
+<p>The robot smoothly interpolates its rotation based on t-ratio progression along the path:</p>
 <ul>
-<li>As the robot travels, its rotation setpoint <strong>gradually transitions</strong> toward the target heading</li>
+<li>As the robot travels, its rotation setpoint <strong>gradually transitions</strong> toward the target rotation</li>
 <li>The transition is <strong>proportional to segment progress</strong></li>
 <li>Results in smooth, predictable rotation behavior</li>
 </ul>
@@ -1552,7 +1614,7 @@
 </tr>
 <tr>
 <td><strong>Non-Profiled</strong></td>
-<td>Quick reaction rotations; when you need immediate heading change</td>
+<td>Quick reaction rotations; when you need immediate rotation change</td>
 </tr>
 </tbody>
 </table>
@@ -1567,9 +1629,9 @@
 </ul>
 <p>Typical values: <code>0.02</code> to <code>0.1</code> meters</p>
 <h3 id="end-rotation-tolerance">End Rotation Tolerance<a class="headerlink" href="#end-rotation-tolerance" title="Permanent link">&para;</a></h3>
-<p>How close (in degrees) the robot must be to the <strong>final heading</strong> to finish the path.</p>
+<p>How close (in degrees) the robot must be to the <strong>final rotation</strong> to finish the path.</p>
 <ul>
-<li><strong>Smaller values</strong> → More precise final heading</li>
+<li><strong>Smaller values</strong> → More precise final rotation</li>
 <li><strong>Larger values</strong> → Faster completion</li>
 </ul>
 <p>Typical values: <code>1.0</code> to <code>5.0</code> degrees</p>
@@ -1588,24 +1650,54 @@
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
 </span></code></pre></div>
 <h2 id="parameter-interaction">Parameter Interaction<a class="headerlink" href="#parameter-interaction" title="Permanent link">&para;</a></h2>
-<p>These parameters interact with each other and with velocity constraints:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>┌─────────────────────────────────────────────────────────────┐
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>│                    Path Following Flow                       │
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>├─────────────────────────────────────────────────────────────┤
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>│  1. Robot approaches translation target                      │
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>│  2. Velocity limited by max_velocity constraint              │
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>│  3. When within handoff_radius → advance to next target      │
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>│  4. Rotation interpolated based on t_ratio (if profiled)     │
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>│  5. At final element, check end_tolerances                   │
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>│  6. Path complete when within both tolerances                │
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>└─────────────────────────────────────────────────────────────┘
-</span></code></pre></div>
+<p>These parameters work together during path execution:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Key Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Robot drives toward current translation target</td>
+<td>Translation controller</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Speed capped by active constraints</td>
+<td>Max velocity</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Target switches when robot enters handoff zone</td>
+<td>Handoff radius</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Heading adjusts toward next rotation target</td>
+<td>T-ratio, profiled rotation</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Final target checks position and heading</td>
+<td>End tolerances</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Path completes when both tolerances satisfied</td>
+<td>End translation/rotation tolerance</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition tip">
 <p class="admonition-title">Balancing Parameters</p>
 <ul>
 <li><strong>Higher velocity</strong> requires <strong>larger handoff radius</strong> to prevent overshoot</li>
 <li><strong>Tighter turns</strong> benefit from <strong>lower velocity</strong> constraints on those segments</li>
-<li><strong>Precision maneuvers</strong> need <strong>smaller tolerances</strong> and <strong>lower velocities</strong></li>
+<li><strong>Precision maneuvers</strong> need <strong>smaller tolerances</strong>, <strong>smaller handoff radii</strong>, and <strong>lower velocities</strong></li>
 </ul>
 </div>
 

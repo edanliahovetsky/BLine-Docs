@@ -4,7 +4,7 @@
 
 BLine offers the advantages of simplicity, easy tunability, and excellent real time performance while performing at a the same (or potentially better) level as other autonomous solutions. 
 
-![Robot Demo](assets/gifs/cone-demo.gif)
+![Robot Demo](assets/gifs/robot-demos/cone-demo.gif)
 
 ## The BLine Suite
 

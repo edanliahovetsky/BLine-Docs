@@ -76,6 +76,7 @@ nav:
     - Path Elements: concepts/path-elements.md
     - Constraints: concepts/constraints.md
     - Key Parameters: concepts/key-parameters.md
+    - Design Philosophy: concepts/design-philosophy.md
   - GUI:
     - Overview: gui/index.md
     - Canvas: gui/canvas.md
@@ -87,4 +88,5 @@ nav:
     - FollowPath Builder: lib/follow-path.md
     - API Reference: lib/api-reference.md
   - Usage Tips: usage-tips.md
+  - Common Issues: common-issues.md
 

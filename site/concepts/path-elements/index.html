@@ -825,6 +825,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1205,6 +1233,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../common-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1540,15 +1595,15 @@
 </tbody>
 </table>
 <!-- GIF: Show all three element types on canvas -->
-<p><img alt="Element Types" src="../assets/gifs/element-types.gif" /></p>
+<p><img alt="Element Types" src="../../assets/gifs/concepts/element-types.gif" /></p>
 <h2 id="waypoints">Waypoints<a class="headerlink" href="#waypoints" title="Permanent link">&para;</a></h2>
-<p>A <strong>Waypoint</strong> combines both translation and rotation—the robot drives to this position AND rotates to the specified heading.</p>
+<p>A <strong>Waypoint</strong> combines both translation and rotation—the robot drives to this position AND rotates to the specified rotation.</p>
 <h3 id="when-to-use-waypoints">When to Use Waypoints<a class="headerlink" href="#when-to-use-waypoints" title="Permanent link">&para;</a></h3>
 <p>Use Waypoints when the robot needs to face a specific direction at a location:</p>
 <ul>
 <li>Scoring positions (need to face the target)</li>
 <li>Intake stations (need to face the game piece source)</li>
-<li>Any position where heading matters</li>
+<li>Any position where rotation matters</li>
 </ul>
 <h3 id="code-example">Code Example<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h3>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Create a waypoint at (1.0, 1.0) facing 0 degrees</span>
@@ -1574,11 +1629,11 @@
 <h2 id="translation-targets">Translation Targets<a class="headerlink" href="#translation-targets" title="Permanent link">&para;</a></h2>
 <p>A <strong>TranslationTarget</strong> is a position-only target—the robot drives through this point without changing its rotation setpoint.</p>
 <h3 id="when-to-use-translation-targets">When to Use Translation Targets<a class="headerlink" href="#when-to-use-translation-targets" title="Permanent link">&para;</a></h3>
-<p>Use TranslationTargets for intermediate points where heading doesn't matter:</p>
+<p>Use TranslationTargets for intermediate points where rotation doesn't matter:</p>
 <ul>
 <li>Avoiding obstacles</li>
 <li>Path shaping (creating curves)</li>
-<li>Waypoints along a route where you don't care about rotation</li>
+<li>Points along a route where you don't care about rotation</li>
 </ul>
 <h3 id="code-example_1">Code Example<a class="headerlink" href="#code-example_1" title="Permanent link">&para;</a></h3>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Create a translation target at (2.0, 2.0)</span>
@@ -1596,13 +1651,13 @@
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span>
 </span></code></pre></div>
 <h2 id="rotation-targets">Rotation Targets<a class="headerlink" href="#rotation-targets" title="Permanent link">&para;</a></h2>
-<p>A <strong>RotationTarget</strong> is a rotation-only target positioned along a segment between anchors. The robot rotates to this heading while traveling between translation points.</p>
+<p>A <strong>RotationTarget</strong> is a rotation-only target positioned along a segment between anchors. The robot turns to this holonomic rotation while traveling between translation points.</p>
 <h3 id="when-to-use-rotation-targets">When to Use Rotation Targets<a class="headerlink" href="#when-to-use-rotation-targets" title="Permanent link">&para;</a></h3>
 <p>Use RotationTargets when you need the robot to rotate mid-segment without adding a translation point:</p>
 <ul>
-<li>Rotating while driving in a straight line</li>
-<li>Preparing heading for the next action</li>
+<li>Preparing rotation for the next action</li>
 <li>Smooth rotation transitions</li>
+<li>Rotation control were translation does not matter</li>
 </ul>
 <h3 id="the-t_ratio-parameter">The t_ratio Parameter<a class="headerlink" href="#the-t_ratio-parameter" title="Permanent link">&para;</a></h3>
 <p>RotationTargets exist <em>between</em> anchors (Waypoints or TranslationTargets). The <strong>t_ratio</strong> parameter (0.0–1.0) determines where along the segment the rotation occurs:</p>
@@ -1630,7 +1685,7 @@
 </table>
 <p>In the GUI, simply drag the RotationTarget along its connecting line to adjust the t_ratio visually.</p>
 <!-- GIF: Dragging a rotation target along a segment -->
-<p><img alt="Rotation Target t_ratio" src="../assets/gifs/rotation-t-ratio.gif" /></p>
+<p><img alt="Rotation Target t_ratio" src="../../assets/gifs/concepts/rotation-t-ratio.gif" /></p>
 <h3 id="code-example_2">Code Example<a class="headerlink" href="#code-example_2" title="Permanent link">&para;</a></h3>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// Rotate to 90 degrees at the midpoint of the segment</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RotationTarget</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
@@ -1646,7 +1701,7 @@
 <h2 id="profiled-vs-non-profiled-rotation">Profiled vs Non-Profiled Rotation<a class="headerlink" href="#profiled-vs-non-profiled-rotation" title="Permanent link">&para;</a></h2>
 <p>Both Waypoints and RotationTargets support a <strong>profiled rotation</strong> setting that controls how the robot transitions to the target rotation:</p>
 <h3 id="profiled-rotation-default">Profiled Rotation (Default)<a class="headerlink" href="#profiled-rotation-default" title="Permanent link">&para;</a></h3>
-<p>The robot smoothly interpolates its heading based on its t-ratio progression along the path. As the robot travels between anchors, its rotation setpoint gradually transitions toward the target heading proportional to how far it has traveled along the segment.</p>
+<p>The robot smoothly interpolates its rotation based on its t-ratio progression along the path. As the robot travels between anchors, its rotation setpoint gradually transitions toward the target rotation proportional to how far it has traveled along the segment.</p>
 <h3 id="non-profiled-rotation">Non-Profiled Rotation<a class="headerlink" href="#non-profiled-rotation" title="Permanent link">&para;</a></h3>
 <p>The robot immediately snaps to the target rotation when it enters the segment—no interpolation based on position. This is useful when you want an immediate rotation change.</p>
 <p>Toggle this setting per-element in the GUI sidebar under "Profiled Rotation", or set <code>profiled_rotation</code> in JSON/code.</p>
@@ -1656,7 +1711,7 @@
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="c1">// Start at (1,1) facing 0 degrees</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="c1">// Drive through (2,2) - heading unchanged</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="c1">// Drive through (2,2) - rotation unchanged</span>
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">)),</span>
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="c1">// Rotate to 90 degrees at midpoint of next segment</span>

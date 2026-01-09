@@ -21,11 +21,11 @@ A **Path** is a sequence of path elements that define where the robot should go 
 | **RotationTarget** | Green dashed rectangle with rotation handle |
 
 <!-- GIF: Show all three element types on canvas -->
-![Element Types](../assets/gifs/element-types.gif)
+![Element Types](../assets/gifs/concepts/element-types.gif)
 
 ## Waypoints
 
-A **Waypoint** combines both translation and rotation—the robot drives to this position AND rotates to the specified heading.
+A **Waypoint** combines both translation and rotation—the robot drives to this position AND rotates to the specified rotation.
 
 ### When to Use Waypoints
 
@@ -33,7 +33,7 @@ Use Waypoints when the robot needs to face a specific direction at a location:
 
 - Scoring positions (need to face the target)
 - Intake stations (need to face the game piece source)
-- Any position where heading matters
+- Any position where rotation matters
 
 ### Code Example
 
@@ -68,11 +68,11 @@ A **TranslationTarget** is a position-only target—the robot drives through thi
 
 ### When to Use Translation Targets
 
-Use TranslationTargets for intermediate points where heading doesn't matter:
+Use TranslationTargets for intermediate points where rotation doesn't matter:
 
 - Avoiding obstacles
 - Path shaping (creating curves)
-- Waypoints along a route where you don't care about rotation
+- Points along a route where you don't care about rotation
 
 ### Code Example
 
@@ -97,15 +97,15 @@ new Path.TranslationTarget(2.0, 2.0)
 
 ## Rotation Targets
 
-A **RotationTarget** is a rotation-only target positioned along a segment between anchors. The robot rotates to this heading while traveling between translation points.
+A **RotationTarget** is a rotation-only target positioned along a segment between anchors. The robot turns to this holonomic rotation while traveling between translation points.
 
 ### When to Use Rotation Targets
 
 Use RotationTargets when you need the robot to rotate mid-segment without adding a translation point:
 
-- Rotating while driving in a straight line
-- Preparing heading for the next action
+- Preparing rotation for the next action
 - Smooth rotation transitions
+- Rotation control were translation does not matter
 
 ### The t_ratio Parameter
 
@@ -120,7 +120,7 @@ RotationTargets exist *between* anchors (Waypoints or TranslationTargets). The *
 In the GUI, simply drag the RotationTarget along its connecting line to adjust the t_ratio visually.
 
 <!-- GIF: Dragging a rotation target along a segment -->
-![Rotation Target t_ratio](../assets/gifs/rotation-t-ratio.gif)
+![Rotation Target t_ratio](../assets/gifs/concepts/rotation-t-ratio.gif)
 
 ### Code Example
 
@@ -146,7 +146,7 @@ Both Waypoints and RotationTargets support a **profiled rotation** setting that 
 
 ### Profiled Rotation (Default)
 
-The robot smoothly interpolates its heading based on its t-ratio progression along the path. As the robot travels between anchors, its rotation setpoint gradually transitions toward the target heading proportional to how far it has traveled along the segment.
+The robot smoothly interpolates its rotation based on its t-ratio progression along the path. As the robot travels between anchors, its rotation setpoint gradually transitions toward the target rotation proportional to how far it has traveled along the segment.
 
 ### Non-Profiled Rotation
 
@@ -163,7 +163,7 @@ Path myPath = new Path(
     // Start at (1,1) facing 0 degrees
     new Path.Waypoint(new Translation2d(1.0, 1.0), new Rotation2d(0)),
     
-    // Drive through (2,2) - heading unchanged
+    // Drive through (2,2) - rotation unchanged
     new Path.TranslationTarget(new Translation2d(2.0, 2.0)),
     
     // Rotate to 90 degrees at midpoint of next segment

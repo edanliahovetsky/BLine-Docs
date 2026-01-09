@@ -539,6 +539,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/design-philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -870,6 +898,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Tracking Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#algorithm-robustness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Algorithm Robustness
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1032,6 +1077,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1088,6 +1160,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Tracking Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#algorithm-robustness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Algorithm Robustness
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1186,7 +1275,16 @@
 <li><strong>Interpolating rotation</strong> based on progress between rotation targets</li>
 <li><strong>Applying rate limiting</strong> via <code>ChassisRateLimiter</code> to respect constraints</li>
 </ol>
-<p><img alt="Algorithm Demo" src="../assets/gifs/algorithm-demo.gif" /></p>
+<p><img alt="Algorithm Demo" src="../assets/gifs/concepts/algorithm-demo.gif" /></p>
+<h3 id="algorithm-robustness">Algorithm Robustness<a class="headerlink" href="#algorithm-robustness" title="Permanent link">&para;</a></h3>
+<p>The BLine path tracking algorithm is <strong>robust in its response to sharp changes in positional data</strong>:</p>
+<ul>
+<li>Speed magnitude computation depends on distance to the path's end</li>
+<li>Velocity direction depends on the next available waypoint</li>
+<li>All values are <strong>acceleration-limited in 2D</strong> for smooth robot motion</li>
+<li>Chassis output remains stable even during erroneous odometry jitter</li>
+</ul>
+<p><strong>Non-time-parameterized advantage:</strong> Unlike PathPlanner, BLine is not time-parameterized. The control cycle acts in a <strong>greedy fashion</strong>, making the response uniform regardless of path completion or "lag" behind an idealized path. There's no penalty for falling behind schedule—the robot simply continues toward its target.</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>See the <a href="../getting-started/installation/#bline-lib-installation">Installation Guide</a> for setup instructions.</p>
 <h2 id="quick-example">Quick Example<a class="headerlink" href="#quick-example" title="Permanent link">&para;</a></h2>

@@ -752,6 +752,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1132,6 +1160,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../common-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1495,10 +1550,6 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>startOrdinal &lt;= currentOrdinal &amp;&amp; endOrdinal &gt;= currentOrdinal
 </span></code></pre></div>
 <p>If a constraint matches, that value is used; otherwise, the global default is applied.</p>
-<div class="admonition note">
-<p class="admonition-title">GUI vs JSON Indexing</p>
-<p>The JSON format uses <strong>0-based ordinals</strong> while the GUI displays <strong>1-based ordinals</strong> for user-friendliness.</p>
-</div>
 <h3 id="multiple-ranged-constraints">Multiple Ranged Constraints<a class="headerlink" href="#multiple-ranged-constraints" title="Permanent link">&para;</a></h3>
 <p>Paths can have <strong>multiple ranged constraints of the same type</strong>, allowing fine-grained control over different path sections. The first matching constraint (in array order) is used for each element.</p>
 <h3 id="json-example">JSON Example<a class="headerlink" href="#json-example" title="Permanent link">&para;</a></h3>
@@ -1530,7 +1581,7 @@
 <h3 id="visualizing-in-gui">Visualizing in GUI<a class="headerlink" href="#visualizing-in-gui" title="Permanent link">&para;</a></h3>
 <p>When you click on a ranged constraint's slider in the GUI, a <strong>green overlay</strong> highlights the affected path segments on the canvas. This shows exactly where the constraint will apply during path execution.</p>
 <!-- GIF: Clicking constraint slider showing green overlay -->
-<p><img alt="Constraint Visualization" src="../assets/gifs/constraint-slider.gif" /></p>
+<p><img alt="Constraint Visualization" src="../assets/gifs/concepts/constraint-slider.gif" /></p>
 <div class="admonition info">
 <p class="admonition-title">Start Ordinal Behavior</p>
 <p>A ranged constraint that includes the starting element will affect all robot motion <em>leading into</em> that element. For example, if your robot doesn't begin at the first path element (e.g., it's placed mid-field), a velocity constraint starting at ordinal 1 will limit the robot's speed as it travels toward the first waypoint.</p>

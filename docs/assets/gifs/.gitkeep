@@ -29,6 +29,7 @@
 - rotation-t-ratio.gif   - t_ratio adjustment
 - handoff-radius.gif     - Handoff radius concept
 - t-ratio-drag.gif       - Dragging to adjust t_ratio
+- constraint-slider.gif  - Adjusting constraint slider
 #
 # Robot demos:
 - cone-demo.gif          - Robot following path (from READMEs)

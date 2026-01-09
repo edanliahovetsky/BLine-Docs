@@ -3,7 +3,7 @@
 BLine-GUI includes a built-in simulation that previews how your robot will follow the path. This helps validate paths before deploying to hardware.
 
 <!-- GIF: Full simulation playback -->
-![Simulation Demo](../assets/gifs/simulation-demo.gif)
+![Simulation Demo](../assets/gifs/robot-demos/simulation-demo.gif)
 
 ## Transport Controls
 
@@ -35,7 +35,7 @@ During simulation, the canvas shows additional information:
 
 ### Robot Position
 
-A robot icon shows the current simulated position and heading. The icon rotates to match the robot's orientation.
+A robot icon shows the current simulated position and rotation. The icon rotates to match the robot's orientation.
 
 ### Trajectory Trail
 

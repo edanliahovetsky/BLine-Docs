@@ -3,7 +3,7 @@
 BLine-GUI is a visual path planning interface for designing and editing autonomous paths. It provides real-time simulation preview and exports paths as JSON files that BLine-Lib can load.
 
 <!-- GIF: Overall GUI demo showing path creation -->
-![BLine GUI Demo](../assets/gifs/gui-demo.gif)
+![BLine GUI Demo](../assets/gifs/robot-demos/gui-demo.gif)
 
 ## Getting Started
 
@@ -41,7 +41,7 @@ The BLine GUI consists of three main areas:
 ### Visual Path Editing
 
 - Drag elements to reposition on the field
-- Rotate headings with visual handles
+- Rotate rotations with visual handles
 - Add, remove, and reorder elements
 - Real-time path visualization
 

@@ -117,9 +117,6 @@ startOrdinal <= currentOrdinal && endOrdinal >= currentOrdinal
 
 If a constraint matches, that value is used; otherwise, the global default is applied.
 
-!!! note "GUI vs JSON Indexing"
-    The JSON format uses **0-based ordinals** while the GUI displays **1-based ordinals** for user-friendliness.
-
 ### Multiple Ranged Constraints
 
 Paths can have **multiple ranged constraints of the same type**, allowing fine-grained control over different path sections. The first matching constraint (in array order) is used for each element.
@@ -161,7 +158,7 @@ Path.PathConstraints constraints = new Path.PathConstraints()
 When you click on a ranged constraint's slider in the GUI, a **green overlay** highlights the affected path segments on the canvas. This shows exactly where the constraint will apply during path execution.
 
 <!-- GIF: Clicking constraint slider showing green overlay -->
-![Constraint Visualization](../assets/gifs/constraint-slider.gif)
+![Constraint Visualization](../assets/gifs/concepts/constraint-slider.gif)
 
 !!! info "Start Ordinal Behavior"
     A ranged constraint that includes the starting element will affect all robot motion *leading into* that element. For example, if your robot doesn't begin at the first path element (e.g., it's placed mid-field), a velocity constraint starting at ordinal 1 will limit the robot's speed as it travels toward the first waypoint.

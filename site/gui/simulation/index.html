@@ -539,6 +539,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/design-philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1177,6 +1205,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../common-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1437,7 +1492,7 @@
 <h1 id="simulation">Simulation<a class="headerlink" href="#simulation" title="Permanent link">&para;</a></h1>
 <p>BLine-GUI includes a built-in simulation that previews how your robot will follow the path. This helps validate paths before deploying to hardware.</p>
 <!-- GIF: Full simulation playback -->
-<p><img alt="Simulation Demo" src="../../assets/gifs/simulation-demo.gif" /></p>
+<p><img alt="Simulation Demo" src="../../assets/gifs/robot-demos/simulation-demo.gif" /></p>
 <h2 id="transport-controls">Transport Controls<a class="headerlink" href="#transport-controls" title="Permanent link">&para;</a></h2>
 <p>The simulation controls appear at the bottom-left of the canvas:</p>
 <table>
@@ -1472,7 +1527,7 @@
 <h2 id="visual-feedback">Visual Feedback<a class="headerlink" href="#visual-feedback" title="Permanent link">&para;</a></h2>
 <p>During simulation, the canvas shows additional information:</p>
 <h3 id="robot-position">Robot Position<a class="headerlink" href="#robot-position" title="Permanent link">&para;</a></h3>
-<p>A robot icon shows the current simulated position and heading. The icon rotates to match the robot's orientation.</p>
+<p>A robot icon shows the current simulated position and rotation. The icon rotates to match the robot's orientation.</p>
 <h3 id="trajectory-trail">Trajectory Trail<a class="headerlink" href="#trajectory-trail" title="Permanent link">&para;</a></h3>
 <p>An <strong>orange trail</strong> shows the path the robot has traveled during the simulation. This helps visualize the actual trajectory versus the intended path.</p>
 <h3 id="velocity-indication">Velocity Indication<a class="headerlink" href="#velocity-indication" title="Permanent link">&para;</a></h3>
@@ -1518,6 +1573,7 @@
 <h3 id="identify-problem-areas">Identify Problem Areas<a class="headerlink" href="#identify-problem-areas" title="Permanent link">&para;</a></h3>
 <p>Watch for:</p>
 <ul>
+<li><strong>Overshoot on corners</strong>: May indicate overly aggressive constraints or insufficient deceleration</li>
 <li><strong>Sharp slowdowns</strong>: May indicate overly aggressive constraints</li>
 <li><strong>Corner cutting</strong>: Handoff radius might be too large</li>
 <li><strong>Hesitation</strong>: Handoff radius might be too small</li>

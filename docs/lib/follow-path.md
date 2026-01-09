@@ -49,7 +49,7 @@ new PIDController(5.0, 0.0, 0.0)  // Typical starting point
 
 Controls the robot's **holonomic rotation** toward rotation targets.
 
-- **Input**: Heading error (radians)
+- **Input**: rotation error (radians)
 - **Output**: Desired angular velocity (rad/s)
 - **Tuning**: Higher P = faster rotation response
 
@@ -68,6 +68,16 @@ Minimizes **deviation from the line** between waypoints.
 ```java
 new PIDController(2.0, 0.0, 0.0)  // Typical starting point
 ```
+
+### How the Controllers Work Together
+
+The tracking control loop runs all three PID controllers each cycle:
+
+1. **Translation controller** — Minimizes total remaining path distance and drives the robot to the final path element
+2. **Rotation controller** — Either follows the profiled rotation setpoint or snaps directly to the target if no profile is specified
+3. **CTE controller** — Minimizes deviation from the line between current and previous path segments, helping reduce post-handoff cross-track error
+
+The translation controller's speed magnitude depends on distance to the path's end, while direction depends on the next available waypoint. These values are **acceleration-limited in 2D** to provide smooth robot motion toward the target, making chassis output relatively stable even during erroneous odometry jitter.
 
 ## Builder Methods
 
@@ -112,8 +122,20 @@ Command followCommand = pathBuilder.build(myPath);
 The returned command:
 
 - Requires the drive subsystem
+- **Runs to completion** — cannot be stopped midway through the path
 - Runs until the robot reaches the end tolerances
 - Stops the drivetrain when finished
+
+!!! warning "No Mid-Path Stopping"
+    BLine does not support stopping the robot midway through a path. If you need the robot to stop partway through, create separate Path objects and chain them together:
+
+    ```java
+    Commands.sequence(
+        pathBuilder.build(firstSegment),    // Drive to first location
+        new ScoreCommand(),                 // Stop and score
+        pathBuilder.build(secondSegment)    // Continue to next location
+    );
+    ```
 
 ## Complete Example
 
@@ -182,6 +204,53 @@ public class RobotContainer {
 1. Start with P = 2.0, I = 0, D = 0
 2. Lower P if the robot fights itself on curved sections
 3. Higher P keeps the robot closer to the line but may cause jitter
+
+## Logging
+
+BLine provides multiple ways to access internal state data for logging and debugging.
+
+### Consumer-Based Logging
+
+Pass consumers to the `FollowPath` class to receive logging data during path execution. This is ideal for integration with logging frameworks like **AdvantageKit**:
+
+```java
+FollowPath.Builder pathBuilder = new FollowPath.Builder(
+    driveSubsystem,
+    driveSubsystem::getPose,
+    driveSubsystem::getChassisSpeeds,
+    driveSubsystem::drive,
+    new PIDController(5.0, 0.0, 0.0),
+    new PIDController(5.0, 0.0, 0.0),
+    new PIDController(2.0, 0.0, 0.0)
+).withLoggingConsumer((key, value) -> {
+    // Example: AdvantageKit logging
+    Logger.recordOutput("BLine/" + key, value);
+});
+```
+
+The class pushes keys and values covering a wide range of internal state, including:
+
+- Current target position and rotation
+- Distance remaining to path end
+- Cross-track error
+- Current segment index
+- Controller outputs
+- Rate limiter state
+
+### Getter Methods
+
+For direct code integration, getter methods are available on the `FollowPath` command instance:
+
+```java
+Command followCommand = pathBuilder.build(myPath);
+
+// Access state during execution (e.g., in a trigger or parallel command)
+double distanceRemaining = ((FollowPath) followCommand).getDistanceRemaining();
+double crossTrackError = ((FollowPath) followCommand).getCrossTrackError();
+int currentSegment = ((FollowPath) followCommand).getCurrentSegmentIndex();
+```
+
+This is useful for creating custom triggers or conditions based on path progress.
 
 ## Pre-Match Module Orientation
 

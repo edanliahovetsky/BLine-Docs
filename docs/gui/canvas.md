@@ -34,11 +34,11 @@ Click on any element to select it. The selected element will be highlighted, and
 
 ## Adjusting Rotation
 
-Waypoints and RotationTargets have **rotation handles**—small circles extending from the element that indicate the heading direction.
+Waypoints and RotationTargets have **rotation handles**—small circles extending from the element that indicate the rotation direction.
 
-**Drag the rotation handle** to adjust the element's heading.
+**Drag the rotation handle** to adjust the element's rotation.
 
-<!-- GIF: Dragging rotation handle to change heading -->
+<!-- GIF: Dragging rotation handle to change rotation -->
 ![Rotation Handle](../assets/gifs/canvas/rotation-handle.gif)
 
 ## Moving Rotation Targets
@@ -88,7 +88,7 @@ During simulation playback, the canvas shows:
 
 - **Robot position** moving along the path
 - **Orange trail** showing the simulated trajectory
-- **Current heading** indicated by the robot icon orientation
+- **Current rotation** indicated by the robot icon orientation
 
 See [Simulation](simulation.md) for more details on the simulation features.
 
