@@ -937,6 +937,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../lib/pre-match/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pre-Match Module Orientation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib/logging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lib/api-reference/" class="md-nav__link">
         
   
@@ -1737,12 +1793,12 @@
 <h3 id="max-translational-velocity-is-key">Max Translational Velocity is Key<a class="headerlink" href="#max-translational-velocity-is-key" title="Permanent link">&para;</a></h3>
 <p>The <strong>max translational velocity constraint</strong> is the primary ranged constraint recommended for most use cases. It is the most effective method for counteracting overshoot at sharp turns—other than increasing the handoff radius, which reduces path precision.</p>
 <p>By limiting velocity before tight corners, the robot can decelerate in time and follow the intended path more accurately.</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="w"> </span><span class="n">constraints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="p">()</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityMetersPerSec</span><span class="p">(</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w">   </span><span class="c1">// Fast on straight sections</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w">    </span><span class="c1">// Slow before sharp turn</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="w"> </span><span class="n">constraints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityMetersPerSec</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w">   </span><span class="c1">// Fast on straight sections</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w">    </span><span class="c1">// Slow before sharp turn</span>
+<span class="w">    </span><span class="p">);</span>
+</code></pre></div>
 <h3 id="balancing-handoff-radius-and-velocity">Balancing Handoff Radius and Velocity<a class="headerlink" href="#balancing-handoff-radius-and-velocity" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1799,64 +1855,64 @@ Just be sure not to oversaturate your paths and keep them as sparse as possible.
 <p>The translation controller minimizes total path distance remaining.</p>
 <div class="admonition warning">
 <p class="admonition-title">Controller Instability</p>
-<p>Avoid using the PID integral term for the translation controller. Use the integral term will cause translation controller instability. Integral term use in other controllers (Rotation and Cross-Track) is fine. </p>
+<p>Avoid using the PID integral term for the translation controller. Using the integral term will cause translation controller instability. Integral term use in other controllers (Rotation and Cross-Track) is fine. </p>
 </div>
 <p><strong>Starting gains:</strong> P = 5.0, I = 0.0, D = 0.0</p>
 <h3 id="rotation-controller">Rotation Controller<a class="headerlink" href="#rotation-controller" title="Permanent link">&para;</a></h3>
-<p>Controls minimizes error in holonomic heading (rotation).</p>
+<p>Minimizes error in holonomic heading (rotation).</p>
 <p><strong>Starting gains:</strong> P = 3.0, I = 0.0, D = 0.0</p>
 <h3 id="cross-track-controller">Cross-Track Controller<a class="headerlink" href="#cross-track-controller" title="Permanent link">&para;</a></h3>
 <p>Keeps the robot on the line between waypoints or translation targets. It should be used to reduce path deviation in longer path segments over time, rather than on sharp turns. </p>
 <div class="admonition warning">
 <p class="admonition-title">Controller Instability</p>
-<p>Be weary of cross-track controller over-tuning (were the controller overpowers the translation controller). An over-tuned cross track controller will cause undesirable behavior around turns, especially during high velocities. </p>
+<p>Be wary of cross-track controller over-tuning (where the controller overpowers the translation controller). An over-tuned cross-track controller will cause undesirable behavior around turns, especially during high velocities. </p>
 </div>
 <p><strong>Starting gains:</strong> P = 2.0, I = 0.0, D = 0.0</p>
 <h2 id="path-design">Path Design<a class="headerlink" href="#path-design" title="Permanent link">&para;</a></h2>
 <h3 id="use-translationtargets-for-path-shaping">Use TranslationTargets for Path Shaping<a class="headerlink" href="#use-translationtargets-for-path-shaping" title="Permanent link">&para;</a></h3>
 <p>Don't overuse Waypoints. If you just need the robot to pass through a point without a specific rotation, use a TranslationTarget instead:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Good: Only specify rotation where it matters</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span><span class="w">      </span><span class="c1">// Face forward at start</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">),</span><span class="w">                      </span><span class="c1">// Just pass through</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.5</span><span class="p">),</span><span class="w">                      </span><span class="c1">// Path shaping</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">scoringPosition</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">180</span><span class="p">))</span><span class="w">  </span><span class="c1">// Face target</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Good: Only specify rotation where it matters</span>
+<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span><span class="w">      </span><span class="c1">// Face forward at start</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">),</span><span class="w">                      </span><span class="c1">// Just pass through</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.5</span><span class="p">),</span><span class="w">                      </span><span class="c1">// Path shaping</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">scoringPosition</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">180</span><span class="p">))</span><span class="w">  </span><span class="c1">// Face target</span>
+<span class="p">);</span>
+</code></pre></div>
 <h3 id="use-rotationtargets-for-mid-segment-rotation">Use RotationTargets for Mid-Segment Rotation<a class="headerlink" href="#use-rotationtargets-for-mid-segment-rotation" title="Permanent link">&para;</a></h3>
 <p>When you need to rotate while driving but don't need an extra waypoint:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RotationTarget</span><span class="p">(</span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span><span class="w"> </span><span class="mf">0.5</span><span class="p">),</span><span class="w">  </span><span class="c1">// Rotate at midpoint</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">90</span><span class="p">))</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RotationTarget</span><span class="p">(</span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span><span class="w"> </span><span class="mf">0.5</span><span class="p">),</span><span class="w">  </span><span class="c1">// Rotate at midpoint</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">90</span><span class="p">))</span>
+<span class="p">);</span>
+</code></pre></div>
 <h3 id="single-element-paths-for-simple-moves">Single-Element Paths for Simple Moves<a class="headerlink" href="#single-element-paths-for-simple-moves" title="Permanent link">&para;</a></h3>
 <p>Don't overcomplicate simple movements. A single Waypoint is valid:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Simple drive-to-position</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">Path</span><span class="w"> </span><span class="n">simpleMove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">),</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">45</span><span class="p">))</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Simple drive-to-position</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">simpleMove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">),</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">45</span><span class="p">))</span>
+<span class="p">);</span>
+</code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Paths Run to Completion</p>
 <p>BLine paths cannot be stopped midway through execution. If you need the robot to stop partway through a route, break it into separate Path objects:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">toFirstScore</span><span class="p">),</span><span class="w">     </span><span class="c1">// Drive to scoring position</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">(),</span><span class="w">                  </span><span class="c1">// Stop to score</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">toPickup</span><span class="p">),</span><span class="w">         </span><span class="c1">// Drive to pickup location</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">()</span><span class="w">                  </span><span class="c1">// Stop to intake</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
+<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">toFirstScore</span><span class="p">),</span><span class="w">     </span><span class="c1">// Drive to scoring position</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">(),</span><span class="w">                  </span><span class="c1">// Stop to score</span>
+<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">toPickup</span><span class="p">),</span><span class="w">         </span><span class="c1">// Drive to pickup location</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">()</span><span class="w">                  </span><span class="c1">// Stop to intake</span>
+<span class="p">);</span>
+</code></pre></div>
 </div>
 <h2 id="autonomous-performance">Autonomous Performance<a class="headerlink" href="#autonomous-performance" title="Permanent link">&para;</a></h2>
 <h3 id="pre-orient-swerve-modules">Pre-Orient Swerve Modules<a class="headerlink" href="#pre-orient-swerve-modules" title="Permanent link">&para;</a></h3>
 <p>For optimal autonomous start, pre-orient your swerve modules toward the initial path direction before the match begins:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// During disabled periodic or auto init</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">Path</span><span class="w"> </span><span class="n">firstPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;firstAutoPath&quot;</span><span class="p">);</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">Rotation2d</span><span class="w"> </span><span class="n">initialDirection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">firstPath</span><span class="p">.</span><span class="na">getInitialModuleDirection</span><span class="p">();</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">driveSubsystem</span><span class="p">.</span><span class="na">setModuleOrientations</span><span class="p">(</span><span class="n">initialDirection</span><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// During disabled periodic or auto init</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">firstPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;firstAutoPath&quot;</span><span class="p">);</span>
+<span class="n">Rotation2d</span><span class="w"> </span><span class="n">initialDirection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">firstPath</span><span class="p">.</span><span class="na">getInitialModuleDirection</span><span class="p">();</span>
+<span class="n">driveSubsystem</span><span class="p">.</span><span class="na">setModuleOrientations</span><span class="p">(</span><span class="n">initialDirection</span><span class="p">);</span>
+</code></pre></div>
 <p>This prevents the micro-deviations that occur when modules need to rotate during the initial acceleration.</p>
 <h3 id="use-pose-reset-wisely">Use Pose Reset Wisely<a class="headerlink" href="#use-pose-reset-wisely" title="Permanent link">&para;</a></h3>
 <p>The <code>withPoseReset()</code> option resets odometry to the path's starting pose. Use this for:</p>
@@ -1864,9 +1920,9 @@ Just be sure not to oversaturate your paths and keep them as sparse as possible.
 <li><strong>First path in autonomous</strong>: Ensures odometry matches expected starting position</li>
 <li><strong>After significant odometry drift</strong>: Reset to a known position</li>
 </ul>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// Builder with pose reset enabled</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withPoseReset</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">resetPose</span><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Builder with pose reset enabled</span>
+<span class="n">pathBuilder</span><span class="p">.</span><span class="na">withPoseReset</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">resetPose</span><span class="p">);</span>
+</code></pre></div>
 <p>Don't use pose reset for every path—only when starting from a known position.</p>
 <h2 id="workflow-recommendations">Workflow Recommendations<a class="headerlink" href="#workflow-recommendations" title="Permanent link">&para;</a></h2>
 <h3 id="choose-your-workflow">Choose Your Workflow<a class="headerlink" href="#choose-your-workflow" title="Permanent link">&para;</a></h3>
@@ -1913,38 +1969,38 @@ Just be sure not to oversaturate your paths and keep them as sparse as possible.
 </div>
 <p>Currently, BLine does not support event triggers built into paths. However, you can replicate trigger-like functionality using WPILib commands:</p>
 <h3 id="using-waituntil-for-trigger-behavior">Using WaitUntil for Trigger Behavior<a class="headerlink" href="#using-waituntil-for-trigger-behavior" title="Permanent link">&para;</a></h3>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">// Trigger an action when the robot passes a certain point</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">parallel</span><span class="p">(</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">myPath</span><span class="p">),</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="n">Commands</span><span class="p">.</span><span class="na">waitUntil</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">            </span><span class="c1">// Check if robot has passed x = 3.0 meters</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">driveSubsystem</span><span class="p">.</span><span class="na">getPose</span><span class="p">().</span><span class="na">getX</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="p">}).</span><span class="na">andThen</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">())</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="p">)</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Trigger an action when the robot passes a certain point</span>
+<span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">parallel</span><span class="p">(</span>
+<span class="w">        </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">myPath</span><span class="p">),</span>
+<span class="w">        </span><span class="n">Commands</span><span class="p">.</span><span class="na">waitUntil</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Check if robot has passed x = 3.0 meters</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">driveSubsystem</span><span class="p">.</span><span class="na">getPose</span><span class="p">().</span><span class="na">getX</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}).</span><span class="na">andThen</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">())</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
 <h3 id="using-deadlines-with-path-progress">Using Deadlines with Path Progress<a class="headerlink" href="#using-deadlines-with-path-progress" title="Permanent link">&para;</a></h3>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// Run intake while following path, then score</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">deadline</span><span class="p">(</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">        </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">scoringPath</span><span class="p">),</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">()</span><span class="w">  </span><span class="c1">// Runs until path completes</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="p">),</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">()</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Run intake while following path, then score</span>
+<span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">deadline</span><span class="p">(</span>
+<span class="w">        </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">scoringPath</span><span class="p">),</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">()</span><span class="w">  </span><span class="c1">// Runs until path completes</span>
+<span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">()</span>
+<span class="p">);</span>
+</code></pre></div>
 <h3 id="checking-path-progress">Checking Path Progress<a class="headerlink" href="#checking-path-progress" title="Permanent link">&para;</a></h3>
 <p>For more precise triggering, access the path follower's current state:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// Using getter methods on the FollowPath command</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">FollowPath</span><span class="w"> </span><span class="n">followCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">FollowPath</span><span class="p">)</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">myPath</span><span class="p">);</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">Commands</span><span class="p">.</span><span class="na">parallel</span><span class="p">(</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="n">followCommand</span><span class="p">,</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">waitUntil</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">followCommand</span><span class="p">.</span><span class="na">getCurrentSegmentIndex</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">        </span><span class="p">.</span><span class="na">andThen</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PrepareScoreCommand</span><span class="p">())</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Using getter methods on the FollowPath command</span>
+<span class="n">FollowPath</span><span class="w"> </span><span class="n">followCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">FollowPath</span><span class="p">)</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">myPath</span><span class="p">);</span>
+
+<span class="n">Commands</span><span class="p">.</span><span class="na">parallel</span><span class="p">(</span>
+<span class="w">    </span><span class="n">followCommand</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">waitUntil</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">followCommand</span><span class="p">.</span><span class="na">getCurrentSegmentIndex</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">andThen</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PrepareScoreCommand</span><span class="p">())</span>
+<span class="p">);</span>
+</code></pre></div>
 <h2 id="why-no-second-alignment-routine">Why No Second Alignment Routine?<a class="headerlink" href="#why-no-second-alignment-routine" title="Permanent link">&para;</a></h2>
 <p>Unlike time-parameterized path followers, BLine typically doesn't require a separate alignment routine after paths complete.</p>
 <p><strong>Why other tools often need it:</strong></p>
@@ -2044,7 +2100,7 @@ Just be sure not to oversaturate your paths and keep them as sparse as possible.
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.sidebar.sticky", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.sidebar.sticky", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
 

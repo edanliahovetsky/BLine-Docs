@@ -2,74 +2,82 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/common-issues/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/usage-tips/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/concepts/constraints/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/concepts/design-philosophy/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/concepts/key-parameters/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/concepts/path-elements/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/getting-started/installation/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/getting-started/quick-start/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/gui/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/gui/canvas/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/gui/menu-bar/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/gui/sidebar/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/gui/simulation/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/lib/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/lib/api-reference/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/lib/follow-path/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
+    </url>
+    <url>
+         <loc>https://edanliahovetsky.github.io/BLine-Docs/lib/logging/</loc>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://edanliahovetsky.github.io/BLine-Docs/lib/path-construction/</loc>
-         <lastmod>2026-01-08</lastmod>
+         <lastmod>2026-01-20</lastmod>
+    </url>
+    <url>
+         <loc>https://edanliahovetsky.github.io/BLine-Docs/lib/pre-match/</loc>
+         <lastmod>2026-01-20</lastmod>
     </url>
 </urlset>

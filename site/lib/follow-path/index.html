@@ -16,7 +16,7 @@
         <link rel="prev" href="../path-construction/">
       
       
-        <link rel="next" href="../api-reference/">
+        <link rel="next" href="../pre-match/">
       
       
         
@@ -1136,6 +1136,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#tuning-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tuning Order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#translation-controller_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1173,60 +1184,66 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#logging" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Logging
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Logging">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#consumer-based-logging" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Consumer-Based Logging
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#getter-methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getter Methods
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pre-match-module-orientation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pre-Match Module Orientation
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pre-match/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pre-Match Module Orientation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1515,6 +1532,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#tuning-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tuning Order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#translation-controller_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1552,56 +1580,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#logging" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Logging
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Logging">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#consumer-based-logging" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Consumer-Based Logging
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#getter-methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getter Methods
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pre-match-module-orientation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pre-Match Module Orientation
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1622,19 +1600,19 @@
 <h1 id="followpath-builder">FollowPath Builder<a class="headerlink" href="#followpath-builder" title="Permanent link">&para;</a></h1>
 <p>The <code>FollowPath.Builder</code> creates commands that execute path following. It's designed to be configured once and reused for all paths.</p>
 <h2 id="basic-setup">Basic Setup<a class="headerlink" href="#basic-setup" title="Permanent link">&para;</a></h2>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">frc.robot.lib.BLine.*</span><span class="p">;</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.math.controller.PIDController</span><span class="p">;</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">pathBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="p">(</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">driveSubsystem</span><span class="p">,</span><span class="w">                      </span><span class="c1">// Subsystem requirement</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getPose</span><span class="p">,</span><span class="w">             </span><span class="c1">// Current pose supplier</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getChassisSpeeds</span><span class="p">,</span><span class="w">    </span><span class="c1">// Current speeds supplier</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">drive</span><span class="p">,</span><span class="w">               </span><span class="c1">// Drive consumer</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w">    </span><span class="c1">// Translation controller</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w">    </span><span class="c1">// Rotation controller</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">     </span><span class="c1">// Cross-track controller</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">frc.robot.lib.BLine.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.math.controller.PIDController</span><span class="p">;</span>
+
+<span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">pathBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="p">(</span>
+<span class="w">    </span><span class="n">driveSubsystem</span><span class="p">,</span><span class="w">                      </span><span class="c1">// Subsystem requirement</span>
+<span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getPose</span><span class="p">,</span><span class="w">             </span><span class="c1">// Current pose supplier</span>
+<span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getChassisSpeeds</span><span class="p">,</span><span class="w">    </span><span class="c1">// Current speeds supplier</span>
+<span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">drive</span><span class="p">,</span><span class="w">               </span><span class="c1">// Drive consumer</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w">    </span><span class="c1">// Translation controller</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w">    </span><span class="c1">// Rotation controller</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">     </span><span class="c1">// Cross-track controller</span>
+<span class="p">);</span>
+</code></pre></div>
 <h2 id="constructor-parameters">Constructor Parameters<a class="headerlink" href="#constructor-parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1690,8 +1668,8 @@
 <li><strong>Output</strong>: Desired velocity (m/s)</li>
 <li><strong>Tuning</strong>: Higher P = faster acceleration, but may overshoot</li>
 </ul>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">  </span><span class="c1">// Typical starting point</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">  </span><span class="c1">// Typical starting point</span>
+</code></pre></div>
 <h3 id="rotation-controller">Rotation Controller<a class="headerlink" href="#rotation-controller" title="Permanent link">&para;</a></h3>
 <p>Controls the robot's <strong>holonomic rotation</strong> toward rotation targets.</p>
 <ul>
@@ -1699,8 +1677,8 @@
 <li><strong>Output</strong>: Desired angular velocity (rad/s)</li>
 <li><strong>Tuning</strong>: Higher P = faster rotation response</li>
 </ul>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">  </span><span class="c1">// Typical starting point</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">  </span><span class="c1">// Typical starting point</span>
+</code></pre></div>
 <h3 id="cross-track-controller">Cross-Track Controller<a class="headerlink" href="#cross-track-controller" title="Permanent link">&para;</a></h3>
 <p>Minimizes <strong>deviation from the line</strong> between waypoints.</p>
 <ul>
@@ -1708,91 +1686,90 @@
 <li><strong>Output</strong>: Correction velocity (m/s)</li>
 <li><strong>Tuning</strong>: Higher P = stronger path adherence</li>
 </ul>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">  </span><span class="c1">// Typical starting point</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">  </span><span class="c1">// Typical starting point</span>
+</code></pre></div>
 <h3 id="how-the-controllers-work-together">How the Controllers Work Together<a class="headerlink" href="#how-the-controllers-work-together" title="Permanent link">&para;</a></h3>
 <p>The tracking control loop runs all three PID controllers each cycle:</p>
 <ol>
 <li><strong>Translation controller</strong> — Minimizes total remaining path distance and drives the robot to the final path element</li>
 <li><strong>Rotation controller</strong> — Either follows the profiled rotation setpoint or snaps directly to the target if no profile is specified</li>
-<li><strong>CTE controller</strong> — Minimizes deviation from the line between current and previous path segments, helping reduce post-handoff cross-track error</li>
+<li><strong>Cross-Track Error (CTE) controller</strong> — Minimizes deviation from the line between current and previous path segments, helping reduce post-handoff cross-track error</li>
 </ol>
 <p>The translation controller's speed magnitude depends on distance to the path's end, while direction depends on the next available waypoint. These values are <strong>acceleration-limited in 2D</strong> to provide smooth robot motion toward the target, making chassis output relatively stable even during erroneous odometry jitter.</p>
 <h2 id="builder-methods">Builder Methods<a class="headerlink" href="#builder-methods" title="Permanent link">&para;</a></h2>
 <h3 id="withposereset">withPoseReset<a class="headerlink" href="#withposereset" title="Permanent link">&para;</a></h3>
 <p>Resets odometry to the path's starting pose when the command begins:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withPoseReset</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">resetPose</span><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withPoseReset</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">resetPose</span><span class="p">);</span>
+</code></pre></div>
 <p>This is useful for the first path in autonomous to ensure odometry starts correctly.</p>
 <h3 id="withdefaultshouldflip">withDefaultShouldFlip<a class="headerlink" href="#withdefaultshouldflip" title="Permanent link">&para;</a></h3>
 <p>Automatically flip paths for the red alliance based on <code>DriverStation.getAlliance()</code>:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withDefaultShouldFlip</span><span class="p">();</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withDefaultShouldFlip</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="withshouldflip">withShouldFlip<a class="headerlink" href="#withshouldflip" title="Permanent link">&para;</a></h3>
 <p>Custom flip logic:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withShouldFlip</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="c1">// Return true to flip the path</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">DriverStation</span><span class="p">.</span><span class="na">getAlliance</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Alliance</span><span class="p">.</span><span class="na">Red</span><span class="p">;</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">});</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withShouldFlip</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Return true to flip the path</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">DriverStation</span><span class="p">.</span><span class="na">getAlliance</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Alliance</span><span class="p">.</span><span class="na">Red</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div>
 <h2 id="building-commands">Building Commands<a class="headerlink" href="#building-commands" title="Permanent link">&para;</a></h2>
 <p>Use <code>build()</code> to create a command for a specific path:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">Path</span><span class="w"> </span><span class="n">myPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;myPathFile&quot;</span><span class="p">);</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">Command</span><span class="w"> </span><span class="n">followCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">myPath</span><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">myPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;myPathFile&quot;</span><span class="p">);</span>
+<span class="n">Command</span><span class="w"> </span><span class="n">followCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">myPath</span><span class="p">);</span>
+</code></pre></div>
 <p>The returned command:</p>
 <ul>
 <li>Requires the drive subsystem</li>
-<li><strong>Runs to completion</strong> — cannot be stopped midway through the path</li>
 <li>Runs until the robot reaches the end tolerances</li>
 <li>Stops the drivetrain when finished</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">No Mid-Path Stopping</p>
 <p>BLine does not support stopping the robot midway through a path. If you need the robot to stop partway through, create separate Path objects and chain them together:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">firstSegment</span><span class="p">),</span><span class="w">    </span><span class="c1">// Drive to first location</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">(),</span><span class="w">                 </span><span class="c1">// Stop and score</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">secondSegment</span><span class="p">)</span><span class="w">    </span><span class="c1">// Continue to next location</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
+<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">firstSegment</span><span class="p">),</span><span class="w">    </span><span class="c1">// Drive to first location</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">(),</span><span class="w">                 </span><span class="c1">// Stop and score</span>
+<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">secondSegment</span><span class="p">)</span><span class="w">    </span><span class="c1">// Continue to next location</span>
+<span class="p">);</span>
+</code></pre></div>
 </div>
 <h2 id="complete-example">Complete Example<a class="headerlink" href="#complete-example" title="Permanent link">&para;</a></h2>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RobotContainer</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DriveSubsystem</span><span class="w"> </span><span class="n">driveSubsystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DriveSubsystem</span><span class="p">();</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">;</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">RobotContainer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">        </span><span class="c1">// Set global constraints</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">        </span><span class="n">Path</span><span class="p">.</span><span class="na">setDefaultGlobalConstraints</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">DefaultGlobalConstraints</span><span class="p">(</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">            </span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">360.0</span><span class="p">,</span><span class="w"> </span><span class="mf">720.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">        </span><span class="p">));</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">        </span><span class="c1">// Create path builder</span>
-</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">        </span><span class="n">pathBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="p">(</span>
-</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">            </span><span class="n">driveSubsystem</span><span class="p">,</span>
-</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">            </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getPose</span><span class="p">,</span>
-</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">            </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getChassisSpeeds</span><span class="p">,</span>
-</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">            </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">drive</span><span class="p">,</span>
-</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span>
-</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span>
-</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
-</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">        </span><span class="p">).</span><span class="na">withDefaultShouldFlip</span><span class="p">()</span>
-</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">         </span><span class="p">.</span><span class="na">withPoseReset</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">resetPose</span><span class="p">);</span>
-</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>
-</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">getAutonomousCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
-</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">            </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;toFirstScore&quot;</span><span class="p">)),</span>
-</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">(),</span>
-</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="w">            </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;toPickup&quot;</span><span class="p">)),</span>
-</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">(),</span>
-</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="w">            </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;toSecondScore&quot;</span><span class="p">)),</span>
-</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">()</span>
-</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="w">        </span><span class="p">);</span>
-</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RobotContainer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DriveSubsystem</span><span class="w"> </span><span class="n">driveSubsystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DriveSubsystem</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">RobotContainer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Set global constraints</span>
+<span class="w">        </span><span class="n">Path</span><span class="p">.</span><span class="na">setDefaultGlobalConstraints</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">DefaultGlobalConstraints</span><span class="p">(</span>
+<span class="w">            </span><span class="mf">4.5</span><span class="p">,</span><span class="w"> </span><span class="mf">12.0</span><span class="p">,</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">860</span><span class="p">,</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span>
+<span class="w">        </span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// Create path builder</span>
+<span class="w">        </span><span class="n">pathBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="p">(</span>
+<span class="w">            </span><span class="n">driveSubsystem</span><span class="p">,</span>
+<span class="w">            </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getPose</span><span class="p">,</span>
+<span class="w">            </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getChassisSpeeds</span><span class="p">,</span>
+<span class="w">            </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">drive</span><span class="p">,</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">).</span><span class="na">withDefaultShouldFlip</span><span class="p">()</span>
+<span class="w">         </span><span class="p">.</span><span class="na">withPoseReset</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">resetPose</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">getAutonomousCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
+<span class="w">            </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;toFirstScore&quot;</span><span class="p">)),</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;toPickup&quot;</span><span class="p">)),</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;toSecondScore&quot;</span><span class="p">)),</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">()</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="tuning-tips">Tuning Tips<a class="headerlink" href="#tuning-tips" title="Permanent link">&para;</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Tune at Maximum Velocities</p>
@@ -1803,71 +1780,25 @@
 </ul>
 <p>Always tune within the full operating range of velocities and accelerations.</p>
 </div>
+<h3 id="tuning-order">Tuning Order<a class="headerlink" href="#tuning-order" title="Permanent link">&para;</a></h3>
+<p>The PID controllers should be tuned in the following order: translation, rotation, and finally cross-track.</p>
 <h3 id="translation-controller_1">Translation Controller<a class="headerlink" href="#translation-controller_1" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Start with P = 5.0, I = 0, D = 0</li>
-<li>Increase P until the robot accelerates aggressively toward targets</li>
-<li>If you see oscillation near endpoints, add small D (0.1-0.5)</li>
-<li>I is rarely needed for path following</li>
-</ol>
+<p>The translation controller minimizes total path distance remaining.</p>
+<div class="admonition warning">
+<p class="admonition-title">Controller Instability</p>
+<p>Avoid using the PID integral term for the translation controller. Using the integral term will cause translation controller instability. Integral term use in other controllers (Rotation and Cross-Track) is fine.</p>
+</div>
+<p><strong>Starting gains:</strong> P = 5.0, I = 0.0, D = 0.0</p>
 <h3 id="rotation-controller_1">Rotation Controller<a class="headerlink" href="#rotation-controller_1" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Start with P = 5.0, I = 0, D = 0</li>
-<li>Increase P until rotation is responsive but not oscillating</li>
-<li>Add D if you see overshoot on rotation targets</li>
-</ol>
+<p>Minimizes error in holonomic heading (rotation).</p>
+<p><strong>Starting gains:</strong> P = 3.0, I = 0.0, D = 0.0</p>
 <h3 id="cross-track-controller_1">Cross-Track Controller<a class="headerlink" href="#cross-track-controller_1" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Start with P = 2.0, I = 0, D = 0</li>
-<li>Lower P if the robot fights itself on curved sections</li>
-<li>Higher P keeps the robot closer to the line but may cause jitter</li>
-</ol>
-<h2 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h2>
-<p>BLine provides multiple ways to access internal state data for logging and debugging.</p>
-<h3 id="consumer-based-logging">Consumer-Based Logging<a class="headerlink" href="#consumer-based-logging" title="Permanent link">&para;</a></h3>
-<p>Pass consumers to the <code>FollowPath</code> class to receive logging data during path execution. This is ideal for integration with logging frameworks like <strong>AdvantageKit</strong>:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">pathBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="p">(</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="n">driveSubsystem</span><span class="p">,</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getPose</span><span class="p">,</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getChassisSpeeds</span><span class="p">,</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">drive</span><span class="p">,</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="p">).</span><span class="na">withLoggingConsumer</span><span class="p">((</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="c1">// Example: AdvantageKit logging</span>
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="n">Logger</span><span class="p">.</span><span class="na">recordOutput</span><span class="p">(</span><span class="s">&quot;BLine/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="p">});</span>
-</span></code></pre></div>
-<p>The class pushes keys and values covering a wide range of internal state, including:</p>
-<ul>
-<li>Current target position and rotation</li>
-<li>Distance remaining to path end</li>
-<li>Cross-track error</li>
-<li>Current segment index</li>
-<li>Controller outputs</li>
-<li>Rate limiter state</li>
-</ul>
-<h3 id="getter-methods">Getter Methods<a class="headerlink" href="#getter-methods" title="Permanent link">&para;</a></h3>
-<p>For direct code integration, getter methods are available on the <code>FollowPath</code> command instance:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">Command</span><span class="w"> </span><span class="n">followCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">myPath</span><span class="p">);</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1">// Access state during execution (e.g., in a trigger or parallel command)</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kt">double</span><span class="w"> </span><span class="n">distanceRemaining</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">FollowPath</span><span class="p">)</span><span class="w"> </span><span class="n">followCommand</span><span class="p">).</span><span class="na">getDistanceRemaining</span><span class="p">();</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kt">double</span><span class="w"> </span><span class="n">crossTrackError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">FollowPath</span><span class="p">)</span><span class="w"> </span><span class="n">followCommand</span><span class="p">).</span><span class="na">getCrossTrackError</span><span class="p">();</span>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="kt">int</span><span class="w"> </span><span class="n">currentSegment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">FollowPath</span><span class="p">)</span><span class="w"> </span><span class="n">followCommand</span><span class="p">).</span><span class="na">getCurrentSegmentIndex</span><span class="p">();</span>
-</span></code></pre></div>
-<p>This is useful for creating custom triggers or conditions based on path progress.</p>
-<h2 id="pre-match-module-orientation">Pre-Match Module Orientation<a class="headerlink" href="#pre-match-module-orientation" title="Permanent link">&para;</a></h2>
-<p>For optimal autonomous start, pre-orient swerve modules:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// During robot setup or auto init</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">Path</span><span class="w"> </span><span class="n">firstPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;firstAutoPath&quot;</span><span class="p">);</span>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">Rotation2d</span><span class="w"> </span><span class="n">initialDirection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">firstPath</span><span class="p">.</span><span class="na">getInitialModuleDirection</span><span class="p">();</span>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1">// Orient modules before match starts</span>
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">driveSubsystem</span><span class="p">.</span><span class="na">setModuleOrientations</span><span class="p">(</span><span class="n">initialDirection</span><span class="p">);</span>
-</span></code></pre></div>
-<p>This prevents micro-deviations at auto start caused by modules rotating while driving.</p>
+<p>Keeps the robot on the line between waypoints or translation targets. It should be used to reduce path deviation in longer path segments over time, rather than on sharp turns.</p>
+<div class="admonition warning">
+<p class="admonition-title">Controller Instability</p>
+<p>Be wary of cross-track controller over-tuning (where the controller overpowers the translation controller). An over-tuned cross-track controller will cause undesirable behavior around turns, especially during high velocities.</p>
+</div>
+<p><strong>Starting gains:</strong> P = 2.0, I = 0.0, D = 0.0</p>
 
 
 
@@ -1952,7 +1883,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.sidebar.sticky", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.sidebar.sticky", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
 

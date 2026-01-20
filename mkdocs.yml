@@ -5,6 +5,12 @@ site_url: https://edanliahovetsky.github.io/BLine-Docs/
 theme:
   name: material
   custom_dir: overrides
+  highlightjs: true
+  hljs_languages:
+    - java
+    - json
+    - yaml
+    - bash
   palette:
     - scheme: slate
       primary: deep orange
@@ -28,7 +34,6 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.copy
-    - content.code.annotate
   icon:
     repo: fontawesome/brands/github
 
@@ -51,10 +56,6 @@ extra_javascript:
   - javascripts/gif-lazy-load.js
 
 markdown_extensions:
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
@@ -91,6 +92,8 @@ nav:
     - Overview: lib/index.md
     - Path Construction: lib/path-construction.md
     - FollowPath Builder: lib/follow-path.md
+    - Pre-Match Module Orientation: lib/pre-match.md
+    - Logging: lib/logging.md
     - API Reference: lib/api-reference.md
   - Usage Tips: usage-tips.md
   - Common Issues: common-issues.md
