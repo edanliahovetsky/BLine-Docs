@@ -85,6 +85,7 @@ nav:
   - Concepts:
     - Path Elements: concepts/path-elements.md
     - Constraints: concepts/constraints.md
+    - Event Triggers: concepts/event-triggers.md
     - Key Parameters: concepts/key-parameters.md
     - Design Philosophy: concepts/design-philosophy.md
   - GUI:
@@ -93,13 +94,16 @@ nav:
     - Canvas: gui/canvas.md
     - Sidebar: gui/sidebar.md
     - Simulation: gui/simulation.md
+    - Protrusions: gui/protrusions.md
   - Library:
     - Overview: lib/index.md
     - Path Construction: lib/path-construction.md
     - FollowPath Builder: lib/follow-path.md
+    - Event Triggers: lib/event-triggers.md
+    - Alliance Flip & Mirror: lib/flip-and-mirror.md
     - Pre-Match Module Orientation: lib/pre-match.md
     - Logging: lib/logging.md
     - API Reference: lib/api-reference.md
-  - Usage Tips: usage-tips.md
+  - Tuning & Usage Tips: usage-tips.md
   - Common Issues: common-issues.md
 

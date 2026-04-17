@@ -1,172 +1,176 @@
 # Quick Start
 
-This guide walks you through creating and following your first BLine path.
+This page walks through creating and following your first BLine path end-to-end. It assumes:
 
-## Prerequisites
+- You have [installed BLine-Lib](installation.md#bline-lib) in a WPILib FRC robot project.
+- Your robot has a holonomic drivetrain with a reliable pose estimate.
+- You are comfortable with WPILib command-based programming (subsystems, commands, `Pose2d`).
 
-- [BLine-Lib installed](installation.md#bline-lib-installation) in your FRC project
-- A holonomic drivetrain (swerve, mecanum, etc.)
-- Basic familiarity with WPILib command-based programming
+## 1. Set global constraints
 
-## Step 1: Set Global Constraints
+Global constraints provide fallback velocity/acceleration limits, end tolerances, and a default handoff radius that apply to every path unless a path-specific constraint overrides them. Set them once, before constructing any paths. Pick the approach that matches your workflow:
 
-Global constraints define default velocity/acceleration limits and tolerances for all paths. Choose one approach:
+=== "Via config.json (GUI / JSON workflows)"
 
-=== "Using config.json"
+    Create `src/main/deploy/autos/config.json`:
 
-    Create a `config.json` file in `src/main/deploy/autos/`:
-    
     ```json
     {
         "default_max_velocity_meters_per_sec": 4.5,
-        "default_max_acceleration_meters_per_sec2": 12.0,
-        "default_max_velocity_deg_per_sec": 540,
-        "default_max_acceleration_deg_per_sec2": 860,
+        "default_max_acceleration_meters_per_sec2": 10.0,
+        "default_max_velocity_deg_per_sec": 600,
+        "default_max_acceleration_deg_per_sec2": 2000,
         "default_end_translation_tolerance_meters": 0.03,
         "default_end_rotation_tolerance_deg": 2.0,
-        "default_intermediate_handoff_radius_meters": 0.2
+        "default_intermediate_handoff_radius_meters": 0.25
     }
     ```
 
-=== "In Code"
+    BLine-Lib auto-loads this file when it constructs the first `Path`. If you design paths in BLine-GUI, the GUI writes this file for you from its **Settings → Edit Config** dialog.
 
-    Set global constraints programmatically in your robot initialization:
-    
+=== "Via Code (code-only workflow)"
+
     ```java
-    // Set global constraints before creating any paths
+    // In Robot.robotInit() or RobotContainer's constructor
     Path.setDefaultGlobalConstraints(new Path.DefaultGlobalConstraints(
         4.5,    // maxVelocityMetersPerSec
-        12.0,   // maxAccelerationMetersPerSec2
-        540,    // maxVelocityDegPerSec
-        860,    // maxAccelerationDegPerSec2
+        10.0,   // maxAccelerationMetersPerSec2
+        600,    // maxVelocityDegPerSec
+        2000,   // maxAccelerationDegPerSec2
         0.03,   // endTranslationToleranceMeters
         2.0,    // endRotationToleranceDeg
-        0.2     // intermediateHandoffRadiusMeters
+        0.25    // intermediateHandoffRadiusMeters
     ));
     ```
 
-## Step 2: Create a FollowPath Builder
+The numbers above are reasonable starting points; see [Tuning & Usage Tips](../usage-tips.md) for how to tune them.
 
-Create a reusable `FollowPath.Builder` in your drive subsystem or `RobotContainer`:
+## 2. Build a reusable `FollowPath.Builder`
+
+`FollowPath.Builder` wires BLine to your drivetrain: a pose supplier, chassis-speeds supplier/consumer, and three PID controllers. Build it once (typically in `RobotContainer`) and reuse it for every path.
 
 ```java
 import frc.robot.lib.BLine.*;
 import edu.wpi.first.math.controller.PIDController;
 
-// Create a reusable builder with your robot's configuration
 FollowPath.Builder pathBuilder = new FollowPath.Builder(
-    driveSubsystem,                      // The drive subsystem to require
-    driveSubsystem::getPose,             // Supplier for current robot pose
-    driveSubsystem::getChassisSpeeds,    // Supplier for current speeds
-    driveSubsystem::drive,               // Consumer to drive the robot
-    new PIDController(5.0, 0.0, 0.0),    // Translation PID
-    new PIDController(3.0, 0.0, 0.0),    // Rotation PID
-    new PIDController(2.0, 0.0, 0.0)     // Cross-track PID
-).withDefaultShouldFlip()                // Auto-flip for red alliance
- .withPoseReset(driveSubsystem::resetPose);  // Reset odometry at path start
+    driveSubsystem,                     // Subsystem requirement
+    driveSubsystem::getPose,            // Supplier<Pose2d>
+    driveSubsystem::getChassisSpeeds,   // Supplier<ChassisSpeeds> (robot-relative)
+    driveSubsystem::drive,              // Consumer<ChassisSpeeds>  (robot-relative)
+    new PIDController(5.0, 0.0, 0.0),   // translation — minimizes remaining distance
+    new PIDController(3.0, 0.0, 0.0),   // rotation    — minimizes heading error
+    new PIDController(2.0, 0.0, 0.0)    // cross-track — minimizes perpendicular deviation
+)
+.withDefaultShouldFlip()                // auto-flip when on the red alliance
+.withPoseReset(driveSubsystem::resetPose); // reset odometry at each path's start pose
 ```
 
-!!! info "PID Controllers"
-    - **Translation Controller**: Controls speed based on distance remaining to path end
-    - **Rotation Controller**: Controls holonomic rotation toward rotation targets
-    - **Cross-Track Controller**: Minimizes deviation from the path line
+!!! info "The three PID controllers"
+    - **Translation** sets speed magnitude based on *remaining path distance*. Its output gets direction added by pointing at the next target and is then clamped to the active max-velocity constraint.
+    - **Rotation** drives holonomic heading toward the current rotation target (either profiled along the segment or snapped to the target when `profiled_rotation=false`).
+    - **Cross-track** nudges the robot back onto the straight line between the previous and current translation targets — useful on long segments, not a substitute for velocity limiting through turns.
 
-## Step 3: Create and Follow Paths
+    Tune them in that order: translation first, then rotation, then CTE. See [Tuning & Usage Tips](../usage-tips.md#pid-tuning).
 
-=== "From JSON File"
+!!! tip "Drive-subsystem consumer must be robot-relative"
+    BLine's follower computes a field-relative `ChassisSpeeds`, converts it to robot-relative via the current pose, and passes that to the consumer. If your drive subsystem accepts field-relative speeds, convert them back inside the consumer. (CTRE Swerve Templates and most YAGSL setups use robot-relative `ApplyRequest` / drive methods, so this just works.)
 
-    Place your path JSON in `deploy/autos/paths/`, then load it:
-    
+## 3. Create and follow a path
+
+=== "From JSON"
+
+    Place a file like `deploy/autos/paths/scoreFirst.json` (BLine-GUI writes this for you). Load it by name, without the extension:
+
     ```java
-    // Loads deploy/autos/paths/myPathFile.json
-    // Note: .json extension is added automatically
-    Path myPath = new Path("myPathFile");
-    
-    Command followCommand = pathBuilder.build(myPath);
+    Path scorePath = new Path("scoreFirst");
+    Command followCommand = pathBuilder.build(scorePath);
     ```
 
-=== "Programmatically"
+=== "In code"
 
-    Create paths directly in code:
-    
     ```java
-    Path myPath = new Path(
-        new Path.Waypoint(new Translation2d(1.0, 1.0), new Rotation2d(0)),
+    Path scorePath = new Path(
+        new Path.Waypoint(new Translation2d(1.0, 1.0), Rotation2d.fromDegrees(0)),
         new Path.TranslationTarget(new Translation2d(2.0, 2.0)),
-        new Path.Waypoint(new Translation2d(3.0, 1.0), new Rotation2d(Math.PI))
+        new Path.Waypoint(new Translation2d(3.0, 1.0), Rotation2d.fromDegrees(180))
     );
-    
-    Command followCommand = pathBuilder.build(myPath);
+    Command followCommand = pathBuilder.build(scorePath);
     ```
 
-## Step 4: Use in Autonomous
+## 4. Use it in autonomous
 
-Add the follow command to your autonomous routine:
+BLine paths always run to completion — the command finishes only when both the end translation and end rotation tolerances are met. To add pauses, scoring, or intake actions, split your routine into multiple paths:
 
 ```java
 public Command getAutonomousCommand() {
-    Path scorePath = new Path("scoreFirst");
-    Path pickupPath = new Path("intake");
-    
     return Commands.sequence(
-        pathBuilder.build(scorePath),
-        // Add scoring action here
-        pathBuilder.build(pickupPath)
-        // Continue with more actions...
+        pathBuilder.build(new Path("toFirstScore")),
+        new ScoreCommand(),
+        pathBuilder.build(new Path("toPickup")),
+        new IntakeCommand(),
+        pathBuilder.build(new Path("toSecondScore")),
+        new ScoreCommand()
     );
 }
 ```
 
-## Step 5: Pre-Orient Modules (Recommended)
+If you need actions to fire *during* a path (as opposed to between paths), use [Event Triggers](../concepts/event-triggers.md).
 
-For optimal autonomous performance, pre-orient your swerve modules toward the initial path direction before the match begins. This prevents micro-deviations at the start caused by modules needing to rotate during driving.
+## 5. Pre-orient swerve modules (strongly recommended)
+
+Before the match starts, point the swerve modules in the direction the robot is about to drive. This prevents the small lateral drift you'd otherwise see in the first few tens of milliseconds while modules pivot under load.
 
 ```java
-// In your autonomous initialization or pre-match routine
-Path autoPath = new Path("myAutoPath");
-Rotation2d initialDirection = autoPath.getInitialModuleDirection();
-
+Path firstAuto = new Path("firstAutoPath");
+Rotation2d initialDirection = firstAuto.getInitialModuleDirection();
 driveSubsystem.setModuleOrientations(initialDirection);
 ```
 
-## Adding Path-Specific Constraints (Optional)
+Call this from disabled-periodic or an auto-init command. See [Pre-Match Module Orientation](../lib/pre-match.md) for details.
 
-Override global constraints for individual paths:
+## Add path-specific constraints (optional)
+
+Override global defaults per path:
 
 ```java
-Path.PathConstraints slowConstraints = new Path.PathConstraints()
+Path.PathConstraints slow = new Path.PathConstraints()
     .setMaxVelocityMetersPerSec(2.0)
-    .setMaxAccelerationMetersPerSec2(11)
-    .setMaxVelocityDegPerSec(180.0)
-    .setMaxAccelerationDegPerSec2(360.0)
+    .setMaxAccelerationMetersPerSec2(6.0)
     .setEndTranslationToleranceMeters(0.02)
     .setEndRotationToleranceDeg(1.0);
 
-// Create path with custom constraints
-Path slowPath = new Path(
-    slowConstraints,
-    new Path.Waypoint(new Translation2d(1.0, 1.0), new Rotation2d(0)),
-    new Path.TranslationTarget(new Translation2d(2.0, 2.0)),
-    new Path.Waypoint(new Translation2d(3.0, 1.0), new Rotation2d(Math.PI))
+Path alignment = new Path(
+    slow,
+    new Path.Waypoint(new Translation2d(1.0, 1.0), Rotation2d.fromDegrees(0)),
+    new Path.Waypoint(new Translation2d(3.0, 1.0), Rotation2d.fromDegrees(180))
 );
 ```
 
-You can also use **ranged constraints** to vary limits across different path segments:
+Or vary limits across the path using [ranged constraints](../concepts/constraints.md#ranged-constraints):
 
 ```java
-Path.PathConstraints rangedConstraints = new Path.PathConstraints()
+Path.PathConstraints ranged = new Path.PathConstraints()
     .setMaxVelocityMetersPerSec(
-        new Path.RangedConstraint(4.0, 0, 2),  // Fast for elements 0-2
-        new Path.RangedConstraint(1.5, 3, 5)   // Slow for elements 3-5
+        new Path.RangedConstraint(4.0, 0, 2),  // fast through ordinals 0–2
+        new Path.RangedConstraint(1.5, 3, 5)   // slow through ordinals 3–5
     );
 ```
 
-See [Constraints](../concepts/constraints.md) for more details on the constraint system.
+## Common workflows
 
-## Next Steps
+| Workflow | When it fits |
+|----------|--------------|
+| **GUI + Lib + JSON** | You want to iterate visually. Save paths as JSON, check them into Git. Most teams. |
+| **JSON-only + Lib** | You're comfortable writing JSON by hand, or generating it from another tool. |
+| **Code-only + Lib** | Fully dynamic paths (e.g. auto-align to the nearest scoring position computed at runtime). |
 
-- [Core Concepts](../concepts/path-elements.md) — Understand path elements in depth
-- [GUI Overview](../gui/index.md) — Learn to use the visual path editor
-- [Path Construction](../lib/path-construction.md) — Detailed path creation guide
-- [Usage Tips](../usage-tips.md) — Best practices for tuning and optimization
+Nothing stops you from mixing these — the code-only `Path.Waypoint(...)` API and the JSON loader produce the same `Path` object at the end.
 
+## Next steps
+
+- [Core Concepts →](../concepts/path-elements.md) — path elements, constraints, handoff radii, event triggers.
+- [GUI Overview →](../gui/index.md) — the visual editor, simulation preview, and keyboard shortcuts.
+- [FollowPath Builder →](../lib/follow-path.md) — every builder option in depth.
+- [Tuning & Usage Tips →](../usage-tips.md) — how to actually tune the PIDs and pick tolerances.
+- [Common Issues →](../common-issues.md) — fixes for things teams hit in the field.

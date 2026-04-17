@@ -16,14 +16,14 @@
         <link rel="prev" href="../path-elements/">
       
       
-        <link rel="next" href="../key-parameters/">
+        <link rel="next" href="../event-triggers/">
       
       
         
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -121,7 +121,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#path-constraints" class="md-skip">
+        <a href="#constraints" class="md-skip">
           Skip to content
         </a>
       
@@ -567,10 +567,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#constraint-types" class="md-nav__link">
+  <a href="#the-six-constraint-types" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Constraint Types
+        The six constraint types
       
     </span>
   </a>
@@ -578,22 +578,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#global-constraints" class="md-nav__link">
+  <a href="#global-defaults" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Global Constraints
+        Global defaults
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Global Constraints">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-specific-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path-specific constraints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ranged-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ranged constraints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ranged constraints">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#option-a-using-configjson-for-json-based-workflows" class="md-nav__link">
+  <a href="#ordinals-translation-and-rotation-tracked-separately" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Option A: Using config.json (for JSON-based workflows)
+        Ordinals — translation and rotation tracked separately
       
     </span>
   </a>
@@ -601,10 +623,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-b-setting-in-code-for-code-only-workflows" class="md-nav__link">
+  <a href="#json-form" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Option B: Setting in Code (for code-only workflows)
+        JSON form
       
     </span>
   </a>
@@ -628,10 +650,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#path-specific-constraints" class="md-nav__link">
+  <a href="#how-constraints-actually-shape-motion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Path-Specific Constraints
+        How constraints actually shape motion
       
     </span>
   </a>
@@ -639,93 +661,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ranged-constraints" class="md-nav__link">
+  <a href="#see-also" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ranged Constraints
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Ranged Constraints">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#defining-ranged-constraints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Defining Ranged Constraints
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ordinal-indexing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ordinal Indexing
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multiple-ranged-constraints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Multiple Ranged Constraints
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        JSON Example
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#code-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Code Example
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#visualizing-in-gui" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Visualizing in GUI
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-constraints-affect-path-following" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How Constraints Affect Path Following
+        See also
       
     </span>
   </a>
@@ -736,6 +675,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -998,6 +965,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gui/protrusions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protrusions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1150,6 +1145,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lib/event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lib/flip-and-mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alliance Flip & Mirror
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lib/pre-match/" class="md-nav__link">
         
   
@@ -1248,7 +1299,7 @@
   <span class="md-ellipsis">
     
   
-    Usage Tips
+    Tuning & Usage Tips
   
 
     
@@ -1315,10 +1366,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#constraint-types" class="md-nav__link">
+  <a href="#the-six-constraint-types" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Constraint Types
+        The six constraint types
       
     </span>
   </a>
@@ -1326,22 +1377,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#global-constraints" class="md-nav__link">
+  <a href="#global-defaults" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Global Constraints
+        Global defaults
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Global Constraints">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-specific-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path-specific constraints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ranged-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ranged constraints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ranged constraints">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#option-a-using-configjson-for-json-based-workflows" class="md-nav__link">
+  <a href="#ordinals-translation-and-rotation-tracked-separately" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Option A: Using config.json (for JSON-based workflows)
+        Ordinals — translation and rotation tracked separately
       
     </span>
   </a>
@@ -1349,10 +1422,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-b-setting-in-code-for-code-only-workflows" class="md-nav__link">
+  <a href="#json-form" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Option B: Setting in Code (for code-only workflows)
+        JSON form
       
     </span>
   </a>
@@ -1376,10 +1449,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#path-specific-constraints" class="md-nav__link">
+  <a href="#how-constraints-actually-shape-motion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Path-Specific Constraints
+        How constraints actually shape motion
       
     </span>
   </a>
@@ -1387,93 +1460,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ranged-constraints" class="md-nav__link">
+  <a href="#see-also" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ranged Constraints
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Ranged Constraints">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#defining-ranged-constraints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Defining Ranged Constraints
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ordinal-indexing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ordinal Indexing
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multiple-ranged-constraints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Multiple Ranged Constraints
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        JSON Example
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#code-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Code Example
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#visualizing-in-gui" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Visualizing in GUI
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-constraints-affect-path-following" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How Constraints Affect Path Following
+        See also
       
     </span>
   </a>
@@ -1497,128 +1487,162 @@
 
 
 
-<h1 id="path-constraints">Path Constraints<a class="headerlink" href="#path-constraints" title="Permanent link">&para;</a></h1>
-<p>Path constraints are critical for ensuring proper robot motion and preventing overshooting during element handoff. When the robot approaches a translation target at high speed without appropriate velocity limits, it may overshoot the handoff radius and exhibit erratic behavior. Properly configured constraints ensure smooth transitions between path elements.</p>
-<h2 id="constraint-types">Constraint Types<a class="headerlink" href="#constraint-types" title="Permanent link">&para;</a></h2>
-<p>BLine supports six constraint types that can be applied to paths:</p>
+<h1 id="constraints">Constraints<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h1>
+<p>Constraints are the primary knob you'll use to shape robot motion in BLine. Velocity limits in particular are how you keep the robot from overshooting turns — far more effective than shrinking handoff radii, which costs path precision.</p>
+<h2 id="the-six-constraint-types">The six constraint types<a class="headerlink" href="#the-six-constraint-types" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Constraint</th>
 <th>Unit</th>
-<th>Description</th>
+<th>Applies to</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Max Translational Velocity</strong></td>
 <td>m/s</td>
-<td>Maximum speed the robot can travel</td>
+<td>Every translation segment</td>
 </tr>
 <tr>
 <td><strong>Max Translational Acceleration</strong></td>
 <td>m/s²</td>
-<td>Maximum acceleration for translation</td>
+<td>Translation rate limiting</td>
 </tr>
 <tr>
 <td><strong>Max Rotational Velocity</strong></td>
 <td>deg/s</td>
-<td>Maximum angular speed for holonomic rotation</td>
+<td>Holonomic rotation</td>
 </tr>
 <tr>
 <td><strong>Max Rotational Acceleration</strong></td>
 <td>deg/s²</td>
-<td>Maximum angular acceleration for rotation</td>
+<td>Rotation rate limiting</td>
 </tr>
 <tr>
 <td><strong>End Translation Tolerance</strong></td>
 <td>m</td>
-<td>How close the robot must be to the final position to finish</td>
+<td>Path-completion check</td>
 </tr>
 <tr>
 <td><strong>End Rotation Tolerance</strong></td>
 <td>deg</td>
-<td>How close the robot must be to the final rotation to finish</td>
+<td>Path-completion check</td>
 </tr>
 </tbody>
 </table>
-<h2 id="global-constraints">Global Constraints<a class="headerlink" href="#global-constraints" title="Permanent link">&para;</a></h2>
-<p>Global constraints define default velocity/acceleration limits and tolerances for all paths. You can set them in two ways:</p>
-<h3 id="option-a-using-configjson-for-json-based-workflows">Option A: Using config.json (for JSON-based workflows)<a class="headerlink" href="#option-a-using-configjson-for-json-based-workflows" title="Permanent link">&para;</a></h3>
-<p>Create a <code>config.json</code> file in <code>src/main/deploy/autos/</code>:</p>
+<p>Velocity and acceleration constraints can be applied <strong>globally</strong>, <strong>per path</strong>, or <strong>per range of ordinals</strong> within a path. Tolerances apply per path (or globally as defaults) only.</p>
+<p>There is also a seventh related value, the <strong>intermediate handoff radius</strong> (m), which is configurable per-translation-element and as a global default. See <a href="../key-parameters/#handoff-radius">Key Parameters</a>.</p>
+<h2 id="global-defaults">Global defaults<a class="headerlink" href="#global-defaults" title="Permanent link">&para;</a></h2>
+<p>Global defaults provide fallback values when a path doesn't override them. Set them once, before the first <code>Path</code> is created.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Via config.json</label><label for="__tabbed_1_2">In code</label><label for="__tabbed_1_3">In the GUI</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><code>src/main/deploy/autos/config.json</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;default_max_velocity_meters_per_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_max_acceleration_meters_per_sec2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_max_velocity_deg_per_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_max_acceleration_deg_per_sec2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">860</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;default_max_acceleration_meters_per_sec2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;default_max_velocity_deg_per_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;default_max_acceleration_deg_per_sec2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;default_end_translation_tolerance_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;default_end_rotation_tolerance_deg&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_intermediate_handoff_radius_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2</span>
+<span class="w">    </span><span class="nt">&quot;default_intermediate_handoff_radius_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.25</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="option-b-setting-in-code-for-code-only-workflows">Option B: Setting in Code (for code-only workflows)<a class="headerlink" href="#option-b-setting-in-code-for-code-only-workflows" title="Permanent link">&para;</a></h3>
-<p>Set global constraints programmatically in your robot initialization:</p>
+<p>The GUI also accepts a nested <code>kinematic_constraints</code> object — BLine-Lib v0.8.3+ reads both shapes. Older configs are migrated automatically when the GUI opens a project.</p>
+</div>
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">setDefaultGlobalConstraints</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">DefaultGlobalConstraints</span><span class="p">(</span>
 <span class="w">    </span><span class="mf">4.5</span><span class="p">,</span><span class="w">    </span><span class="c1">// maxVelocityMetersPerSec</span>
-<span class="w">    </span><span class="mf">12.0</span><span class="p">,</span><span class="w">   </span><span class="c1">// maxAccelerationMetersPerSec2</span>
-<span class="w">    </span><span class="mi">540</span><span class="p">,</span><span class="w">    </span><span class="c1">// maxVelocityDegPerSec</span>
-<span class="w">    </span><span class="mi">860</span><span class="p">,</span><span class="w">    </span><span class="c1">// maxAccelerationDegPerSec2</span>
+<span class="w">    </span><span class="mf">10.0</span><span class="p">,</span><span class="w">   </span><span class="c1">// maxAccelerationMetersPerSec2</span>
+<span class="w">    </span><span class="mi">600</span><span class="p">,</span><span class="w">    </span><span class="c1">// maxVelocityDegPerSec</span>
+<span class="w">    </span><span class="mi">2000</span><span class="p">,</span><span class="w">   </span><span class="c1">// maxAccelerationDegPerSec2</span>
 <span class="w">    </span><span class="mf">0.03</span><span class="p">,</span><span class="w">   </span><span class="c1">// endTranslationToleranceMeters</span>
 <span class="w">    </span><span class="mf">2.0</span><span class="p">,</span><span class="w">    </span><span class="c1">// endRotationToleranceDeg</span>
-<span class="w">    </span><span class="mf">0.2</span><span class="w">     </span><span class="c1">// intermediateHandoffRadiusMeters</span>
+<span class="w">    </span><span class="mf">0.25</span><span class="w">    </span><span class="c1">// intermediateHandoffRadiusMeters</span>
 <span class="p">));</span>
 </code></pre></div>
-<h3 id="in-the-gui">In the GUI<a class="headerlink" href="#in-the-gui" title="Permanent link">&para;</a></h3>
-<p>Global constraints are configured in <strong>Settings → Robot Config</strong>. These serve as defaults when no path-specific or ranged constraint is set.</p>
-<h2 id="path-specific-constraints">Path-Specific Constraints<a class="headerlink" href="#path-specific-constraints" title="Permanent link">&para;</a></h2>
-<p>Override global constraints for individual paths using <code>PathConstraints</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="w"> </span><span class="n">slowConstraints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="p">()</span>
+</div>
+<div class="tabbed-block">
+<p><strong>Settings → Edit Config…</strong> writes <code>config.json</code> for you. Always set the kinematic defaults before designing paths.</p>
+</div>
+</div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Global defaults do <strong>not</strong> support ranged constraints</p>
+<p>You can only set a single scalar value for each global default. "Fast here, slow there" behavior must be specified at the path level via <a href="#ranged-constraints">ranged constraints</a>.</p>
+</div>
+<h2 id="path-specific-constraints">Path-specific constraints<a class="headerlink" href="#path-specific-constraints" title="Permanent link">&para;</a></h2>
+<p><code>Path.PathConstraints</code> overrides global defaults for an individual path. Use the fluent builder:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="w"> </span><span class="n">constraints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="p">()</span>
 <span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityMetersPerSec</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="na">setMaxAccelerationMetersPerSec2</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityDegPerSec</span><span class="p">(</span><span class="mf">180.0</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="na">setMaxAccelerationDegPerSec2</span><span class="p">(</span><span class="mf">360.0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">setMaxAccelerationMetersPerSec2</span><span class="p">(</span><span class="mf">6.0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityDegPerSec</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">setMaxAccelerationDegPerSec2</span><span class="p">(</span><span class="mi">720</span><span class="p">)</span>
 <span class="w">    </span><span class="p">.</span><span class="na">setEndTranslationToleranceMeters</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span>
 <span class="w">    </span><span class="p">.</span><span class="na">setEndRotationToleranceDeg</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
 
-<span class="c1">// Create path with custom constraints</span>
-<span class="n">Path</span><span class="w"> </span><span class="n">slowPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
-<span class="w">    </span><span class="n">slowConstraints</span><span class="p">,</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">)),</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="p">))</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">slow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
+<span class="w">    </span><span class="n">constraints</span><span class="p">,</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">startPose</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">endPose</span><span class="p">)</span>
 <span class="p">);</span>
 </code></pre></div>
-<h2 id="ranged-constraints">Ranged Constraints<a class="headerlink" href="#ranged-constraints" title="Permanent link">&para;</a></h2>
-<p>Ranged constraints allow different limits for different sections of a path—essential for slowing down before tight turns or precision maneuvers.</p>
-<h3 id="defining-ranged-constraints">Defining Ranged Constraints<a class="headerlink" href="#defining-ranged-constraints" title="Permanent link">&para;</a></h3>
-<p>Each ranged constraint is defined by:</p>
-<ul>
-<li><strong><code>value</code></strong>: The constraint value (velocity, acceleration, etc.)</li>
-<li><strong><code>start_ordinal</code></strong>: The first element index this constraint applies to (inclusive)</li>
-<li><strong><code>end_ordinal</code></strong>: The last element index this constraint applies to (inclusive)</li>
-</ul>
-<h3 id="ordinal-indexing">Ordinal Indexing<a class="headerlink" href="#ordinal-indexing" title="Permanent link">&para;</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Important: Separate Ordinal Counters</p>
-<p>Translation and rotation ordinals are tracked <strong>separately</strong>:</p>
-<ul>
-<li><strong>Translation ordinal</strong> increments for each <code>TranslationTarget</code> and each <code>Waypoint</code></li>
-<li><strong>Rotation ordinal</strong> increments for each <code>RotationTarget</code> and each <code>Waypoint</code></li>
-</ul>
-</div>
-<p>This means a <code>Waypoint</code> (which contains both translation and rotation) increments <strong>both</strong> counters, while standalone <code>TranslationTarget</code> and <code>RotationTarget</code> elements only increment their respective counter.</p>
-<p><strong>Example ordinal assignment:</strong></p>
+<p>Any field you don't set falls back to the global default. You can load a path from JSON and still override constraints in code via <code>path.setPathConstraints(...)</code> if you need to mutate them dynamically.</p>
+<h2 id="ranged-constraints">Ranged constraints<a class="headerlink" href="#ranged-constraints" title="Permanent link">&para;</a></h2>
+<p>Ranged constraints apply a velocity or acceleration value only to elements within a given <strong>ordinal range</strong>. This is how you slow down through a tight turn without dragging the entire path down.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="w"> </span><span class="n">ranged</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityMetersPerSec</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w">           </span><span class="c1">// fast through ordinals 0–2</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">),</span><span class="w">           </span><span class="c1">// slow through ordinals 3–4</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span><span class="w"> </span><span class="c1">// fast after ordinal 5</span>
+<span class="w">    </span><span class="p">);</span>
+</code></pre></div>
+<h3 id="ordinals-translation-and-rotation-tracked-separately">Ordinals — translation and rotation tracked separately<a class="headerlink" href="#ordinals-translation-and-rotation-tracked-separately" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Path Element</th>
-<th style="text-align: center;">Translation Ordinal</th>
-<th style="text-align: center;">Rotation Ordinal</th>
+<th>Element type</th>
+<th style="text-align: center;">Translation ordinal</th>
+<th style="text-align: center;">Rotation ordinal</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Waypoint (start)</td>
+<td><code>Waypoint</code></td>
+<td style="text-align: center;">increments</td>
+<td style="text-align: center;">increments</td>
+</tr>
+<tr>
+<td><code>TranslationTarget</code></td>
+<td style="text-align: center;">increments</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td><code>RotationTarget</code></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">increments</td>
+</tr>
+<tr>
+<td><code>EventTrigger</code></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+</tbody>
+</table>
+<p>A translation-side ranged constraint (<code>setMaxVelocityMetersPerSec</code>, <code>setMaxAccelerationMetersPerSec2</code>) matches the <strong>translation ordinal</strong> of the element it's applied to. A rotation-side ranged constraint matches the <strong>rotation ordinal</strong>. Event triggers don't participate in ordinals at all.</p>
+<p><strong>Worked example:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th style="text-align: center;">Translation ord.</th>
+<th style="text-align: center;">Rotation ord.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Waypoint</td>
 <td style="text-align: center;">0</td>
 <td style="text-align: center;">0</td>
 </tr>
@@ -1628,7 +1652,7 @@
 <td style="text-align: center;">—</td>
 </tr>
 <tr>
-<td>RotationTarget (t_ratio=0.5)</td>
+<td>RotationTarget</td>
 <td style="text-align: center;">—</td>
 <td style="text-align: center;">1</td>
 </tr>
@@ -1638,60 +1662,62 @@
 <td style="text-align: center;">—</td>
 </tr>
 <tr>
-<td>Waypoint (end)</td>
+<td>Waypoint</td>
 <td style="text-align: center;">3</td>
 <td style="text-align: center;">2</td>
 </tr>
 </tbody>
 </table>
-<p>When the path follower processes each element, it checks if any ranged constraint applies by testing:</p>
-<div class="highlight"><pre><span></span><code>startOrdinal &lt;= currentOrdinal &amp;&amp; endOrdinal &gt;= currentOrdinal
-</code></pre></div>
-<p>If a constraint matches, that value is used; otherwise, the global default is applied.</p>
-<h3 id="multiple-ranged-constraints">Multiple Ranged Constraints<a class="headerlink" href="#multiple-ranged-constraints" title="Permanent link">&para;</a></h3>
-<p>Paths can have <strong>multiple ranged constraints of the same type</strong>, allowing fine-grained control over different path sections. The first matching constraint (in array order) is used for each element.</p>
-<h3 id="json-example">JSON Example<a class="headerlink" href="#json-example" title="Permanent link">&para;</a></h3>
+<p>A <code>RangedConstraint(1.5, 2, 3)</code> on <code>setMaxVelocityMetersPerSec</code> caps speed while the robot drives to ordinals 2 and 3 (the third TranslationTarget and the final Waypoint). A <code>RangedConstraint(360, 0, 1)</code> on <code>setMaxVelocityDegPerSec</code> caps angular speed while the robot pursues rotation ordinals 0 and 1.</p>
+<div class="admonition info">
+<p class="admonition-title">Matching rule</p>
+<p>For each element, BLine walks the constraint list in array order and uses the <strong>first</strong> range whose <code>[start_ordinal, end_ordinal]</code> contains the element's ordinal. If no range matches, the global default is used — so "unconstrained" elements still respect the global cap.</p>
+<p>Because the first matching range wins, <strong>list order matters</strong> when ranges overlap.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Unbounded ranges</p>
+<p>Use <code>Integer.MAX_VALUE</code> as <code>endOrdinal</code> to say "from this ordinal onward." BLine treats the range as unbounded-right.</p>
+</div>
+<h3 id="json-form">JSON form<a class="headerlink" href="#json-form" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;path_elements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;path_elements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">],</span>
 <span class="w">    </span><span class="nt">&quot;constraints&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;max_velocity_meters_per_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span>
-<span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">}</span>
+<span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">}</span>
 <span class="w">        </span><span class="p">],</span>
-<span class="w">        </span><span class="nt">&quot;max_velocity_deg_per_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="nt">&quot;max_acceleration_meters_per_sec2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2147483647</span><span class="w"> </span><span class="p">}</span>
 <span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;max_velocity_deg_per_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;max_acceleration_deg_per_sec2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;end_translation_tolerance_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;end_rotation_tolerance_deg&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="code-example">Code Example<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="w"> </span><span class="n">constraints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="p">()</span>
-<span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityMetersPerSec</span><span class="p">(</span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w">   </span><span class="c1">// Fast approach (ordinals 0-1)</span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w">    </span><span class="c1">// Slow precision (ordinals 2-3)</span>
-<span class="w">    </span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityDegPerSec</span><span class="p">(</span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span><span class="w">  </span><span class="c1">// Apply to all</span>
-<span class="w">    </span><span class="p">);</span>
-</code></pre></div>
-<h3 id="visualizing-in-gui">Visualizing in GUI<a class="headerlink" href="#visualizing-in-gui" title="Permanent link">&para;</a></h3>
-<p>When you click on a ranged constraint's slider in the GUI, a <strong>green overlay</strong> highlights the affected path segments on the canvas. This shows exactly where the constraint will apply during path execution.</p>
-<!-- GIF: Clicking constraint slider showing green overlay -->
-<p><img alt="Constraint Visualization" src="../assets/gifs/concepts/constraint-slider.gif" /></p>
-<div class="admonition info">
-<p class="admonition-title">Start Ordinal Behavior</p>
-<p>A ranged constraint that includes the starting element will affect all robot motion <em>leading into</em> that element. For example, if your robot doesn't begin at the first path element (e.g., it's placed mid-field), a velocity constraint starting at ordinal 1 will limit the robot's speed as it travels toward the first waypoint.</p>
-</div>
-<h2 id="how-constraints-affect-path-following">How Constraints Affect Path Following<a class="headerlink" href="#how-constraints-affect-path-following" title="Permanent link">&para;</a></h2>
-<p>During path execution, <code>FollowPath</code> retrieves constraints for each element via <code>getPathElementsWithConstraints()</code>. The <code>ChassisRateLimiter</code> then enforces these limits by:</p>
+<p>A constraint that is a plain number is treated as a single unbounded range. Mix and match freely.</p>
+<h3 id="in-the-gui">In the GUI<a class="headerlink" href="#in-the-gui" title="Permanent link">&para;</a></h3>
+<p>When you click a ranged constraint's slider, a green overlay highlights the affected segments on the canvas. Drag the slider handles to change the start/end ordinals, or open the <strong>constraint pop-out editor</strong> (BLine-GUI v0.5.0+) for a wider editing surface.</p>
+<p><img alt="Constraint Visualization" src="../../assets/gifs/canvas/constraint-overlay.gif" /></p>
+<h2 id="how-constraints-actually-shape-motion">How constraints actually shape motion<a class="headerlink" href="#how-constraints-actually-shape-motion" title="Permanent link">&para;</a></h2>
+<p>At every cycle, BLine's <code>FollowPath</code>:</p>
 <ol>
-<li>Capping the commanded velocity to the current element's max velocity</li>
-<li>Limiting acceleration between cycles based on the current element's max acceleration</li>
-<li>Applying these limits separately to translational and rotational motion</li>
+<li>Resolves the <strong>active constraint</strong> for the current target element (looking up translation ordinal for velocity/accel, rotation ordinal for rot velocity/accel).</li>
+<li>Clamps the translation controller's output to the max translational velocity.</li>
+<li>Feeds the commanded <code>ChassisSpeeds</code> into <code>ChassisRateLimiter</code>, which limits both the 2D translational rate and the rotational rate based on the active max accelerations.</li>
 </ol>
-<p>This ensures the robot respects velocity limits when approaching handoff radii, preventing overshoot and enabling precise element transitions.</p>
+<p>The cross-track controller's output is <strong>not</strong> clamped by the velocity constraint — it's summed with the clamped translation output before rate limiting. This matters when you tune CTE gains: it can contribute meaningful perpendicular velocity on top of the translation command.</p>
+<div class="admonition tip">
+<p class="admonition-title">Prefer velocity limits to shrink handoff radii</p>
+<p>When a path overshoots a turn, the first-line fix is a ranged velocity cap <strong>before</strong> the turn. Shrinking the handoff radius is a last resort: if the robot is still moving faster than the radius allows, it can miss the handoff zone entirely and oscillate.</p>
+</div>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../key-parameters/">Key Parameters</a> — handoff radii, t_ratios, and end tolerances in depth.</li>
+<li><a href="../../usage-tips/">Tuning &amp; Usage Tips</a> — how to choose numeric values for all of the above.</li>
+<li><a href="../../lib/path-construction/">Library: Path Construction</a> — ranged constraints in JSON and code.</li>
+</ul>
 
 
 

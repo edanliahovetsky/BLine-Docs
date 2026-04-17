@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -535,6 +535,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../key-parameters/" class="md-nav__link">
         
   
@@ -626,19 +654,19 @@
   <a href="#why-polylines" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why Polylines?
+        Why polylines?
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Why Polylines?">
+    <nav class="md-nav" aria-label="Why polylines?">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#computational-efficiency" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Computational Efficiency
+        Computational efficiency
       
     </span>
   </a>
@@ -649,7 +677,7 @@
   <a href="#ease-of-controller-tuning" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ease of Controller Tuning
+        Ease of controller tuning
       
     </span>
   </a>
@@ -660,7 +688,18 @@
   <a href="#forgiving-performance" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Forgiving Performance
+        Forgiving performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#robustness-to-disturbances" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Robustness to disturbances
       
     </span>
   </a>
@@ -671,7 +710,7 @@
   <a href="#path-simplicity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Path Simplicity
+        Path simplicity
       
     </span>
   </a>
@@ -687,19 +726,30 @@
   <a href="#control-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Control Architecture
+        Control architecture
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Control Architecture">
+    <nav class="md-nav" aria-label="Control architecture">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#the-three-pid-controllers" class="md-nav__link">
+  <a href="#three-pid-controllers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Three PID Controllers
+        Three PID controllers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-the-cte-controller-earns-its-keep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the CTE controller earns its keep
       
     </span>
   </a>
@@ -710,7 +760,7 @@
   <a href="#algorithm-robustness" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Algorithm Robustness
+        Algorithm robustness
       
     </span>
   </a>
@@ -723,10 +773,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#intermediary-elements-constraints" class="md-nav__link">
+  <a href="#where-bline-shines-and-where-it-doesnt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Intermediary Elements &amp; Constraints
+        Where BLine shines (and where it doesn't)
       
     </span>
   </a>
@@ -734,10 +784,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#comparison-to-other-solutions" class="md-nav__link">
+  <a href="#localization-is-orthogonal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Comparison to Other Solutions
+        Localization is orthogonal
       
     </span>
   </a>
@@ -745,41 +795,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#current-limitations" class="md-nav__link">
+  <a href="#future-direction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Current Limitations
+        Future direction
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Current Limitations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#event-triggers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Event Triggers
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sharp-corner-edge-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Sharp Corner Edge Cases
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -993,6 +1015,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gui/protrusions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protrusions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1145,6 +1195,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lib/event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lib/flip-and-mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alliance Flip & Mirror
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lib/pre-match/" class="md-nav__link">
         
   
@@ -1243,7 +1349,7 @@
   <span class="md-ellipsis">
     
   
-    Usage Tips
+    Tuning & Usage Tips
   
 
     
@@ -1313,19 +1419,19 @@
   <a href="#why-polylines" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why Polylines?
+        Why polylines?
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Why Polylines?">
+    <nav class="md-nav" aria-label="Why polylines?">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#computational-efficiency" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Computational Efficiency
+        Computational efficiency
       
     </span>
   </a>
@@ -1336,7 +1442,7 @@
   <a href="#ease-of-controller-tuning" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ease of Controller Tuning
+        Ease of controller tuning
       
     </span>
   </a>
@@ -1347,7 +1453,18 @@
   <a href="#forgiving-performance" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Forgiving Performance
+        Forgiving performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#robustness-to-disturbances" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Robustness to disturbances
       
     </span>
   </a>
@@ -1358,7 +1475,7 @@
   <a href="#path-simplicity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Path Simplicity
+        Path simplicity
       
     </span>
   </a>
@@ -1374,19 +1491,30 @@
   <a href="#control-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Control Architecture
+        Control architecture
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Control Architecture">
+    <nav class="md-nav" aria-label="Control architecture">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#the-three-pid-controllers" class="md-nav__link">
+  <a href="#three-pid-controllers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Three PID Controllers
+        Three PID controllers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-the-cte-controller-earns-its-keep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the CTE controller earns its keep
       
     </span>
   </a>
@@ -1397,7 +1525,7 @@
   <a href="#algorithm-robustness" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Algorithm Robustness
+        Algorithm robustness
       
     </span>
   </a>
@@ -1410,10 +1538,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#intermediary-elements-constraints" class="md-nav__link">
+  <a href="#where-bline-shines-and-where-it-doesnt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Intermediary Elements &amp; Constraints
+        Where BLine shines (and where it doesn't)
       
     </span>
   </a>
@@ -1421,10 +1549,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#comparison-to-other-solutions" class="md-nav__link">
+  <a href="#localization-is-orthogonal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Comparison to Other Solutions
+        Localization is orthogonal
       
     </span>
   </a>
@@ -1432,41 +1560,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#current-limitations" class="md-nav__link">
+  <a href="#future-direction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Current Limitations
+        Future direction
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Current Limitations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#event-triggers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Event Triggers
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sharp-corner-edge-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Sharp Corner Edge Cases
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1488,47 +1588,53 @@
 
 
 <h1 id="design-philosophy">Design Philosophy<a class="headerlink" href="#design-philosophy" title="Permanent link">&para;</a></h1>
-<p>BLine takes a fundamentally different approach to path tracking compared to traditional Bézier-based solutions like PathPlanner and Choreo. This page explains the rationale behind BLine's polyline architecture and when it excels.</p>
-<h2 id="why-polylines">Why Polylines?<a class="headerlink" href="#why-polylines" title="Permanent link">&para;</a></h2>
-<h3 id="computational-efficiency">Computational Efficiency<a class="headerlink" href="#computational-efficiency" title="Permanent link">&para;</a></h3>
-<p>A direct improvement over PathPlanner and Choreo is computational efficiency and simplicity when creating simple paths.</p>
-<p>BLine does <strong>not</strong> need to precompute or discretize a Bézier trajectory into finite timestamps before the controller can follow the path. The path gets passed to the tracking controller immediately after creation, which provides loop cycle time gains for <strong>real-time teleop applications</strong>.</p>
-<p>This means you don't have to do any pre-computing as you might with Bézier trajectories. Of course, for pre-baked paths there's no difference—the majority of computation happens during path creation regardless of the tool.</p>
+<p>BLine takes a fundamentally different approach to path tracking compared to Bézier- and clock-driven systems like PathPlanner and Choreo. This page spells out the rationale behind the polyline architecture and where BLine earns its advantages.</p>
+<h2 id="why-polylines">Why polylines?<a class="headerlink" href="#why-polylines" title="Permanent link">&para;</a></h2>
+<h3 id="computational-efficiency">Computational efficiency<a class="headerlink" href="#computational-efficiency" title="Permanent link">&para;</a></h3>
+<p>Bézier-based planners discretize trajectories into timestamped setpoints before the controller can follow them. BLine doesn't: the <code>Path</code> object is fed directly to the tracking controller, which acts on geometric state each cycle.</p>
+<p>That design buys two concrete things:</p>
+<ol>
+<li><strong>No precomputation delay for runtime-generated paths.</strong> Useful for teleop auto-align and anything dynamic.</li>
+<li><strong>Cheap loop-cycle cost</strong> during execution. Each control cycle is a handful of distance/projection calculations, not a table lookup into a precomputed trajectory.</li>
+</ol>
+<p>For pre-baked competition autos, the difference is smaller than it looks — most of the compute in any system happens at path-creation time regardless of the tool. The effect shows up most clearly when paths are generated on the fly.</p>
 <div class="admonition info">
-<p class="admonition-title">Performance Results</p>
-<p>Validation testing demonstrated a <strong>97% reduction</strong> in path computation time compared to PathPlanner.</p>
+<p class="admonition-title">Measured result</p>
+<p>Monte Carlo simulation validation reported a <strong>97% reduction</strong> in path computation time vs. PathPlanner.</p>
 </div>
-<h3 id="ease-of-controller-tuning">Ease of Controller Tuning<a class="headerlink" href="#ease-of-controller-tuning" title="Permanent link">&para;</a></h3>
-<p>The BLine tracking controller achieves good (if not better) results with <strong>less hassle</strong>. Tuning a time-parameterized PID controller to follow curved paths (Bézier or otherwise) can be difficult, especially for newer teams.</p>
-<p><strong>Common issues with time-parameterized tracking:</strong></p>
+<h3 id="ease-of-controller-tuning">Ease of controller tuning<a class="headerlink" href="#ease-of-controller-tuning" title="Permanent link">&para;</a></h3>
+<p>Tuning a time-parameterized PID to follow a Bézier trajectory is tuning <em>follow the clock</em>:</p>
 <ul>
-<li>Over-tuned gains easily cause erratic behavior and jittering</li>
-<li>Under-tuned gains cause the robot to fall behind during acceleration</li>
-<li>Problems are exacerbated when the drivetrain isn't perfectly tuned</li>
-<li>Makes it harder to push a chassis to its true max acceleration and velocity limits</li>
-<li>Teams historically run a second profiled PID alignment routine after paths end to overcome tracking and early finish challenges</li>
+<li>Over-tuned gains cause erratic behavior and jittering.</li>
+<li>Under-tuned gains make the robot fall behind during acceleration — once behind, the follower can struggle to recover.</li>
+<li>Drivetrain imperfections make it hard to push the chassis to its true max velocity and acceleration.</li>
+<li>Many teams end up running a second profiled PID alignment routine after every path to recover the accuracy time-parameterized tracking gave up.</li>
 </ul>
-<p><strong>BLine avoids these issues</strong> simply by the nature of its PID controller setpoint: the path's endpoint. By having the translation controller minimize total path distance remaining:</p>
-<ul>
-<li>Controller output is high at the start and properly tapers off at the end</li>
-<li>User-defined acceleration and velocity limits ensure the robot properly utilizes chassis acceleration</li>
-<li>The robot hits max velocity irrespective of drivetrain or tracking controller tuning</li>
-</ul>
+<p>BLine sidesteps this entirely. The translation controller's setpoint is <strong>zero remaining path distance</strong> — the controller output is high at the start, tapers to zero at the endpoint, and naturally behaves like a trapezoidal profile once clamped by the velocity/acceleration constraints. The robot hits max velocity irrespective of drivetrain tuning, and the only tuning that really matters is the deceleration near the end of the path.</p>
 <div class="admonition tip">
-<p class="admonition-title">Quick Tuning</p>
-<p>The tuning of BLine's translation PID controller is only critical at the very end of path tracking, where the robot must decelerate and stop. This domain is far more manageable compared to the time-parameterized approach.</p>
-<p>In testing, a good translational controller config was achieved in <strong>around 5 minutes of tuning</strong>.</p>
+<p class="admonition-title">5-minute tuning window</p>
+<p>Etherex's real-world tuning experience: a good translation-controller config was achieved in about 5 minutes. The reason is simple — the controller only does meaningful work at the very end of the path, so there's less surface area to tune against.</p>
 </div>
-<h3 id="forgiving-performance">Forgiving Performance<a class="headerlink" href="#forgiving-performance" title="Permanent link">&para;</a></h3>
-<p>There's <strong>no large performance penalty for under-tuning</strong>—the difference between optimally and sub-optimally tuned controllers is only noticeable at the very end of the robot's motion, making the tracking controller very forgiving.</p>
-<p>In contrast, a time-parameterized controller's response is apparent along the entire path, and poorly tuned chassis or gains are noticeable across the robot's entire motion, making sub-optimal tuning less forgiving.</p>
-<h3 id="path-simplicity">Path Simplicity<a class="headerlink" href="#path-simplicity" title="Permanent link">&para;</a></h3>
-<p>BLine paths are simple and relatively quick to create.</p>
-<p>Consider a <strong>straight-line path</strong> with no intermediary elements, simply going between two points where the robot is at rest at both. Both Choreo and PathPlanner would essentially create a trapezoidal motion profile, introducing the aforementioned time-parameterized controller pains for a very simple path. This takes more computational resources, adds hassle (control points, anchors, Choreo optimizer), and results in a nearly identically performing path compared to BLine.</p>
-<p>BLine can also function with <strong>only one path element</strong> (waypoint), useful for aligning to the Reefscape Reef or Crescendo Amp in teleop or auto. This essentially turns BLine into a bare-bones drive-to-point PID command without the hassle of a separate solution.</p>
-<h2 id="control-architecture">Control Architecture<a class="headerlink" href="#control-architecture" title="Permanent link">&para;</a></h2>
-<h3 id="the-three-pid-controllers">The Three PID Controllers<a class="headerlink" href="#the-three-pid-controllers" title="Permanent link">&para;</a></h3>
-<p>The BLine tracking control loop runs three separate PID controllers that work together:</p>
+<h3 id="forgiving-performance">Forgiving performance<a class="headerlink" href="#forgiving-performance" title="Permanent link">&para;</a></h3>
+<p>There's <strong>no large performance penalty for under-tuning</strong>. The difference between optimally and sub-optimally tuned controllers is only noticeable in the last few centimeters before the endpoint. A time-parameterized controller's response is apparent along the <em>entire</em> path, and poor tuning is obvious everywhere.</p>
+<h3 id="robustness-to-disturbances">Robustness to disturbances<a class="headerlink" href="#robustness-to-disturbances" title="Permanent link">&para;</a></h3>
+<p>Because BLine is geometric rather than time-parameterized, it reacts naturally to disturbances (collisions, vision jumps, temporary stalls):</p>
+<ul>
+<li>Speed magnitude = f(remaining distance). A push backward simply raises remaining distance; the controller naturally commands more speed.</li>
+<li>Speed direction = pointing toward the current target. A push sideways just steers the robot back.</li>
+<li>The control cycle is <strong>greedy</strong> — each cycle computes the best command for <em>now</em>, with no expectation about what time it is.</li>
+</ul>
+<p>A time-parameterized follower that was pushed off course will keep chasing its schedule rather than returning to the path. P2P-style followers (like BLine) return to the setpoint geometry, which matches how teams think about auto behavior.</p>
+<div class="admonition warning">
+<p class="admonition-title">Known edge case</p>
+<p>When the robot is at high velocity relative to max acceleration <em>and</em> close to a handoff radius boundary <em>and</em> a significant disturbance occurs, the combination can still fault. The standard mitigations are (a) use a forgiving handoff radius on high-speed segments, (b) enable <a href="../key-parameters/#t-ratio-based-handoffs-optional">t-ratio based handoffs</a>, or (c) tighten velocity limits through the disturbance-prone region.</p>
+</div>
+<h3 id="path-simplicity">Path simplicity<a class="headerlink" href="#path-simplicity" title="Permanent link">&para;</a></h3>
+<p>BLine paths are simple to reason about: a list of points. A single-element BLine path with one waypoint is a valid, useful path — essentially a drive-to-pose command without the overhead of a separate solution. That matters for teleop auto-align (Reefscape reef, Crescendo amp, etc.) and for any "go to this pose" workflow.</p>
+<p>For more complex paths, BLine uses path elements, handoff radii, and ranged velocity limits as the primary motion-control primitives — analogous to Bézier control points, anchors, and optimizer output but with direct, visual meaning.</p>
+<hr />
+<h2 id="control-architecture">Control architecture<a class="headerlink" href="#control-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="three-pid-controllers">Three PID controllers<a class="headerlink" href="#three-pid-controllers" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1541,58 +1647,42 @@
 <tbody>
 <tr>
 <td><strong>Translation</strong></td>
-<td>Minimizes total remaining path distance</td>
-<td>Distance to path end (m)</td>
-<td>Desired velocity (m/s)</td>
+<td>Drive to the final path element</td>
+<td>Remaining path distance (m)</td>
+<td>Desired translational speed magnitude (m/s)</td>
 </tr>
 <tr>
 <td><strong>Rotation</strong></td>
-<td>Follows profiled rotation or snaps to target</td>
-<td>Rotation error (rad)</td>
+<td>Track current rotation target</td>
+<td>Heading error (rad)</td>
 <td>Angular velocity (rad/s)</td>
 </tr>
 <tr>
-<td><strong>Cross-Track Error (CTE)</strong></td>
-<td>Minimizes deviation from path line</td>
-<td>Perpendicular distance (m)</td>
+<td><strong>Cross-track (CTE)</strong></td>
+<td>Stay on the line between path segments</td>
+<td>Perpendicular distance from line (m)</td>
 <td>Correction velocity (m/s)</td>
 </tr>
 </tbody>
 </table>
-<p>The <strong>translation controller</strong> drives the robot to the final path element. The <strong>rotation controller</strong> either follows the profiled rotation or snaps directly to the target if no profile is specified. The <strong>CTE controller</strong> minimizes deviation from the line between the current and previous path segments, helping reduce post-handoff CTE.</p>
-<h3 id="algorithm-robustness">Algorithm Robustness<a class="headerlink" href="#algorithm-robustness" title="Permanent link">&para;</a></h3>
-<p>The BLine path tracking algorithm is <strong>robust in its response to sharp changes in positional data</strong>.</p>
-<p><strong>Why it's stable:</strong></p>
-<ul>
-<li>Initial computation for translational speed magnitude depends on distance to the path's end</li>
-<li>Velocity direction depends on the next available waypoint</li>
-<li>These values are <strong>acceleration-limited in 2D</strong> to provide smooth robot motion toward the target</li>
-<li>Chassis output remains relatively stable even during erroneous odometry jitter</li>
-</ul>
-<p><strong>Non-time-parameterized advantage:</strong></p>
-<p>BLine is <strong>not time-parameterized</strong> like PathPlanner. The control cycle acts in a <strong>greedy fashion</strong>, which makes the response uniform regardless of path completion or "lag" behind the idealized path.</p>
+<p>Each cycle: translation controller produces a speed magnitude, direction is set by pointing at the current translation target, CTE adds a perpendicular nudge, rotation is resolved from profiled/non-profiled interpolation, and the combined <code>ChassisSpeeds</code> is rate-limited before being sent to the drivetrain.</p>
+<h3 id="why-the-cte-controller-earns-its-keep">Why the CTE controller earns its keep<a class="headerlink" href="#why-the-cte-controller-earns-its-keep" title="Permanent link">&para;</a></h3>
+<p>The translation controller is maxed out for most of a path (its output saturates to the active velocity constraint). That means the path the robot actually takes between two elements depends mostly on <em>how the direction vector evolves</em>, which is determined by the geometry of the next target. Over long segments, small position errors from the nominal line don't get corrected — the robot just drives "toward the point from here," not "back to the line, then toward the point."</p>
+<p>The CTE controller explicitly minimizes the perpendicular distance from the current path segment and is additive with the translation output. It pulls the robot back onto the segment line over time.</p>
 <div class="admonition warning">
-<p class="admonition-title">Edge Cases</p>
-<p>Collisions and jitter can be problematic if they are significant enough relative to the handoff radii of the elements—particularly when the target is about to switch at high velocities relative to the max acceleration.</p>
-<p>Future improvements may include dynamic handoff radii that scale based on cross-track error and segment completion.</p>
+<p class="admonition-title">Don't over-tune CTE</p>
+<p>An aggressively tuned CTE controller can overpower the translation controller during turns, especially at high speeds — you'll see the robot "fishtailing" into turns. Tune translation first, then rotation, then CTE. CTE gains should feel <em>gentle</em>.</p>
 </div>
-<h2 id="intermediary-elements-constraints">Intermediary Elements &amp; Constraints<a class="headerlink" href="#intermediary-elements-constraints" title="Permanent link">&para;</a></h2>
-<p>For paths with intermediary elements, BLine retains its ease of controller tuning and computational simplicity. Just as Bézier paths have control points and anchors, BLine paths use:</p>
+<h3 id="algorithm-robustness">Algorithm robustness<a class="headerlink" href="#algorithm-robustness" title="Permanent link">&para;</a></h3>
+<p>The tracking algorithm is robust in its response to sharp changes in positional data:</p>
 <ul>
-<li><strong>Path elements</strong> — Define where the robot should go</li>
-<li><strong>Handoff radii</strong> — Control when targets switch</li>
-<li><strong>Translational velocity limiting</strong> — Primary means of motion control</li>
+<li>Speed magnitude depends on distance to the path's end — a vision jump "backward" increases remaining distance, naturally commanding more speed.</li>
+<li>Direction depends on the next available waypoint — independent of transient position errors along the segment.</li>
+<li>All outputs are <strong>acceleration-limited in 2D</strong> via <code>ChassisRateLimiter</code>, keeping commanded chassis motion smooth even when the underlying pose estimate is noisy.</li>
+<li>The control cycle is greedy — the response is uniform regardless of path completion or "lag" behind any idealized path.</li>
 </ul>
-<p><strong>Ranged constraints</strong> ensure the robot doesn't overshoot intermediary elements due to high velocities. To create more complex BLine paths, users manually define these constraints. After creating one or two paths, users quickly build intuition for appropriate constraints. The GUI simulation also aids in understanding robot behavior.</p>
-<p>Through this system of constraints, handoff radii, and path elements:</p>
-<ul>
-<li>The forgivingness and performance of the translational PID controller is maintained</li>
-<li>Computational simplicity is preserved</li>
-<li>Users gain fine control over exact robot behavior at individual path elements (velocity and precision)</li>
-<li>This opens the door for <strong>rapid and effective empirical tuning, testing, and validation</strong></li>
-</ul>
-<p>BLine provides as much intermediary control as the user wants (within polyline reason) and can create complex autonomous routines.</p>
-<h2 id="comparison-to-other-solutions">Comparison to Other Solutions<a class="headerlink" href="#comparison-to-other-solutions" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="where-bline-shines-and-where-it-doesnt">Where BLine shines (and where it doesn't)<a class="headerlink" href="#where-bline-shines-and-where-it-doesnt" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1604,78 +1694,74 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Path type</strong></td>
+<td>Path type</td>
 <td>Polyline</td>
 <td>Bézier curves</td>
 <td>Drive-to-point</td>
 </tr>
 <tr>
-<td><strong>Time-parameterized</strong></td>
+<td>Time-parameterized</td>
 <td>No</td>
 <td>Yes</td>
 <td>No</td>
 </tr>
 <tr>
-<td><strong>Precomputation required</strong></td>
+<td>Precomputation required</td>
 <td>No</td>
 <td>Yes</td>
 <td>No</td>
 </tr>
 <tr>
-<td><strong>Tuning difficulty</strong></td>
+<td>Tuning difficulty</td>
 <td>Low</td>
-<td>Medium-High</td>
+<td>Medium–High</td>
 <td>Low</td>
 </tr>
 <tr>
-<td><strong>Intermediary control</strong></td>
+<td>Intermediary element control</td>
 <td>Full</td>
 <td>Full</td>
-<td>Limited</td>
+<td>Limited (best at 1–2 translation elements)</td>
 </tr>
 <tr>
-<td><strong>Real-time path creation</strong></td>
+<td>Real-time path creation</td>
 <td>Excellent</td>
 <td>Limited</td>
 <td>Excellent</td>
 </tr>
 <tr>
-<td><strong>Complex paths</strong></td>
+<td>Complex multi-element paths</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Limited</td>
 </tr>
 <tr>
-<td><strong>Single-point moves</strong></td>
+<td>Single-point moves</td>
 <td>Yes</td>
 <td>Overkill</td>
 <td>Yes</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Compared to AutoPilot:</strong></p>
-<p>The ease of tuning should be similar, as AutoPilot also circumvents time-parameterized tracking issues via its own approach. However, AutoPilot performs best in simpler cases and isn't designed for paths requiring intermediary element control (3+ translation elements). BLine handles both simple and complex paths well.</p>
-<h2 id="current-limitations">Current Limitations<a class="headerlink" href="#current-limitations" title="Permanent link">&para;</a></h2>
-<h3 id="event-triggers">Event Triggers<a class="headerlink" href="#event-triggers" title="Permanent link">&para;</a></h3>
-<p>Currently, BLine does not support event triggers built into paths. This is a planned feature (likely before kickoff or shortly after).</p>
-<p><strong>Current workaround:</strong> Users can replicate trigger-like functionality via a <code>WaitUntil</code> command checking the path follower's current tracked rotation or translation:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Example: Wait until robot is past a certain point</span>
-<span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
-<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">myPath</span><span class="p">),</span>
-<span class="w">    </span><span class="c1">// Event triggers would go here - currently use WaitUntil with custom conditions</span>
-<span class="p">);</span>
-</code></pre></div>
-<h3 id="sharp-corner-edge-cases">Sharp Corner Edge Cases<a class="headerlink" href="#sharp-corner-edge-cases" title="Permanent link">&para;</a></h3>
-<p>At very high velocities with small handoff radii, corner overshoot can occur. Solutions include:</p>
+<p><strong>vs. PathPlanner / Choreo:</strong> if you want the smoothest possible curvature and you're willing to invest heavily in time-parameterized PID tuning, Bézier systems can win on paper. In practice, tuning and robustness issues often make them behave worse on the field. BLine is designed to give up a little theoretical optimality for a lot of practical tunability.</p>
+<p><strong>vs. AutoPilot:</strong> AutoPilot is excellent for single-point and two-point moves. BLine is designed for longer routines with meaningful intermediate-element control — 3+ translation elements is where BLine starts to decisively pull ahead.</p>
+<hr />
+<h2 id="localization-is-orthogonal">Localization is orthogonal<a class="headerlink" href="#localization-is-orthogonal" title="Permanent link">&para;</a></h2>
+<p>BLine takes a <code>Pose2d</code> supplier and trusts it. How you produce that pose is entirely your call:</p>
 <ul>
-<li>Using ranged velocity constraints before sharp turns</li>
-<li>Increasing handoff radii where precision isn't critical</li>
-<li>Adding intermediate path elements for smoother curves</li>
+<li><strong>Wheel odometry only.</strong> Works fine in auto if your drivetrain is well-tuned (correct gear ratios, wheel size, filters) and slip is controlled (stator current limits, sane velocity/acceleration limits).</li>
+<li><strong>Vision + wheel odometry.</strong> Strongly recommended for any multi-path routine or anything that could get bumped, since wheel odometry drifts and never self-corrects. Use PhotonVision, Limelight MegaTag, QuestNav, etc.</li>
+<li><strong>Vision-only.</strong> Also fine, subject to the same caveats as any vision-driven autonomy.</li>
 </ul>
-<div class="admonition tip">
-<p class="admonition-title">Best Practice</p>
-<p>The <strong>max translational velocity constraint</strong> is the most effective method for counteracting overshoot at sharp turns—more so than increasing handoff radius, which reduces path precision.</p>
-</div>
+<p>BLine has no opinion here — the library just receives whatever pose you hand it, and quality of localization puts an upper bound on the accuracy of path following regardless of the follower you use.</p>
+<hr />
+<h2 id="future-direction">Future direction<a class="headerlink" href="#future-direction" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>On-the-fly path planning.</strong> BLine currently leaves A<em>/Theta</em>-style obstacle-aware planning to the user. It's possible to pair BLine with a simple obstacle-aware planner (using translational velocity limits and forgiving handoff radii as the primary tuning knobs), and a first-class integration is on the roadmap.</li>
+<li><strong>End-velocity control.</strong> Ending a path at a non-zero translational velocity is not currently supported; it's a planned feature.</li>
+<li><strong>Dynamic handoff radii.</strong> Radii that scale with cross-track error or segment completion are under consideration as a mitigation for the high-speed/near-handoff-boundary edge case.</li>
+</ul>
+<p>See the <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778">Chief Delphi thread</a> for ongoing discussion and release notes.</p>
 
 
 

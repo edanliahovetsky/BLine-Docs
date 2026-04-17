@@ -23,11 +23,11 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Usage Tips - BLine Documentation</title>
+        <title>Tuning & Usage Tips - BLine Documentation</title>
       
     
     
@@ -121,7 +121,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#usage-tips" class="md-skip">
+        <a href="#tuning-usage-tips" class="md-skip">
           Skip to content
         </a>
       
@@ -157,7 +157,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Usage Tips
+              Tuning & Usage Tips
             
           </span>
         </div>
@@ -535,6 +535,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../concepts/event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../concepts/key-parameters/" class="md-nav__link">
         
   
@@ -785,6 +813,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gui/protrusions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protrusions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -937,6 +993,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../lib/event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib/flip-and-mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alliance Flip & Mirror
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lib/pre-match/" class="md-nav__link">
         
   
@@ -1044,7 +1156,7 @@
   <span class="md-ellipsis">
     
   
-    Usage Tips
+    Tuning & Usage Tips
   
 
     
@@ -1062,7 +1174,7 @@
   <span class="md-ellipsis">
     
   
-    Usage Tips
+    Tuning & Usage Tips
   
 
     
@@ -1088,22 +1200,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#constraint-tuning" class="md-nav__link">
+  <a href="#pid-tuning" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Constraint Tuning
+        PID tuning
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Constraint Tuning">
+    <nav class="md-nav" aria-label="PID tuning">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#max-translational-velocity-is-key" class="md-nav__link">
+  <a href="#tune-in-this-order-translation-rotation-cross-track" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Max Translational Velocity is Key
+        Tune in this order: translation → rotation → cross-track
       
     </span>
   </a>
@@ -1111,10 +1223,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#balancing-handoff-radius-and-velocity" class="md-nav__link">
+  <a href="#recommended-starting-gains" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Balancing Handoff Radius and Velocity
+        Recommended starting gains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tune-at-maximum-velocities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tune at maximum velocities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagnosing-pid-issues-from-the-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagnosing PID issues from the logs
       
     </span>
   </a>
@@ -1127,22 +1261,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pid-tuning" class="md-nav__link">
+  <a href="#end-tolerances" class="md-nav__link">
     <span class="md-ellipsis">
       
-        PID Tuning
+        End tolerances
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="PID Tuning">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constraints-the-primary-shaping-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraints: the primary shaping tool
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constraints: the primary shaping tool">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tune-at-maximum-velocities" class="md-nav__link">
+  <a href="#velocity-limiting-is-how-you-control-motion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tune at Maximum Velocities
+        Velocity limiting is how you control motion
       
     </span>
   </a>
@@ -1150,10 +1295,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tuning-order" class="md-nav__link">
+  <a href="#build-constraint-intuition-by-iterating" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tuning Order
+        Build constraint intuition by iterating
       
     </span>
   </a>
@@ -1161,10 +1306,38 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#translation-controller" class="md-nav__link">
+  <a href="#dont-over-constrain" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Translation Controller
+        Don't over-constrain
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handoff-radii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handoff radii
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Handoff radii">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#start-with-the-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start with the default
       
     </span>
   </a>
@@ -1172,10 +1345,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rotation-controller" class="md-nav__link">
+  <a href="#sizing-rules-of-thumb" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Rotation Controller
+        Sizing rules of thumb
       
     </span>
   </a>
@@ -1183,10 +1356,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cross-track-controller" class="md-nav__link">
+  <a href="#the-oscillation-failure-mode" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cross-Track Controller
+        The oscillation failure mode
       
     </span>
   </a>
@@ -1202,19 +1375,19 @@
   <a href="#path-design" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Path Design
+        Path design
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Path Design">
+    <nav class="md-nav" aria-label="Path design">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#use-translationtargets-for-path-shaping" class="md-nav__link">
+  <a href="#use-translationtargets-for-shape-waypoints-for-rotation-specific-points" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Use TranslationTargets for Path Shaping
+        Use TranslationTargets for shape, Waypoints for rotation-specific points
       
     </span>
   </a>
@@ -1222,10 +1395,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#use-rotationtargets-for-mid-segment-rotation" class="md-nav__link">
+  <a href="#dont-pile-waypoints-through-obstacles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Use RotationTargets for Mid-Segment Rotation
+        Don't pile Waypoints through obstacles
       
     </span>
   </a>
@@ -1233,10 +1406,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#single-element-paths-for-simple-moves" class="md-nav__link">
+  <a href="#smooth-turns-with-more-elements-not-bigger-radii" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Single-Element Paths for Simple Moves
+        Smooth turns with more elements, not bigger radii
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-element-paths-are-fine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-element paths are fine
       
     </span>
   </a>
@@ -1249,22 +1433,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#autonomous-performance" class="md-nav__link">
+  <a href="#autonomous-starts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Autonomous Performance
+        Autonomous starts
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Autonomous Performance">
+    <nav class="md-nav" aria-label="Autonomous starts">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pre-orient-swerve-modules" class="md-nav__link">
+  <a href="#always-pre-orient-modules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pre-Orient Swerve Modules
+        Always pre-orient modules
       
     </span>
   </a>
@@ -1272,10 +1456,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#use-pose-reset-wisely" class="md-nav__link">
+  <a href="#use-withposereset-for-the-first-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Use Pose Reset Wisely
+        Use withPoseReset for the first path
       
     </span>
   </a>
@@ -1288,22 +1472,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#workflow-recommendations" class="md-nav__link">
+  <a href="#on-the-fly-paths-teleop-auto-align" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Workflow Recommendations
+        On-the-fly paths (teleop auto-align)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Workflow Recommendations">
+    <nav class="md-nav" aria-label="On-the-fly paths (teleop auto-align)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#choose-your-workflow" class="md-nav__link">
+  <a href="#snapshot-the-pose-at-schedule-time-not-at-bindings-time" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Choose Your Workflow
+        Snapshot the pose at schedule time, not at bindings time
       
     </span>
   </a>
@@ -1311,21 +1495,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iterate-quickly" class="md-nav__link">
+  <a href="#or-skip-the-current-pose-waypoint-entirely" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Iterate Quickly
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#use-the-simulation-for-quick-checks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Use the Simulation for Quick Checks
+        Or: skip the "current pose" waypoint entirely
       
     </span>
   </a>
@@ -1341,19 +1514,19 @@
   <a href="#event-triggers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Event Triggers
+        Event triggers
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Event Triggers">
+    <nav class="md-nav" aria-label="Event triggers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#using-waituntil-for-trigger-behavior" class="md-nav__link">
+  <a href="#triggers-fire-once-per-run" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Using WaitUntil for Trigger Behavior
+        Triggers fire once per run
       
     </span>
   </a>
@@ -1361,21 +1534,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#using-deadlines-with-path-progress" class="md-nav__link">
+  <a href="#register-at-init-not-at-path-build-time" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Using Deadlines with Path Progress
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#checking-path-progress" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Checking Path Progress
+        Register at init, not at path build time
       
     </span>
   </a>
@@ -1388,10 +1550,110 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-no-second-alignment-routine" class="md-nav__link">
+  <a href="#alliance-flipping-mirroring" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why No Second Alignment Routine?
+        Alliance flipping &amp; mirroring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alliance flipping &amp; mirroring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pick-one-policy-per-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pick one policy per project
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#author-everything-from-the-blue-alliance-perspective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Author everything from the blue-alliance perspective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mirror-flip-they-transform-heading-differently" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mirror ≠ Flip — they transform heading differently
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#localization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Localization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow recommendations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow recommendations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iterate-fast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Iterate fast
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-bline-usually-doesnt-need-a-second-alignment-routine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why BLine usually doesn't need a "second alignment routine"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
       
     </span>
   </a>
@@ -1460,22 +1722,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#constraint-tuning" class="md-nav__link">
+  <a href="#pid-tuning" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Constraint Tuning
+        PID tuning
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Constraint Tuning">
+    <nav class="md-nav" aria-label="PID tuning">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#max-translational-velocity-is-key" class="md-nav__link">
+  <a href="#tune-in-this-order-translation-rotation-cross-track" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Max Translational Velocity is Key
+        Tune in this order: translation → rotation → cross-track
       
     </span>
   </a>
@@ -1483,10 +1745,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#balancing-handoff-radius-and-velocity" class="md-nav__link">
+  <a href="#recommended-starting-gains" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Balancing Handoff Radius and Velocity
+        Recommended starting gains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tune-at-maximum-velocities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tune at maximum velocities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagnosing-pid-issues-from-the-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagnosing PID issues from the logs
       
     </span>
   </a>
@@ -1499,22 +1783,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pid-tuning" class="md-nav__link">
+  <a href="#end-tolerances" class="md-nav__link">
     <span class="md-ellipsis">
       
-        PID Tuning
+        End tolerances
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="PID Tuning">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constraints-the-primary-shaping-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraints: the primary shaping tool
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constraints: the primary shaping tool">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tune-at-maximum-velocities" class="md-nav__link">
+  <a href="#velocity-limiting-is-how-you-control-motion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tune at Maximum Velocities
+        Velocity limiting is how you control motion
       
     </span>
   </a>
@@ -1522,10 +1817,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tuning-order" class="md-nav__link">
+  <a href="#build-constraint-intuition-by-iterating" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tuning Order
+        Build constraint intuition by iterating
       
     </span>
   </a>
@@ -1533,10 +1828,38 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#translation-controller" class="md-nav__link">
+  <a href="#dont-over-constrain" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Translation Controller
+        Don't over-constrain
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handoff-radii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handoff radii
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Handoff radii">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#start-with-the-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start with the default
       
     </span>
   </a>
@@ -1544,10 +1867,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rotation-controller" class="md-nav__link">
+  <a href="#sizing-rules-of-thumb" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Rotation Controller
+        Sizing rules of thumb
       
     </span>
   </a>
@@ -1555,10 +1878,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cross-track-controller" class="md-nav__link">
+  <a href="#the-oscillation-failure-mode" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cross-Track Controller
+        The oscillation failure mode
       
     </span>
   </a>
@@ -1574,19 +1897,19 @@
   <a href="#path-design" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Path Design
+        Path design
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Path Design">
+    <nav class="md-nav" aria-label="Path design">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#use-translationtargets-for-path-shaping" class="md-nav__link">
+  <a href="#use-translationtargets-for-shape-waypoints-for-rotation-specific-points" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Use TranslationTargets for Path Shaping
+        Use TranslationTargets for shape, Waypoints for rotation-specific points
       
     </span>
   </a>
@@ -1594,10 +1917,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#use-rotationtargets-for-mid-segment-rotation" class="md-nav__link">
+  <a href="#dont-pile-waypoints-through-obstacles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Use RotationTargets for Mid-Segment Rotation
+        Don't pile Waypoints through obstacles
       
     </span>
   </a>
@@ -1605,10 +1928,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#single-element-paths-for-simple-moves" class="md-nav__link">
+  <a href="#smooth-turns-with-more-elements-not-bigger-radii" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Single-Element Paths for Simple Moves
+        Smooth turns with more elements, not bigger radii
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-element-paths-are-fine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-element paths are fine
       
     </span>
   </a>
@@ -1621,22 +1955,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#autonomous-performance" class="md-nav__link">
+  <a href="#autonomous-starts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Autonomous Performance
+        Autonomous starts
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Autonomous Performance">
+    <nav class="md-nav" aria-label="Autonomous starts">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pre-orient-swerve-modules" class="md-nav__link">
+  <a href="#always-pre-orient-modules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pre-Orient Swerve Modules
+        Always pre-orient modules
       
     </span>
   </a>
@@ -1644,10 +1978,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#use-pose-reset-wisely" class="md-nav__link">
+  <a href="#use-withposereset-for-the-first-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Use Pose Reset Wisely
+        Use withPoseReset for the first path
       
     </span>
   </a>
@@ -1660,22 +1994,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#workflow-recommendations" class="md-nav__link">
+  <a href="#on-the-fly-paths-teleop-auto-align" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Workflow Recommendations
+        On-the-fly paths (teleop auto-align)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Workflow Recommendations">
+    <nav class="md-nav" aria-label="On-the-fly paths (teleop auto-align)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#choose-your-workflow" class="md-nav__link">
+  <a href="#snapshot-the-pose-at-schedule-time-not-at-bindings-time" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Choose Your Workflow
+        Snapshot the pose at schedule time, not at bindings time
       
     </span>
   </a>
@@ -1683,21 +2017,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iterate-quickly" class="md-nav__link">
+  <a href="#or-skip-the-current-pose-waypoint-entirely" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Iterate Quickly
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#use-the-simulation-for-quick-checks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Use the Simulation for Quick Checks
+        Or: skip the "current pose" waypoint entirely
       
     </span>
   </a>
@@ -1713,19 +2036,19 @@
   <a href="#event-triggers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Event Triggers
+        Event triggers
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Event Triggers">
+    <nav class="md-nav" aria-label="Event triggers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#using-waituntil-for-trigger-behavior" class="md-nav__link">
+  <a href="#triggers-fire-once-per-run" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Using WaitUntil for Trigger Behavior
+        Triggers fire once per run
       
     </span>
   </a>
@@ -1733,21 +2056,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#using-deadlines-with-path-progress" class="md-nav__link">
+  <a href="#register-at-init-not-at-path-build-time" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Using Deadlines with Path Progress
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#checking-path-progress" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Checking Path Progress
+        Register at init, not at path build time
       
     </span>
   </a>
@@ -1760,10 +2072,110 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-no-second-alignment-routine" class="md-nav__link">
+  <a href="#alliance-flipping-mirroring" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why No Second Alignment Routine?
+        Alliance flipping &amp; mirroring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alliance flipping &amp; mirroring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pick-one-policy-per-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pick one policy per project
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#author-everything-from-the-blue-alliance-perspective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Author everything from the blue-alliance perspective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mirror-flip-they-transform-heading-differently" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mirror ≠ Flip — they transform heading differently
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#localization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Localization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow recommendations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow recommendations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iterate-fast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Iterate fast
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-bline-usually-doesnt-need-a-second-alignment-routine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why BLine usually doesn't need a "second alignment routine"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
       
     </span>
   </a>
@@ -1787,235 +2199,264 @@
 
 
 
-<h1 id="usage-tips">Usage Tips<a class="headerlink" href="#usage-tips" title="Permanent link">&para;</a></h1>
-<p>Best practices and recommendations for getting the most out of BLine.</p>
-<h2 id="constraint-tuning">Constraint Tuning<a class="headerlink" href="#constraint-tuning" title="Permanent link">&para;</a></h2>
-<h3 id="max-translational-velocity-is-key">Max Translational Velocity is Key<a class="headerlink" href="#max-translational-velocity-is-key" title="Permanent link">&para;</a></h3>
-<p>The <strong>max translational velocity constraint</strong> is the primary ranged constraint recommended for most use cases. It is the most effective method for counteracting overshoot at sharp turns—other than increasing the handoff radius, which reduces path precision.</p>
-<p>By limiting velocity before tight corners, the robot can decelerate in time and follow the intended path more accurately.</p>
-<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="w"> </span><span class="n">constraints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="p">()</span>
-<span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityMetersPerSec</span><span class="p">(</span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w">   </span><span class="c1">// Fast on straight sections</span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w">    </span><span class="c1">// Slow before sharp turn</span>
-<span class="w">    </span><span class="p">);</span>
-</code></pre></div>
-<h3 id="balancing-handoff-radius-and-velocity">Balancing Handoff Radius and Velocity<a class="headerlink" href="#balancing-handoff-radius-and-velocity" title="Permanent link">&para;</a></h3>
+<h1 id="tuning-usage-tips">Tuning &amp; Usage Tips<a class="headerlink" href="#tuning-usage-tips" title="Permanent link">&para;</a></h1>
+<p>Practical advice for getting BLine working well on a real robot. A lot of this distills experience from teams running BLine during the 2026 season — it's all empirical, not theoretical.</p>
+<h2 id="pid-tuning">PID tuning<a class="headerlink" href="#pid-tuning" title="Permanent link">&para;</a></h2>
+<h3 id="tune-in-this-order-translation-rotation-cross-track">Tune in this order: translation → rotation → cross-track<a class="headerlink" href="#tune-in-this-order-translation-rotation-cross-track" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Translation controller first, with rotation and CTE set to zero.</strong> The easiest way is to author a path with a single Waypoint whose rotation matches the robot's current heading, and tune a straight-line move on a long distance. Watch for:</p>
+<ul>
+<li>Controller saturates (output = max velocity) through most of the path — that's correct.</li>
+<li>Controller smoothly decelerates through the last meter or so.</li>
+<li>Robot stops inside the end tolerance without oscillating.</li>
+</ul>
+</li>
+<li>
+<p><strong>Add the rotation controller.</strong> Author a waypoint that requires rotation during the move. Tune until:</p>
+<ul>
+<li>Rotation reaches the target heading without overshoot.</li>
+<li>No jitter at the endpoint.</li>
+</ul>
+</li>
+<li>
+<p><strong>Finally, tune CTE.</strong> On a longer multi-segment path, observe the <code>FollowPath/crossTrackError</code> log key. Tune just high enough to pull the robot back onto the line over the course of long segments. Don't over-tune — see below.</p>
+</li>
+</ol>
+<h3 id="recommended-starting-gains">Recommended starting gains<a class="headerlink" href="#recommended-starting-gains" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Scenario</th>
-<th>Solution</th>
+<th>Controller</th>
+<th>P</th>
+<th>I</th>
+<th>D</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Robot overshoots turns</td>
-<td>Lower velocity OR increase handoff radius</td>
+<td>Translation</td>
+<td>5.0</td>
+<td>0.0</td>
+<td>0.0</td>
 </tr>
 <tr>
-<td>Robot hesitates at waypoints</td>
-<td>Increase handoff radius OR increase velocity</td>
+<td>Rotation</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>0.0</td>
 </tr>
 <tr>
-<td>Robot cuts corners</td>
-<td>Decrease handoff radius OR lower velocity</td>
-</tr>
-<tr>
-<td>Path precision matters</td>
-<td>Smaller handoff radius + lower velocity</td>
+<td>Cross-track</td>
+<td>2.0</td>
+<td>0.0</td>
+<td>0.0</td>
 </tr>
 </tbody>
 </table>
-<div class="admonition danger">
-<p class="admonition-title">Avoid the Worst Case</p>
-<p>If the radius is too small, the robot may overshoot and miss the handoff zone entirely at high velocities—this causes erratic path behavior and is the <strong>worst-case scenario</strong>. Conversely, if the handoff radius is too large, the robot will switch targets too early, causing path instability.</p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Smooth Turns: Add More Elements</p>
-<p>For smoother, more accurate navigation through turns, try adding a few extra <strong>TranslationTargets</strong> or <strong>Waypoints</strong> along the curve.<br />
-This approach lets the robot follow the desired path more naturally—without needing aggressive velocity constraints or oversize handoff radii.<br />
-More elements create a gentler, better-controlled trajectory through each bend. 
-Just be sure not to oversaturate your paths and keep them as sparse as possible.</p>
-</div>
-<h2 id="pid-tuning">PID Tuning<a class="headerlink" href="#pid-tuning" title="Permanent link">&para;</a></h2>
-<h3 id="tune-at-maximum-velocities">Tune at Maximum Velocities<a class="headerlink" href="#tune-at-maximum-velocities" title="Permanent link">&para;</a></h3>
+<p>These are real-world starting points, not lab values. Most teams end up close to them after tuning.</p>
 <div class="admonition warning">
-<p class="admonition-title">Critical</p>
-<p>When tuning the translation and rotation PID controllers, <strong>stress-test your controller gains at maximum robot velocity and acceleration</strong> for both translation and rotation.</p>
+<p class="admonition-title">Never use I on the translation controller</p>
+<p>The translation controller's setpoint is zero remaining distance. An integrator accumulates error while the robot is far from the endpoint and drives instability. Use P-only (or P + D if you need damping). Integrators on rotation and CTE are fine and can help with steady-state offsets.</p>
 </div>
-<p>If you limit max acceleration <em>after</em> tuning your controllers, or increase max allowable velocity beyond what was used during tuning, you will likely experience:</p>
+<div class="admonition warning">
+<p class="admonition-title">Don't over-tune CTE</p>
+<p>CTE's output sums with the translation output (no clamp), so aggressive CTE gains can fight the translation command during turns. You'll see fishtailing and corner instability. Tune CTE <em>after</em> translation and rotation feel right, and keep it gentle — just enough to pull the robot back onto long segment lines.</p>
+</div>
+<h3 id="tune-at-maximum-velocities">Tune at maximum velocities<a class="headerlink" href="#tune-at-maximum-velocities" title="Permanent link">&para;</a></h3>
+<p>Stress-test your translation-controller gains at the max velocity and acceleration your path constraints allow. If you tune at 2 m/s and then run a path at 4 m/s, you'll see overshoot and instability at the endpoint you didn't see during tuning.</p>
+<p>If you ever <em>increase</em> the max velocity after tuning, re-test. If you <em>decrease</em> max acceleration after tuning, re-test — the slower deceleration can change the tail behavior.</p>
+<h3 id="diagnosing-pid-issues-from-the-logs">Diagnosing PID issues from the logs<a class="headerlink" href="#diagnosing-pid-issues-from-the-logs" title="Permanent link">&para;</a></h3>
+<p>Log <code>FollowPath/remainingPathDistanceMeters</code> and <code>FollowPath/crossTrackError</code> to AdvantageScope. What to look for:</p>
 <ul>
-<li>Overshoot when reaching the path endpoint</li>
-<li>Unexpected behavior during path following</li>
+<li><strong>Clean monotonic remaining-distance curve</strong> → translation is tuned well.</li>
+<li><strong>Bouncy/oscillating remaining-distance near zero</strong> → tolerance too tight or translation P slightly too high.</li>
+<li><strong>Sustained non-zero CTE over a long segment</strong> → CTE P too low.</li>
+<li><strong>CTE that swings + and − rapidly</strong> → CTE P too high (or segment is genuinely short / path is at high curvature).</li>
+<li><strong>Robot stops short, command never finishes</strong> → check end tolerances; loosen them first, then re-examine PID.</li>
 </ul>
-<p>Always tune your controllers within the full operating range of velocities and accelerations that your path constraints allow.</p>
-<h3 id="tuning-order">Tuning Order<a class="headerlink" href="#tuning-order" title="Permanent link">&para;</a></h3>
-<p>The PID controllers should be tuned in the following order: translation, rotation, and finally cross-track. </p>
-<h3 id="translation-controller">Translation Controller<a class="headerlink" href="#translation-controller" title="Permanent link">&para;</a></h3>
-<p>The translation controller minimizes total path distance remaining.</p>
-<div class="admonition warning">
-<p class="admonition-title">Controller Instability</p>
-<p>Avoid using the PID integral term for the translation controller. Using the integral term will cause translation controller instability. Integral term use in other controllers (Rotation and Cross-Track) is fine. </p>
-</div>
-<p><strong>Starting gains:</strong> P = 5.0, I = 0.0, D = 0.0</p>
-<h3 id="rotation-controller">Rotation Controller<a class="headerlink" href="#rotation-controller" title="Permanent link">&para;</a></h3>
-<p>Minimizes error in holonomic heading (rotation).</p>
-<p><strong>Starting gains:</strong> P = 3.0, I = 0.0, D = 0.0</p>
-<h3 id="cross-track-controller">Cross-Track Controller<a class="headerlink" href="#cross-track-controller" title="Permanent link">&para;</a></h3>
-<p>Keeps the robot on the line between waypoints or translation targets. It should be used to reduce path deviation in longer path segments over time, rather than on sharp turns. </p>
-<div class="admonition warning">
-<p class="admonition-title">Controller Instability</p>
-<p>Be wary of cross-track controller over-tuning (where the controller overpowers the translation controller). An over-tuned cross-track controller will cause undesirable behavior around turns, especially during high velocities. </p>
-</div>
-<p><strong>Starting gains:</strong> P = 2.0, I = 0.0, D = 0.0</p>
-<h2 id="path-design">Path Design<a class="headerlink" href="#path-design" title="Permanent link">&para;</a></h2>
-<h3 id="use-translationtargets-for-path-shaping">Use TranslationTargets for Path Shaping<a class="headerlink" href="#use-translationtargets-for-path-shaping" title="Permanent link">&para;</a></h3>
-<p>Don't overuse Waypoints. If you just need the robot to pass through a point without a specific rotation, use a TranslationTarget instead:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Good: Only specify rotation where it matters</span>
-<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span><span class="w">      </span><span class="c1">// Face forward at start</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">),</span><span class="w">                      </span><span class="c1">// Just pass through</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.5</span><span class="p">),</span><span class="w">                      </span><span class="c1">// Path shaping</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">scoringPosition</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">180</span><span class="p">))</span><span class="w">  </span><span class="c1">// Face target</span>
-<span class="p">);</span>
-</code></pre></div>
-<h3 id="use-rotationtargets-for-mid-segment-rotation">Use RotationTargets for Mid-Segment Rotation<a class="headerlink" href="#use-rotationtargets-for-mid-segment-rotation" title="Permanent link">&para;</a></h3>
-<p>When you need to rotate while driving but don't need an extra waypoint:</p>
-<div class="highlight"><pre><span></span><code><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RotationTarget</span><span class="p">(</span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span><span class="w"> </span><span class="mf">0.5</span><span class="p">),</span><span class="w">  </span><span class="c1">// Rotate at midpoint</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">90</span><span class="p">))</span>
-<span class="p">);</span>
-</code></pre></div>
-<h3 id="single-element-paths-for-simple-moves">Single-Element Paths for Simple Moves<a class="headerlink" href="#single-element-paths-for-simple-moves" title="Permanent link">&para;</a></h3>
-<p>Don't overcomplicate simple movements. A single Waypoint is valid:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Simple drive-to-position</span>
-<span class="n">Path</span><span class="w"> </span><span class="n">simpleMove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">),</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">45</span><span class="p">))</span>
-<span class="p">);</span>
-</code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title">Paths Run to Completion</p>
-<p>BLine paths cannot be stopped midway through execution. If you need the robot to stop partway through a route, break it into separate Path objects:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
-<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">toFirstScore</span><span class="p">),</span><span class="w">     </span><span class="c1">// Drive to scoring position</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">(),</span><span class="w">                  </span><span class="c1">// Stop to score</span>
-<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">toPickup</span><span class="p">),</span><span class="w">         </span><span class="c1">// Drive to pickup location</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">()</span><span class="w">                  </span><span class="c1">// Stop to intake</span>
-<span class="p">);</span>
-</code></pre></div>
-</div>
-<h2 id="autonomous-performance">Autonomous Performance<a class="headerlink" href="#autonomous-performance" title="Permanent link">&para;</a></h2>
-<h3 id="pre-orient-swerve-modules">Pre-Orient Swerve Modules<a class="headerlink" href="#pre-orient-swerve-modules" title="Permanent link">&para;</a></h3>
-<p>For optimal autonomous start, pre-orient your swerve modules toward the initial path direction before the match begins:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// During disabled periodic or auto init</span>
-<span class="n">Path</span><span class="w"> </span><span class="n">firstPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;firstAutoPath&quot;</span><span class="p">);</span>
-<span class="n">Rotation2d</span><span class="w"> </span><span class="n">initialDirection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">firstPath</span><span class="p">.</span><span class="na">getInitialModuleDirection</span><span class="p">();</span>
-<span class="n">driveSubsystem</span><span class="p">.</span><span class="na">setModuleOrientations</span><span class="p">(</span><span class="n">initialDirection</span><span class="p">);</span>
-</code></pre></div>
-<p>This prevents the micro-deviations that occur when modules need to rotate during the initial acceleration.</p>
-<h3 id="use-pose-reset-wisely">Use Pose Reset Wisely<a class="headerlink" href="#use-pose-reset-wisely" title="Permanent link">&para;</a></h3>
-<p>The <code>withPoseReset()</code> option resets odometry to the path's starting pose. Use this for:</p>
+<p>A remaining-distance graph is, in etherex's own words, "the single most useful piece of evidence" when debugging PID behavior.</p>
+<h2 id="end-tolerances">End tolerances<a class="headerlink" href="#end-tolerances" title="Permanent link">&para;</a></h2>
+<p>Start with <strong>0.05–0.08 m translation tolerance</strong> and <strong>2–4° rotation tolerance</strong>, then tighten if needed. Good values for common use cases:</p>
+<table>
+<thead>
+<tr>
+<th>Use case</th>
+<th>Translation</th>
+<th>Rotation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>General autonomous</td>
+<td>0.05–0.08 m</td>
+<td>2–4°</td>
+</tr>
+<tr>
+<td>Precision scoring</td>
+<td>0.02–0.04 m</td>
+<td>1–2°</td>
+</tr>
+<tr>
+<td>"Get in the zone" alignment</td>
+<td>0.08–0.15 m</td>
+<td>3–5°</td>
+</tr>
+</tbody>
+</table>
+<p>Tight tolerances take disproportionately longer as the PID lingers in the low-output regime near the endpoint. If a path is mysteriously slow at its tail, loosen tolerances first.</p>
+<h2 id="constraints-the-primary-shaping-tool">Constraints: the primary shaping tool<a class="headerlink" href="#constraints-the-primary-shaping-tool" title="Permanent link">&para;</a></h2>
+<h3 id="velocity-limiting-is-how-you-control-motion">Velocity limiting is how you control motion<a class="headerlink" href="#velocity-limiting-is-how-you-control-motion" title="Permanent link">&para;</a></h3>
+<p><strong>Max translational velocity is the primary knob</strong> for shaping path behavior. Teams come from PathPlanner/Choreo expecting to tune paths by editing shape; in BLine you tune by editing <em>velocity caps</em> on sections of the path.</p>
+<p>Example: the robot overshoots a waypoint at the end of a long straight section:</p>
+<ol>
+<li>First reach: add a ranged <code>setMaxVelocityMetersPerSec</code> cap over the last 1–2 ordinals before the waypoint.</li>
+<li>If that's not enough: add a second cap that goes even lower at the very end.</li>
+<li>Only after that: consider shrinking the handoff radius or the endpoint tolerance.</li>
+</ol>
+<h3 id="build-constraint-intuition-by-iterating">Build constraint intuition by iterating<a class="headerlink" href="#build-constraint-intuition-by-iterating" title="Permanent link">&para;</a></h3>
+<p>The first two paths will feel awkward. By the third, you'll have intuition for what velocity caps make sense on what kinds of sections. The GUI simulation helps — a simulated slowdown visibly highlights where the cap is active.</p>
+<h3 id="dont-over-constrain">Don't over-constrain<a class="headerlink" href="#dont-over-constrain" title="Permanent link">&para;</a></h3>
+<p>Leaving constraints at the global default is fine for most of a path. Ranged constraints exist for the 1–2 specific sections where you need something different. Don't set a ranged constraint on every ordinal; most ordinals should use the global default.</p>
+<h2 id="handoff-radii">Handoff radii<a class="headerlink" href="#handoff-radii" title="Permanent link">&para;</a></h2>
+<h3 id="start-with-the-default">Start with the default<a class="headerlink" href="#start-with-the-default" title="Permanent link">&para;</a></h3>
+<p>A 0.2–0.25 m global default handoff radius works for most paths. Per-element overrides are for specific tight or loose moments.</p>
+<h3 id="sizing-rules-of-thumb">Sizing rules of thumb<a class="headerlink" href="#sizing-rules-of-thumb" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>First path in autonomous</strong>: Ensures odometry matches expected starting position</li>
-<li><strong>After significant odometry drift</strong>: Reset to a known position</li>
+<li><strong>High-speed straight-line transitions</strong> → larger radius (0.3–0.5 m) or enable <a href="../lib/follow-path/#withtratiobasedtranslationhandoffsboolean">t-ratio handoffs</a>.</li>
+<li><strong>Precision final waypoint</strong> → smaller radius (0.05–0.1 m) <em>paired with</em> a ranged velocity cap that brings the robot below its can-it-stop-here threshold.</li>
+<li><strong>Tight turn intermediate point</strong> → default, then use velocity cap to control overshoot.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="c1">// Builder with pose reset enabled</span>
-<span class="n">pathBuilder</span><span class="p">.</span><span class="na">withPoseReset</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">resetPose</span><span class="p">);</span>
+<h3 id="the-oscillation-failure-mode">The oscillation failure mode<a class="headerlink" href="#the-oscillation-failure-mode" title="Permanent link">&para;</a></h3>
+<p>If the handoff radius is smaller than the robot's stopping distance at its configured max velocity, the robot overshoots the circle. Once past, it reverses. The path never completes. Symptoms:</p>
+<ul>
+<li>Robot visibly lurches past a waypoint, reverses, lurches again.</li>
+<li>Remaining distance graph saws around zero at a specific target.</li>
+<li>Command never reports finished.</li>
+</ul>
+<p><strong>Fix</strong>: lower the velocity into that waypoint (ranged constraint) before enlarging the radius. Enlarging the radius reduces path precision; lowering velocity just adds a few hundred ms.</p>
+<h2 id="path-design">Path design<a class="headerlink" href="#path-design" title="Permanent link">&para;</a></h2>
+<h3 id="use-translationtargets-for-shape-waypoints-for-rotation-specific-points">Use TranslationTargets for shape, Waypoints for rotation-specific points<a class="headerlink" href="#use-translationtargets-for-shape-waypoints-for-rotation-specific-points" title="Permanent link">&para;</a></h3>
+<p>Every Waypoint pins rotation, which costs rotation bandwidth during that segment. For a mid-path curve where rotation doesn't matter, use a TranslationTarget. Reserve Waypoints for points where the robot genuinely needs a specific heading.</p>
+<h3 id="dont-pile-waypoints-through-obstacles">Don't pile Waypoints through obstacles<a class="headerlink" href="#dont-pile-waypoints-through-obstacles" title="Permanent link">&para;</a></h3>
+<p><strong>Bump / obstacle strategy:</strong></p>
+<ul>
+<li><strong>One waypoint just before the obstacle.</strong></li>
+<li><strong>One waypoint just past the obstacle.</strong></li>
+<li><strong>No intermediate waypoints inside the obstacle itself.</strong></li>
+</ul>
+<p>If you put a Waypoint on top of the bump, the robot tries to decelerate into the handoff circle mid-bump, loses traction, and stalls with wheels spinning. Keep the handoff decisions away from the disturbance zone.</p>
+<h3 id="smooth-turns-with-more-elements-not-bigger-radii">Smooth turns with more elements, not bigger radii<a class="headerlink" href="#smooth-turns-with-more-elements-not-bigger-radii" title="Permanent link">&para;</a></h3>
+<p>For a smooth curve through a turn, add a few extra TranslationTargets along the arc with default handoff radii. The polyline naturally approximates a curve. This gives cleaner path tracking than inflating handoff radii and letting the robot cut corners.</p>
+<p>Don't over-do it — oversaturating a path with TranslationTargets creates many small segments where handoff decisions happen rapidly. 3–5 well-placed elements usually beats 10 marginal ones.</p>
+<h3 id="single-element-paths-are-fine">Single-element paths are fine<a class="headerlink" href="#single-element-paths-are-fine" title="Permanent link">&para;</a></h3>
+<p>A single-Waypoint path is the cleanest drive-to-pose command. Use it for teleop auto-align and simple "go here" actions:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">align</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">reefScoringPose</span><span class="p">));</span>
+<span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">align</span><span class="p">).</span><span class="na">schedule</span><span class="p">();</span>
 </code></pre></div>
-<p>Don't use pose reset for every path—only when starting from a known position.</p>
-<h2 id="workflow-recommendations">Workflow Recommendations<a class="headerlink" href="#workflow-recommendations" title="Permanent link">&para;</a></h2>
-<h3 id="choose-your-workflow">Choose Your Workflow<a class="headerlink" href="#choose-your-workflow" title="Permanent link">&para;</a></h3>
+<h2 id="autonomous-starts">Autonomous starts<a class="headerlink" href="#autonomous-starts" title="Permanent link">&para;</a></h2>
+<h3 id="always-pre-orient-modules">Always pre-orient modules<a class="headerlink" href="#always-pre-orient-modules" title="Permanent link">&para;</a></h3>
+<p>Before the match starts, point the swerve modules in the direction the robot will drive first:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;firstAutoPath&quot;</span><span class="p">);</span>
+<span class="n">Rotation2d</span><span class="w"> </span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">first</span><span class="p">.</span><span class="na">getInitialModuleDirection</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getPose</span><span class="p">);</span>
+<span class="n">driveSubsystem</span><span class="p">.</span><span class="na">setModuleOrientations</span><span class="p">(</span><span class="n">dir</span><span class="p">);</span>
+</code></pre></div>
+<p>Call from disabled-periodic so the orientation stays current as vision updates the robot's pose. See <a href="../lib/pre-match/">Pre-Match Module Orientation</a> for the full pattern.</p>
+<h3 id="use-withposereset-for-the-first-path">Use <code>withPoseReset</code> for the first path<a class="headerlink" href="#use-withposereset-for-the-first-path" title="Permanent link">&para;</a></h3>
+<p>The very first <code>FollowPath</code> in auto should reset the robot's pose to the path's start pose, so that subsequent odometry/vision fusion starts from a known origin:</p>
+<div class="highlight"><pre><span></span><code><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withPoseReset</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">resetPose</span><span class="p">);</span>
+</code></pre></div>
+<p>Subsequent paths in the same routine don't need it — the pose is already anchored.</p>
+<h2 id="on-the-fly-paths-teleop-auto-align">On-the-fly paths (teleop auto-align)<a class="headerlink" href="#on-the-fly-paths-teleop-auto-align" title="Permanent link">&para;</a></h2>
+<h3 id="snapshot-the-pose-at-schedule-time-not-at-bindings-time">Snapshot the pose at schedule time, not at bindings time<a class="headerlink" href="#snapshot-the-pose-at-schedule-time-not-at-bindings-time" title="Permanent link">&para;</a></h3>
+<p>A common bug: if you build a path inside a binding's setup code, it captures the robot's pose at <strong>robot startup</strong>, not at button-press time.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// BUG: getRobotWaypoint() returns the robot&#39;s pose right now, at setup</span>
+<span class="n">driveController</span><span class="p">.</span><span class="na">square</span><span class="p">().</span><span class="na">whileTrue</span><span class="p">(</span>
+<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="n">getRobotWaypoint</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">target</span><span class="p">)))</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>Fix by deferring the build with <code>Commands.deferredProxy(...)</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">driveController</span><span class="p">.</span><span class="na">square</span><span class="p">().</span><span class="na">whileTrue</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">deferredProxy</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">.</span><span class="na">getPose</span><span class="p">()),</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+<span class="w">        </span><span class="p">))</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+<h3 id="or-skip-the-current-pose-waypoint-entirely">Or: skip the "current pose" waypoint entirely<a class="headerlink" href="#or-skip-the-current-pose-waypoint-entirely" title="Permanent link">&para;</a></h3>
+<p>For a single-destination drive-to-pose, you don't actually need the robot's current pose as a waypoint at all — BLine tracks against the live pose from the builder's supplier. Just build a one-waypoint path with the target:</p>
+<div class="highlight"><pre><span></span><code><span class="n">driveController</span><span class="p">.</span><span class="na">square</span><span class="p">().</span><span class="na">whileTrue</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">deferredProxy</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">target</span><span class="p">))))</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>Cleaner, fewer moving parts, and no pose-capture bug possible.</p>
+<h2 id="event-triggers">Event triggers<a class="headerlink" href="#event-triggers" title="Permanent link">&para;</a></h2>
+<h3 id="triggers-fire-once-per-run">Triggers fire once per run<a class="headerlink" href="#triggers-fire-once-per-run" title="Permanent link">&para;</a></h3>
+<p>They're not continuous. For "while the robot is in region X" behavior, flip boolean state with Show/Hide-style trigger pairs and have a separate parallel command observe it via <code>waitUntil</code>. See <a href="../concepts/event-triggers/#toggle-state-let-a-wait-until-drive-behavior">Event Triggers → Toggle state pattern</a>.</p>
+<h3 id="register-at-init-not-at-path-build-time">Register at init, not at path build time<a class="headerlink" href="#register-at-init-not-at-path-build-time" title="Permanent link">&para;</a></h3>
+<p><code>FollowPath.registerEventTrigger(...)</code> is static and persistent. Call it once in <code>RobotContainer</code>'s constructor. Don't register per path — you'll either double-register (no-op since it replaces) or forget and have an "unregistered key" warning in your logs.</p>
+<h2 id="alliance-flipping-mirroring">Alliance flipping &amp; mirroring<a class="headerlink" href="#alliance-flipping-mirroring" title="Permanent link">&para;</a></h2>
+<h3 id="pick-one-policy-per-project">Pick one policy per project<a class="headerlink" href="#pick-one-policy-per-project" title="Permanent link">&para;</a></h3>
+<p>Either the builder handles flipping (<code>withDefaultShouldFlip()</code>) and you never call <code>flip()</code> manually, or you handle it manually and the builder does not. Mixing leads to double-flip bugs.</p>
+<h3 id="author-everything-from-the-blue-alliance-perspective">Author everything from the blue-alliance perspective<a class="headerlink" href="#author-everything-from-the-blue-alliance-perspective" title="Permanent link">&para;</a></h3>
+<p>It's the FRC convention and it's what <code>withDefaultShouldFlip()</code> assumes. Never author red-side paths directly — you'll make your life harder on every JSON edit.</p>
+<h3 id="mirror-flip-they-transform-heading-differently">Mirror ≠ Flip — they transform heading differently<a class="headerlink" href="#mirror-flip-they-transform-heading-differently" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>flip()</code> maps θ → θ − π. Preserves alliance-relative orientation.</li>
+<li><code>mirror()</code> maps θ → −θ. Does <strong>not</strong> preserve mechanism orientation — a side-mounted shooter can point wrong after mirroring.</li>
+</ul>
+<p>Use <code>flip()</code> for opposite-alliance when the field has rotational symmetry. Use <code>mirror()</code> for left/right-side path families or fields with mirror symmetry. See <a href="../lib/flip-and-mirror/">Alliance Flip &amp; Mirror</a> for specifics.</p>
+<h2 id="localization">Localization<a class="headerlink" href="#localization" title="Permanent link">&para;</a></h2>
+<p>BLine doesn't care how you produce the pose. But the quality of the pose bounds the quality of path following:</p>
+<ul>
+<li><strong>Wheel odometry only</strong> is fine for single-path auto routines when the drivetrain is well-tuned and slip is controlled. Drift accumulates over time — expect trouble for multi-path routines.</li>
+<li><strong>Vision + wheel odometry</strong> is the standard. Use PhotonVision MegaTag, Limelight, QuestNav, etc. Strongly recommended for anything with more than ~1 path.</li>
+<li><strong>Vision-only</strong> also works; same quality caveats as any vision-driven autonomy.</li>
+</ul>
+<p>For teleop auto-align, vision updates are essentially required — you're targeting a pose on the field, and wheel odometry drifts in teleop just like it does in auto.</p>
+<h2 id="workflow-recommendations">Workflow recommendations<a class="headerlink" href="#workflow-recommendations" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Workflow</th>
-<th>Best For</th>
+<th>Fit</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>GUI + Lib + JSON</strong></td>
-<td>Visual path design, iteration, easy adjustments</td>
+<td>Most teams. Visual iteration, paths in Git.</td>
 </tr>
 <tr>
-<td><strong>JSON + Lib</strong></td>
-<td>Teams comfortable editing JSON directly</td>
+<td><strong>JSON-only + Lib</strong></td>
+<td>Comfortable writing JSON, or generating it programmatically from another tool.</td>
 </tr>
 <tr>
-<td><strong>Code Only</strong></td>
-<td>Dynamic paths, generated paths, full code control</td>
+<td><strong>Code-only + Lib</strong></td>
+<td>Fully dynamic paths (auto-align to computed poses, pathfinding integration).</td>
 </tr>
 </tbody>
 </table>
-<h3 id="iterate-quickly">Iterate Quickly<a class="headerlink" href="#iterate-quickly" title="Permanent link">&para;</a></h3>
-<p>BLine is designed for rapid iteration:</p>
-<ol>
-<li>Design paths in GUI or JSON</li>
-<li>Test on hardware</li>
-<li>Adjust constraints and positions</li>
-<li>Repeat</li>
-</ol>
-<h3 id="use-the-simulation-for-quick-checks">Use the Simulation for Quick Checks<a class="headerlink" href="#use-the-simulation-for-quick-checks" title="Permanent link">&para;</a></h3>
-<p>The GUI simulation provides immediate feedback, but remember its limitations:</p>
+<p>These aren't mutually exclusive — hybrid workflows (visual paths for fixed autos, code-only paths for teleop align) are common.</p>
+<h3 id="iterate-fast">Iterate fast<a class="headerlink" href="#iterate-fast" title="Permanent link">&para;</a></h3>
+<p>BLine is built around empirical iteration. Design → simulate in sim (not the GUI, a real WPILib physics sim) → test on the robot → adjust → repeat. Because path computation is effectively free and the tracking controller is forgiving to under-tuning, you can iterate on paths in between match runs without re-tuning everything.</p>
+<h2 id="why-bline-usually-doesnt-need-a-second-alignment-routine">Why BLine usually doesn't need a "second alignment routine"<a class="headerlink" href="#why-bline-usually-doesnt-need-a-second-alignment-routine" title="Permanent link">&para;</a></h2>
+<p>Time-parameterized path followers often finish a path slightly early or slightly off — you see teams tack a second "aim PID" command onto the end of every autonomous move to recover.</p>
+<p>BLine doesn't need this because:</p>
 <ul>
-<li><strong>Good for</strong>: Rough timing estimates, path flow validation, constraint effects</li>
-<li><strong>Not accurate for</strong>: Exact timing, real drivetrain dynamics, PID behavior</li>
+<li>The translation controller's setpoint is the final position's remaining distance, not a time-parameterized trajectory.</li>
+<li>The command finishes when both end tolerances are met, not when a clock runs out.</li>
+<li>The only tuning that matters at the endpoint is what the translation PID does in the last few cm — and that's exactly where tolerances come in.</li>
 </ul>
-<h2 id="event-triggers">Event Triggers<a class="headerlink" href="#event-triggers" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
-<p class="admonition-title">Coming Soon</p>
-<p>Built-in event trigger support is a planned feature and will be added in a future release.</p>
-</div>
-<p>Currently, BLine does not support event triggers built into paths. However, you can replicate trigger-like functionality using WPILib commands:</p>
-<h3 id="using-waituntil-for-trigger-behavior">Using WaitUntil for Trigger Behavior<a class="headerlink" href="#using-waituntil-for-trigger-behavior" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">// Trigger an action when the robot passes a certain point</span>
-<span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
-<span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">parallel</span><span class="p">(</span>
-<span class="w">        </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">myPath</span><span class="p">),</span>
-<span class="w">        </span><span class="n">Commands</span><span class="p">.</span><span class="na">waitUntil</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// Check if robot has passed x = 3.0 meters</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">driveSubsystem</span><span class="p">.</span><span class="na">getPose</span><span class="p">().</span><span class="na">getX</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}).</span><span class="na">andThen</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">())</span>
-<span class="w">    </span><span class="p">)</span>
-<span class="p">);</span>
-</code></pre></div>
-<h3 id="using-deadlines-with-path-progress">Using Deadlines with Path Progress<a class="headerlink" href="#using-deadlines-with-path-progress" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">// Run intake while following path, then score</span>
-<span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
-<span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">deadline</span><span class="p">(</span>
-<span class="w">        </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">scoringPath</span><span class="p">),</span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">()</span><span class="w">  </span><span class="c1">// Runs until path completes</span>
-<span class="w">    </span><span class="p">),</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">()</span>
-<span class="p">);</span>
-</code></pre></div>
-<h3 id="checking-path-progress">Checking Path Progress<a class="headerlink" href="#checking-path-progress" title="Permanent link">&para;</a></h3>
-<p>For more precise triggering, access the path follower's current state:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Using getter methods on the FollowPath command</span>
-<span class="n">FollowPath</span><span class="w"> </span><span class="n">followCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">FollowPath</span><span class="p">)</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">myPath</span><span class="p">);</span>
-
-<span class="n">Commands</span><span class="p">.</span><span class="na">parallel</span><span class="p">(</span>
-<span class="w">    </span><span class="n">followCommand</span><span class="p">,</span>
-<span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">waitUntil</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">followCommand</span><span class="p">.</span><span class="na">getCurrentSegmentIndex</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="na">andThen</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PrepareScoreCommand</span><span class="p">())</span>
-<span class="p">);</span>
-</code></pre></div>
-<h2 id="why-no-second-alignment-routine">Why No Second Alignment Routine?<a class="headerlink" href="#why-no-second-alignment-routine" title="Permanent link">&para;</a></h2>
-<p>Unlike time-parameterized path followers, BLine typically doesn't require a separate alignment routine after paths complete.</p>
-<p><strong>Why other tools often need it:</strong></p>
+<p>Chain paths directly. If the endpoint isn't precise enough, tighten the translation tolerance on the last path, not add a separate alignment step.</p>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Time-parameterized tracking can finish "early" if the robot falls behind</li>
-<li>Controller tuning affects endpoint accuracy</li>
-<li>Robot may not be precisely positioned when path completes</li>
+<li><a href="../common-issues/">Common Issues</a> — specific failure modes and fixes.</li>
+<li><a href="../concepts/key-parameters/">Concepts → Key Parameters</a> — parameter reference for every knob mentioned here.</li>
+<li><a href="../lib/follow-path/">Library → FollowPath Builder</a> — builder method reference.</li>
 </ul>
-<p><strong>Why BLine doesn't:</strong></p>
-<ul>
-<li>The translation controller minimizes distance to the endpoint, not time</li>
-<li>The robot continues driving until within tolerance, regardless of how long it takes</li>
-<li>No penalty for "falling behind"—the greedy algorithm simply continues toward the target</li>
-</ul>
-<p>This means you can typically chain path commands directly without intermediate alignment steps.</p>
 
 
 

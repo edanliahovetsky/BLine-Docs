@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -535,6 +535,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../concepts/event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../concepts/key-parameters/" class="md-nav__link">
         
   
@@ -785,6 +813,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gui/protrusions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protrusions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -953,21 +1009,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basic-usage" class="md-nav__link">
+  <a href="#json-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basic Usage
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json-file-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        JSON File Structure
+        JSON schema
       
     </span>
   </a>
@@ -978,7 +1023,29 @@
   <a href="#element-types-in-json" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Element Types in JSON
+        Element types in JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constraint-value-forms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraint value forms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loading-from-a-custom-directory-or-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loading from a custom directory or string
       
     </span>
   </a>
@@ -991,22 +1058,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#defining-programmatically" class="md-nav__link">
+  <a href="#building-paths-in-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Defining Programmatically
+        Building paths in code
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Defining Programmatically">
+    <nav class="md-nav" aria-label="Building paths in code">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basic-path" class="md-nav__link">
+  <a href="#element-constructors-worth-knowing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basic Path
+        Element constructors worth knowing
       
     </span>
   </a>
@@ -1014,22 +1081,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#path-elements" class="md-nav__link">
+  <a href="#path-specific-constraints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Path Elements
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Path Elements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#waypoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Waypoint
+        Path-specific constraints
       
     </span>
   </a>
@@ -1037,48 +1092,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#translationtarget" class="md-nav__link">
+  <a href="#ranged-constraints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TranslationTarget
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rotationtarget" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        RotationTarget
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#with-path-constraints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        With Path Constraints
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#with-ranged-constraints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        With Ranged Constraints
+        Ranged constraints
       
     </span>
   </a>
@@ -1091,10 +1108,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ordinal-indexing-for-ranged-constraints" class="md-nav__link">
+  <a href="#global-defaults" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ordinal Indexing for Ranged Constraints
+        Global defaults
       
     </span>
   </a>
@@ -1102,130 +1119,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#global-constraints" class="md-nav__link">
+  <a href="#alliance-flipping-mirroring-and-copies" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Global Constraints
+        Alliance flipping, mirroring, and copies
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Global Constraints">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#using-configjson" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Using config.json
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#in-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        In Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#alliance-flipping" class="md-nav__link">
+  <a href="#utilities-for-preparing-a-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Alliance Flipping
+        Utilities for preparing a path
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Alliance Flipping">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#automatic-flipping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Automatic Flipping
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#manual-flipping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Manual Flipping
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-flip-logic" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Custom Flip Logic
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#path-utilities" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Path Utilities
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Path Utilities">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-starting-pose" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Get Starting Pose
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-initial-module-direction" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Get Initial Module Direction
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1233,7 +1144,7 @@
   <a href="#single-element-paths" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Single-Element Paths
+        Single-element paths
       
     </span>
   </a>
@@ -1264,6 +1175,62 @@
     
   
     FollowPath Builder
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flip-and-mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alliance Flip & Mirror
   
 
     
@@ -1382,7 +1349,7 @@
   <span class="md-ellipsis">
     
   
-    Usage Tips
+    Tuning & Usage Tips
   
 
     
@@ -1461,21 +1428,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basic-usage" class="md-nav__link">
+  <a href="#json-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basic Usage
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json-file-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        JSON File Structure
+        JSON schema
       
     </span>
   </a>
@@ -1486,7 +1442,29 @@
   <a href="#element-types-in-json" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Element Types in JSON
+        Element types in JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constraint-value-forms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraint value forms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loading-from-a-custom-directory-or-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loading from a custom directory or string
       
     </span>
   </a>
@@ -1499,22 +1477,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#defining-programmatically" class="md-nav__link">
+  <a href="#building-paths-in-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Defining Programmatically
+        Building paths in code
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Defining Programmatically">
+    <nav class="md-nav" aria-label="Building paths in code">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basic-path" class="md-nav__link">
+  <a href="#element-constructors-worth-knowing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basic Path
+        Element constructors worth knowing
       
     </span>
   </a>
@@ -1522,22 +1500,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#path-elements" class="md-nav__link">
+  <a href="#path-specific-constraints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Path Elements
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Path Elements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#waypoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Waypoint
+        Path-specific constraints
       
     </span>
   </a>
@@ -1545,48 +1511,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#translationtarget" class="md-nav__link">
+  <a href="#ranged-constraints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TranslationTarget
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rotationtarget" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        RotationTarget
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#with-path-constraints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        With Path Constraints
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#with-ranged-constraints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        With Ranged Constraints
+        Ranged constraints
       
     </span>
   </a>
@@ -1599,10 +1527,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ordinal-indexing-for-ranged-constraints" class="md-nav__link">
+  <a href="#global-defaults" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ordinal Indexing for Ranged Constraints
+        Global defaults
       
     </span>
   </a>
@@ -1610,130 +1538,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#global-constraints" class="md-nav__link">
+  <a href="#alliance-flipping-mirroring-and-copies" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Global Constraints
+        Alliance flipping, mirroring, and copies
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Global Constraints">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#using-configjson" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Using config.json
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#in-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        In Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#alliance-flipping" class="md-nav__link">
+  <a href="#utilities-for-preparing-a-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Alliance Flipping
+        Utilities for preparing a path
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Alliance Flipping">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#automatic-flipping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Automatic Flipping
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#manual-flipping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Manual Flipping
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-flip-logic" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Custom Flip Logic
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#path-utilities" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Path Utilities
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Path Utilities">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-starting-pose" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Get Starting Pose
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-initial-module-direction" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Get Initial Module Direction
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1741,7 +1563,7 @@
   <a href="#single-element-paths" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Single-Element Paths
+        Single-element paths
       
     </span>
   </a>
@@ -1766,16 +1588,45 @@
 
 
 <h1 id="path-construction">Path Construction<a class="headerlink" href="#path-construction" title="Permanent link">&para;</a></h1>
-<p>BLine supports three ways to create paths: loading from JSON files, defining programmatically in code, or a hybrid approach.</p>
+<p>BLine supports three equally-supported ways to define a path:</p>
+<ol>
+<li><strong>Load from JSON</strong> — most common when using BLine-GUI.</li>
+<li><strong>Build programmatically in code</strong> — for dynamic paths or code-only workflows.</li>
+<li><strong>Hybrid</strong> — load a path from JSON, then mutate or replace elements before running it.</li>
+</ol>
+<p>All three produce the same <code>Path</code> object.</p>
 <h2 id="loading-from-json">Loading from JSON<a class="headerlink" href="#loading-from-json" title="Permanent link">&para;</a></h2>
-<p>The simplest approach when using BLine-GUI or hand-written JSON files.</p>
-<h3 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">// Loads deploy/autos/paths/myPathFile.json</span>
-<span class="c1">// Note: .json extension is added automatically</span>
-<span class="n">Path</span><span class="w"> </span><span class="n">myPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;myPathFile&quot;</span><span class="p">);</span>
+<p>Place your file at <code>src/main/deploy/autos/paths/&lt;name&gt;.json</code> (the GUI writes there by default) and load it by name without the extension:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">scoreFirst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;scoreFirst&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// loads deploy/autos/paths/scoreFirst.json</span>
 </code></pre></div>
-<p>Paths are loaded from <code>src/main/deploy/autos/paths/</code> by default.</p>
-<h3 id="json-file-structure">JSON File Structure<a class="headerlink" href="#json-file-structure" title="Permanent link">&para;</a></h3>
+<p><code>new Path(String)</code> delegates to <code>JsonUtils.loadPath(...)</code>, which:</p>
+<ol>
+<li>Reads the JSON file.</li>
+<li>Parses path elements, constraints, and an optional in-file override of global constraints.</li>
+<li>If no override is present, loads global defaults from <code>deploy/autos/config.json</code>.</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">No <code>.json</code> extension in the constructor</p>
+<p><code>new Path("scoreFirst")</code> is correct. <code>new Path("scoreFirst.json")</code> is not (it would look for <code>scoreFirst.json.json</code>).</p>
+</div>
+<h3 id="json-schema">JSON schema<a class="headerlink" href="#json-schema" title="Permanent link">&para;</a></h3>
+<p>Minimal viable path:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;path_elements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;waypoint&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;translation_target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;x_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;y_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;rotation_target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;profiled_rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;waypoint&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;translation_target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;x_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;y_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;rotation_target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.14159</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;profiled_rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>With every optional field populated:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;path_elements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
@@ -1786,7 +1637,7 @@
 <span class="w">                </span><span class="nt">&quot;intermediate_handoff_radius_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;rotation_target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
 <span class="w">                </span><span class="nt">&quot;profiled_rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">},</span>
@@ -1798,20 +1649,19 @@
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rotation&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.57</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5708</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;t_ratio&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;profiled_rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;event_trigger&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;t_ratio&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;lib_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shoot&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;waypoint&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;translation_target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;x_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;y_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;rotation_target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.14</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;profiled_rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="nt">&quot;translation_target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;x_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;y_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;rotation_target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.14159</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;profiled_rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">],</span>
 <span class="w">    </span><span class="nt">&quot;constraints&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1819,14 +1669,16 @@
 <span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span>
 <span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">}</span>
 <span class="w">        </span><span class="p">],</span>
-<span class="w">        </span><span class="nt">&quot;max_acceleration_meters_per_sec2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;max_acceleration_meters_per_sec2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;max_velocity_deg_per_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;max_acceleration_deg_per_sec2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;end_translation_tolerance_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;end_rotation_tolerance_deg&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="element-types-in-json">Element Types in JSON<a class="headerlink" href="#element-types-in-json" title="Permanent link">&para;</a></h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Waypoint</label><label for="__tabbed_1_2">TranslationTarget</label><label for="__tabbed_1_3">RotationTarget</label></div>
+<h3 id="element-types-in-json">Element types in JSON<a class="headerlink" href="#element-types-in-json" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Waypoint</label><label for="__tabbed_1_2">TranslationTarget</label><label for="__tabbed_1_3">RotationTarget</label><label for="__tabbed_1_4">EventTrigger</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -1837,7 +1689,7 @@
 <span class="w">        </span><span class="nt">&quot;intermediate_handoff_radius_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;rotation_target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;profiled_rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -1855,197 +1707,131 @@
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rotation&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.57</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5708</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;t_ratio&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;profiled_rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="p">}</span>
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;event_trigger&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;t_ratio&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lib_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;myAction&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Register the action in code with <code>FollowPath.registerEventTrigger("myAction", ...)</code> before running any path that references it. See <a href="../event-triggers/">Event Triggers</a>.</p>
 </div>
 </div>
-<h2 id="defining-programmatically">Defining Programmatically<a class="headerlink" href="#defining-programmatically" title="Permanent link">&para;</a></h2>
-<p>For code-only workflows or dynamic path generation.</p>
-<h3 id="basic-path">Basic Path<a class="headerlink" href="#basic-path" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">myPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+</div>
+<h3 id="constraint-value-forms">Constraint value forms<a class="headerlink" href="#constraint-value-forms" title="Permanent link">&para;</a></h3>
+<p>Inside the <code>constraints</code> block, velocity/acceleration values accept two shapes:</p>
+<ul>
+<li><strong>Scalar</strong> — applies to the entire path: <code>"max_acceleration_meters_per_sec2": 10.0</code>.</li>
+<li><strong>Array of ranged constraints</strong> — per-ordinal-range values:
+    <div class="highlight"><pre><span></span><code><span class="nt">&quot;max_velocity_meters_per_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_ordinal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div></li>
+</ul>
+<p>End tolerances are scalar only.</p>
+<h3 id="loading-from-a-custom-directory-or-string">Loading from a custom directory or string<a class="headerlink" href="#loading-from-a-custom-directory-or-string" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Custom autos directory (useful in tests)</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;/path/to/autos&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;scoreFirst&quot;</span><span class="p">);</span>
+
+<span class="c1">// From a JSON string (e.g. network data)</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonUtils</span><span class="p">.</span><span class="na">loadPathFromJsonString</span><span class="p">(</span><span class="n">jsonText</span><span class="p">,</span><span class="w"> </span><span class="n">globalConstraints</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="building-paths-in-code">Building paths in code<a class="headerlink" href="#building-paths-in-code" title="Permanent link">&para;</a></h2>
+<p>The <code>Path</code> constructors accept varargs of <code>PathElement</code> and an optional <code>PathConstraints</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">simple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
 <span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">)),</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="p">))</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">180</span><span class="p">))</span>
 <span class="p">);</span>
 </code></pre></div>
-<h3 id="path-elements">Path Elements<a class="headerlink" href="#path-elements" title="Permanent link">&para;</a></h3>
-<h4 id="waypoint">Waypoint<a class="headerlink" href="#waypoint" title="Permanent link">&para;</a></h4>
-<p>Combined position and rotation target:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// From Translation2d and Rotation2d</span>
-<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<h3 id="element-constructors-worth-knowing">Element constructors worth knowing<a class="headerlink" href="#element-constructors-worth-knowing" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Waypoints</span>
+<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">pose</span><span class="p">);</span><span class="w">                                         </span><span class="c1">// Pose2d in</span>
+<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span><span class="w"> </span><span class="n">handoffRadius</span><span class="p">);</span><span class="w">                          </span><span class="c1">// custom radius</span>
+<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">translation</span><span class="p">,</span><span class="w"> </span><span class="n">rotation</span><span class="p">);</span><span class="w">                        </span><span class="c1">// Translation2d + Rotation2d</span>
+<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">translation</span><span class="p">,</span><span class="w"> </span><span class="n">rotation</span><span class="p">,</span><span class="w"> </span><span class="cm">/*profiledRotation=*/</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
 
-<span class="c1">// From Pose2d</span>
-<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Pose2d</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
-</code></pre></div>
-<h4 id="translationtarget">TranslationTarget<a class="headerlink" href="#translationtarget" title="Permanent link">&para;</a></h4>
-<p>Position-only target:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// From Translation2d</span>
-<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">))</span>
+<span class="c1">// Translation targets</span>
+<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">handoffRadius</span><span class="p">);</span>
+<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">));</span>
 
-<span class="c1">// From coordinates</span>
-<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">)</span>
+<span class="c1">// Rotation targets</span>
+<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RotationTarget</span><span class="p">(</span><span class="n">rotation</span><span class="p">,</span><span class="w"> </span><span class="n">tRatio</span><span class="p">);</span><span class="w">                       </span><span class="c1">// profiled by default</span>
+<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RotationTarget</span><span class="p">(</span><span class="n">rotation</span><span class="p">,</span><span class="w"> </span><span class="n">tRatio</span><span class="p">,</span><span class="w"> </span><span class="cm">/*profiledRotation=*/</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+
+<span class="c1">// Event triggers</span>
+<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">EventTrigger</span><span class="p">(</span><span class="n">tRatio</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;myKey&quot;</span><span class="p">);</span>
 </code></pre></div>
-<h4 id="rotationtarget">RotationTarget<a class="headerlink" href="#rotationtarget" title="Permanent link">&para;</a></h4>
-<p>Rotation-only target with position along segment:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Rotation at midpoint of segment (t_ratio = 0.5)</span>
-<span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RotationTarget</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="with-path-constraints">With Path Constraints<a class="headerlink" href="#with-path-constraints" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="w"> </span><span class="n">constraints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="p">()</span>
+<h3 id="path-specific-constraints">Path-specific constraints<a class="headerlink" href="#path-specific-constraints" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="w"> </span><span class="n">slow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="p">()</span>
 <span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityMetersPerSec</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="na">setMaxAccelerationMetersPerSec2</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityDegPerSec</span><span class="p">(</span><span class="mf">180.0</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="na">setMaxAccelerationDegPerSec2</span><span class="p">(</span><span class="mf">360.0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">setMaxAccelerationMetersPerSec2</span><span class="p">(</span><span class="mf">6.0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityDegPerSec</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">setMaxAccelerationDegPerSec2</span><span class="p">(</span><span class="mi">720</span><span class="p">)</span>
 <span class="w">    </span><span class="p">.</span><span class="na">setEndTranslationToleranceMeters</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span>
 <span class="w">    </span><span class="p">.</span><span class="na">setEndRotationToleranceDeg</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
 
-<span class="n">Path</span><span class="w"> </span><span class="n">slowPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
-<span class="w">    </span><span class="n">constraints</span><span class="p">,</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">TranslationTarget</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">)),</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="p">))</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
+<span class="w">    </span><span class="n">slow</span><span class="p">,</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">startPose</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">endPose</span><span class="p">)</span>
 <span class="p">);</span>
 </code></pre></div>
-<h3 id="with-ranged-constraints">With Ranged Constraints<a class="headerlink" href="#with-ranged-constraints" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="w"> </span><span class="n">rangedConstraints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="p">()</span>
+<h3 id="ranged-constraints">Ranged constraints<a class="headerlink" href="#ranged-constraints" title="Permanent link">&para;</a></h3>
+<p>Pass multiple <code>RangedConstraint</code> values to the setter:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="w"> </span><span class="n">ranged</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="p">()</span>
 <span class="w">    </span><span class="p">.</span><span class="na">setMaxVelocityMetersPerSec</span><span class="p">(</span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w">   </span><span class="c1">// Fast for elements 0-2</span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">    </span><span class="c1">// Slow for elements 3-5</span>
-<span class="w">    </span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="na">setMaxAccelerationMetersPerSec2</span><span class="p">(</span><span class="mf">3.0</span><span class="p">);</span>
-
-<span class="n">Path</span><span class="w"> </span><span class="n">variedPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
-<span class="w">    </span><span class="n">rangedConstraints</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// ... elements ...</span>
-<span class="p">);</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w">   </span><span class="c1">// ordinals 0–2 capped at 4.0 m/s</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">),</span><span class="w">   </span><span class="c1">// ordinals 3–4 capped at 1.5 m/s</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">RangedConstraint</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
 </code></pre></div>
-<h2 id="ordinal-indexing-for-ranged-constraints">Ordinal Indexing for Ranged Constraints<a class="headerlink" href="#ordinal-indexing-for-ranged-constraints" title="Permanent link">&para;</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Important: Separate Ordinal Counters</p>
-<p>Translation and rotation ordinals are tracked <strong>separately</strong>:</p>
-<ul>
-<li><strong>Translation ordinal</strong> increments for each <code>TranslationTarget</code> and each <code>Waypoint</code></li>
-<li><strong>Rotation ordinal</strong> increments for each <code>RotationTarget</code> and each <code>Waypoint</code></li>
-</ul>
-</div>
-<p>This means a <code>Waypoint</code> (which contains both translation and rotation) increments <strong>both</strong> counters, while standalone <code>TranslationTarget</code> and <code>RotationTarget</code> elements only increment their respective counter.</p>
-<p><strong>Example ordinal assignment:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Path Element</th>
-<th style="text-align: center;">Translation Ordinal</th>
-<th style="text-align: center;">Rotation Ordinal</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Waypoint (start)</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0</td>
-</tr>
-<tr>
-<td>TranslationTarget</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">—</td>
-</tr>
-<tr>
-<td>RotationTarget (t_ratio=0.5)</td>
-<td style="text-align: center;">—</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr>
-<td>TranslationTarget</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">—</td>
-</tr>
-<tr>
-<td>Waypoint (end)</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">2</td>
-</tr>
-</tbody>
-</table>
-<p>When the path follower processes each element, it checks if any ranged constraint applies by testing:</p>
-<div class="highlight"><pre><span></span><code>startOrdinal &lt;= currentOrdinal &amp;&amp; endOrdinal &gt;= currentOrdinal
-</code></pre></div>
-<p>If a constraint matches, that value is used; otherwise, the global default is applied.</p>
-<h2 id="global-constraints">Global Constraints<a class="headerlink" href="#global-constraints" title="Permanent link">&para;</a></h2>
-<p>Set default constraints that apply to all paths when no path-specific constraint is set.</p>
-<h3 id="using-configjson">Using config.json<a class="headerlink" href="#using-configjson" title="Permanent link">&para;</a></h3>
-<p>Create <code>src/main/deploy/autos/config.json</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;default_max_velocity_meters_per_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_max_acceleration_meters_per_sec2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_max_velocity_deg_per_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_max_acceleration_deg_per_sec2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">860</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_end_translation_tolerance_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_end_rotation_tolerance_deg&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_intermediate_handoff_radius_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2</span>
-<span class="p">}</span>
-</code></pre></div>
-<h3 id="in-code">In Code<a class="headerlink" href="#in-code" title="Permanent link">&para;</a></h3>
+<p>The <strong>first matching range wins</strong>, so if ranges overlap, order matters. See <a href="../../concepts/constraints/#ranged-constraints">Constraints → Ranged constraints</a> for the ordinal model.</p>
+<h2 id="global-defaults">Global defaults<a class="headerlink" href="#global-defaults" title="Permanent link">&para;</a></h2>
+<p><code>Path.setDefaultGlobalConstraints(...)</code> installs defaults that any subsequently-created path falls back to:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">setDefaultGlobalConstraints</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">DefaultGlobalConstraints</span><span class="p">(</span>
 <span class="w">    </span><span class="mf">4.5</span><span class="p">,</span><span class="w">    </span><span class="c1">// maxVelocityMetersPerSec</span>
-<span class="w">    </span><span class="mf">12.0</span><span class="p">,</span><span class="w">   </span><span class="c1">// maxAccelerationMetersPerSec2</span>
-<span class="w">    </span><span class="mi">540</span><span class="p">,</span><span class="w">    </span><span class="c1">// maxVelocityDegPerSec</span>
-<span class="w">    </span><span class="mi">860</span><span class="p">,</span><span class="w">    </span><span class="c1">// maxAccelerationDegPerSec2</span>
+<span class="w">    </span><span class="mf">10.0</span><span class="p">,</span><span class="w">   </span><span class="c1">// maxAccelerationMetersPerSec2</span>
+<span class="w">    </span><span class="mi">600</span><span class="p">,</span><span class="w">    </span><span class="c1">// maxVelocityDegPerSec</span>
+<span class="w">    </span><span class="mi">2000</span><span class="p">,</span><span class="w">   </span><span class="c1">// maxAccelerationDegPerSec2</span>
 <span class="w">    </span><span class="mf">0.03</span><span class="p">,</span><span class="w">   </span><span class="c1">// endTranslationToleranceMeters</span>
 <span class="w">    </span><span class="mf">2.0</span><span class="p">,</span><span class="w">    </span><span class="c1">// endRotationToleranceDeg</span>
-<span class="w">    </span><span class="mf">0.2</span><span class="w">     </span><span class="c1">// intermediateHandoffRadiusMeters</span>
+<span class="w">    </span><span class="mf">0.25</span><span class="w">    </span><span class="c1">// intermediateHandoffRadiusMeters</span>
 <span class="p">));</span>
 </code></pre></div>
-<h2 id="alliance-flipping">Alliance Flipping<a class="headerlink" href="#alliance-flipping" title="Permanent link">&para;</a></h2>
-<p>BLine automatically handles path mirroring for the opposite alliance.</p>
-<h3 id="automatic-flipping">Automatic Flipping<a class="headerlink" href="#automatic-flipping" title="Permanent link">&para;</a></h3>
-<p>When using <code>.withDefaultShouldFlip()</code> on your builder, paths are automatically flipped based on <code>DriverStation.getAlliance()</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">pathBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="p">(...)</span>
-<span class="w">    </span><span class="p">.</span><span class="na">withDefaultShouldFlip</span><span class="p">();</span><span class="w">  </span><span class="c1">// Auto-flip for red alliance</span>
+<p>If you don't call this method, BLine loads defaults from <code>deploy/autos/config.json</code> the first time a <code>Path</code> is constructed. Setting defaults programmatically is the right choice in code-only workflows.</p>
+<h2 id="alliance-flipping-mirroring-and-copies">Alliance flipping, mirroring, and copies<a class="headerlink" href="#alliance-flipping-mirroring-and-copies" title="Permanent link">&para;</a></h2>
+<p>Most teams configure flipping on the builder (<code>withDefaultShouldFlip()</code>) and don't touch the path manually. For the details — including when to prefer <code>mirror()</code> over <code>flip()</code>, how symmetry types are handled, and how to construct a mirrored or flipped copy without mutating the original — see <a href="../flip-and-mirror/">Alliance Flip &amp; Mirror</a>.</p>
+<p>Quick reference:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">red</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blue</span><span class="p">.</span><span class="na">copy</span><span class="p">();</span>
+<span class="n">red</span><span class="p">.</span><span class="na">flip</span><span class="p">();</span><span class="w">              </span><span class="c1">// rotational symmetry — red alliance mirror image</span>
+<span class="c1">// ...</span>
+<span class="n">blue</span><span class="p">.</span><span class="na">mirror</span><span class="p">();</span><span class="w">           </span><span class="c1">// vertical mirror across the field width centerline</span>
 </code></pre></div>
-<h3 id="manual-flipping">Manual Flipping<a class="headerlink" href="#manual-flipping" title="Permanent link">&para;</a></h3>
-<p>You can also flip paths manually:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">myPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;myPathFile&quot;</span><span class="p">);</span>
-
-<span class="c1">// Flip for opposite alliance</span>
-<span class="n">myPath</span><span class="p">.</span><span class="na">flip</span><span class="p">();</span>
-
-<span class="c1">// Undo the flip</span>
-<span class="n">myPath</span><span class="p">.</span><span class="na">undoFlip</span><span class="p">();</span>
+<h2 id="utilities-for-preparing-a-path">Utilities for preparing a path<a class="headerlink" href="#utilities-for-preparing-a-path" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">getStartPose</span><span class="p">()</span><span class="w">                </span><span class="c1">// first translation + first rotation (default 0° if none)</span>
+<span class="n">Path</span><span class="p">.</span><span class="na">getStartPose</span><span class="p">(</span><span class="n">fallbackRot</span><span class="p">)</span><span class="w">     </span><span class="c1">// same, but use fallbackRot if no rotation target exists</span>
+<span class="n">Path</span><span class="p">.</span><span class="na">getInitialModuleDirection</span><span class="p">()</span><span class="w">   </span><span class="c1">// direction modules should face at path start (see pre-match page)</span>
+<span class="n">Path</span><span class="p">.</span><span class="na">isValid</span><span class="p">()</span><span class="w">                     </span><span class="c1">// false if first/last element is not a waypoint or translation target</span>
+<span class="n">Path</span><span class="p">.</span><span class="na">copy</span><span class="p">()</span><span class="w">                        </span><span class="c1">// deep copy, preserves flipped state</span>
 </code></pre></div>
-<h3 id="custom-flip-logic">Custom Flip Logic<a class="headerlink" href="#custom-flip-logic" title="Permanent link">&para;</a></h3>
-<p>For custom flip behavior:</p>
-<div class="highlight"><pre><span></span><code><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">pathBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="p">(...)</span>
-<span class="w">    </span><span class="p">.</span><span class="na">withShouldFlip</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Your custom logic</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">DriverStation</span><span class="p">.</span><span class="na">getAlliance</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Alliance</span><span class="p">.</span><span class="na">Red</span><span class="p">;</span>
-<span class="w">    </span><span class="p">});</span>
-</code></pre></div>
-<h2 id="path-utilities">Path Utilities<a class="headerlink" href="#path-utilities" title="Permanent link">&para;</a></h2>
-<h3 id="get-starting-pose">Get Starting Pose<a class="headerlink" href="#get-starting-pose" title="Permanent link">&para;</a></h3>
-<p>Useful for resetting odometry:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">myPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;myPathFile&quot;</span><span class="p">);</span>
-<span class="n">Pose2d</span><span class="w"> </span><span class="n">startPose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myPath</span><span class="p">.</span><span class="na">getStartPose</span><span class="p">();</span>
-</code></pre></div>
-<h3 id="get-initial-module-direction">Get Initial Module Direction<a class="headerlink" href="#get-initial-module-direction" title="Permanent link">&para;</a></h3>
-<p>Get the direction swerve modules should face at path start:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Rotation2d</span><span class="w"> </span><span class="n">initialDirection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myPath</span><span class="p">.</span><span class="na">getInitialModuleDirection</span><span class="p">();</span>
-<span class="n">driveSubsystem</span><span class="p">.</span><span class="na">setModuleOrientations</span><span class="p">(</span><span class="n">initialDirection</span><span class="p">);</span>
-</code></pre></div>
-<h2 id="single-element-paths">Single-Element Paths<a class="headerlink" href="#single-element-paths" title="Permanent link">&para;</a></h2>
-<p>Paths can consist of just <strong>one Waypoint or TranslationTarget</strong>:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Simple point-to-point move</span>
-<span class="n">Path</span><span class="w"> </span><span class="n">simpleMove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Translation2d</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<h2 id="single-element-paths">Single-element paths<a class="headerlink" href="#single-element-paths" title="Permanent link">&para;</a></h2>
+<p>A path consisting of a single <code>Waypoint</code> or <code>TranslationTarget</code> is valid and useful:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Simple drive-to-pose</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">alignToReef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">reefScoringPose</span><span class="p">)</span>
 <span class="p">);</span>
+<span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">alignToReef</span><span class="p">).</span><span class="na">schedule</span><span class="p">();</span>
 </code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>A path with only a RotationTarget is invalid—you need at least one translation element.</p>
-</div>
+<p>A path that is only a <code>RotationTarget</code> or only an <code>EventTrigger</code> is <strong>invalid</strong> — <code>isValid()</code> returns <code>false</code> and <code>FollowPath.initialize()</code> will refuse to execute it.</p>
 
 
 

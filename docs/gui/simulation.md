@@ -1,107 +1,77 @@
 # Simulation
 
-BLine-GUI includes a built-in simulation that previews how your robot will follow the path. This helps validate paths before deploying to hardware.
+BLine-GUI includes a built-in simulation that previews how your robot will follow the current path. Use it for quick structural checks — does the path flow in the order you expect, do constraints land where you meant them to — before pushing to hardware.
 
-<!-- GIF: Full simulation playback -->
 ![Simulation Demo](../assets/gifs/robot-demos/simulation-demo.gif)
 
-## Transport Controls
+## Transport controls
 
-The simulation controls appear at the bottom-left of the canvas:
+The simulation controls sit at the bottom-left of the canvas:
 
 | Control | Function |
 |---------|----------|
-| **▶ / ⏸** | Play/pause simulation |
-| **Timeline slider** | Scrub through the path |
-| **Time display** | Current time / total duration |
+| **▶ / ⏸** | Play / pause simulation (`Space` on the canvas). |
+| **Timeline slider** | Scrub to any point in the path. |
+| **Time display** | Current time / total duration in seconds. |
 
-### Play/Pause
+Scrubbing the timeline while paused is the fastest way to inspect exactly where on the path something happens (a handoff, a rotation target, an event trigger).
 
-Click the **▶ button** or press **Space** to start the simulation. The robot icon will move along the path following the defined constraints.
+## What the simulation shows
 
-Click **⏸** or press **Space** again to pause.
+- **Simulated robot footprint** — rendered from the configured Robot Length / Robot Width in project config, rotating to match the simulated heading.
+- **Trajectory trail** — orange trail along the path the sim actually walked.
+- **Rotation evolution** — the footprint rotates according to profiled/non-profiled rotation targets.
+- **Constraint effects** — ranged velocity caps visibly slow the footprint through their ordinal ranges.
+- **Event-trigger fires** — the sim visually reacts to `show_on_event_keys` / `hide_on_event_keys` for protrusions.
+- **Protrusion footprint** — if protrusions are enabled, the simulated robot footprint *changes size as protrusions toggle*, not just the dashed overlay.
 
-### Timeline Scrubbing
+## What the simulation does **not** show
 
-Drag the **timeline slider** to jump to any point in the path. This lets you inspect specific moments without watching the entire simulation.
+!!! warning "Limitations"
+    The simulation uses simplified kinematics — it is **not** a drivetrain physics simulator.
 
-### Time Display
+    - **No PID dynamics.** The sim doesn't run the three PID controllers; it uses a simplified `v = √(2·a·d)` profile to step along the path. Real-robot timing and behavior will differ, especially near path endpoints.
+    - **Perfect traction.** No wheel slip, no battery sag, no motor limits.
+    - **No disturbances.** Nothing pushes the robot; it just follows the plan.
+    - **Instant acceleration response.** No motor time constants, no voltage saturation.
 
-The time display shows `current / total` in seconds, giving you the estimated path duration.
+    The sim's total path duration is a **rough estimate**, not a precise prediction. Treat it like a wireframe preview.
 
-## Visual Feedback
+For accurate dynamics, use a WPILib physics simulation with your drive code, or test on hardware.
 
-During simulation, the canvas shows additional information:
+## How to use it effectively
 
-### Robot Position
+### Structural validation
 
-A robot icon shows the current simulated position and rotation. The icon rotates to match the robot's orientation.
+Use the sim to confirm path structure is correct before real-robot testing:
 
-### Trajectory Trail
+- Do the segments connect where you expected?
+- Are rotations happening at the right points in the path?
+- Do constraint ranges cover the right ordinals? (Click a constraint segment — the canvas overlay confirms.)
+- Do event triggers fire in the right order?
 
-An **orange trail** shows the path the robot has traveled during the simulation. This helps visualize the actual trajectory versus the intended path.
+### Constraint sanity check
 
-### Velocity Indication
+Play the sim while adjusting ranged velocity constraints. The simulated footprint visibly decelerates through capped ranges — if the slowdown happens in the wrong place, you've indexed the wrong ordinals.
 
-The robot icon's movement speed reflects the simulated velocity, giving you a sense of how constraints affect the robot's speed at different parts of the path.
+### Identifying design smells
 
-## Understanding Simulation Results
+Things to watch for in sim:
 
-### What the Simulation Shows
+- **Robot deceleration lingers mid-segment** — your velocity constraint range is too wide, or you want handoff radii instead.
+- **Robot cuts a corner visibly** — handoff radii too large, or you need an extra TranslationTarget.
+- **Rotation finishes too late (near the end of the segment)** — reduce the RotationTarget's t_ratio.
+- **The sim footprint doesn't match the robot's bumper/intake geometry** — update Robot Length/Width or enable protrusions in **Settings → Edit Config…**.
 
-- **Path timing**: Estimated duration for the entire path
-- **Velocity profile**: How fast the robot moves at each segment
-- **Trajectory shape**: The actual path the robot follows
-- **Rotation behavior**: How the robot rotates along the path
-
-### What the Simulation Doesn't Show
-
-!!! warning "Simulation Limitations"
-    The simulation uses idealistic kinematics and assumes the drivetrain responds instantly to commanded velocities. Key limitations:
-    
-    - **No PID simulation**: Uses a simplified `v = √(2ad)` formula instead of actual PID control
-    - **No wheel slip**: Assumes perfect traction
-    - **No disturbances**: No external forces or field interactions
-    - **Instant acceleration**: Doesn't model motor response time
-
-### Real-World Testing
-
-The simulation provides an **initial visualization** of your path, but for accurate results:
-
-1. Use a physics simulation framework like **WPILib's simulation**
-2. Test on actual hardware
-3. Iterate based on empirical results
-
-!!! tip "Rapid Iteration"
-    BLine is designed for rapid iteration. Use the GUI simulation for quick checks, then test on hardware. The fast path computation time means you can quickly adjust and re-test.
-
-## Tips for Using Simulation
-
-### Check Constraint Effects
-
-Play the simulation while adjusting constraints to see how they affect:
-
-- Overall path time
-- Speed through different segments
-- Smooth transitions between elements
-
-### Identify Problem Areas
-
-Watch for:
-
-- **Overshoot on corners**: May indicate overly aggressive constraints or insufficient deceleration
-- **Sharp slowdowns**: May indicate overly aggressive constraints
-- **Corner cutting**: Handoff radius might be too large
-- **Hesitation**: Handoff radius might be too small
-- **Unusual rotations**: Check profiled rotation settings
-
-### Validate Path Order
-
-The simulation helps verify that elements are in the correct order and that the path flows as intended.
-
-## Keyboard Shortcuts
+## Keyboard shortcuts
 
 | Shortcut | Action |
 |----------|--------|
-| `Space` | Play/pause simulation |
+| `Space` (canvas focus) | Play / pause simulation |
+| Drag timeline slider | Scrub |
 
+## Next
+
+- [Canvas](canvas.md) — reading the canvas during sim.
+- [Protrusions](protrusions.md) — how the simulated footprint grows/shrinks with event triggers.
+- [Tuning & Usage Tips](../usage-tips.md) — turning sim intuition into real-robot tuning.

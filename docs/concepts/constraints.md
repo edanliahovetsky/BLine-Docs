@@ -1,175 +1,175 @@
-# Path Constraints
+# Constraints
 
-Path constraints are critical for ensuring proper robot motion and preventing overshooting during element handoff. When the robot approaches a translation target at high speed without appropriate velocity limits, it may overshoot the handoff radius and exhibit erratic behavior. Properly configured constraints ensure smooth transitions between path elements.
+Constraints are the primary knob you'll use to shape robot motion in BLine. Velocity limits in particular are how you keep the robot from overshooting turns — far more effective than shrinking handoff radii, which costs path precision.
 
-## Constraint Types
+## The six constraint types
 
-BLine supports six constraint types that can be applied to paths:
+| Constraint | Unit | Applies to |
+|------------|------|------------|
+| **Max Translational Velocity** | m/s | Every translation segment |
+| **Max Translational Acceleration** | m/s² | Translation rate limiting |
+| **Max Rotational Velocity** | deg/s | Holonomic rotation |
+| **Max Rotational Acceleration** | deg/s² | Rotation rate limiting |
+| **End Translation Tolerance** | m | Path-completion check |
+| **End Rotation Tolerance** | deg | Path-completion check |
 
-| Constraint | Unit | Description |
-|------------|------|-------------|
-| **Max Translational Velocity** | m/s | Maximum speed the robot can travel |
-| **Max Translational Acceleration** | m/s² | Maximum acceleration for translation |
-| **Max Rotational Velocity** | deg/s | Maximum angular speed for holonomic rotation |
-| **Max Rotational Acceleration** | deg/s² | Maximum angular acceleration for rotation |
-| **End Translation Tolerance** | m | How close the robot must be to the final position to finish |
-| **End Rotation Tolerance** | deg | How close the robot must be to the final rotation to finish |
+Velocity and acceleration constraints can be applied **globally**, **per path**, or **per range of ordinals** within a path. Tolerances apply per path (or globally as defaults) only.
 
-## Global Constraints
+There is also a seventh related value, the **intermediate handoff radius** (m), which is configurable per-translation-element and as a global default. See [Key Parameters](key-parameters.md#handoff-radius).
 
-Global constraints define default velocity/acceleration limits and tolerances for all paths. You can set them in two ways:
+## Global defaults
 
-### Option A: Using config.json (for JSON-based workflows)
+Global defaults provide fallback values when a path doesn't override them. Set them once, before the first `Path` is created.
 
-Create a `config.json` file in `src/main/deploy/autos/`:
+=== "Via config.json"
 
-```json
-{
-    "default_max_velocity_meters_per_sec": 4.5,
-    "default_max_acceleration_meters_per_sec2": 12.0,
-    "default_max_velocity_deg_per_sec": 540,
-    "default_max_acceleration_deg_per_sec2": 860,
-    "default_end_translation_tolerance_meters": 0.03,
-    "default_end_rotation_tolerance_deg": 2.0,
-    "default_intermediate_handoff_radius_meters": 0.2
-}
-```
+    `src/main/deploy/autos/config.json`:
 
-### Option B: Setting in Code (for code-only workflows)
+    ```json
+    {
+        "default_max_velocity_meters_per_sec": 4.5,
+        "default_max_acceleration_meters_per_sec2": 10.0,
+        "default_max_velocity_deg_per_sec": 600,
+        "default_max_acceleration_deg_per_sec2": 2000,
+        "default_end_translation_tolerance_meters": 0.03,
+        "default_end_rotation_tolerance_deg": 2.0,
+        "default_intermediate_handoff_radius_meters": 0.25
+    }
+    ```
 
-Set global constraints programmatically in your robot initialization:
+    The GUI also accepts a nested `kinematic_constraints` object — BLine-Lib v0.8.3+ reads both shapes. Older configs are migrated automatically when the GUI opens a project.
+
+=== "In code"
+
+    ```java
+    Path.setDefaultGlobalConstraints(new Path.DefaultGlobalConstraints(
+        4.5,    // maxVelocityMetersPerSec
+        10.0,   // maxAccelerationMetersPerSec2
+        600,    // maxVelocityDegPerSec
+        2000,   // maxAccelerationDegPerSec2
+        0.03,   // endTranslationToleranceMeters
+        2.0,    // endRotationToleranceDeg
+        0.25    // intermediateHandoffRadiusMeters
+    ));
+    ```
+
+=== "In the GUI"
+
+    **Settings → Edit Config…** writes `config.json` for you. Always set the kinematic defaults before designing paths.
+
+!!! info "Global defaults do **not** support ranged constraints"
+    You can only set a single scalar value for each global default. "Fast here, slow there" behavior must be specified at the path level via [ranged constraints](#ranged-constraints).
+
+## Path-specific constraints
+
+`Path.PathConstraints` overrides global defaults for an individual path. Use the fluent builder:
 
 ```java
-Path.setDefaultGlobalConstraints(new Path.DefaultGlobalConstraints(
-    4.5,    // maxVelocityMetersPerSec
-    12.0,   // maxAccelerationMetersPerSec2
-    540,    // maxVelocityDegPerSec
-    860,    // maxAccelerationDegPerSec2
-    0.03,   // endTranslationToleranceMeters
-    2.0,    // endRotationToleranceDeg
-    0.2     // intermediateHandoffRadiusMeters
-));
-```
-
-### In the GUI
-
-Global constraints are configured in **Settings → Robot Config**. These serve as defaults when no path-specific or ranged constraint is set.
-
-## Path-Specific Constraints
-
-Override global constraints for individual paths using `PathConstraints`:
-
-```java
-Path.PathConstraints slowConstraints = new Path.PathConstraints()
+Path.PathConstraints constraints = new Path.PathConstraints()
     .setMaxVelocityMetersPerSec(2.0)
-    .setMaxAccelerationMetersPerSec2(1.5)
-    .setMaxVelocityDegPerSec(180.0)
-    .setMaxAccelerationDegPerSec2(360.0)
+    .setMaxAccelerationMetersPerSec2(6.0)
+    .setMaxVelocityDegPerSec(180)
+    .setMaxAccelerationDegPerSec2(720)
     .setEndTranslationToleranceMeters(0.02)
     .setEndRotationToleranceDeg(1.0);
 
-// Create path with custom constraints
-Path slowPath = new Path(
-    slowConstraints,
-    new Path.Waypoint(new Translation2d(1.0, 1.0), new Rotation2d(0)),
-    new Path.TranslationTarget(new Translation2d(2.0, 2.0)),
-    new Path.Waypoint(new Translation2d(3.0, 1.0), new Rotation2d(Math.PI))
+Path slow = new Path(
+    constraints,
+    new Path.Waypoint(startPose),
+    new Path.Waypoint(endPose)
 );
 ```
 
-## Ranged Constraints
+Any field you don't set falls back to the global default. You can load a path from JSON and still override constraints in code via `path.setPathConstraints(...)` if you need to mutate them dynamically.
 
-Ranged constraints allow different limits for different sections of a path—essential for slowing down before tight turns or precision maneuvers.
+## Ranged constraints
 
-### Defining Ranged Constraints
+Ranged constraints apply a velocity or acceleration value only to elements within a given **ordinal range**. This is how you slow down through a tight turn without dragging the entire path down.
 
-Each ranged constraint is defined by:
+```java
+Path.PathConstraints ranged = new Path.PathConstraints()
+    .setMaxVelocityMetersPerSec(
+        new Path.RangedConstraint(4.0, 0, 2),           // fast through ordinals 0–2
+        new Path.RangedConstraint(1.5, 3, 4),           // slow through ordinals 3–4
+        new Path.RangedConstraint(4.0, 5, Integer.MAX_VALUE) // fast after ordinal 5
+    );
+```
 
-- **`value`**: The constraint value (velocity, acceleration, etc.)
-- **`start_ordinal`**: The first element index this constraint applies to (inclusive)
-- **`end_ordinal`**: The last element index this constraint applies to (inclusive)
+### Ordinals — translation and rotation tracked separately
 
-### Ordinal Indexing
-
-!!! warning "Important: Separate Ordinal Counters"
-    Translation and rotation ordinals are tracked **separately**:
-    
-    - **Translation ordinal** increments for each `TranslationTarget` and each `Waypoint`
-    - **Rotation ordinal** increments for each `RotationTarget` and each `Waypoint`
-
-This means a `Waypoint` (which contains both translation and rotation) increments **both** counters, while standalone `TranslationTarget` and `RotationTarget` elements only increment their respective counter.
-
-**Example ordinal assignment:**
-
-| Path Element | Translation Ordinal | Rotation Ordinal |
+| Element type | Translation ordinal | Rotation ordinal |
 |--------------|:-------------------:|:----------------:|
-| Waypoint (start) | 0 | 0 |
+| `Waypoint`          | increments | increments |
+| `TranslationTarget` | increments | — |
+| `RotationTarget`    | — | increments |
+| `EventTrigger`      | — | — |
+
+A translation-side ranged constraint (`setMaxVelocityMetersPerSec`, `setMaxAccelerationMetersPerSec2`) matches the **translation ordinal** of the element it's applied to. A rotation-side ranged constraint matches the **rotation ordinal**. Event triggers don't participate in ordinals at all.
+
+**Worked example:**
+
+| Element | Translation ord. | Rotation ord. |
+|---------|:---:|:---:|
+| Waypoint | 0 | 0 |
 | TranslationTarget | 1 | — |
-| RotationTarget (t_ratio=0.5) | — | 1 |
+| RotationTarget | — | 1 |
 | TranslationTarget | 2 | — |
-| Waypoint (end) | 3 | 2 |
+| Waypoint | 3 | 2 |
 
-When the path follower processes each element, it checks if any ranged constraint applies by testing:
+A `RangedConstraint(1.5, 2, 3)` on `setMaxVelocityMetersPerSec` caps speed while the robot drives to ordinals 2 and 3 (the third TranslationTarget and the final Waypoint). A `RangedConstraint(360, 0, 1)` on `setMaxVelocityDegPerSec` caps angular speed while the robot pursues rotation ordinals 0 and 1.
 
-```
-startOrdinal <= currentOrdinal && endOrdinal >= currentOrdinal
-```
+!!! info "Matching rule"
+    For each element, BLine walks the constraint list in array order and uses the **first** range whose `[start_ordinal, end_ordinal]` contains the element's ordinal. If no range matches, the global default is used — so "unconstrained" elements still respect the global cap.
 
-If a constraint matches, that value is used; otherwise, the global default is applied.
+    Because the first matching range wins, **list order matters** when ranges overlap.
 
-### Multiple Ranged Constraints
+!!! tip "Unbounded ranges"
+    Use `Integer.MAX_VALUE` as `endOrdinal` to say "from this ordinal onward." BLine treats the range as unbounded-right.
 
-Paths can have **multiple ranged constraints of the same type**, allowing fine-grained control over different path sections. The first matching constraint (in array order) is used for each element.
-
-### JSON Example
+### JSON form
 
 ```json
 {
-    "path_elements": [...],
+    "path_elements": [ /* ... */ ],
     "constraints": {
         "max_velocity_meters_per_sec": [
-            { "value": 4.5, "start_ordinal": 0, "end_ordinal": 1 },
-            { "value": 1.5, "start_ordinal": 2, "end_ordinal": 3 }
+            { "value": 4.5, "start_ordinal": 0, "end_ordinal": 2 },
+            { "value": 1.5, "start_ordinal": 3, "end_ordinal": 4 }
         ],
-        "max_velocity_deg_per_sec": [
-            { "value": 540, "start_ordinal": 0, "end_ordinal": 3 }
+        "max_acceleration_meters_per_sec2": [
+            { "value": 10.0, "start_ordinal": 0, "end_ordinal": 2147483647 }
         ],
+        "max_velocity_deg_per_sec": 540,
+        "max_acceleration_deg_per_sec2": 2000,
         "end_translation_tolerance_meters": 0.03,
         "end_rotation_tolerance_deg": 2.0
     }
 }
 ```
 
-### Code Example
+A constraint that is a plain number is treated as a single unbounded range. Mix and match freely.
 
-```java
-Path.PathConstraints constraints = new Path.PathConstraints()
-    .setMaxVelocityMetersPerSec(
-        new Path.RangedConstraint(4.5, 0, 1),   // Fast approach (ordinals 0-1)
-        new Path.RangedConstraint(1.5, 2, 3)    // Slow precision (ordinals 2-3)
-    )
-    .setMaxVelocityDegPerSec(
-        new Path.RangedConstraint(540, 0, Integer.MAX_VALUE)  // Apply to all
-    );
-```
+### In the GUI
 
-### Visualizing in GUI
+When you click a ranged constraint's slider, a green overlay highlights the affected segments on the canvas. Drag the slider handles to change the start/end ordinals, or open the **constraint pop-out editor** (BLine-GUI v0.5.0+) for a wider editing surface.
 
-When you click on a ranged constraint's slider in the GUI, a **green overlay** highlights the affected path segments on the canvas. This shows exactly where the constraint will apply during path execution.
+![Constraint Visualization](../assets/gifs/canvas/constraint-overlay.gif)
 
-<!-- GIF: Clicking constraint slider showing green overlay -->
-![Constraint Visualization](../assets/gifs/concepts/constraint-slider.gif)
+## How constraints actually shape motion
 
-!!! info "Start Ordinal Behavior"
-    A ranged constraint that includes the starting element will affect all robot motion *leading into* that element. For example, if your robot doesn't begin at the first path element (e.g., it's placed mid-field), a velocity constraint starting at ordinal 1 will limit the robot's speed as it travels toward the first waypoint.
+At every cycle, BLine's `FollowPath`:
 
-## How Constraints Affect Path Following
+1. Resolves the **active constraint** for the current target element (looking up translation ordinal for velocity/accel, rotation ordinal for rot velocity/accel).
+2. Clamps the translation controller's output to the max translational velocity.
+3. Feeds the commanded `ChassisSpeeds` into `ChassisRateLimiter`, which limits both the 2D translational rate and the rotational rate based on the active max accelerations.
 
-During path execution, `FollowPath` retrieves constraints for each element via `getPathElementsWithConstraints()`. The `ChassisRateLimiter` then enforces these limits by:
+The cross-track controller's output is **not** clamped by the velocity constraint — it's summed with the clamped translation output before rate limiting. This matters when you tune CTE gains: it can contribute meaningful perpendicular velocity on top of the translation command.
 
-1. Capping the commanded velocity to the current element's max velocity
-2. Limiting acceleration between cycles based on the current element's max acceleration
-3. Applying these limits separately to translational and rotational motion
+!!! tip "Prefer velocity limits to shrink handoff radii"
+    When a path overshoots a turn, the first-line fix is a ranged velocity cap **before** the turn. Shrinking the handoff radius is a last resort: if the robot is still moving faster than the radius allows, it can miss the handoff zone entirely and oscillate.
 
-This ensures the robot respects velocity limits when approaching handoff radii, preventing overshoot and enabling precise element transitions.
+## See also
 
+- [Key Parameters](key-parameters.md) — handoff radii, t_ratios, and end tolerances in depth.
+- [Tuning & Usage Tips](../usage-tips.md) — how to choose numeric values for all of the above.
+- [Library: Path Construction](../lib/path-construction.md) — ranged constraints in JSON and code.

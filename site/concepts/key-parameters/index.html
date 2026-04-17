@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://edanliahovetsky.github.io/BLine-Docs/concepts/key-parameters/">
       
       
-        <link rel="prev" href="../constraints/">
+        <link rel="prev" href="../event-triggers/">
       
       
         <link rel="next" href="../design-philosophy/">
@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -532,6 +532,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -598,19 +626,19 @@
   <a href="#handoff-radius" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Handoff Radius
+        Handoff radius
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Handoff Radius">
+    <nav class="md-nav" aria-label="Handoff radius">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#how-it-works" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How It Works
+        How it works
       
     </span>
   </a>
@@ -621,7 +649,7 @@
   <a href="#tuning-guidelines" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tuning Guidelines
+        Tuning guidelines
       
     </span>
   </a>
@@ -629,10 +657,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#setting-handoff-radius" class="md-nav__link">
+  <a href="#setting-the-radius" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setting Handoff Radius
+        Setting the radius
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t-ratio-based-handoffs-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        t-ratio based handoffs (optional)
       
     </span>
   </a>
@@ -645,52 +684,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#t_ratio-rotation-targets" class="md-nav__link">
+  <a href="#t_ratio-rotation-targets-and-event-triggers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        t_ratio (Rotation Targets)
+        t_ratio (rotation targets and event triggers)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="t_ratio (Rotation Targets)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#values" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Values
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-its-used" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How It's Used
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gui-interaction" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GUI Interaction
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -698,19 +698,19 @@
   <a href="#profiled-rotation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Profiled Rotation
+        Profiled rotation
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Profiled Rotation">
+    <nav class="md-nav" aria-label="Profiled rotation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#profiled-default-true" class="md-nav__link">
+  <a href="#profiled-default" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Profiled (Default: true)
+        Profiled (default)
       
     </span>
   </a>
@@ -718,10 +718,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#non-profiled-false" class="md-nav__link">
+  <a href="#non-profiled" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Non-Profiled (false)
+        Non-profiled
       
     </span>
   </a>
@@ -729,10 +729,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#when-to-use-each" class="md-nav__link">
+  <a href="#in-the-gui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        When to Use Each
+        In the GUI
       
     </span>
   </a>
@@ -748,30 +748,19 @@
   <a href="#end-tolerances" class="md-nav__link">
     <span class="md-ellipsis">
       
-        End Tolerances
+        End tolerances
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="End Tolerances">
+    <nav class="md-nav" aria-label="End tolerances">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#end-translation-tolerance" class="md-nav__link">
+  <a href="#picking-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        End Translation Tolerance
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#end-rotation-tolerance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        End Rotation Tolerance
+        Picking values
       
     </span>
   </a>
@@ -782,7 +771,7 @@
   <a href="#setting-tolerances" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setting Tolerances
+        Setting tolerances
       
     </span>
   </a>
@@ -795,10 +784,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameter-interaction" class="md-nav__link">
+  <a href="#how-these-parameters-interact" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parameter Interaction
+        How these parameters interact
       
     </span>
   </a>
@@ -1043,6 +1032,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gui/protrusions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protrusions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1195,6 +1212,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../lib/event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lib/flip-and-mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alliance Flip & Mirror
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../lib/pre-match/" class="md-nav__link">
         
   
@@ -1293,7 +1366,7 @@
   <span class="md-ellipsis">
     
   
-    Usage Tips
+    Tuning & Usage Tips
   
 
     
@@ -1363,19 +1436,19 @@
   <a href="#handoff-radius" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Handoff Radius
+        Handoff radius
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Handoff Radius">
+    <nav class="md-nav" aria-label="Handoff radius">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#how-it-works" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How It Works
+        How it works
       
     </span>
   </a>
@@ -1386,7 +1459,7 @@
   <a href="#tuning-guidelines" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tuning Guidelines
+        Tuning guidelines
       
     </span>
   </a>
@@ -1394,10 +1467,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#setting-handoff-radius" class="md-nav__link">
+  <a href="#setting-the-radius" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setting Handoff Radius
+        Setting the radius
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t-ratio-based-handoffs-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        t-ratio based handoffs (optional)
       
     </span>
   </a>
@@ -1410,52 +1494,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#t_ratio-rotation-targets" class="md-nav__link">
+  <a href="#t_ratio-rotation-targets-and-event-triggers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        t_ratio (Rotation Targets)
+        t_ratio (rotation targets and event triggers)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="t_ratio (Rotation Targets)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#values" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Values
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-its-used" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How It's Used
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gui-interaction" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GUI Interaction
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1463,19 +1508,19 @@
   <a href="#profiled-rotation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Profiled Rotation
+        Profiled rotation
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Profiled Rotation">
+    <nav class="md-nav" aria-label="Profiled rotation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#profiled-default-true" class="md-nav__link">
+  <a href="#profiled-default" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Profiled (Default: true)
+        Profiled (default)
       
     </span>
   </a>
@@ -1483,10 +1528,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#non-profiled-false" class="md-nav__link">
+  <a href="#non-profiled" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Non-Profiled (false)
+        Non-profiled
       
     </span>
   </a>
@@ -1494,10 +1539,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#when-to-use-each" class="md-nav__link">
+  <a href="#in-the-gui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        When to Use Each
+        In the GUI
       
     </span>
   </a>
@@ -1513,30 +1558,19 @@
   <a href="#end-tolerances" class="md-nav__link">
     <span class="md-ellipsis">
       
-        End Tolerances
+        End tolerances
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="End Tolerances">
+    <nav class="md-nav" aria-label="End tolerances">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#end-translation-tolerance" class="md-nav__link">
+  <a href="#picking-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        End Translation Tolerance
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#end-rotation-tolerance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        End Rotation Tolerance
+        Picking values
       
     </span>
   </a>
@@ -1547,7 +1581,7 @@
   <a href="#setting-tolerances" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setting Tolerances
+        Setting tolerances
       
     </span>
   </a>
@@ -1560,10 +1594,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameter-interaction" class="md-nav__link">
+  <a href="#how-these-parameters-interact" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parameter Interaction
+        How these parameters interact
       
     </span>
   </a>
@@ -1588,214 +1622,186 @@
 
 
 <h1 id="key-parameters">Key Parameters<a class="headerlink" href="#key-parameters" title="Permanent link">&para;</a></h1>
-<p>Understanding these key parameters is essential for tuning BLine paths for optimal performance.</p>
-<h2 id="handoff-radius">Handoff Radius<a class="headerlink" href="#handoff-radius" title="Permanent link">&para;</a></h2>
-<p>The <strong>intermediate handoff radius</strong> determines how close the robot must get to a translation target before advancing to the next one. On the canvas, this is visualized as a <strong>magenta dashed circle</strong> around translation elements.</p>
-<!-- GIF: Showing handoff radius circles on canvas -->
+<p>This page covers the parameters that most directly shape BLine's behavior during a path: handoff radius, t_ratio, profiled rotation, and end tolerances. Tuning these well is usually the difference between a path that "works in sim" and a path that wins matches.</p>
+<h2 id="handoff-radius">Handoff radius<a class="headerlink" href="#handoff-radius" title="Permanent link">&para;</a></h2>
+<p>The <strong>intermediate handoff radius</strong> determines how close the robot must get to the current translation target before BLine switches to tracking the next one. It's rendered on the canvas as a <strong>magenta dashed circle</strong> around each translation element.</p>
 <p><img alt="Handoff Radius Visualization" src="../../assets/gifs/concepts/handoff-radius.gif" /></p>
-<h3 id="how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h3>
-<p>When the robot enters the handoff radius of the current target, the path follower advances to the next element, creating smooth transitions between segments.</p>
-<h3 id="tuning-guidelines">Tuning Guidelines<a class="headerlink" href="#tuning-guidelines" title="Permanent link">&para;</a></h3>
+<h3 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h3>
+<p>BLine continuously checks the robot's position against the current translation target. When one of these conditions holds, the follower advances:</p>
+<ul>
+<li>The robot is within the current target's handoff radius, <strong>or</strong></li>
+<li>(if enabled) the robot's progress along the segment exceeds <code>1 − handoff_radius / segment_length</code>.</li>
+</ul>
+<p>The second condition is the "t-ratio based handoff" described below.</p>
+<h3 id="tuning-guidelines">Tuning guidelines<a class="headerlink" href="#tuning-guidelines" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Radius Size</th>
-<th>Behavior</th>
-<th>Use Case</th>
+<th>Radius</th>
+<th>Effect</th>
+<th>Typical use</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Smaller</strong></td>
-<td>Robot waits longer before switching targets</td>
-<td>Better precision at waypoints, but can cause hesitation</td>
+<td><strong>Too small</strong></td>
+<td>Robot may overshoot the zone at speed and oscillate back. Worst failure mode.</td>
+<td>Never intentional.</td>
 </tr>
 <tr>
-<td><strong>Larger</strong></td>
-<td>Robot switches sooner</td>
-<td>Smoother transitions at speed, but may cut corners</td>
+<td><strong>Small</strong></td>
+<td>Higher precision at the waypoint. Robot decelerates more.</td>
+<td>Scoring/alignment waypoints.</td>
+</tr>
+<tr>
+<td><strong>Medium</strong> (0.2–0.35 m)</td>
+<td>Smooth, balanced transitions.</td>
+<td>Most intermediate elements.</td>
+</tr>
+<tr>
+<td><strong>Large</strong></td>
+<td>Path cuts corners.</td>
+<td>Through wide-open sections where precision doesn't matter.</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition danger">
-<p class="admonition-title">Critical Warning</p>
-<p>If the radius is too small, the robot may overshoot and miss the handoff zone entirely at high velocities—this causes erratic path behavior and is the <strong>worst-case scenario</strong>. Conversely, if the handoff radius is too large, the robot will switch targets too early, causing path instability.</p>
+<p class="admonition-title">Mismatched radius and velocity is the #1 oscillation cause</p>
+<p>The most common oscillation cause we've seen is a handoff radius that's far smaller than the robot's stopping distance at the configured max velocity. If the robot blows past the circle, it reverses, blows past again, and the path never completes. If you see that, <strong>lower the velocity before the waypoint</strong> (via a ranged constraint) rather than chasing the radius.</p>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">Smooth Turns: Add More Elements</p>
-<p>For smoother, more accurate navigation through turns, try adding a few extra <strong>TranslationTargets</strong> or <strong>Waypoints</strong> along the curve.<br />
-This approach lets the robot follow the desired path more naturally—without needing aggressive velocity constraints or oversize handoff radii.<br />
-More elements create a gentler, better-controlled trajectory through each bend. 
-Just be sure not to oversaturate your paths and keep them as sparse as possible.</p>
+<p class="admonition-title">Smooth turns: prefer more elements over a larger radius</p>
+<p>For cleaner curves through turns, add extra TranslationTargets along the arc instead of enlarging the handoff radius. More elements create a gentler polyline that the robot can track precisely; bigger radii just cut the corner.</p>
 </div>
-<h3 id="setting-handoff-radius">Setting Handoff Radius<a class="headerlink" href="#setting-handoff-radius" title="Permanent link">&para;</a></h3>
-<p><strong>Per-element</strong> in the GUI sidebar, or via the <code>intermediate_handoff_radius_meters</code> field in JSON.</p>
-<p><strong>Project-wide default</strong> in <strong>Settings → Robot Config</strong> (GUI) or via <code>config.json</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;default_intermediate_handoff_radius_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2</span>
-<span class="p">}</span>
-</code></pre></div>
-<h2 id="t_ratio-rotation-targets">t_ratio (Rotation Targets)<a class="headerlink" href="#t_ratio-rotation-targets" title="Permanent link">&para;</a></h2>
-<p>The <strong>t_ratio</strong> parameter defines <em>where</em> along the path segment (0.0 to 1.0) a rotation should be achieved. This only applies to <code>RotationTarget</code> elements.</p>
-<h3 id="values">Values<a class="headerlink" href="#values" title="Permanent link">&para;</a></h3>
+<h3 id="setting-the-radius">Setting the radius<a class="headerlink" href="#setting-the-radius" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Per translation element</strong> — in the GUI sidebar (<strong>Handoff Radius (m)</strong>) or in JSON (<code>intermediate_handoff_radius_meters</code> inside a <code>translation</code> / <code>waypoint.translation_target</code>).</li>
+<li><strong>Globally (default)</strong> — <code>default_intermediate_handoff_radius_meters</code> in <code>config.json</code> or the <code>DefaultGlobalConstraints</code> constructor.</li>
+</ul>
+<h3 id="t-ratio-based-handoffs-optional">t-ratio based handoffs (optional)<a class="headerlink" href="#t-ratio-based-handoffs-optional" title="Permanent link">&para;</a></h3>
+<p>For high-speed paths, you can opt into <code>withTRatioBasedTranslationHandoffs(true)</code> on <code>FollowPath.Builder</code>. With this flag enabled:</p>
+<ul>
+<li>Handoff still fires immediately if the robot is within the target's handoff radius.</li>
+<li>Handoff also fires when the robot's projection onto the current segment passes <code>1 − handoff_radius / segment_length</code>.</li>
+</ul>
+<p>This is more robust on risky, high-speed paths where collisions or temporary overshoot could push the robot outside the handoff circle. The default is <code>false</code> (radius-only handoffs); only turn it on if you have a specific reason. See <a href="../../lib/follow-path/#withtratiobasedtranslationhandoffsboolean">FollowPath Builder → t-ratio handoffs</a> for details.</p>
+<hr />
+<h2 id="t_ratio-rotation-targets-and-event-triggers">t_ratio (rotation targets and event triggers)<a class="headerlink" href="#t_ratio-rotation-targets-and-event-triggers" title="Permanent link">&para;</a></h2>
+<p><code>t_ratio</code> ∈ [0, 1] specifies where along a segment the behavior applies:</p>
 <table>
 <thead>
 <tr>
-<th>t_ratio</th>
-<th>Position Along Segment</th>
+<th><code>t_ratio</code></th>
+<th>Position along segment</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>0.0</code></td>
-<td>Rotation at the <strong>start</strong> of the segment</td>
+<td>At the start</td>
 </tr>
 <tr>
 <td><code>0.5</code></td>
-<td>Rotation at the <strong>midpoint</strong></td>
+<td>At the midpoint</td>
 </tr>
 <tr>
 <td><code>1.0</code></td>
-<td>Rotation at the <strong>end</strong> of the segment</td>
+<td>At the end</td>
 </tr>
 </tbody>
 </table>
-<h3 id="how-its-used">How It's Used<a class="headerlink" href="#how-its-used" title="Permanent link">&para;</a></h3>
-<p>The path follower calculates the robot's progress along the current segment as a ratio (0.0 to 1.0). Rotation targets are processed when the robot's progress exceeds the target's t_ratio.</p>
-<p>For <strong>profiled rotation</strong>, the rotation setpoint interpolates smoothly based on progress. For <strong>non-profiled rotation</strong>, the robot immediately adopts the target rotation upon reaching the t_ratio threshold.</p>
-<h3 id="gui-interaction">GUI Interaction<a class="headerlink" href="#gui-interaction" title="Permanent link">&para;</a></h3>
-<p>In the GUI, simply drag the RotationTarget along its connecting line to adjust the t_ratio visually. The element snaps to positions along the segment.</p>
-<!-- GIF: Dragging rotation target to adjust t_ratio -->
+<p>For <strong>RotationTargets</strong>, t_ratio is used two ways:</p>
+<ul>
+<li>As the <strong>anchor point</strong> for profiled rotation: the target is fully achieved when the robot's projection onto the segment reaches <code>t_ratio</code>.</li>
+<li>As a <strong>switching threshold</strong>: once the robot's projection passes <code>t_ratio</code>, BLine considers this rotation target complete and looks ahead to the next rotation target.</li>
+</ul>
+<p>For <strong>EventTriggers</strong>, t_ratio is the <strong>firing threshold</strong>: the trigger fires when the robot's projection along its segment first crosses this value.</p>
 <p><img alt="Adjusting t_ratio" src="../../assets/gifs/concepts/t-ratio-drag.gif" /></p>
-<h2 id="profiled-rotation">Profiled Rotation<a class="headerlink" href="#profiled-rotation" title="Permanent link">&para;</a></h2>
-<p>The <strong>profiled rotation</strong> setting controls how the robot transitions to a target rotation.</p>
-<h3 id="profiled-default-true">Profiled (Default: <code>true</code>)<a class="headerlink" href="#profiled-default-true" title="Permanent link">&para;</a></h3>
-<p>The robot smoothly interpolates its rotation based on t-ratio progression along the path:</p>
+<div class="admonition info">
+<p class="admonition-title">Projection is robust to disturbances</p>
+<p>t_ratio is evaluated against the robot's <strong>projected position</strong> on the straight-line segment, not raw distance. That means bumps, vision jumps, or cross-track error don't break rotation timing or event triggers — they fire when the robot is <em>alongside</em> the trigger point on the segment, not when it hits a specific coordinate.</p>
+</div>
+<hr />
+<h2 id="profiled-rotation">Profiled rotation<a class="headerlink" href="#profiled-rotation" title="Permanent link">&para;</a></h2>
+<p>Both Waypoints and RotationTargets carry a <code>profiled_rotation</code> flag.</p>
+<h3 id="profiled-default">Profiled (default)<a class="headerlink" href="#profiled-default" title="Permanent link">&para;</a></h3>
+<p>The rotation setpoint <strong>interpolates smoothly</strong> from the previous rotation target to this one, following the robot's segment progress. Produces graceful sweep-style turns — the robot rotates <em>as</em> it translates.</p>
+<p>Interpolation uses the shortest angular path (wrapped via WPILib's <code>MathUtil.angleModulus</code>), so you don't need to worry about <code>-π</code>/<code>π</code> edge cases.</p>
+<h3 id="non-profiled">Non-profiled<a class="headerlink" href="#non-profiled" title="Permanent link">&para;</a></h3>
+<p>The rotation setpoint <strong>snaps</strong> to the target heading immediately. The rotation controller then drives toward it as fast as the rotational velocity/acceleration constraints allow.</p>
+<p>Use non-profiled when:</p>
 <ul>
-<li>As the robot travels, its rotation setpoint <strong>gradually transitions</strong> toward the target rotation</li>
-<li>The transition is <strong>proportional to segment progress</strong></li>
-<li>Results in smooth, predictable rotation behavior</li>
+<li>You want the robot to rotate first, then drive (e.g., aim before launching).</li>
+<li>Mid-segment rotation needs to happen quickly, not spread across the segment.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rotation&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.57</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;t_ratio&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;profiled_rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-<span class="p">}</span>
-</code></pre></div>
-<h3 id="non-profiled-false">Non-Profiled (<code>false</code>)<a class="headerlink" href="#non-profiled-false" title="Permanent link">&para;</a></h3>
-<p>The robot immediately snaps to the target rotation when it enters the segment:</p>
+<h3 id="in-the-gui">In the GUI<a class="headerlink" href="#in-the-gui" title="Permanent link">&para;</a></h3>
+<p>Toggle <strong>Profiled Rotation</strong> in the element's properties panel in the sidebar.</p>
+<hr />
+<h2 id="end-tolerances">End tolerances<a class="headerlink" href="#end-tolerances" title="Permanent link">&para;</a></h2>
+<p>End tolerances decide when <code>FollowPath</code> reports finished. Both must be satisfied:</p>
 <ul>
-<li><strong>No interpolation</strong> based on position</li>
-<li>Useful when you want an <strong>immediate</strong> rotation change</li>
-<li>Can be more aggressive but less smooth</li>
+<li><strong>End translation tolerance</strong> (m) — translation controller is within this distance of zero remaining path distance.</li>
+<li><strong>End rotation tolerance</strong> (deg) — the robot's heading is within this many degrees of the final rotation target.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rotation&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;rotation_radians&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.57</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;t_ratio&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;profiled_rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
-<span class="p">}</span>
-</code></pre></div>
-<h3 id="when-to-use-each">When to Use Each<a class="headerlink" href="#when-to-use-each" title="Permanent link">&para;</a></h3>
+<h3 id="picking-values">Picking values<a class="headerlink" href="#picking-values" title="Permanent link">&para;</a></h3>
+<p>Start with a <strong>base translation tolerance between 0.05 m and 0.08 m</strong>, then decrease incrementally only if you need the extra precision.</p>
+<p>Tight tolerances cost runtime:</p>
+<ul>
+<li>Smaller tolerance → more time spent in the low-speed convergence regime at the end of the path. Risk of the PID oscillating near zero.</li>
+<li>Larger tolerance → path ends sooner, but position error can be noticeable.</li>
+</ul>
+<p>Typical good values:</p>
 <table>
 <thead>
 <tr>
-<th>Mode</th>
-<th>Best For</th>
+<th>Use case</th>
+<th>Translation tol</th>
+<th>Rotation tol</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Profiled</strong></td>
-<td>Most situations; smooth autonomous routines</td>
+<td>General autonomous</td>
+<td>0.05–0.08 m</td>
+<td>2–4°</td>
 </tr>
 <tr>
-<td><strong>Non-Profiled</strong></td>
-<td>Quick reaction rotations; when you need immediate rotation change</td>
+<td>Precision scoring</td>
+<td>0.02–0.04 m</td>
+<td>1–2°</td>
+</tr>
+<tr>
+<td>"Get in the zone" alignment</td>
+<td>0.08–0.15 m</td>
+<td>3–5°</td>
 </tr>
 </tbody>
 </table>
-<p>Toggle this setting per-element in the sidebar under "Profiled Rotation".</p>
-<h2 id="end-tolerances">End Tolerances<a class="headerlink" href="#end-tolerances" title="Permanent link">&para;</a></h2>
-<p>End tolerances determine when the path follower considers the path complete.</p>
-<h3 id="end-translation-tolerance">End Translation Tolerance<a class="headerlink" href="#end-translation-tolerance" title="Permanent link">&para;</a></h3>
-<p>How close (in meters) the robot must be to the <strong>final position</strong> to finish the path.</p>
+<h3 id="setting-tolerances">Setting tolerances<a class="headerlink" href="#setting-tolerances" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Smaller values</strong> → More precise final positioning, but may take longer or oscillate</li>
-<li><strong>Larger values</strong> → Faster completion, but less precise</li>
+<li>Per path: <code>PathConstraints.setEndTranslationToleranceMeters(...)</code> / <code>setEndRotationToleranceDeg(...)</code>.</li>
+<li>Globally: <code>default_end_translation_tolerance_meters</code> / <code>default_end_rotation_tolerance_deg</code> in <code>config.json</code>.</li>
 </ul>
-<p>Typical values: <code>0.02</code> to <code>0.1</code> meters</p>
-<h3 id="end-rotation-tolerance">End Rotation Tolerance<a class="headerlink" href="#end-rotation-tolerance" title="Permanent link">&para;</a></h3>
-<p>How close (in degrees) the robot must be to the <strong>final rotation</strong> to finish the path.</p>
-<ul>
-<li><strong>Smaller values</strong> → More precise final rotation</li>
-<li><strong>Larger values</strong> → Faster completion</li>
-</ul>
-<p>Typical values: <code>1.0</code> to <code>5.0</code> degrees</p>
-<h3 id="setting-tolerances">Setting Tolerances<a class="headerlink" href="#setting-tolerances" title="Permanent link">&para;</a></h3>
-<p><strong>In code:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="w"> </span><span class="n">constraints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">PathConstraints</span><span class="p">()</span>
-<span class="w">    </span><span class="p">.</span><span class="na">setEndTranslationToleranceMeters</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span><span class="w">  </span><span class="c1">// 2 cm</span>
-<span class="w">    </span><span class="p">.</span><span class="na">setEndRotationToleranceDeg</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span><span class="w">        </span><span class="c1">// 1 degree</span>
-</code></pre></div>
-<p><strong>In JSON:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;constraints&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;end_translation_tolerance_meters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;end_rotation_tolerance_deg&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<h2 id="parameter-interaction">Parameter Interaction<a class="headerlink" href="#parameter-interaction" title="Permanent link">&para;</a></h2>
-<p>These parameters work together during path execution:</p>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>Action</th>
-<th>Key Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Robot drives toward current translation target</td>
-<td>Translation controller</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Speed capped by active constraints</td>
-<td>Max velocity</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Target switches when robot enters handoff zone</td>
-<td>Handoff radius</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Heading adjusts toward next rotation target</td>
-<td>T-ratio, profiled rotation</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Final target checks position and heading</td>
-<td>End tolerances</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Path completes when both tolerances satisfied</td>
-<td>End translation/rotation tolerance</td>
-</tr>
-</tbody>
-</table>
+<hr />
+<h2 id="how-these-parameters-interact">How these parameters interact<a class="headerlink" href="#how-these-parameters-interact" title="Permanent link">&para;</a></h2>
+<p>Every cycle of <code>FollowPath</code>:</p>
+<ol>
+<li>The translation controller computes speed from <strong>remaining path distance</strong>.</li>
+<li>That speed is <strong>clamped to max translational velocity</strong> (global or ranged).</li>
+<li>Direction is set by pointing at the <strong>next translation target</strong>.</li>
+<li>The cross-track controller adds a <strong>perpendicular correction</strong> toward the segment line.</li>
+<li>Rotation is resolved from the active rotation target using <code>t_ratio</code> and profiled/non-profiled rules, then driven by the rotation controller.</li>
+<li>The full <code>ChassisSpeeds</code> is <strong>acceleration-limited in 2D</strong> and passed to the drive consumer.</li>
+<li>If the robot enters a target's <strong>handoff radius</strong>, the translation cursor advances.</li>
+<li>On the final target, the robot is considered done once <strong>both end tolerances</strong> are satisfied.</li>
+</ol>
 <div class="admonition tip">
-<p class="admonition-title">Balancing Parameters</p>
+<p class="admonition-title">Balance rules of thumb</p>
 <ul>
-<li><strong>Higher velocity</strong> requires <strong>larger handoff radius</strong> to prevent overshoot</li>
-<li><strong>Tighter turns</strong> benefit from <strong>lower velocity</strong> constraints on those segments</li>
-<li><strong>Precision maneuvers</strong> need <strong>smaller tolerances</strong>, <strong>smaller handoff radii</strong>, and <strong>lower velocities</strong></li>
+<li>Higher velocity ⇒ larger handoff radius needed (or use t-ratio handoffs).</li>
+<li>Tight turns ⇒ lower velocity on that section via a ranged constraint.</li>
+<li>Precision endpoints ⇒ smaller tolerances, smaller handoff radius, lower velocity near the end.</li>
+<li>Long path, mild drift ⇒ tune the CTE controller; it's designed for exactly this.</li>
 </ul>
 </div>
 

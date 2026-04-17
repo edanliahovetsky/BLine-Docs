@@ -1,137 +1,140 @@
 # Sidebar
 
-The sidebar provides detailed editing controls for path elements and constraints. It's divided into several panels for different functions.
+The sidebar is where per-element editing and path-level constraint configuration happen. It's split into three panels: the element list, the element properties editor, and the constraint editor.
 
-## Path Elements Panel
+## Path Elements panel
 
-The top section lists all elements in your path in order.
+Lists every element in the current path in order. Each row shows a colored type chip, the element type, and its key property (coordinates, rotation, or lib key). A red ⊖ button deletes the row; numeric row indices give you a quick reference for ranged-constraint ordinals.
 
-<!-- GIF: Path elements panel overview -->
 ![Elements Panel](../assets/gifs/sidebar/sidebar-elements.gif)
 
-### Element List
+### Add an element
 
-Each element shows:
+Click **Add element** to insert a new element **after the currently selected one**. If nothing is selected, it's appended to the end of the path.
 
-- **Type icon** (colored indicator matching canvas colors)
-- **Element type** (Waypoint, Translation, Rotation)
-- **Key properties** (coordinates or rotation value)
-- **✕ button** to delete the element
-
-### Adding Elements
-
-Click the **"Add element"** button to insert a new element after the currently selected one.
-
-<!-- GIF: Adding a new element -->
 ![Add Element](../assets/gifs/sidebar/add-element.gif)
 
-If no element is selected, the new element is added at the end of the path.
+Newly added elements default to a sensible type based on the path's current state, but you can change the type immediately via the properties panel's **Type** dropdown.
 
-### Reordering Elements
+### Reorder elements
 
-**Drag elements** in the list to reorder them. The path will update immediately on the canvas.
+Drag list rows to reorder them. The canvas updates instantly.
 
-<!-- GIF: Dragging to reorder elements -->
 ![Reorder Elements](../assets/gifs/sidebar/reorder-elements.gif)
 
-!!! note
-    Remember that RotationTargets are positioned relative to the segment they're on. Reordering may change which segment a RotationTarget belongs to.
+!!! note "RotationTargets are segment-scoped"
+    A RotationTarget is logically "between" two translation elements. Reordering can change which segment it belongs to. The same applies to EventTriggers. Reorder consciously when these elements are in the path.
 
-### Removing Elements
+### Remove an element
 
-Click the **✕ button** next to any element to remove it, or select it and press Delete/Backspace.
+Click the red ⊖ next to any row, or select it and press `Delete` / `Backspace` in the canvas or sidebar.
 
-## Element Properties Panel
+## Element Properties panel
 
-When an element is selected, its properties appear in this panel.
+Appears when an element is selected. Fields vary by element type.
 
-### Common Properties
+### Type dropdown
 
-| Property | Applies To | Description |
-|----------|------------|-------------|
-| **Type** | All | Dropdown to convert between element types |
-| **Rotation (deg)** | Waypoint, RotationTarget | rotation in degrees |
-| **Profiled Rotation** | Waypoint, RotationTarget | Checkbox for rotation interpolation mode |
+All elements expose a **Type** dropdown that converts between types:
 
-### Translation Properties
+- **Waypoint ↔ TranslationTarget** — adds or removes the rotation data.
+- **Waypoint ↔ RotationTarget** — adds or removes the translation data.
+- **TranslationTarget ↔ RotationTarget** — swaps translation for rotation.
+- **↔ EventTrigger** — replaces with an event trigger (resets fields).
+
+![Convert Type](../assets/gifs/sidebar/convert-element.gif)
+
+### Translation properties
 
 For Waypoints and TranslationTargets:
 
-| Property | Description |
-|----------|-------------|
-| **X (m)** | X coordinate in meters |
-| **Y (m)** | Y coordinate in meters |
-| **Handoff Radius (m)** | Distance at which path advances to next element |
+| Field | Description |
+|-------|-------------|
+| **X (m)** | Field-coordinate x in meters. |
+| **Y (m)** | Field-coordinate y in meters. |
+| **Handoff Radius (m)** | Radius at which the follower advances from this target. Leave at 0 to inherit the global default. |
 
-<!-- GIF: Editing element properties -->
+### Rotation properties
+
+For Waypoints and RotationTargets:
+
+| Field | Description |
+|-------|-------------|
+| **Rotation (deg)** | Holonomic heading target in degrees. |
+| **Profiled Rotation** | When checked, the rotation interpolates from the previous target across the segment. When unchecked, the setpoint snaps. |
+
+For standalone RotationTargets there's also:
+
+| Field | Description |
+|-------|-------------|
+| **t_ratio** | Position along the segment (0.0 – 1.0) where the rotation target is evaluated. Also adjustable by dragging the target on the canvas. |
+
+### Event-trigger properties
+
+For EventTriggers:
+
+| Field | Description |
+|-------|-------------|
+| **Event Pos (0–1)** | The `t_ratio` along the segment at which the trigger fires. |
+| **Lib Key** | The string key your robot code registered an action under via `FollowPath.registerEventTrigger(...)`. |
+
+See [Event Triggers](../concepts/event-triggers.md) for the full model and patterns.
+
 ![Edit Properties](../assets/gifs/sidebar/edit-properties.gif)
 
-### RotationTarget Properties
+## Path Constraints panel
 
-For RotationTargets specifically:
+Configure the ranged velocity/acceleration constraints for the path. End tolerances live in project config (not here).
 
-| Property | Description |
-|----------|-------------|
-| **t_ratio** | Position along segment (0.0 to 1.0) |
-
-!!! tip
-    You can also adjust t_ratio by dragging the RotationTarget along its segment on the canvas.
-
-### Converting Element Types
-
-Use the **Type dropdown** to convert an element to a different type:
-
-- **Waypoint ↔ TranslationTarget**: Removes or adds rotation data
-- **Waypoint ↔ RotationTarget**: Removes or adds translation data
-- **TranslationTarget ↔ RotationTarget**: Swaps translation for rotation
-
-<!-- GIF: Converting element types -->
-![Convert Type](../assets/gifs/sidebar/convert-element.gif)
-
-## Path Constraints Panel
-
-Manage velocity and acceleration constraints for your path.
-
-### Adding Constraints
-
-Click **"Add constraint"** to create a new ranged constraint.
-
-<!-- GIF: Adding a constraint -->
 ![Add Constraint](../assets/gifs/sidebar/add-constraint.gif)
 
-### Constraint Types
+### Add a constraint
 
-Available constraint types:
+Click **Add constraint**, choose the type (max translational velocity, max translational acceleration, max rotational velocity, max rotational acceleration), and pick a value.
 
-- Max Velocity (m/s)
-- Max Acceleration (m/s²)
-- Max Rotational Velocity (deg/s)
-- Max Rotational Acceleration (deg/s²)
+### Constraint rows (v0.5.0 SegmentBar)
 
-### Constraint Properties
+Each constraint is rendered as a **SegmentBar**: a horizontal bar with one colored segment per range, with value labels on top and drag handles between them. The ordinal axis on the bar corresponds to the translation or rotation ordinal sequence of the path (depending on which constraint type you're editing).
 
-Each constraint shows:
+| Action | How |
+|--------|-----|
+| **Adjust a value** | Click inside the segment and edit the value label inline, or drag its SpinBox. |
+| **Resize a range** | Drag the handle between two segments left or right. |
+| **Add a new range** | Click **+ Add** next to the bar, or split an existing segment (see shortcuts below). |
+| **Delete a range** | Click its **×** button or select it and press `Delete` / `Backspace`. |
+| **Navigate between segments** | Click a segment, then use `←` / `→`. |
 
-| Property | Description |
-|----------|-------------|
-| **Type** | Dropdown to select constraint type |
-| **Value** | The limit value |
-| **Range slider** | Start and end ordinals (1-based) |
-| **✕ button** | Remove the constraint |
-
-### Range Slider
-
-The range slider lets you specify which elements the constraint applies to:
-
-- **Left handle**: Start ordinal (first affected element)
-- **Right handle**: End ordinal (last affected element)
-
-<!-- GIF: Adjusting constraint range -->
 ![Constraint Range](../assets/gifs/sidebar/constraint-range.gif)
 
-!!! info "Visual Feedback"
-    Click on the slider to see a **green overlay** on the canvas highlighting the affected path segments.
+### Pop-out constraint editor (v0.5.0)
 
-### Removing Constraints
+For paths with many constraints, open the **pop-out constraint editor** via the icon on the right side of the constraint section header. The pop-out window gives you a larger editing surface for all constraints simultaneously, with the same SegmentBar widgets. Edits sync bidirectionally with the sidebar in real time.
 
-Click the <span style="color: red; font-weight: bold;">⊖</span> button next to any constraint to remove it.
+The pop-out also honors standard undo/redo (`Ctrl/Cmd + Z` / `Ctrl/Cmd + Shift + Z`).
+
+### Visual feedback on the canvas
+
+Click any constraint segment to highlight the **segments of the path** that constraint covers with a green overlay on the canvas. This is the fastest way to confirm an ordinal range matches what you intended.
+
+### Removing a constraint
+
+Click the red ⊖ on a constraint row to remove all of its ranges at once. To delete a single range within a constraint, use the per-segment × or `Delete` shortcut.
+
+## Keyboard shortcuts in the segment bar
+
+With a constraint segment focused (click it first):
+
+| Shortcut | Action |
+|----------|--------|
+| `←` / `→` | Navigate between adjacent segments |
+| `Home` / `End` | Jump to first / last segment |
+| `Delete` / `Backspace` | Delete the focused segment |
+| `S` | Split the focused segment at its midpoint |
+
+Also works inside the pop-out editor.
+
+## Recent changes
+
+- **v0.5.0** — Introduced `SegmentBar` constraint widget, pop-out editor, indexed list items, adaptive-height sidebar, inline units, and tooltips.
+- **v0.5.0 under the hood** — Ordinal remapping keeps ranged constraints correct when path structure changes; EventTrigger elements are now properly counted against the rotation ordinal sequence on project load.
+- **v0.4.0** — Clicking empty space clears selection. Drag/rotation undo no longer records redundant entries for simple clicks.

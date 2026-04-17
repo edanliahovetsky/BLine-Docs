@@ -1,176 +1,148 @@
 # Key Parameters
 
-Understanding these key parameters is essential for tuning BLine paths for optimal performance.
+This page covers the parameters that most directly shape BLine's behavior during a path: handoff radius, t_ratio, profiled rotation, and end tolerances. Tuning these well is usually the difference between a path that "works in sim" and a path that wins matches.
 
-## Handoff Radius
+## Handoff radius
 
-The **intermediate handoff radius** determines how close the robot must get to a translation target before advancing to the next one. On the canvas, this is visualized as a **magenta dashed circle** around translation elements.
+The **intermediate handoff radius** determines how close the robot must get to the current translation target before BLine switches to tracking the next one. It's rendered on the canvas as a **magenta dashed circle** around each translation element.
 
-<!-- GIF: Showing handoff radius circles on canvas -->
 ![Handoff Radius Visualization](../assets/gifs/concepts/handoff-radius.gif)
 
-### How It Works
+### How it works
 
-When the robot enters the handoff radius of the current target, the path follower advances to the next element, creating smooth transitions between segments.
+BLine continuously checks the robot's position against the current translation target. When one of these conditions holds, the follower advances:
 
-### Tuning Guidelines
+- The robot is within the current target's handoff radius, **or**
+- (if enabled) the robot's progress along the segment exceeds `1 − handoff_radius / segment_length`.
 
-| Radius Size | Behavior | Use Case |
-|-------------|----------|----------|
-| **Smaller** | Robot waits longer before switching targets | Better precision at waypoints, but can cause hesitation |
-| **Larger** | Robot switches sooner | Smoother transitions at speed, but may cut corners |
+The second condition is the "t-ratio based handoff" described below.
 
-!!! danger "Critical Warning"
-    If the radius is too small, the robot may overshoot and miss the handoff zone entirely at high velocities—this causes erratic path behavior and is the **worst-case scenario**. Conversely, if the handoff radius is too large, the robot will switch targets too early, causing path instability.
+### Tuning guidelines
 
-!!! tip "Smooth Turns: Add More Elements"
-    For smoother, more accurate navigation through turns, try adding a few extra **TranslationTargets** or **Waypoints** along the curve.  
-    This approach lets the robot follow the desired path more naturally—without needing aggressive velocity constraints or oversize handoff radii.  
-    More elements create a gentler, better-controlled trajectory through each bend. 
-    Just be sure not to oversaturate your paths and keep them as sparse as possible.
+| Radius | Effect | Typical use |
+|--------|--------|-------------|
+| **Too small** | Robot may overshoot the zone at speed and oscillate back. Worst failure mode. | Never intentional. |
+| **Small** | Higher precision at the waypoint. Robot decelerates more. | Scoring/alignment waypoints. |
+| **Medium** (0.2–0.35 m) | Smooth, balanced transitions. | Most intermediate elements. |
+| **Large** | Path cuts corners. | Through wide-open sections where precision doesn't matter. |
 
-### Setting Handoff Radius
+!!! danger "Mismatched radius and velocity is the #1 oscillation cause"
+    The most common oscillation cause we've seen is a handoff radius that's far smaller than the robot's stopping distance at the configured max velocity. If the robot blows past the circle, it reverses, blows past again, and the path never completes. If you see that, **lower the velocity before the waypoint** (via a ranged constraint) rather than chasing the radius.
 
-**Per-element** in the GUI sidebar, or via the `intermediate_handoff_radius_meters` field in JSON.
+!!! tip "Smooth turns: prefer more elements over a larger radius"
+    For cleaner curves through turns, add extra TranslationTargets along the arc instead of enlarging the handoff radius. More elements create a gentler polyline that the robot can track precisely; bigger radii just cut the corner.
 
-**Project-wide default** in **Settings → Robot Config** (GUI) or via `config.json`:
+### Setting the radius
 
-```json
-{
-    "default_intermediate_handoff_radius_meters": 0.2
-}
-```
+- **Per translation element** — in the GUI sidebar (**Handoff Radius (m)**) or in JSON (`intermediate_handoff_radius_meters` inside a `translation` / `waypoint.translation_target`).
+- **Globally (default)** — `default_intermediate_handoff_radius_meters` in `config.json` or the `DefaultGlobalConstraints` constructor.
 
-## t_ratio (Rotation Targets)
+### t-ratio based handoffs (optional)
 
-The **t_ratio** parameter defines *where* along the path segment (0.0 to 1.0) a rotation should be achieved. This only applies to `RotationTarget` elements.
+For high-speed paths, you can opt into `withTRatioBasedTranslationHandoffs(true)` on `FollowPath.Builder`. With this flag enabled:
 
-### Values
+- Handoff still fires immediately if the robot is within the target's handoff radius.
+- Handoff also fires when the robot's projection onto the current segment passes `1 − handoff_radius / segment_length`.
 
-| t_ratio | Position Along Segment |
-|---------|------------------------|
-| `0.0` | Rotation at the **start** of the segment |
-| `0.5` | Rotation at the **midpoint** |
-| `1.0` | Rotation at the **end** of the segment |
+This is more robust on risky, high-speed paths where collisions or temporary overshoot could push the robot outside the handoff circle. The default is `false` (radius-only handoffs); only turn it on if you have a specific reason. See [FollowPath Builder → t-ratio handoffs](../lib/follow-path.md#withtratiobasedtranslationhandoffsboolean) for details.
 
-### How It's Used
+---
 
-The path follower calculates the robot's progress along the current segment as a ratio (0.0 to 1.0). Rotation targets are processed when the robot's progress exceeds the target's t_ratio.
+## t_ratio (rotation targets and event triggers)
 
-For **profiled rotation**, the rotation setpoint interpolates smoothly based on progress. For **non-profiled rotation**, the robot immediately adopts the target rotation upon reaching the t_ratio threshold.
+`t_ratio` ∈ [0, 1] specifies where along a segment the behavior applies:
 
-### GUI Interaction
+| `t_ratio` | Position along segment |
+|-----------|-----------------------|
+| `0.0` | At the start |
+| `0.5` | At the midpoint |
+| `1.0` | At the end |
 
-In the GUI, simply drag the RotationTarget along its connecting line to adjust the t_ratio visually. The element snaps to positions along the segment.
+For **RotationTargets**, t_ratio is used two ways:
 
-<!-- GIF: Dragging rotation target to adjust t_ratio -->
+- As the **anchor point** for profiled rotation: the target is fully achieved when the robot's projection onto the segment reaches `t_ratio`.
+- As a **switching threshold**: once the robot's projection passes `t_ratio`, BLine considers this rotation target complete and looks ahead to the next rotation target.
+
+For **EventTriggers**, t_ratio is the **firing threshold**: the trigger fires when the robot's projection along its segment first crosses this value.
+
 ![Adjusting t_ratio](../assets/gifs/concepts/t-ratio-drag.gif)
 
-## Profiled Rotation
+!!! info "Projection is robust to disturbances"
+    t_ratio is evaluated against the robot's **projected position** on the straight-line segment, not raw distance. That means bumps, vision jumps, or cross-track error don't break rotation timing or event triggers — they fire when the robot is *alongside* the trigger point on the segment, not when it hits a specific coordinate.
 
-The **profiled rotation** setting controls how the robot transitions to a target rotation.
+---
 
-### Profiled (Default: `true`)
+## Profiled rotation
 
-The robot smoothly interpolates its rotation based on t-ratio progression along the path:
+Both Waypoints and RotationTargets carry a `profiled_rotation` flag.
 
-- As the robot travels, its rotation setpoint **gradually transitions** toward the target rotation
-- The transition is **proportional to segment progress**
-- Results in smooth, predictable rotation behavior
+### Profiled (default)
 
-```json
-{
-    "type": "rotation",
-    "rotation_radians": 1.57,
-    "t_ratio": 0.5,
-    "profiled_rotation": true
-}
-```
+The rotation setpoint **interpolates smoothly** from the previous rotation target to this one, following the robot's segment progress. Produces graceful sweep-style turns — the robot rotates *as* it translates.
 
-### Non-Profiled (`false`)
+Interpolation uses the shortest angular path (wrapped via WPILib's `MathUtil.angleModulus`), so you don't need to worry about `-π`/`π` edge cases.
 
-The robot immediately snaps to the target rotation when it enters the segment:
+### Non-profiled
 
-- **No interpolation** based on position
-- Useful when you want an **immediate** rotation change
-- Can be more aggressive but less smooth
+The rotation setpoint **snaps** to the target heading immediately. The rotation controller then drives toward it as fast as the rotational velocity/acceleration constraints allow.
 
-```json
-{
-    "type": "rotation",
-    "rotation_radians": 1.57,
-    "t_ratio": 0.5,
-    "profiled_rotation": false
-}
-```
+Use non-profiled when:
 
-### When to Use Each
+- You want the robot to rotate first, then drive (e.g., aim before launching).
+- Mid-segment rotation needs to happen quickly, not spread across the segment.
 
-| Mode | Best For |
-|------|----------|
-| **Profiled** | Most situations; smooth autonomous routines |
-| **Non-Profiled** | Quick reaction rotations; when you need immediate rotation change |
+### In the GUI
 
-Toggle this setting per-element in the sidebar under "Profiled Rotation".
+Toggle **Profiled Rotation** in the element's properties panel in the sidebar.
 
-## End Tolerances
+---
 
-End tolerances determine when the path follower considers the path complete.
+## End tolerances
 
-### End Translation Tolerance
+End tolerances decide when `FollowPath` reports finished. Both must be satisfied:
 
-How close (in meters) the robot must be to the **final position** to finish the path.
+- **End translation tolerance** (m) — translation controller is within this distance of zero remaining path distance.
+- **End rotation tolerance** (deg) — the robot's heading is within this many degrees of the final rotation target.
 
-- **Smaller values** → More precise final positioning, but may take longer or oscillate
-- **Larger values** → Faster completion, but less precise
+### Picking values
 
-Typical values: `0.02` to `0.1` meters
+Start with a **base translation tolerance between 0.05 m and 0.08 m**, then decrease incrementally only if you need the extra precision.
 
-### End Rotation Tolerance
+Tight tolerances cost runtime:
 
-How close (in degrees) the robot must be to the **final rotation** to finish the path.
+- Smaller tolerance → more time spent in the low-speed convergence regime at the end of the path. Risk of the PID oscillating near zero.
+- Larger tolerance → path ends sooner, but position error can be noticeable.
 
-- **Smaller values** → More precise final rotation
-- **Larger values** → Faster completion
+Typical good values:
 
-Typical values: `1.0` to `5.0` degrees
+| Use case | Translation tol | Rotation tol |
+|----------|-----------------|--------------|
+| General autonomous | 0.05–0.08 m | 2–4° |
+| Precision scoring | 0.02–0.04 m | 1–2° |
+| "Get in the zone" alignment | 0.08–0.15 m | 3–5° |
 
-### Setting Tolerances
+### Setting tolerances
 
-**In code:**
+- Per path: `PathConstraints.setEndTranslationToleranceMeters(...)` / `setEndRotationToleranceDeg(...)`.
+- Globally: `default_end_translation_tolerance_meters` / `default_end_rotation_tolerance_deg` in `config.json`.
 
-```java
-Path.PathConstraints constraints = new Path.PathConstraints()
-    .setEndTranslationToleranceMeters(0.02)  // 2 cm
-    .setEndRotationToleranceDeg(1.0);        // 1 degree
-```
+---
 
-**In JSON:**
+## How these parameters interact
 
-```json
-{
-    "constraints": {
-        "end_translation_tolerance_meters": 0.03,
-        "end_rotation_tolerance_deg": 2.0
-    }
-}
-```
+Every cycle of `FollowPath`:
 
-## Parameter Interaction
+1. The translation controller computes speed from **remaining path distance**.
+2. That speed is **clamped to max translational velocity** (global or ranged).
+3. Direction is set by pointing at the **next translation target**.
+4. The cross-track controller adds a **perpendicular correction** toward the segment line.
+5. Rotation is resolved from the active rotation target using `t_ratio` and profiled/non-profiled rules, then driven by the rotation controller.
+6. The full `ChassisSpeeds` is **acceleration-limited in 2D** and passed to the drive consumer.
+7. If the robot enters a target's **handoff radius**, the translation cursor advances.
+8. On the final target, the robot is considered done once **both end tolerances** are satisfied.
 
-These parameters work together during path execution:
-
-| Step | Action | Key Parameter |
-|------|--------|---------------|
-| 1 | Robot drives toward current translation target | Translation controller |
-| 2 | Speed capped by active constraints | Max velocity |
-| 3 | Target switches when robot enters handoff zone | Handoff radius |
-| 4 | Heading adjusts toward next rotation target | T-ratio, profiled rotation |
-| 5 | Final target checks position and heading | End tolerances |
-| 6 | Path completes when both tolerances satisfied | End translation/rotation tolerance |
-
-!!! tip "Balancing Parameters"
-    - **Higher velocity** requires **larger handoff radius** to prevent overshoot
-    - **Tighter turns** benefit from **lower velocity** constraints on those segments
-    - **Precision maneuvers** need **smaller tolerances**, **smaller handoff radii**, and **lower velocities**
-
+!!! tip "Balance rules of thumb"
+    - Higher velocity ⇒ larger handoff radius needed (or use t-ratio handoffs).
+    - Tight turns ⇒ lower velocity on that section via a ranged constraint.
+    - Precision endpoints ⇒ smaller tolerances, smaller handoff radius, lower velocity near the end.
+    - Long path, mild drift ⇒ tune the CTE controller; it's designed for exactly this.

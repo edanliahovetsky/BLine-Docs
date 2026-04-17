@@ -16,14 +16,14 @@
         <link rel="prev" href="../path-construction/">
       
       
-        <link rel="next" href="../pre-match/">
+        <link rel="next" href="../event-triggers/">
       
       
         
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -535,6 +535,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../concepts/event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../concepts/key-parameters/" class="md-nav__link">
         
   
@@ -785,6 +813,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gui/protrusions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protrusions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -969,10 +1025,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#basic-setup" class="md-nav__link">
+  <a href="#minimal-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basic Setup
+        Minimal setup
       
     </span>
   </a>
@@ -983,7 +1039,7 @@
   <a href="#constructor-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Constructor Parameters
+        Constructor parameters
       
     </span>
   </a>
@@ -994,91 +1050,30 @@
   <a href="#pid-controllers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        PID Controllers
+        PID controllers
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="PID Controllers">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#translation-controller" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Translation Controller
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rotation-controller" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rotation Controller
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cross-track-controller" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cross-Track Controller
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-the-controllers-work-together" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How the Controllers Work Together
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#builder-methods" class="md-nav__link">
+  <a href="#fluent-builder-methods" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Builder Methods
+        Fluent builder methods
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Builder Methods">
+    <nav class="md-nav" aria-label="Fluent builder methods">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#withposereset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        withPoseReset
-      
-    </span>
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#withdefaultshouldflip" class="md-nav__link">
     <span class="md-ellipsis">
       
-        withDefaultShouldFlip
+        withDefaultShouldFlip()
       
     </span>
   </a>
@@ -1086,10 +1081,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#withshouldflip" class="md-nav__link">
+  <a href="#withshouldflipsupplierboolean" class="md-nav__link">
     <span class="md-ellipsis">
       
-        withShouldFlip
+        withShouldFlip(Supplier&lt;Boolean&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#withshouldmirrorsupplierboolean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        withShouldMirror(Supplier&lt;Boolean&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#withposeresetconsumerpose2d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        withPoseReset(Consumer&lt;Pose2d&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#withtratiobasedtranslationhandoffsboolean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        withTRatioBasedTranslationHandoffs(boolean)
       
     </span>
   </a>
@@ -1102,44 +1130,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#building-commands" class="md-nav__link">
+  <a href="#building-a-command" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Building Commands
+        Building a command
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#complete-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Complete Example
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tuning-tips" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Tuning Tips
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Tuning Tips">
+    <nav class="md-nav" aria-label="Building a command">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tuning-order" class="md-nav__link">
+  <a href="#what-the-command-does" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tuning Order
+        What the command does
       
     </span>
   </a>
@@ -1147,32 +1153,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#translation-controller_1" class="md-nav__link">
+  <a href="#no-mid-path-stopping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Translation Controller
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rotation-controller_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rotation Controller
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cross-track-controller_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cross-Track Controller
+        No mid-path stopping
       
     </span>
   </a>
@@ -1181,6 +1165,39 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diagnostic-getters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagnostic getters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-complete-robotcontainer-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A complete RobotContainer skeleton
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1188,6 +1205,62 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flip-and-mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alliance Flip & Mirror
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1298,7 +1371,7 @@
   <span class="md-ellipsis">
     
   
-    Usage Tips
+    Tuning & Usage Tips
   
 
     
@@ -1365,10 +1438,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#basic-setup" class="md-nav__link">
+  <a href="#minimal-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basic Setup
+        Minimal setup
       
     </span>
   </a>
@@ -1379,7 +1452,7 @@
   <a href="#constructor-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Constructor Parameters
+        Constructor parameters
       
     </span>
   </a>
@@ -1390,91 +1463,30 @@
   <a href="#pid-controllers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        PID Controllers
+        PID controllers
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="PID Controllers">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#translation-controller" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Translation Controller
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rotation-controller" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rotation Controller
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cross-track-controller" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cross-Track Controller
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-the-controllers-work-together" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How the Controllers Work Together
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#builder-methods" class="md-nav__link">
+  <a href="#fluent-builder-methods" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Builder Methods
+        Fluent builder methods
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Builder Methods">
+    <nav class="md-nav" aria-label="Fluent builder methods">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#withposereset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        withPoseReset
-      
-    </span>
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#withdefaultshouldflip" class="md-nav__link">
     <span class="md-ellipsis">
       
-        withDefaultShouldFlip
+        withDefaultShouldFlip()
       
     </span>
   </a>
@@ -1482,10 +1494,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#withshouldflip" class="md-nav__link">
+  <a href="#withshouldflipsupplierboolean" class="md-nav__link">
     <span class="md-ellipsis">
       
-        withShouldFlip
+        withShouldFlip(Supplier&lt;Boolean&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#withshouldmirrorsupplierboolean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        withShouldMirror(Supplier&lt;Boolean&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#withposeresetconsumerpose2d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        withPoseReset(Consumer&lt;Pose2d&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#withtratiobasedtranslationhandoffsboolean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        withTRatioBasedTranslationHandoffs(boolean)
       
     </span>
   </a>
@@ -1498,44 +1543,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#building-commands" class="md-nav__link">
+  <a href="#building-a-command" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Building Commands
+        Building a command
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#complete-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Complete Example
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tuning-tips" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Tuning Tips
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Tuning Tips">
+    <nav class="md-nav" aria-label="Building a command">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tuning-order" class="md-nav__link">
+  <a href="#what-the-command-does" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tuning Order
+        What the command does
       
     </span>
   </a>
@@ -1543,32 +1566,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#translation-controller_1" class="md-nav__link">
+  <a href="#no-mid-path-stopping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Translation Controller
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rotation-controller_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rotation Controller
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cross-track-controller_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cross-Track Controller
+        No mid-path stopping
       
     </span>
   </a>
@@ -1577,6 +1578,39 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diagnostic-getters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagnostic getters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-complete-robotcontainer-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A complete RobotContainer skeleton
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1598,207 +1632,225 @@
 
 
 <h1 id="followpath-builder">FollowPath Builder<a class="headerlink" href="#followpath-builder" title="Permanent link">&para;</a></h1>
-<p>The <code>FollowPath.Builder</code> creates commands that execute path following. It's designed to be configured once and reused for all paths.</p>
-<h2 id="basic-setup">Basic Setup<a class="headerlink" href="#basic-setup" title="Permanent link">&para;</a></h2>
+<p><code>FollowPath.Builder</code> captures the per-robot configuration you need once and builds fresh <code>FollowPath</code> commands for every path you want to run. Configure it in <code>RobotContainer</code> and reuse.</p>
+<h2 id="minimal-setup">Minimal setup<a class="headerlink" href="#minimal-setup" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">frc.robot.lib.BLine.*</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.math.controller.PIDController</span><span class="p">;</span>
 
 <span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">pathBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="p">(</span>
-<span class="w">    </span><span class="n">driveSubsystem</span><span class="p">,</span><span class="w">                      </span><span class="c1">// Subsystem requirement</span>
-<span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getPose</span><span class="p">,</span><span class="w">             </span><span class="c1">// Current pose supplier</span>
-<span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getChassisSpeeds</span><span class="p">,</span><span class="w">    </span><span class="c1">// Current speeds supplier</span>
-<span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">drive</span><span class="p">,</span><span class="w">               </span><span class="c1">// Drive consumer</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w">    </span><span class="c1">// Translation controller</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w">    </span><span class="c1">// Rotation controller</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">     </span><span class="c1">// Cross-track controller</span>
+<span class="w">    </span><span class="n">driveSubsystem</span><span class="p">,</span><span class="w">                     </span><span class="c1">// Subsystem requirement</span>
+<span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getPose</span><span class="p">,</span><span class="w">            </span><span class="c1">// Supplier&lt;Pose2d&gt;  (field-frame)</span>
+<span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getChassisSpeeds</span><span class="p">,</span><span class="w">   </span><span class="c1">// Supplier&lt;ChassisSpeeds&gt;  (robot-relative)</span>
+<span class="w">    </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">drive</span><span class="p">,</span><span class="w">              </span><span class="c1">// Consumer&lt;ChassisSpeeds&gt;  (robot-relative)</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w">   </span><span class="c1">// translation controller</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w">   </span><span class="c1">// rotation controller</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">    </span><span class="c1">// cross-track controller</span>
 <span class="p">);</span>
 </code></pre></div>
-<h2 id="constructor-parameters">Constructor Parameters<a class="headerlink" href="#constructor-parameters" title="Permanent link">&para;</a></h2>
+<h2 id="constructor-parameters">Constructor parameters<a class="headerlink" href="#constructor-parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Parameter</th>
 <th>Type</th>
-<th>Description</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>driveSubsystem</code></td>
-<td><code>SubsystemBase</code></td>
-<td>The drive subsystem to require</td>
+<td><code>Subsystem</code></td>
+<td>Command requirement. BLine accepts any <code>Subsystem</code>, not just <code>SubsystemBase</code> (widened in v0.4.1+).</td>
 </tr>
 <tr>
 <td><code>poseSupplier</code></td>
 <td><code>Supplier&lt;Pose2d&gt;</code></td>
-<td>Returns current robot pose</td>
+<td>Field-frame pose each cycle. Must match the alliance-origin convention you used to author the path (blue-origin convention is standard; BLine flips at runtime).</td>
 </tr>
 <tr>
-<td><code>speedsSupplier</code></td>
+<td><code>robotRelativeSpeedsSupplier</code></td>
 <td><code>Supplier&lt;ChassisSpeeds&gt;</code></td>
-<td>Returns current robot-relative speeds</td>
+<td>Current chassis speeds, <strong>robot-relative</strong>.</td>
 </tr>
 <tr>
-<td><code>speedsConsumer</code></td>
+<td><code>robotRelativeSpeedsConsumer</code></td>
 <td><code>Consumer&lt;ChassisSpeeds&gt;</code></td>
-<td>Accepts robot-relative speeds to drive</td>
+<td>Commanded chassis speeds, <strong>robot-relative</strong>. BLine does the field↔robot conversion internally.</td>
 </tr>
 <tr>
 <td><code>translationController</code></td>
 <td><code>PIDController</code></td>
-<td>Controls speed based on distance remaining</td>
+<td>Minimizes remaining path distance.</td>
 </tr>
 <tr>
 <td><code>rotationController</code></td>
 <td><code>PIDController</code></td>
-<td>Controls holonomic rotation toward targets</td>
+<td>Minimizes holonomic heading error. Continuous input enabled by BLine (−π, π).</td>
 </tr>
 <tr>
 <td><code>crossTrackController</code></td>
 <td><code>PIDController</code></td>
-<td>Minimizes deviation from path line</td>
+<td>Minimizes perpendicular deviation from the current segment line.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="pid-controllers">PID Controllers<a class="headerlink" href="#pid-controllers" title="Permanent link">&para;</a></h2>
-<h3 id="translation-controller">Translation Controller<a class="headerlink" href="#translation-controller" title="Permanent link">&para;</a></h3>
-<p>Controls the robot's speed based on <strong>remaining distance to the path end</strong>.</p>
-<ul>
-<li><strong>Input</strong>: Distance remaining (meters)</li>
-<li><strong>Output</strong>: Desired velocity (m/s)</li>
-<li><strong>Tuning</strong>: Higher P = faster acceleration, but may overshoot</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">  </span><span class="c1">// Typical starting point</span>
-</code></pre></div>
-<h3 id="rotation-controller">Rotation Controller<a class="headerlink" href="#rotation-controller" title="Permanent link">&para;</a></h3>
-<p>Controls the robot's <strong>holonomic rotation</strong> toward rotation targets.</p>
-<ul>
-<li><strong>Input</strong>: rotation error (radians)</li>
-<li><strong>Output</strong>: Desired angular velocity (rad/s)</li>
-<li><strong>Tuning</strong>: Higher P = faster rotation response</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">  </span><span class="c1">// Typical starting point</span>
-</code></pre></div>
-<h3 id="cross-track-controller">Cross-Track Controller<a class="headerlink" href="#cross-track-controller" title="Permanent link">&para;</a></h3>
-<p>Minimizes <strong>deviation from the line</strong> between waypoints.</p>
-<ul>
-<li><strong>Input</strong>: Perpendicular distance from path line (meters)</li>
-<li><strong>Output</strong>: Correction velocity (m/s)</li>
-<li><strong>Tuning</strong>: Higher P = stronger path adherence</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w">  </span><span class="c1">// Typical starting point</span>
-</code></pre></div>
-<h3 id="how-the-controllers-work-together">How the Controllers Work Together<a class="headerlink" href="#how-the-controllers-work-together" title="Permanent link">&para;</a></h3>
-<p>The tracking control loop runs all three PID controllers each cycle:</p>
-<ol>
-<li><strong>Translation controller</strong> — Minimizes total remaining path distance and drives the robot to the final path element</li>
-<li><strong>Rotation controller</strong> — Either follows the profiled rotation setpoint or snaps directly to the target if no profile is specified</li>
-<li><strong>Cross-Track Error (CTE) controller</strong> — Minimizes deviation from the line between current and previous path segments, helping reduce post-handoff cross-track error</li>
-</ol>
-<p>The translation controller's speed magnitude depends on distance to the path's end, while direction depends on the next available waypoint. These values are <strong>acceleration-limited in 2D</strong> to provide smooth robot motion toward the target, making chassis output relatively stable even during erroneous odometry jitter.</p>
-<h2 id="builder-methods">Builder Methods<a class="headerlink" href="#builder-methods" title="Permanent link">&para;</a></h2>
-<h3 id="withposereset">withPoseReset<a class="headerlink" href="#withposereset" title="Permanent link">&para;</a></h3>
-<p>Resets odometry to the path's starting pose when the command begins:</p>
-<div class="highlight"><pre><span></span><code><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withPoseReset</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">resetPose</span><span class="p">);</span>
-</code></pre></div>
-<p>This is useful for the first path in autonomous to ensure odometry starts correctly.</p>
-<h3 id="withdefaultshouldflip">withDefaultShouldFlip<a class="headerlink" href="#withdefaultshouldflip" title="Permanent link">&para;</a></h3>
-<p>Automatically flip paths for the red alliance based on <code>DriverStation.getAlliance()</code>:</p>
+<div class="admonition warning">
+<p class="admonition-title">Speeds must be robot-relative</p>
+<p><code>FollowPath</code> computes a field-relative <code>ChassisSpeeds</code> internally, converts it to robot-relative using the current pose's rotation, and hands that to your consumer. If your drive subsystem's <code>drive()</code> expects field-relative speeds, either wrap the consumer to convert back, or expose a robot-relative method and pass that instead. CTRE Swerve Templates and most YAGSL configurations already use robot-relative <code>ApplyRequest</code> / robot-relative speeds.</p>
+</div>
+<h2 id="pid-controllers">PID controllers<a class="headerlink" href="#pid-controllers" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Controller</th>
+<th>Input</th>
+<th>Output</th>
+<th>Typical starting gain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Translation</strong></td>
+<td>Remaining path distance (m)</td>
+<td>Speed magnitude (m/s)</td>
+<td><code>P = 5.0</code></td>
+</tr>
+<tr>
+<td><strong>Rotation</strong></td>
+<td>Heading error (rad)</td>
+<td>Angular velocity (rad/s)</td>
+<td><code>P = 3.0</code></td>
+</tr>
+<tr>
+<td><strong>Cross-Track</strong></td>
+<td>Signed perpendicular distance from segment line (m)</td>
+<td>Correction velocity (m/s)</td>
+<td><code>P = 2.0</code></td>
+</tr>
+</tbody>
+</table>
+<p>All three are <code>edu.wpi.first.math.controller.PIDController</code>. BLine sets their tolerances from the active path's end tolerances on each command init and enables continuous input on the rotation controller.</p>
+<p>Tuning order is <strong>translation → rotation → cross-track</strong>. See <a href="../../usage-tips/#pid-tuning">Tuning &amp; Usage Tips</a> for the full procedure.</p>
+<div class="admonition warning">
+<p class="admonition-title">Don't use the integral term on the translation controller</p>
+<p>The translation controller's setpoint is zero remaining distance. An integrator accumulates while the robot is far from the endpoint and drives instability. Use P-only (or P + D if needed) for translation. Integrators on rotation and CTE are fine.</p>
+</div>
+<h2 id="fluent-builder-methods">Fluent builder methods<a class="headerlink" href="#fluent-builder-methods" title="Permanent link">&para;</a></h2>
+<p>Each method returns the builder so you can chain them. Settings persist across <code>build(...)</code> calls until you change them.</p>
+<h3 id="withdefaultshouldflip"><code>withDefaultShouldFlip()</code><a class="headerlink" href="#withdefaultshouldflip" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withDefaultShouldFlip</span><span class="p">();</span>
 </code></pre></div>
-<h3 id="withshouldflip">withShouldFlip<a class="headerlink" href="#withshouldflip" title="Permanent link">&para;</a></h3>
-<p>Custom flip logic:</p>
-<div class="highlight"><pre><span></span><code><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withShouldFlip</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Return true to flip the path</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">DriverStation</span><span class="p">.</span><span class="na">getAlliance</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Alliance</span><span class="p">.</span><span class="na">Red</span><span class="p">;</span>
-<span class="p">});</span>
+<p>Automatically flips the path for the red alliance using <code>DriverStation.getAlliance()</code>. Wire this if you're authoring every path from the blue-origin perspective (the convention). Uses rotational field symmetry by default via <code>FlippingUtil</code>.</p>
+<h3 id="withshouldflipsupplierboolean"><code>withShouldFlip(Supplier&lt;Boolean&gt;)</code><a class="headerlink" href="#withshouldflipsupplierboolean" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withShouldFlip</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">SmartDashboard</span><span class="p">.</span><span class="na">getBoolean</span><span class="p">(</span><span class="s">&quot;FlipPath&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">));</span>
 </code></pre></div>
-<h2 id="building-commands">Building Commands<a class="headerlink" href="#building-commands" title="Permanent link">&para;</a></h2>
-<p>Use <code>build()</code> to create a command for a specific path:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">myPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;myPathFile&quot;</span><span class="p">);</span>
-<span class="n">Command</span><span class="w"> </span><span class="n">followCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">myPath</span><span class="p">);</span>
+<p>Custom flip logic if the default alliance rule doesn't fit (e.g., dashboard toggle for testing, alternate origin conventions).</p>
+<h3 id="withshouldmirrorsupplierboolean"><code>withShouldMirror(Supplier&lt;Boolean&gt;)</code><a class="headerlink" href="#withshouldmirrorsupplierboolean" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withShouldMirror</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">fieldConfiguration</span><span class="p">.</span><span class="na">shouldMirror</span><span class="p">());</span>
 </code></pre></div>
-<p>The returned command:</p>
+<p>Applies <code>Path.mirror()</code> when the supplier returns true. Mirroring reflects the path across the field width centerline (<code>y → fieldSizeY − y</code>) and maps <code>θ → −θ</code>. This is <strong>not</strong> the same as <code>flip()</code> — see <a href="../flip-and-mirror/">Alliance Flip &amp; Mirror</a> for when each makes sense.</p>
+<p>Flip and mirror both apply at command init time and can be combined.</p>
+<h3 id="withposeresetconsumerpose2d"><code>withPoseReset(Consumer&lt;Pose2d&gt;)</code><a class="headerlink" href="#withposeresetconsumerpose2d" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withPoseReset</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">resetPose</span><span class="p">);</span>
+</code></pre></div>
+<p>When set, <code>FollowPath.initialize()</code> calls the consumer with the path's start pose. Useful for the first path in auto (so odometry starts at the known location).</p>
+<p>Set once, it applies to <strong>every</strong> subsequent <code>build(...)</code>. To turn it off on a per-path basis while reusing the same builder, override with a no-op: <code>.withPoseReset(p -&gt; {})</code>.</p>
+<h3 id="withtratiobasedtranslationhandoffsboolean"><code>withTRatioBasedTranslationHandoffs(boolean)</code><a class="headerlink" href="#withtratiobasedtranslationhandoffsboolean" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">pathBuilder</span><span class="p">.</span><span class="na">withTRatioBasedTranslationHandoffs</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div>
+<p>When enabled, translation handoffs fire as soon as <strong>either</strong>:</p>
 <ul>
-<li>Requires the drive subsystem</li>
-<li>Runs until the robot reaches the end tolerances</li>
-<li>Stops the drivetrain when finished</li>
+<li>The robot is within the current target's handoff radius (normal behavior), or</li>
+<li>The robot's projection onto the current segment passes <code>1 − handoff_radius / segment_length</code>.</li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">No Mid-Path Stopping</p>
-<p>BLine does not support stopping the robot midway through a path. If you need the robot to stop partway through, create separate Path objects and chain them together:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
-<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">firstSegment</span><span class="p">),</span><span class="w">    </span><span class="c1">// Drive to first location</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">(),</span><span class="w">                 </span><span class="c1">// Stop and score</span>
-<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">secondSegment</span><span class="p">)</span><span class="w">    </span><span class="c1">// Continue to next location</span>
+<p>This is more robust on high-speed paths where a collision or aggressive initial target could push the robot outside the radius and stall the handoff. Default is <code>false</code> (radius-only handoffs).</p>
+<p>Use it for specific high-risk paths; leave it off for general-purpose paths. See v0.8.4 release notes if you're comparing against older behavior — an initialization edge case at the very start of a path was fixed in v0.8.4 so you can safely enable t-ratio handoffs even when the robot starts close to the first target.</p>
+<h2 id="building-a-command">Building a command<a class="headerlink" href="#building-a-command" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;scoreFirst&quot;</span><span class="p">);</span>
+<span class="n">Command</span><span class="w"> </span><span class="n">cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+<span class="n">cmd</span><span class="p">.</span><span class="na">schedule</span><span class="p">();</span>
+</code></pre></div>
+<p><code>build(path)</code>:</p>
+<ul>
+<li>Deep-copies the path so the command can safely flip/mirror without mutating the original.</li>
+<li>Wires the required subsystem, flip/mirror/pose-reset policies, and PID controllers.</li>
+<li>Returns a fresh <code>FollowPath</code> command.</li>
+</ul>
+<p>Each call produces an independent command; safe to build the same path multiple times if needed.</p>
+<h3 id="what-the-command-does">What the command does<a class="headerlink" href="#what-the-command-does" title="Permanent link">&para;</a></h3>
+<p>When scheduled:</p>
+<ol>
+<li><code>initialize()</code> — optionally flip/mirror the path, optionally reset odometry to the start pose, reset PID controller internal state and tolerances, clear traversal cursors, and log <code>FollowPath/pathTranslations</code>.</li>
+<li><code>execute()</code> — advances translation cursor, selects rotation target, fires any due event triggers, computes and rate-limits the commanded <code>ChassisSpeeds</code>, logs state.</li>
+<li><code>isFinished()</code> — returns true when the robot is on the last translation element, past the last rotation target, with translation and rotation both at their setpoints.</li>
+<li><code>end(interrupted)</code> — sends a zeroed <code>ChassisSpeeds</code> to the drive consumer. This was added in v0.7.2 after reports of the last commanded speed latching past command completion.</li>
+</ol>
+<h3 id="no-mid-path-stopping">No mid-path stopping<a class="headerlink" href="#no-mid-path-stopping" title="Permanent link">&para;</a></h3>
+<p>BLine paths run to completion (end tolerances satisfied) unless interrupted. For routines that need to stop mid-route, split into separate paths and chain them:</p>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
+<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">toFirstScore</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">toIntake</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">toSecondScore</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">()</span>
 <span class="p">);</span>
 </code></pre></div>
-</div>
-<h2 id="complete-example">Complete Example<a class="headerlink" href="#complete-example" title="Permanent link">&para;</a></h2>
+<p>For actions that fire <em>during</em> a path, use <a href="../event-triggers/">Event Triggers</a>.</p>
+<h2 id="diagnostic-getters">Diagnostic getters<a class="headerlink" href="#diagnostic-getters" title="Permanent link">&para;</a></h2>
+<p><code>FollowPath</code> exposes a few getters for dashboards or custom logic:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">getCurrentTranslationElementIndex</span><span class="p">();</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">getCurrentRotationElementIndex</span><span class="p">();</span><span class="w">     </span><span class="c1">// -1 when no active rotation target remains</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">getRemainingPathDistanceMeters</span><span class="p">();</span><span class="w">  </span><span class="c1">// 0.0 when not in a valid traversal state</span>
+</code></pre></div>
+<p><code>getRemainingPathDistanceMeters()</code> was added in v0.8.1 for dashboards and auto sequencing that want to display or react to progress.</p>
+<h2 id="a-complete-robotcontainer-skeleton">A complete <code>RobotContainer</code> skeleton<a class="headerlink" href="#a-complete-robotcontainer-skeleton" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RobotContainer</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DriveSubsystem</span><span class="w"> </span><span class="n">driveSubsystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DriveSubsystem</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DriveSubsystem</span><span class="w"> </span><span class="n">drive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DriveSubsystem</span><span class="p">();</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">;</span>
 
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">RobotContainer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Set global constraints</span>
 <span class="w">        </span><span class="n">Path</span><span class="p">.</span><span class="na">setDefaultGlobalConstraints</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">DefaultGlobalConstraints</span><span class="p">(</span>
-<span class="w">            </span><span class="mf">4.5</span><span class="p">,</span><span class="w"> </span><span class="mf">12.0</span><span class="p">,</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">860</span><span class="p">,</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span>
+<span class="w">            </span><span class="mf">4.5</span><span class="p">,</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w"> </span><span class="mi">600</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.25</span>
 <span class="w">        </span><span class="p">));</span>
 
-<span class="w">        </span><span class="c1">// Create path builder</span>
+<span class="w">        </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">registerEventTrigger</span><span class="p">(</span><span class="s">&quot;deployIntake&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">intake</span><span class="p">::</span><span class="n">deploy</span><span class="p">);</span>
+<span class="w">        </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">registerEventTrigger</span><span class="p">(</span><span class="s">&quot;shoot&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ShootCommand</span><span class="p">(</span><span class="n">shooter</span><span class="p">));</span>
+
 <span class="w">        </span><span class="n">pathBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">Builder</span><span class="p">(</span>
-<span class="w">            </span><span class="n">driveSubsystem</span><span class="p">,</span>
-<span class="w">            </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getPose</span><span class="p">,</span>
-<span class="w">            </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">getChassisSpeeds</span><span class="p">,</span>
-<span class="w">            </span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">drive</span><span class="p">,</span>
+<span class="w">            </span><span class="n">drive</span><span class="p">,</span>
+<span class="w">            </span><span class="n">drive</span><span class="p">::</span><span class="n">getPose</span><span class="p">,</span>
+<span class="w">            </span><span class="n">drive</span><span class="p">::</span><span class="n">getChassisSpeeds</span><span class="p">,</span>
+<span class="w">            </span><span class="n">drive</span><span class="p">::</span><span class="n">drive</span><span class="p">,</span>
 <span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span>
 <span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span>
 <span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">PIDController</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
-<span class="w">        </span><span class="p">).</span><span class="na">withDefaultShouldFlip</span><span class="p">()</span>
-<span class="w">         </span><span class="p">.</span><span class="na">withPoseReset</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">::</span><span class="n">resetPose</span><span class="p">);</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withDefaultShouldFlip</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withPoseReset</span><span class="p">(</span><span class="n">drive</span><span class="p">::</span><span class="n">resetPose</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// AdvantageKit logging</span>
+<span class="w">        </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">setDoubleLoggingConsumer</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Logger</span><span class="p">.</span><span class="na">recordOutput</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">getFirst</span><span class="p">(),</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">getSecond</span><span class="p">()));</span>
+<span class="w">        </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">setBooleanLoggingConsumer</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Logger</span><span class="p">.</span><span class="na">recordOutput</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">getFirst</span><span class="p">(),</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">getSecond</span><span class="p">()));</span>
+<span class="w">        </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">setPoseLoggingConsumer</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Logger</span><span class="p">.</span><span class="na">recordOutput</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">getFirst</span><span class="p">(),</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">getSecond</span><span class="p">()));</span>
+<span class="w">        </span><span class="n">FollowPath</span><span class="p">.</span><span class="na">setTranslationListLoggingConsumer</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Logger</span><span class="p">.</span><span class="na">recordOutput</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">getFirst</span><span class="p">(),</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">getSecond</span><span class="p">()));</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">getAutonomousCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
-<span class="w">            </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;toFirstScore&quot;</span><span class="p">)),</span>
-<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">(),</span>
-<span class="w">            </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;toPickup&quot;</span><span class="p">)),</span>
-<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">IntakeCommand</span><span class="p">(),</span>
-<span class="w">            </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;toSecondScore&quot;</span><span class="p">)),</span>
-<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">ScoreCommand</span><span class="p">()</span>
-<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;scoreFirst&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">drive</span><span class="p">.</span><span class="na">setModuleOrientations</span><span class="p">(</span><span class="n">first</span><span class="p">.</span><span class="na">getInitialModuleDirection</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">first</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="tuning-tips">Tuning Tips<a class="headerlink" href="#tuning-tips" title="Permanent link">&para;</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Tune at Maximum Velocities</p>
-<p>When tuning PID controllers, <strong>stress-test your gains at maximum robot velocity and acceleration</strong>. If you limit max acceleration <em>after</em> tuning, or increase max velocity beyond what was used during tuning, you will likely experience:</p>
+<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Overshoot when reaching the path endpoint</li>
-<li>Unexpected behavior during path following</li>
+<li><a href="../event-triggers/">Event Triggers</a> — registering actions for triggers referenced by paths.</li>
+<li><a href="../flip-and-mirror/">Alliance Flip &amp; Mirror</a> — <code>withDefaultShouldFlip</code>, <code>withShouldMirror</code>, symmetry choices.</li>
+<li><a href="../pre-match/">Pre-Match Module Orientation</a> — <code>getInitialModuleDirection()</code> for optimal auto starts.</li>
+<li><a href="../logging/">Logging</a> — what keys the follower publishes.</li>
+<li><a href="../../usage-tips/">Tuning &amp; Usage Tips</a> — PID tuning procedure.</li>
 </ul>
-<p>Always tune within the full operating range of velocities and accelerations.</p>
-</div>
-<h3 id="tuning-order">Tuning Order<a class="headerlink" href="#tuning-order" title="Permanent link">&para;</a></h3>
-<p>The PID controllers should be tuned in the following order: translation, rotation, and finally cross-track.</p>
-<h3 id="translation-controller_1">Translation Controller<a class="headerlink" href="#translation-controller_1" title="Permanent link">&para;</a></h3>
-<p>The translation controller minimizes total path distance remaining.</p>
-<div class="admonition warning">
-<p class="admonition-title">Controller Instability</p>
-<p>Avoid using the PID integral term for the translation controller. Using the integral term will cause translation controller instability. Integral term use in other controllers (Rotation and Cross-Track) is fine.</p>
-</div>
-<p><strong>Starting gains:</strong> P = 5.0, I = 0.0, D = 0.0</p>
-<h3 id="rotation-controller_1">Rotation Controller<a class="headerlink" href="#rotation-controller_1" title="Permanent link">&para;</a></h3>
-<p>Minimizes error in holonomic heading (rotation).</p>
-<p><strong>Starting gains:</strong> P = 3.0, I = 0.0, D = 0.0</p>
-<h3 id="cross-track-controller_1">Cross-Track Controller<a class="headerlink" href="#cross-track-controller_1" title="Permanent link">&para;</a></h3>
-<p>Keeps the robot on the line between waypoints or translation targets. It should be used to reduce path deviation in longer path segments over time, rather than on sharp turns.</p>
-<div class="admonition warning">
-<p class="admonition-title">Controller Instability</p>
-<p>Be wary of cross-track controller over-tuning (where the controller overpowers the translation controller). An over-tuned cross-track controller will cause undesirable behavior around turns, especially during high velocities.</p>
-</div>
-<p><strong>Starting gains:</strong> P = 2.0, I = 0.0, D = 0.0</p>
 
 
 

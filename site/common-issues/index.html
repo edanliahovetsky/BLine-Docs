@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -533,6 +533,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../concepts/event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../concepts/key-parameters/" class="md-nav__link">
         
   
@@ -783,6 +811,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gui/protrusions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protrusions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -935,6 +991,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../lib/event-triggers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Triggers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib/flip-and-mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alliance Flip & Mirror
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../lib/pre-match/" class="md-nav__link">
         
   
@@ -1033,7 +1145,7 @@
   <span class="md-ellipsis">
     
   
-    Usage Tips
+    Tuning & Usage Tips
   
 
     
@@ -1113,10 +1225,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#robot-overshoots-at-turns" class="md-nav__link">
+  <a href="#robot-oscillates-around-a-waypoint-and-never-finishes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Robot Overshoots at Turns
+        Robot oscillates around a waypoint and never finishes
       
     </span>
   </a>
@@ -1124,10 +1236,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#robot-hesitates-at-waypoints" class="md-nav__link">
+  <a href="#robot-stalls-on-a-bump-obstacle-wheels-slipping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Robot Hesitates at Waypoints
+        Robot stalls on a bump / obstacle, wheels slipping
       
     </span>
   </a>
@@ -1135,10 +1247,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#path-takes-longer-than-expected" class="md-nav__link">
+  <a href="#robot-goes-to-0-0-before-running-the-real-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Path Takes Longer Than Expected
+        Robot goes to (0, 0) before running the real path
       
     </span>
   </a>
@@ -1146,10 +1258,153 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#robot-doesnt-face-correct-rotation" class="md-nav__link">
+  <a href="#path-doesnt-work-on-red-alliance-or-goes-the-wrong-way" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Robot Doesn't Face Correct Rotation
+        Path doesn't work on red alliance (or goes the wrong way)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mirrored-path-ends-pointing-the-wrong-way-for-a-side-mounted-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mirrored path ends pointing the wrong way for a side-mounted mechanism
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#last-commanded-velocity-is-still-driving-after-the-command-ends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Last commanded velocity is still driving after the command ends
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oscillation-starting-the-very-first-path-if-withtratiobasedtranslationhandoffstrue-is-enabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Oscillation starting the very first path if withTRatioBasedTranslationHandoffs(true) is enabled
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rotation-target-doesnt-finish-interpolating-before-the-segment-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rotation target doesn't finish interpolating before the segment does
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robot-visibly-drifts-laterally-during-the-first-500-ms-of-auto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Robot visibly drifts laterally during the first ~500 ms of auto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-takes-much-longer-than-expected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path takes much longer than expected
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robot-doesnt-end-up-facing-the-right-direction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Robot doesn't end up facing the right direction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ghost-robot-doesnt-match-the-real-robot-in-sim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Ghost robot" doesn't match the real robot in sim
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unresolved-dependency-comgithubedanliahovetskybline-lib" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unresolved dependency: com.github.edanliahovetsky:BLine-Lib:...
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows-defender-flags-the-bline-gui-installer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows Defender flags the BLine-GUI installer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unregistered-event-trigger-key-warnings-in-the-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Unregistered event trigger key" warnings in the logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configjson-isnt-being-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config.json isn't being read
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#still-stuck" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Still stuck?
       
     </span>
   </a>
@@ -1191,10 +1446,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#robot-overshoots-at-turns" class="md-nav__link">
+  <a href="#robot-oscillates-around-a-waypoint-and-never-finishes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Robot Overshoots at Turns
+        Robot oscillates around a waypoint and never finishes
       
     </span>
   </a>
@@ -1202,10 +1457,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#robot-hesitates-at-waypoints" class="md-nav__link">
+  <a href="#robot-stalls-on-a-bump-obstacle-wheels-slipping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Robot Hesitates at Waypoints
+        Robot stalls on a bump / obstacle, wheels slipping
       
     </span>
   </a>
@@ -1213,10 +1468,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#path-takes-longer-than-expected" class="md-nav__link">
+  <a href="#robot-goes-to-0-0-before-running-the-real-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Path Takes Longer Than Expected
+        Robot goes to (0, 0) before running the real path
       
     </span>
   </a>
@@ -1224,10 +1479,153 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#robot-doesnt-face-correct-rotation" class="md-nav__link">
+  <a href="#path-doesnt-work-on-red-alliance-or-goes-the-wrong-way" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Robot Doesn't Face Correct Rotation
+        Path doesn't work on red alliance (or goes the wrong way)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mirrored-path-ends-pointing-the-wrong-way-for-a-side-mounted-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mirrored path ends pointing the wrong way for a side-mounted mechanism
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#last-commanded-velocity-is-still-driving-after-the-command-ends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Last commanded velocity is still driving after the command ends
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oscillation-starting-the-very-first-path-if-withtratiobasedtranslationhandoffstrue-is-enabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Oscillation starting the very first path if withTRatioBasedTranslationHandoffs(true) is enabled
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rotation-target-doesnt-finish-interpolating-before-the-segment-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rotation target doesn't finish interpolating before the segment does
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robot-visibly-drifts-laterally-during-the-first-500-ms-of-auto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Robot visibly drifts laterally during the first ~500 ms of auto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-takes-much-longer-than-expected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path takes much longer than expected
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robot-doesnt-end-up-facing-the-right-direction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Robot doesn't end up facing the right direction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ghost-robot-doesnt-match-the-real-robot-in-sim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Ghost robot" doesn't match the real robot in sim
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unresolved-dependency-comgithubedanliahovetskybline-lib" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unresolved dependency: com.github.edanliahovetsky:BLine-Lib:...
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows-defender-flags-the-bline-gui-installer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows Defender flags the BLine-GUI installer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unregistered-event-trigger-key-warnings-in-the-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Unregistered event trigger key" warnings in the logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configjson-isnt-being-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config.json isn't being read
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#still-stuck" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Still stuck?
       
     </span>
   </a>
@@ -1252,56 +1650,145 @@
 
 
 <h1 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h1>
-<p>Common issues and solutions when working with BLine paths. This guide covers the most frequently encountered problems and provides actionable steps to resolve them.</p>
-<h2 id="robot-overshoots-at-turns">Robot Overshoots at Turns<a class="headerlink" href="#robot-overshoots-at-turns" title="Permanent link">&para;</a></h2>
-<p><strong>Causes:</strong></p>
-<ul>
-<li>Velocity too high for handoff radius</li>
-<li>Handoff radius too small</li>
-</ul>
-<p><strong>Solutions:</strong></p>
+<p>Real-world failure modes and fixes, collected from teams running BLine during the 2026 season. Each entry is a symptom → cause → fix recipe you can walk down.</p>
+<p>If you hit something not covered here, the <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778">Chief Delphi thread</a> is the right place to post.</p>
+<h2 id="robot-oscillates-around-a-waypoint-and-never-finishes">Robot oscillates around a waypoint and never finishes<a class="headerlink" href="#robot-oscillates-around-a-waypoint-and-never-finishes" title="Permanent link">&para;</a></h2>
+<p><strong>Symptoms:</strong> The robot overshoots a waypoint, reverses, overshoots again, forever. Remaining-distance log (<code>FollowPath/remainingPathDistanceMeters</code>) saws around a non-zero value.</p>
+<p><strong>Cause:</strong> The handoff radius at that waypoint is smaller than the robot's stopping distance at its configured max velocity. The robot blows past the circle, backs up past the circle the other way, and never latches the handoff.</p>
+<p><strong>Fix:</strong></p>
 <ol>
-<li>Add velocity constraint before the turn</li>
-<li>Increase handoff radius at that element</li>
-<li>Add an intermediate TranslationTarget to break up the path</li>
+<li><strong>Add a ranged velocity cap</strong> before the waypoint with a smaller max velocity. Walk it down until the robot can stop within the radius. This is the correct fix in 90% of cases.</li>
+<li><strong>As a last resort</strong>, increase the waypoint's handoff radius. Costs path precision.</li>
+<li><strong>Don't just shrink the radius</strong> — that makes the problem worse.</li>
 </ol>
-<h2 id="robot-hesitates-at-waypoints">Robot Hesitates at Waypoints<a class="headerlink" href="#robot-hesitates-at-waypoints" title="Permanent link">&para;</a></h2>
-<p><strong>Causes:</strong></p>
+<p>Watch <code>FollowPath/crossTrackError</code> in the same dashboard — if it's fine but the remaining-distance is oscillating, this is definitely the issue.</p>
+<h2 id="robot-stalls-on-a-bump-obstacle-wheels-slipping">Robot stalls on a bump / obstacle, wheels slipping<a class="headerlink" href="#robot-stalls-on-a-bump-obstacle-wheels-slipping" title="Permanent link">&para;</a></h2>
+<p><strong>Symptoms:</strong> Robot approaches a bump, decelerates aggressively, and stalls with wheels spinning. Sometimes it gets over if you crank velocity way up, but then overshoots badly on the other side.</p>
+<p><strong>Cause:</strong> Too many waypoints clustered around the obstacle. The robot tries to decelerate into a handoff circle <em>while</em> crossing the disturbance.</p>
+<p><strong>Fix:</strong></p>
 <ul>
-<li>Handoff radius too small</li>
-<li>Velocity constraint too aggressive</li>
+<li><strong>One waypoint just before</strong> the obstacle.</li>
+<li><strong>One waypoint just past</strong> the obstacle.</li>
+<li><strong>No intermediate waypoints on the obstacle itself.</strong></li>
+<li>If you want fine control, use <strong>ranged constraints</strong> set before and after the obstacle ordinal — not extra Waypoints.</li>
 </ul>
-<p><strong>Solutions:</strong></p>
+<p>This is the pattern a few teams settled on after running into bumps during the 2026 season (both etherex and teams 449 and 6989 called it out).</p>
+<h2 id="robot-goes-to-0-0-before-running-the-real-path">Robot goes to (0, 0) before running the real path<a class="headerlink" href="#robot-goes-to-0-0-before-running-the-real-path" title="Permanent link">&para;</a></h2>
+<p><strong>Symptoms:</strong> Trigger a teleop auto-align on button-press. The robot drives to <code>(0, 0)</code> first, then to the target.</p>
+<p><strong>Cause:</strong> The path was built at binding-registration time, not at button-press time, and it captured the robot's pose as whatever <code>Pose2d</code> existed at robot startup — typically <code>Pose2d.kZero</code>.</p>
+<p><strong>Fix — Option A (explicit deferral):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">driveController</span><span class="p">.</span><span class="na">square</span><span class="p">().</span><span class="na">whileTrue</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">deferredProxy</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">driveSubsystem</span><span class="p">.</span><span class="na">getPose</span><span class="p">()),</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+<span class="w">        </span><span class="p">))</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+<p><strong>Fix — Option B (drop the "current pose" waypoint):</strong></p>
+<p>For a single-destination drive-to-pose, you don't need the robot's current pose as a waypoint at all. BLine tracks against the live pose supplier from the builder:</p>
+<div class="highlight"><pre><span></span><code><span class="n">driveController</span><span class="p">.</span><span class="na">square</span><span class="p">().</span><span class="na">whileTrue</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">deferredProxy</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">pathBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">Waypoint</span><span class="p">(</span><span class="n">target</span><span class="p">))))</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>Option B is what we recommend — it removes an entire class of bugs.</p>
+<h2 id="path-doesnt-work-on-red-alliance-or-goes-the-wrong-way">Path doesn't work on red alliance (or goes the wrong way)<a class="headerlink" href="#path-doesnt-work-on-red-alliance-or-goes-the-wrong-way" title="Permanent link">&para;</a></h2>
+<p><strong>Symptoms:</strong> Blue-side auto works perfectly. Red side drives a completely wrong path, or drives the right shape in the wrong direction.</p>
+<p><strong>Possible causes:</strong></p>
 <ol>
-<li>Increase handoff radius</li>
-<li>Review velocity constraints</li>
+<li><strong><code>withDefaultShouldFlip()</code> not wired.</strong> Confirm the builder has <code>withDefaultShouldFlip()</code> <em>or</em> you're calling <code>flip()</code> manually somewhere in the chain — not both, not neither.</li>
+<li><strong>Teleop-style driver-perspective negation bleeding into auto.</strong> Some swerve subsystems negate the commanded velocity on red (so "stick forward" points away from the driver station). If this negation is applied to the consumer BLine writes to, the auto's commanded motion is negated 180° on red. Fix: move the negation into a <code>joystickToLinearVelocity</code> helper that only applies to human stick input, not to <code>FollowPath</code>'s output.</li>
+<li><strong>Authored paths on the red side by accident.</strong> All paths should be authored from the blue alliance's perspective. BLine flips at runtime.</li>
+<li><strong>Field symmetry mismatch.</strong> If the game uses mirror symmetry (not rotational), you need <code>mirror()</code> / <code>withShouldMirror(...)</code> instead of flip. See <a href="../lib/flip-and-mirror/">Alliance Flip &amp; Mirror</a>.</li>
 </ol>
-<h2 id="path-takes-longer-than-expected">Path Takes Longer Than Expected<a class="headerlink" href="#path-takes-longer-than-expected" title="Permanent link">&para;</a></h2>
-<p><strong>Causes:</strong></p>
+<h2 id="mirrored-path-ends-pointing-the-wrong-way-for-a-side-mounted-mechanism">Mirrored path ends pointing the wrong way for a side-mounted mechanism<a class="headerlink" href="#mirrored-path-ends-pointing-the-wrong-way-for-a-side-mounted-mechanism" title="Permanent link">&para;</a></h2>
+<p><strong>Symptoms:</strong> <code>path.mirror()</code> flips the path across the field width, and the final heading points the wrong way for a side-mounted shooter or intake.</p>
+<p><strong>Cause:</strong> <code>mirror()</code> maps <code>θ → −θ</code> (not <code>θ + π</code>), which preserves driver-perspective "forward" but inverts the <em>side</em> of the robot the mechanism points from.</p>
+<p><strong>Fix:</strong></p>
 <ul>
-<li>Constraints too conservative</li>
-<li>Too many elements</li>
-<li>End tolerances too tight</li>
+<li><strong>Override the final rotation</strong> after mirroring (<code>path.setElement(lastIndex, new Waypoint(pos, mechanismHeading))</code>).</li>
+<li><strong>Use <code>flip()</code> if the field is rotationally symmetric</strong> — it maps <code>θ → θ − π</code>, preserving the alliance-relative side.</li>
+<li><strong>Keep separate authored paths per side</strong> if the asymmetric mechanism makes mirror unusable.</li>
 </ul>
-<p><strong>Solutions:</strong></p>
-<ol>
-<li>Review constraint values</li>
-<li>Simplify path with fewer elements</li>
-<li>Loosen end tolerances if precision isn't critical</li>
-</ol>
-<h2 id="robot-doesnt-face-correct-rotation">Robot Doesn't Face Correct Rotation<a class="headerlink" href="#robot-doesnt-face-correct-rotation" title="Permanent link">&para;</a></h2>
-<p><strong>Causes:</strong></p>
+<h2 id="last-commanded-velocity-is-still-driving-after-the-command-ends">Last commanded velocity is still driving after the command ends<a class="headerlink" href="#last-commanded-velocity-is-still-driving-after-the-command-ends" title="Permanent link">&para;</a></h2>
+<p><strong>Symptoms:</strong> <code>FollowPath</code> finishes, but the robot keeps drifting at the last commanded speed until the next command takes over.</p>
+<p><strong>Fix:</strong> Update to BLine-Lib v0.7.2 or later. Earlier versions didn't zero the chassis speeds on command end; this was fixed after haarcz reported it. In v0.7.2+, <code>FollowPath.end()</code> explicitly writes a zeroed <code>ChassisSpeeds</code> to the consumer.</p>
+<h2 id="oscillation-starting-the-very-first-path-if-withtratiobasedtranslationhandoffstrue-is-enabled">Oscillation starting the very first path if <code>withTRatioBasedTranslationHandoffs(true)</code> is enabled<a class="headerlink" href="#oscillation-starting-the-very-first-path-if-withtratiobasedtranslationhandoffstrue-is-enabled" title="Permanent link">&para;</a></h2>
+<p><strong>Symptoms:</strong> The very first path of a run oscillates around the opening translation target and never completes handoff. Subsequent paths work fine. Only affects paths with <code>withTRatioBasedTranslationHandoffs(true)</code>.</p>
+<p><strong>Fix:</strong> Update to BLine-Lib v0.8.4. Earlier versions had an initialization edge case when the robot started at or extremely near the first path target combined with t-ratio handoffs. In v0.8.4+, handoff fires as soon as <em>either</em> the t-ratio threshold is reached <em>or</em> the robot is already within the handoff radius — which resolves the stall.</p>
+<h2 id="rotation-target-doesnt-finish-interpolating-before-the-segment-does">Rotation target doesn't finish interpolating before the segment does<a class="headerlink" href="#rotation-target-doesnt-finish-interpolating-before-the-segment-does" title="Permanent link">&para;</a></h2>
+<p><strong>Symptoms:</strong> Robot is supposed to rotate to heading X by the midpoint of a segment. The robot crosses the midpoint still rotating, never reaching heading X, and the segment ends before rotation completes.</p>
+<p><strong>Possible causes:</strong></p>
 <ul>
-<li>Missing rotation target</li>
-<li>Profiled rotation causing slow transition</li>
-<li>Rotation controller P too low</li>
+<li><code>profiled_rotation: true</code> and the segment is short relative to the rotational acceleration limit — there literally isn't enough segment to interpolate over.</li>
+<li>The max rotational velocity / acceleration is too low.</li>
 </ul>
-<p><strong>Solutions:</strong></p>
+<p><strong>Fixes:</strong></p>
 <ol>
-<li>Add RotationTarget or Waypoint with desired rotation</li>
-<li>Try non-profiled rotation for immediate rotation change</li>
-<li>Tune rotation controller gains</li>
+<li>Increase max rotational velocity and acceleration in global or path constraints.</li>
+<li>Use <code>profiled_rotation: false</code> on the RotationTarget so the robot starts rotating immediately instead of tapering.</li>
+<li>Move the rotation target earlier (lower <code>t_ratio</code>) so the interpolation has more segment to work with.</li>
 </ol>
+<h2 id="robot-visibly-drifts-laterally-during-the-first-500-ms-of-auto">Robot visibly drifts laterally during the first ~500 ms of auto<a class="headerlink" href="#robot-visibly-drifts-laterally-during-the-first-500-ms-of-auto" title="Permanent link">&para;</a></h2>
+<p><strong>Symptoms:</strong> Auto starts, robot immediately drifts sideways a few cm, then recovers and continues.</p>
+<p><strong>Cause:</strong> Swerve modules weren't pre-oriented before the match started. They're pivoting under load during the first control cycle.</p>
+<p><strong>Fix:</strong> Pre-orient modules in disabled-periodic using <code>path.getInitialModuleDirection(driveSubsystem::getPose)</code>. See <a href="../lib/pre-match/">Pre-Match Module Orientation</a>.</p>
+<h2 id="path-takes-much-longer-than-expected">Path takes much longer than expected<a class="headerlink" href="#path-takes-much-longer-than-expected" title="Permanent link">&para;</a></h2>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li><strong>Constraints too conservative</strong> — check <code>FollowPath/translationControllerOutput</code> and the active velocity. If controller output is well below the max constraint, the constraint isn't the bottleneck. If it's at the max constraint, raise the constraint.</li>
+<li><strong>End tolerance too tight</strong> — the last few cm of approach can easily eat 500+ ms if the tolerance is sub-centimeter. Loosen to 0.05–0.08 m unless you genuinely need precision.</li>
+<li><strong>Translation P too low</strong> — the robot never gets aggressive enough. Try <code>P = 5.0</code> as a starting point.</li>
+<li><strong>Too many elements</strong> — each handoff involves a cursor advance and a brief heading realignment. A path with 15 waypoints spends a lot of time at handoffs; consider removing the non-essential ones.</li>
+</ul>
+<h2 id="robot-doesnt-end-up-facing-the-right-direction">Robot doesn't end up facing the right direction<a class="headerlink" href="#robot-doesnt-end-up-facing-the-right-direction" title="Permanent link">&para;</a></h2>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li><strong>No rotation target at the end.</strong> A final <code>TranslationTarget</code> without a Waypoint after it leaves rotation wherever it was. Replace with a Waypoint, or add a RotationTarget with <code>t_ratio = 1.0</code> at the end.</li>
+<li><strong>Profiled rotation is spreading the turn across the whole segment.</strong> Try <code>profiled_rotation: false</code> to snap instead.</li>
+<li><strong>Rotation P too low.</strong> Tune starting at <code>P = 3.0</code>.</li>
+</ul>
+<h2 id="ghost-robot-doesnt-match-the-real-robot-in-sim">"Ghost robot" doesn't match the real robot in sim<a class="headerlink" href="#ghost-robot-doesnt-match-the-real-robot-in-sim" title="Permanent link">&para;</a></h2>
+<p><strong>Symptoms (pre-v0.5.0 only):</strong> The simulated robot icon finishes before the real robot reaches the endpoint.</p>
+<p><strong>Context:</strong> In earlier reports, some teams expected the GUI's sim footprint to match real-robot timing. It doesn't — the sim is a simplified kinematic preview, not a physics simulation. See <a href="../gui/simulation/#what-the-simulation-does-not-show">Simulation → Limitations</a>.</p>
+<p><strong>Modern BLine (v0.8.x):</strong> Paths end when the <em>robot</em> (via the live pose supplier) actually reaches both end tolerances, regardless of sim timing. There is no "ghost" on the robot side — the sim footprint only exists in the GUI.</p>
+<h2 id="unresolved-dependency-comgithubedanliahovetskybline-lib"><code>Unresolved dependency: com.github.edanliahovetsky:BLine-Lib:...</code><a class="headerlink" href="#unresolved-dependency-comgithubedanliahovetskybline-lib" title="Permanent link">&para;</a></h2>
+<p><strong>Cause:</strong> The version tag in <code>build.gradle</code> or the vendor JSON doesn't exist on GitHub (typo, or pinned to an unreleased version).</p>
+<p><strong>Fix:</strong> Check the <a href="https://github.com/edanliahovetsky/BLine-Lib/releases">BLine-Lib releases page</a> for available tags. Current stable is <strong>v0.8.4</strong>. Update the version string:</p>
+<div class="highlight"><pre><span></span><code>implementation &#39;com.github.edanliahovetsky:BLine-Lib:v0.8.4&#39;
+</code></pre></div>
+<p>If you're on the vendor JSON approach, re-run <strong>WPILib: Manage Vendor Libraries → Install new libraries (online)</strong> to refresh.</p>
+<h2 id="windows-defender-flags-the-bline-gui-installer">Windows Defender flags the BLine-GUI installer<a class="headerlink" href="#windows-defender-flags-the-bline-gui-installer" title="Permanent link">&para;</a></h2>
+<p><strong>Cause:</strong> The Windows binaries are currently unsigned. False positives are occasional (not universal).</p>
+<p><strong>Fix:</strong></p>
+<ol>
+<li><strong>Install from source</strong> via <code>pipx install git+https://github.com/edanliahovetsky/BLine-GUI.git</code> — no AV flag issues that way.</li>
+<li><strong>Whitelist</strong> BLine in your antivirus if you trust the download source. See the <a href="https://github.com/edanliahovetsky/BLine-GUI/releases">BLine-GUI releases page</a> for the official download URL.</li>
+</ol>
+<p>Code-signing for the Windows binaries is on the roadmap.</p>
+<h2 id="unregistered-event-trigger-key-warnings-in-the-logs">"Unregistered event trigger key" warnings in the logs<a class="headerlink" href="#unregistered-event-trigger-key-warnings-in-the-logs" title="Permanent link">&para;</a></h2>
+<p><strong>Cause:</strong> Your path references an <code>EventTrigger</code> whose <code>lib_key</code> was never passed to <code>FollowPath.registerEventTrigger(...)</code>.</p>
+<p><strong>Fix:</strong> Register the key at robot init (in <code>RobotContainer</code>'s constructor). Keys match by string, case-sensitive. Typos are the most common cause.</p>
+<p>BLine deliberately doesn't crash on missing keys — the path completes normally, only the trigger's action is skipped. Fix the typo and it'll fire next time.</p>
+<h2 id="configjson-isnt-being-read">Config.json isn't being read<a class="headerlink" href="#configjson-isnt-being-read" title="Permanent link">&para;</a></h2>
+<p><strong>Symptoms:</strong> The defaults you set in <code>config.json</code> don't seem to take effect; BLine falls back to built-in defaults.</p>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>File is in the wrong place. It should be at <code>src/main/deploy/autos/config.json</code>, which deploys to <code>/home/lvuser/deploy/autos/config.json</code> on the roboRIO.</li>
+<li>JSON is malformed. BLine-Lib will <code>throw</code> with the error — check the console for <code>Failed to load global constraints from .../config.json</code>.</li>
+<li>You are also calling <code>Path.setDefaultGlobalConstraints(...)</code> in code, which takes precedence. Either use the code path or the file, not both.</li>
+</ul>
+<p>Recent BLine-Lib releases (v0.8.3+) are more tolerant of config shape — they accept both flat and nested (<code>kinematic_constraints: { ... }</code>) layouts and log a warning + use a fallback when a specific key is missing rather than crashing. If you're on v0.8.2 or earlier and hit a startup crash after changing the GUI config, upgrade.</p>
+<h2 id="still-stuck">Still stuck?<a class="headerlink" href="#still-stuck" title="Permanent link">&para;</a></h2>
+<p>The <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778">Chief Delphi thread</a> is the best place to post with:</p>
+<ul>
+<li>What you're trying to do.</li>
+<li>A code/path snippet.</li>
+<li>A screenshot of your <code>FollowPath/remainingPathDistanceMeters</code> graph from AdvantageScope (or equivalent).</li>
+<li>Your constraints and the symptoms.</li>
+</ul>
+<p>Etherex and several community members respond actively.</p>
 
 
 
