@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -27,16 +27,35 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
+      - name: Install WeasyPrint system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b libcairo2
+
+      - name: Install Python dependencies
         run: pip install -r requirements.txt
 
-      - name: Build documentation
+      - name: Build documentation (site + PDF)
+        env:
+          ENABLE_PDF_EXPORT: "1"
         run: mkdocs build
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
+
+      - name: Publish PDF to rolling "latest" release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Latest Documentation PDF
+          body: |
+            Auto-generated PDF of the BLine documentation, rebuilt on every push to `main`.
+
+            Download: [BLine-Docs.pdf](https://github.com/${{ github.repository }}/releases/latest/download/BLine-Docs.pdf)
+          files: site/BLine-Docs.pdf
+          make_latest: "true"
 
   deploy:
     environment:

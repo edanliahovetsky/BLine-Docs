@@ -10,6 +10,8 @@
 
 **[View the Documentation →](https://edanliahovetsky.github.io/BLine-Docs/)**
 
+**[Download PDF (offline copy) →](https://github.com/edanliahovetsky/BLine-Docs/releases/latest/download/BLine-Docs.pdf)**
+
 ---
 
 ## What is BLine?

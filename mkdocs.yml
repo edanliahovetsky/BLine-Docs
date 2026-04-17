@@ -71,6 +71,11 @@ markdown_extensions:
 
 plugins:
   - search
+  - with-pdf:
+      output_path: BLine-Docs.pdf
+      cover_title: BLine Documentation
+      cover_subtitle: Open-source path generation and tracking suite for FRC holonomic drivetrains
+      enabled_if_env: ENABLE_PDF_EXPORT
 
 nav:
   - Home: index.md
