@@ -32,3 +32,6 @@ Thumbs.db
 
 # MkDocs
 .cache/
+
+# oh-my-claudecode local state
+.omc/
