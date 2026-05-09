@@ -8,7 +8,7 @@
 
 ## 📖 Live Documentation
 
-**[View the Documentation →](https://edanliahovetsky.github.io/BLine-Docs/)**
+**[View the Documentation →](https://bline-docs.pages.dev/)**
 
 **[Download PDF (offline copy) →](https://github.com/edanliahovetsky/BLine-Docs/releases/latest/download/BLine-Docs.pdf)**
 
@@ -73,6 +73,20 @@ mkdocs build
 ```
 
 The static site will be generated in the `site/` directory.
+
+### Cloudflare Pages
+
+The documentation site is intended to deploy through Cloudflare Pages.
+
+Use these project settings:
+
+```text
+Production branch: main
+Build command: pip install -r requirements.txt && mkdocs build
+Output directory: site
+```
+
+Keep the GitHub Action enabled for the rolling `BLine-Docs.pdf` release asset.
 
 ---
 
