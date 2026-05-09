@@ -4,7 +4,7 @@
 [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](./LICENSE)
 
 > **This repository contains the documentation website for BLine.**  
-> Looking for the actual code? See [BLine-Lib](https://github.com/edanliahovetsky/BLine-Lib) and [BLine-GUI](https://github.com/edanliahovetsky/BLine-GUI).
+> Looking for the actual code? See [BLine-Lib](https://github.com/edanliahovetsky/BLine-Lib), [BLine Web](https://github.com/edanliahovetsky/BLine-Web), and [BLine-GUI](https://github.com/edanliahovetsky/BLine-GUI).
 
 ## 📖 Live Documentation
 
@@ -22,7 +22,8 @@
 
 | Component | Description | Repository |
 |-----------|-------------|------------|
-| **BLine-GUI** | Visual path planning interface with real-time simulation | [GitHub](https://github.com/edanliahovetsky/BLine-GUI) |
+| **BLine Web** | Browser and desktop path planning interface with real-time simulation | [App](https://bline-web.pages.dev/) / [GitHub](https://github.com/edanliahovetsky/BLine-Web) |
+| **BLine-GUI** | Legacy visual path planning interface | [GitHub](https://github.com/edanliahovetsky/BLine-GUI) |
 | **BLine-Lib** | Java library for FRC robots with path-following algorithm | [GitHub](https://github.com/edanliahovetsky/BLine-Lib) |
 
 ### Key Advantages
@@ -134,7 +135,8 @@ Contributions to improve the documentation are welcome!
 ## 🔗 Related Resources
 
 - **[BLine-Lib on GitHub](https://github.com/edanliahovetsky/BLine-Lib)** — Java library source code
-- **[BLine-GUI on GitHub](https://github.com/edanliahovetsky/BLine-GUI)** — GUI application source code
+- **[BLine Web on GitHub](https://github.com/edanliahovetsky/BLine-Web)** — browser and desktop editor source code
+- **[BLine-GUI on GitHub](https://github.com/edanliahovetsky/BLine-GUI)** — legacy GUI application source code
 - **[Full Javadoc](https://edanliahovetsky.github.io/BLine-Lib/)** — API reference
 - **[Chief Delphi Discussion](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778)** — Community discussion thread
 

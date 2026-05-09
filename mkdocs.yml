@@ -46,6 +46,9 @@ extra:
       link: https://github.com/edanliahovetsky/BLine-Lib
       name: BLine-Lib (GitHub)
     - icon: fontawesome/brands/github
+      link: https://github.com/edanliahovetsky/BLine-Web
+      name: BLine Web (GitHub)
+    - icon: fontawesome/brands/github
       link: https://github.com/edanliahovetsky/BLine-GUI
       name: BLine-GUI (GitHub)
 

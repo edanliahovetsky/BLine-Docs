@@ -1,67 +1,60 @@
 # Installation
 
-BLine has two pieces: the **GUI** for designing paths on a desktop, and the **Java library** that runs path-following on your robot. They are independent — install whichever pieces your workflow needs.
+BLine has two pieces: the **editor** for designing paths on a desktop or in the browser, and the **Java library** that runs path-following on your robot. They are independent — install whichever pieces your workflow needs.
 
 !!! tip "Which do I install?"
-    - **Visual workflow** → install both the GUI and the library.
+    - **Visual workflow** → use BLine Web or install the desktop editor, plus the library.
     - **JSON-only workflow** → install only the library and hand-author JSON in `deploy/autos/paths/`.
     - **Code-only workflow** → install only the library and build `Path` objects in Java.
 
 ---
 
-## BLine-GUI
+## BLine Web Editor
 
 ### Option 1: Prebuilt Binaries (recommended)
 
-Download the latest release for your platform from the [**BLine-GUI Releases page**](https://github.com/edanliahovetsky/BLine-GUI/releases/latest).
+Use the [hosted browser editor](https://bline-web.pages.dev/) or download the latest desktop build for your platform.
 
 === "Windows"
 
-    BLine-GUI publishes both an installer and a portable ZIP.
+    Download [Windows x64](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/latest/windows-x64?source=docs).
 
-    **Installer**
-
-    1. Download `BLine-{version}-Setup.exe`.
-    2. Run it and follow the wizard.
+    1. Run the downloaded installer or bundle.
+    2. Follow the wizard.
     3. Launch BLine from the Start Menu.
-
-    **Portable**
-
-    1. Download `BLine-{version}-Windows-Portable.zip`.
-    2. Extract anywhere.
-    3. Run `BLine.exe`.
 
     The bundles are fully self-contained — no Python install required.
 
     !!! note "Windows Defender / antivirus"
-        The current Windows binaries are unsigned. On a clean Defender install they have not been flagged in testing, but third-party AV may occasionally false-positive. If that happens, either whitelist BLine or install from source instead (see Option 2).
+        The current Windows binaries are unsigned. On a clean Defender install they have not been flagged in testing, but third-party AV may occasionally false-positive. If that happens, either whitelist BLine or use the hosted browser editor instead.
 
 === "macOS"
 
-    **DMG (Apple Silicon)**
+    Download one of:
 
-    1. Download `BLine-{version}-macOS-arm64.dmg`.
-    2. Open the DMG and drag BLine to your Applications folder.
-    3. Launch BLine from Applications.
+    - [macOS Apple Silicon](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/latest/macos-aarch64?source=docs)
+    - [macOS Intel](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/latest/macos-x64?source=docs)
 
-    macOS builds were added in **BLine-GUI v0.5.0**. If you are on older Intel Macs or want the very latest `main`, install from source (Option 2) instead.
+    Open the downloaded app bundle or DMG and move BLine to your Applications folder if prompted.
 
 === "Linux"
 
-    **AppImage (all distributions)**
+    Download [Linux x64](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/latest/linux-x64?source=docs).
 
-    1. Download `BLine-x86_64.AppImage`.
+    1. Save the downloaded file.
     2. Make it executable and run it:
        ```bash
-       chmod +x BLine-x86_64.AppImage
-       ./BLine-x86_64.AppImage
+       chmod +x BLine-*.AppImage
+       ./BLine-*.AppImage
        ```
 
     No system dependencies required.
 
-### Option 2: Install from Source (Python package)
+If a platform link is temporarily unavailable, use the [BLine Web GitHub Releases page](https://github.com/edanliahovetsky/BLine-Web/releases/latest) as the direct fallback.
 
-Use this if you want the latest `main`, need an unsupported platform/architecture, or prefer a pip-managed install.
+### Option 2: Legacy BLine-GUI from Source (Python package)
+
+Use this if you specifically need the legacy PySide6 GUI from `BLine-GUI`.
 
 **Quick install (any platform with `pipx`):**
 
@@ -123,11 +116,11 @@ bline --create-shortcut
         pipx install --python python3.12 git+https://github.com/edanliahovetsky/BLine-GUI.git
         ```
 
-### Updating the GUI
+### Updating the Editor
 
 ```bash
-# If you installed via a prebuilt binary:
-# download the latest release and reinstall.
+# If you installed via a prebuilt BLine Web binary:
+# download the latest desktop build and reinstall.
 
 # If you installed via pipx:
 pipx upgrade bline
@@ -146,7 +139,7 @@ pip install --upgrade git+https://github.com/edanliahovetsky/BLine-GUI.git
     pipx install git+https://github.com/edanliahovetsky/BLine-GUI.git
     ```
 
-### Uninstalling the GUI
+### Uninstalling the Legacy GUI
 
 ```bash
 # pipx
@@ -170,10 +163,16 @@ BLine-Lib is distributed as a WPILib vendor library via JitPack. The current rel
 5. Paste:
 
     ```
-    https://raw.githubusercontent.com/edanliahovetsky/BLine-Lib/main/BLine-Lib.json
+    https://bline-metrics.edan-liahovetsky.workers.dev/vendor/BLine-Lib.json
     ```
 
 WPILib will download the vendor JSON and pin it to your project. To update to a newer version later, re-run the command and paste the same URL.
+
+Fallback direct vendor JSON:
+
+```text
+https://raw.githubusercontent.com/edanliahovetsky/BLine-Lib/main/BLine-Lib.json
+```
 
 ### Option 2: Gradle (JitPack)
 

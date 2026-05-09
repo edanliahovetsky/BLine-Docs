@@ -13,7 +13,7 @@ The current release is **BLine-GUI v0.5.0**, which added macOS binaries, a new c
 | Prebuilt binary (Windows / macOS / Linux) | Start Menu, Applications folder, or double-click the executable |
 | Source install (pip/pipx) | Run `bline` from a terminal |
 
-See [Installation](../getting-started/installation.md#bline-gui) if you haven't installed it yet. To create a desktop shortcut when using the source install, run `bline --create-shortcut`.
+See [Installation](../getting-started/installation.md#bline-web-editor) if you haven't installed it yet. To create a desktop shortcut when using the legacy source install, run `bline --create-shortcut`.
 
 ## Interface layout
 
@@ -94,7 +94,7 @@ Highlights since the initial BLine-GUI release:
 - **v0.4.0 — Selection clarity.** Animated selection indicator on the canvas. Better sync between canvas/sidebar selection. Clicking empty field space clears selection. Drag/reorder/undo preserve selection more reliably.
 - **v0.3.0 — Protrusions.** New per-element protrusion rendering (left/right/front/back/none) with event-trigger-driven show/hide. Reorganized config dialog. See [Protrusions](protrusions.md).
 
-For the full release history, see the [Chief Delphi thread](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778) or the [BLine-GUI releases page](https://github.com/edanliahovetsky/BLine-GUI/releases).
+For the full release history, see the [Chief Delphi thread](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778) or the [BLine Web releases page](https://github.com/edanliahovetsky/BLine-Web/releases/latest).
 
 ## Learn more
 

@@ -159,14 +159,14 @@ implementation 'com.github.edanliahovetsky:BLine-Lib:v0.8.4'
 
 If you're on the vendor JSON approach, re-run **WPILib: Manage Vendor Libraries → Install new libraries (online)** to refresh.
 
-## Windows Defender flags the BLine-GUI installer
+## Windows Defender flags the BLine desktop installer
 
 **Cause:** The Windows binaries are currently unsigned. False positives are occasional (not universal).
 
 **Fix:**
 
-1. **Install from source** via `pipx install git+https://github.com/edanliahovetsky/BLine-GUI.git` — no AV flag issues that way.
-2. **Whitelist** BLine in your antivirus if you trust the download source. See the [BLine-GUI releases page](https://github.com/edanliahovetsky/BLine-GUI/releases) for the official download URL.
+1. **Use the hosted editor** at [bline-web.pages.dev](https://bline-web.pages.dev/) if you do not need native filesystem access.
+2. **Whitelist** BLine in your antivirus if you trust the download source. See the [BLine Web releases page](https://github.com/edanliahovetsky/BLine-Web/releases/latest) for the direct fallback download URL.
 
 Code-signing for the Windows binaries is on the roadmap.
 

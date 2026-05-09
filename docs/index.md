@@ -61,7 +61,8 @@ Monte-Carlo simulation validation (WPILib physics sim, Theta\* initial pathfindi
 ## External Resources
 
 - **[BLine-Lib on GitHub](https://github.com/edanliahovetsky/BLine-Lib)** — Java library source
-- **[BLine-GUI on GitHub](https://github.com/edanliahovetsky/BLine-GUI)** — GUI source and releases (incl. Windows/Linux/macOS binaries)
+- **[BLine Web](https://bline-web.pages.dev/)** — browser editor and desktop downloads for Windows, macOS, and Linux
+- **[BLine-GUI on GitHub](https://github.com/edanliahovetsky/BLine-GUI)** — legacy GUI source and releases
 - **[Full Javadoc](https://edanliahovetsky.github.io/BLine-Lib/)** — Generated API reference
 - **[Chief Delphi Thread](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778)** — Discussion, release notes, community tips
 
