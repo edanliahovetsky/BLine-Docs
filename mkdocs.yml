@@ -1,6 +1,6 @@
 site_name: BLine Documentation
 site_description: Open-source path generation and tracking suite for FRC holonomic drivetrains
-site_url: https://edanliahovetsky.github.io/BLine-Docs/
+site_url: https://bline-docs.pages.dev/
 
 theme:
   name: material
@@ -106,4 +106,3 @@ nav:
     - API Reference: lib/api-reference.md
   - Tuning & Usage Tips: usage-tips.md
   - Common Issues: common-issues.md
-
