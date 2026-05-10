@@ -159,6 +159,28 @@ implementation 'com.github.edanliahovetsky:BLine-Lib:v0.8.4'
 
 If you're on the vendor JSON approach, re-run **WPILib: Manage Vendor Libraries → Install new libraries (online)** to refresh.
 
+## The BLine-Lib vendor JSON URL does not load
+
+**Cause:** The recommended vendor URL is served by the BLine Metrics Worker. If
+Cloudflare or the Worker endpoint is temporarily unavailable, WPILib may fail to
+fetch the vendor JSON even though the library release still exists.
+
+**Fix:** First try the recommended vendor URL again:
+
+```text
+https://bline-metrics.edan-liahovetsky.workers.dev/vendor/BLine-Lib.json
+```
+
+If it still does not load, use the direct GitHub fallback:
+
+```text
+https://raw.githubusercontent.com/edanliahovetsky/BLine-Lib/main/BLine-Lib.json
+```
+
+Both files point to the same BLine-Lib version. The Worker URL is preferred
+because it lets the project count aggregate vendor JSON fetches without
+public-user cookies.
+
 ## Windows Defender flags the BLine desktop installer
 
 **Cause:** The Windows binaries are currently unsigned. False positives are occasional (not universal).

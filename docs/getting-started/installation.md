@@ -156,11 +156,15 @@ BLine-Lib is distributed as a WPILib vendor library via JitPack. The current rel
 
 ### Option 1: Vendor JSON (recommended)
 
+BLine-Lib's recommended WPILib vendor URL is the BLine Metrics Worker endpoint.
+It serves the current vendor JSON and lets the project count aggregate install
+interest without public-user cookies.
+
 1. Open VS Code with your FRC robot project.
 2. Press `Ctrl+Shift+P` (`Cmd+Shift+P` on macOS).
 3. Run **WPILib: Manage Vendor Libraries**.
 4. Select **Install new libraries (online)**.
-5. Paste:
+5. Paste the recommended vendor URL:
 
     ```
     https://bline-metrics.edan-liahovetsky.workers.dev/vendor/BLine-Lib.json
@@ -168,7 +172,8 @@ BLine-Lib is distributed as a WPILib vendor library via JitPack. The current rel
 
 WPILib will download the vendor JSON and pin it to your project. To update to a newer version later, re-run the command and paste the same URL.
 
-Fallback direct vendor JSON:
+If the Worker URL is temporarily unavailable, use the direct GitHub vendor JSON
+as the fallback:
 
 ```text
 https://raw.githubusercontent.com/edanliahovetsky/BLine-Lib/main/BLine-Lib.json
