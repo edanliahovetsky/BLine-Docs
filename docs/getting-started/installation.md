@@ -13,11 +13,11 @@ BLine has two pieces: the **editor** for designing paths on a desktop or in the 
 
 ### Option 1: Prebuilt Binaries (recommended)
 
-Use the [hosted browser editor](https://bline-web.pages.dev/) or download the latest desktop build for your platform.
+Use the [hosted browser editor](https://bline-web.pages.dev/) or download the desktop build for your platform. Current public desktop builds are pre-release; stable channel links will resolve once the first stable BLine Web release is published.
 
 === "Windows"
 
-    Download [Windows x64](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/latest/windows-x64?source=docs).
+    Download [Windows x64](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/prerelease/windows-x64?source=docs-prerelease).
 
     1. Run the downloaded installer or bundle.
     2. Follow the wizard.
@@ -32,14 +32,14 @@ Use the [hosted browser editor](https://bline-web.pages.dev/) or download the la
 
     Download one of:
 
-    - [macOS Apple Silicon](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/latest/macos-aarch64?source=docs)
-    - [macOS Intel](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/latest/macos-x64?source=docs)
+    - [macOS Apple Silicon](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/prerelease/macos-aarch64?source=docs-prerelease)
+    - [macOS Intel](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/prerelease/macos-x64?source=docs-prerelease)
 
     Open the downloaded app bundle or DMG and move BLine to your Applications folder if prompted.
 
 === "Linux"
 
-    Download [Linux x64](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/latest/linux-x64?source=docs).
+    Download [Linux x64](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/prerelease/linux-x64?source=docs-prerelease).
 
     1. Save the downloaded file.
     2. Make it executable and run it:
@@ -120,7 +120,7 @@ bline --create-shortcut
 
 ```bash
 # If you installed via a prebuilt BLine Web binary:
-# download the latest desktop build and reinstall.
+# download the desired desktop channel build and reinstall.
 
 # If you installed via pipx:
 pipx upgrade bline
