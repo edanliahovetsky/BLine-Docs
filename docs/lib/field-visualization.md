@@ -60,7 +60,7 @@ A useful Elastic field view has two independent layers:
 - the selected BLine path as a connected polyline; and
 - the live robot pose from the same `Field2d`.
 
-The line should pass through every authored waypoint and translation target. It does not show rotation targets, event locations, handoff circles, constraint ranges, or a moving preview robot. Keep BLine Web open when those authoring details matter.
+The line should pass through every authored waypoint and translation target. It does not show rotation targets, event locations, handoff circles, ranged constraints, or a moving preview robot. Keep BLine Web open when those authoring details matter.
 
 A representative operator layout places the autonomous chooser beside this field view so the readable selection, connected path object, and live robot pose can be checked together. The line is planned geometry, not a time-parameterized trajectory.
 

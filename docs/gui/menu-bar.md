@@ -100,7 +100,7 @@ After a destructive library edit, verify the active path and collection before c
 | Linked-element identities | No | Yes |
 | Robot footprint/protrusion rendering | No | Yes |
 | Custom field image and selection | No | Yes |
-| Optimizer settings and automatic-range metadata | No | Yes |
+| Optimizer settings and automatic ranged-constraint metadata | No | Yes |
 
 Export a project archive before major restructuring. BLine Web is still alpha; reopen the exported/folder-backed project and verify collection and linked-element state as part of your team workflow.
 

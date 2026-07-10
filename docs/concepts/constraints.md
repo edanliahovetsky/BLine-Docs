@@ -11,9 +11,9 @@ Use constraints as part of path creation, not as a cleanup step after the geomet
 1. Draw the route with the fewest anchors that describe it clearly.
 2. Decide where the robot may travel quickly and where it must slow down.
 3. Run the maximum-velocity optimizer for an initial set of local caps.
-4. Review the generated ranges and edit any region with a mechanism, clearance, or scoring requirement the optimizer cannot know.
+4. Review the generated ranged constraints and edit any region with a mechanism, clearance, or scoring requirement the optimizer cannot know.
 5. Simulate to check the structure and sequencing.
-6. Test incrementally on the robot and refine local **maximum velocity** ranges.
+6. Test incrementally on the robot and refine local **maximum-velocity ranged constraints**.
 
 ```text
 geometry  →  velocity plan  →  optimizer  →  simulate  →  robot test
@@ -36,7 +36,7 @@ The optimizer makes a geometry-based first proposal. The author still owns the v
 | End translation tolerance | m | Yes | One scalar per path |
 | End rotation tolerance | deg | Yes | One scalar per path |
 
-Handoff radius is configured globally or per translation element; it is not a path-range constraint. See [Handoffs, t-ratio & Completion](key-parameters.md).
+Handoff radius is configured globally or per translation element; it is not a path-specific ranged constraint. See [Handoffs, t-ratio & Completion](key-parameters.md).
 
 ## Maximum translation velocity shapes the path
 
@@ -48,20 +48,20 @@ A polyline does not encode a time schedule. BLine continuously drives toward the
 - lower it on the approach to a precise final pose; and
 - leave enough distance at the lower cap for the real robot to respond.
 
-Changing only a handoff radius changes **where** the next segment becomes active. Changing maximum velocity changes **how fast** the robot reaches that transition. Decide the intended route first, then use velocity ranges to make that route achievable.
+Changing only a handoff radius changes **where** the next segment becomes active. Changing maximum velocity changes **how fast** the robot reaches that transition. Decide the intended route first, then use maximum-velocity ranged constraints to make that route achievable.
 
 ## Resolution order
 
 For each element and constraint type, BLine-Lib resolves the value in this order:
 
-1. The **first** path range whose inclusive bounds contain that element's ordinal.
-2. The matching global maximum/default when no range matches.
-3. Zero for a minimum-velocity constraint with no matching path range.
+1. The **first** path-specific ranged constraint whose inclusive bounds contain that element's ordinal.
+2. The matching global maximum/default when no ranged constraint matches.
+3. Zero for a minimum-velocity constraint with no matching path-specific ranged constraint.
 
 Path end tolerances use their path scalar when present, otherwise the global value.
 
-!!! warning "Range order matters in hand-authored data"
-    If overlapping ranges reach BLine-Lib, the first matching range wins. BLine Web repairs its range model to avoid overlap, but generated Java or JSON should not depend on ambiguous ordering.
+!!! warning "Ranged-constraint order matters in hand-authored data"
+    If overlapping ranged constraints reach BLine-Lib, the first matching ranged constraint wins. BLine Web repairs its ranged-constraint model to avoid overlap, but generated Java or JSON should not depend on ambiguous ordering.
 
 ## Translation and rotation use separate ordinals
 
@@ -80,7 +80,7 @@ Rotation track:       1                              2            3
 - A **Rotation Target** increments only the rotation track.
 - An **Event Trigger** increments neither constraint track.
 
-Translation velocity/acceleration ranges use the translation track. Rotation ranges use the rotation track.
+Translation ranged constraints use the translation track. Rotation ranged constraints use the rotation track.
 
 ### Editor versus runtime numbering
 
@@ -92,14 +92,14 @@ BLine Web shows ordinals starting at **1**. Exported path JSON and Java `RangedC
 | 2 | 1 |
 | 3 | 2 |
 
-Use the editor rather than manually translating ranges when possible.
+Use the editor rather than manually converting ranged-constraint ordinals when possible.
 
 ## A common recipe: fast straight, slow turn
 
 For a path with four translation anchors:
 
 1. Leave the open straight at the global maximum.
-2. Add a max-translation-velocity range covering the anchor before the turn and the turn anchor.
+2. Add a maximum-translation-velocity ranged constraint covering the anchor before the turn and the turn anchor.
 3. Run the optimizer for an initial cap.
 4. Simulate to confirm the slowdown occurs in the intended section.
 5. Test on the robot and adjust the cap from observed behavior.
@@ -108,7 +108,7 @@ Do not shrink the handoff radius as the first response to high-speed overshoot. 
 
 ## Java API
 
-A scalar Java setter creates a whole-path range:
+A scalar Java setter creates a whole-path ranged constraint:
 
 ```java
 Path.PathConstraints constraints = new Path.PathConstraints()
@@ -165,7 +165,7 @@ Possible advanced uses include:
 - shaping the portion of the endpoint approach in which the controller can request very small outputs; or
 - a tested edge case that specifically requires a nonzero command floor.
 
-Start at zero and first solve ordinary path behavior with controller tuning, maximum-velocity ranges, handoff behavior, and tolerances. A minimum that is too high can carry the robot through the tolerance, create overshoot, or produce chatter.
+Start at zero and first solve ordinary path behavior with controller tuning, maximum-velocity ranged constraints, handoff behavior, and tolerances. A minimum that is too high can carry the robot through the tolerance, create overshoot, or produce chatter.
 
 !!! warning "A minimum does not create continuous path chaining by itself"
     `FollowPath` still sends zero chassis speeds when the command ends in BLine-Lib v0.9.1. If a composed routine uses a minimum to arrive at the final tolerance with nonzero motion, test the entire command transition and its requirements rather than assuming velocity continuity.

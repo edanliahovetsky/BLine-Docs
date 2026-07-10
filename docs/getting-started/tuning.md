@@ -235,10 +235,10 @@ Controller gains should work across normal paths. Path-specific motion should be
 
 1. Set the global maximum to the robot's tested capability.
 2. Draw the path geometry.
-3. Use BLine Web's optimizer to generate an initial set of maximum-velocity ranges.
-4. Review those ranges around corners, scoring approaches, and mechanism-sensitive areas.
+3. Use BLine Web's optimizer to generate an initial set of maximum-velocity ranged constraints.
+4. Review those ranged constraints around corners, scoring approaches, and mechanism-sensitive areas.
 5. Simulate, test, and refine the local velocity limits.
-6. Use maximum-acceleration ranges where traction or mechanism stability requires them, then revalidate the endpoint response.
+6. Use maximum-acceleration ranged constraints where traction or mechanism stability requires them, then revalidate the endpoint response.
 
 Maximum velocity is a central path-authoring control: it determines how aggressively the robot approaches each part of the geometry. The optimizer provides a useful first pass, not a guarantee of real robot dynamics. See [Constraints & Optimizer](../gui/sidebar.md).
 

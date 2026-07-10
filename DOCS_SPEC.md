@@ -36,6 +36,7 @@ Do not force every page into the same heading template. Match the structure to t
 - Distinguish shipped product defaults, tutorial starting values, full-speed tuning values, and advanced overrides. State the context whenever publishing a recommended number.
 - Explain the intended supported workflow in tutorials and how-to pages. Keep exact incidental mechanics in concept or reference material when foregrounding them would distract from the normal workflow.
 - Use **BLine Web** or **the editor** for workflows shared by the hosted editor and desktop app. Do not describe a shared authoring capability as browser-only; mention both surfaces when platform availability matters, and use browser- or desktop-specific wording only when their storage, import/export, installation, or controls actually differ.
+- Name the feature **ranged constraint** whenever prose refers to a constraint applied across part or all of a path. Prefer specific forms such as **minimum-velocity ranged constraint** and **maximum-acceleration ranged constraint**; reserve **range** by itself for an actual UI range control, an ordinal span, a numeric band, or a JSON range object.
 - Keep tutorials linear and avoid side quests.
 - Keep reference pages compact and table-friendly.
 - Keep troubleshooting pages symptom-first.

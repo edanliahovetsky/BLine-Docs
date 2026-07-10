@@ -55,7 +55,7 @@ Neither model is universally better. They optimize different assumptions.
 
 ### Where its tradeoffs matter
 
-- A sharp corner is not automatically slowed just because it is sharp. Add an appropriate range or review the optimizer output.
+- A sharp corner is not automatically slowed just because it is sharp. Add an appropriate maximum-velocity ranged constraint or review the optimizer output.
 - A physically blocked robot may keep trying forever unless the command composition adds a timeout or fallback.
 - The drawn polyline is not proof that the chassis can follow it at the requested acceleration.
 - A large handoff radius can cut geometry; a small one can be impossible to enter at speed.

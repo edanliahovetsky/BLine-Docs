@@ -75,7 +75,7 @@ Do not keep `withPoseReset(driveSubsystem::resetPose)` on the reused builder for
 
 ### Advanced: arrive with a nonzero command
 
-A minimum-velocity range can deliberately keep the translation command above zero until the final tolerance is entered. This can be useful when one path should arrive moving into the next path, but it is controller-domain shaping—not a normal path default.
+A minimum-velocity ranged constraint can deliberately keep the translation command above zero until the final tolerance is entered. This can be useful when one path should arrive moving into the next path, but it is controller-domain shaping—not a normal path default.
 
 Use it only after the controllers, maximum-velocity plan, endpoint tolerance, and command composition already behave correctly. In BLine-Lib v0.9.1, `FollowPath.end()` still sends zero speeds, so test the whole path-to-path transition rather than assuming the minimum creates mathematically continuous motion.
 
@@ -85,7 +85,7 @@ For a region where the robot should preserve momentum:
 
 1. Put one anchor before the feature and one after it.
 2. Avoid a handoff point on top of the disturbance.
-3. Use a range to control approach speed without forcing a stop on the feature.
+3. Use a maximum-velocity ranged constraint to control approach speed without forcing a stop on the feature.
 4. Use a handoff radius the robot can enter with expected pose error.
 5. Enable t-ratio handoffs when the intermediate anchors are pass-through targets, so missing a handoff circle does not make the robot reverse on the disturbance.
 6. Add an intentional timeout/fallback if becoming stuck should abort the remaining routine.
@@ -97,12 +97,12 @@ Test the path in the real direction and payload state. The editor simulation doe
 When the final pose must be accurate:
 
 1. Keep controller gains that already work globally.
-2. Add a lower max-velocity range over the final translation ordinals.
+2. Add a lower maximum-velocity ranged constraint over the final translation ordinals.
 3. Keep the maximum-acceleration limit at the value used to tune and validate the controller unless the robot's physical operating condition requires a different tested envelope.
 4. Choose a tolerance based on the scoring requirement.
 5. Plot measured speed because v0.9.1 has no final-velocity finish criterion.
 
-Shape a gentle arrival primarily with the local maximum-velocity range. Lowering maximum acceleration after tuning can delay BLine's commanded velocity changes near the endpoint, while an extremely tight tolerance does not fix an approach that is too fast.
+Shape a gentle arrival primarily with the local maximum-velocity ranged constraint. Lowering maximum acceleration after tuning can delay BLine's commanded velocity changes near the endpoint, while an extremely tight tolerance does not fix an approach that is too fast.
 
 ## Aim while translating
 

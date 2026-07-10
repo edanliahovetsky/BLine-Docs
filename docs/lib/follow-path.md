@@ -40,7 +40,7 @@ The three PIDs do not directly control motors:
 4. Active maximum velocities cap the request. Active maximum accelerations limit how quickly it may change from the follower's previous commanded speeds, including while the controller is trying to decelerate near the endpoint.
 5. BLine converts the resulting request to robot-relative `ChassisSpeeds`; the drivetrain then has to realize it.
 
-A velocity constraint is a ceiling, not a promise that the robot reaches that speed. It is also a primary path-authoring control: use local maximum-velocity ranges to slow turns and precision approaches. An acceleration constraint is a command slew limit, not a drivetrain model or proof of traction. Setting it much lower can delay both acceleration and braking and can change the apparent controller tune. Compare BLine's requested outputs with measured drivetrain speed when tuning.
+A velocity constraint is a ceiling, not a promise that the robot reaches that speed. It is also a primary path-authoring control: use local maximum-velocity ranged constraints to slow turns and precision approaches. An acceleration constraint is a command slew limit, not a drivetrain model or proof of traction. Setting it much lower can delay both acceleration and braking and can change the apparent controller tune. Compare BLine's requested outputs with measured drivetrain speed when tuning.
 
 ## Builder options
 

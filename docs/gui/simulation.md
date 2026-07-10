@@ -59,7 +59,7 @@ For a path with no rotation target, the Web preview initially points along the f
 
 ## A three-stage validation loop
 
-1. **Editor:** check geometry, element order, ranges, rotations, marker placement, protrusion preview, and footprint.
+1. **Editor:** check geometry, element order, ranged constraints, rotations, marker placement, protrusion preview, and footprint.
 2. **WPILib simulation:** exercise actual robot code, command scheduling, pose reset, transforms, and logging.
 3. **Robot:** validate localization, module response, traction, endpoint behavior, and safety.
 

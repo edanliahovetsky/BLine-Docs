@@ -11,7 +11,7 @@ Think of a path as two layers:
 
 ![Diagram showing translation anchors defining straight segments while rotation targets and event triggers are placed by geometric progress without bending the route](../assets/images/concepts/path-element-layers.svg)
 
-The path elements define shape and sequencing, but they do not create a time schedule. **Maximum translation velocity** ranges determine how aggressively the robot travels through each part of that shape.
+The path elements define shape and sequencing, but they do not create a time schedule. **Maximum-translation-velocity ranged constraints** determine how aggressively the robot travels through each part of that shape.
 
 ## Element summary
 
@@ -51,7 +51,7 @@ Use translation targets to:
 
 - route around a field feature;
 - approximate a curve;
-- create a range boundary for local translation constraints; or
+- create a ranged-constraint boundary for local translation constraints; or
 - build a one-target drive-to-position command that holds the current heading.
 
 The optional handoff radius controls when the follower may advance to the next anchor. The final anchor is completed by tolerance rather than an intermediate handoff.
@@ -106,7 +106,7 @@ BLine Web enforces the allowed first/last element types when adding or convertin
 
 ## Draw a curve
 
-BLine Web's **Add curve** action records a field stroke, simplifies it, and inserts up to 18 translation targets. It also creates automatic max-velocity constraints for the inserted range.
+BLine Web's **Add curve** action records a field stroke, simplifies it, and inserts up to 18 translation targets. It also creates automatic maximum-velocity ranged constraints across the inserted ordinal span.
 
 ![Drawing a curve and converting it into editable translation targets](../assets/images/gif-posters/draw-curve-start.png){ .gif-demo data-gif-source="/assets/gifs/web/draw-curve.gif" data-gif-poster="/assets/images/gif-posters/draw-curve-start.png" data-gif-end="/assets/images/gif-posters/draw-curve-end.png" data-gif-duration="7580" }
 ![Static result of a drawn curve converted into editable translation targets](../assets/images/gif-posters/draw-curve-end.png){ .gif-print-poster }

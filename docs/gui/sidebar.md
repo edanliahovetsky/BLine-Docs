@@ -9,7 +9,7 @@ For a normal path:
 1. Draw the geometry.
 2. Identify the open travel, turns, narrow clearances, and precision approaches.
 3. Run the maximum-velocity optimizer.
-4. Review the proposed ranges and edit them where the optimizer lacks robot or game-task context.
+4. Review the proposed ranged constraints and edit them where the optimizer lacks robot or game-task context.
 5. Simulate the result.
 6. Test the path incrementally on the robot.
 
@@ -48,7 +48,7 @@ Each cell either shows a ranged value or remains **Open**. For maximum constrain
 | Delete one range | Select it and use the delete action or `Delete`/`Backspace` |
 | Use a larger surface | Choose **Editor** to open the movable modeless Constraint Editor |
 
-Dragging or editing an automatic range converts it to **Manual**, because the value no longer represents the optimizer output.
+Dragging or editing an automatic ranged constraint converts it to **Manual**, because the value no longer represents the optimizer output.
 
 The editor warns when a maximum is above the global value or a minimum is above the paired maximum. Resolve warnings rather than assuming the runtime will clamp them as intended.
 
@@ -62,12 +62,12 @@ The optimizer proposes **maximum translation velocity** caps from path geometry 
 1. Open the Max Velocity card.
 2. Review the **Optimizer** settings.
 3. Choose **Auto all** to fill eligible open segments.
-4. Inspect the generated ranges and the field sections they cover.
+4. Inspect the generated ranged constraints and the field sections they cover.
 5. Adjust caps for mechanisms, clearances, pickup stability, or scoring approaches the geometry alone cannot describe.
 6. Simulate the path.
-7. Test on the robot and convert/edit any range that needs manual control.
+7. Test on the robot and convert or edit any ranged constraint that needs manual control.
 
-**Clear auto** removes automatic ranges only. Manual ranges survive optimizer reruns.
+**Clear auto** removes automatic ranged constraints only. Manual ranged constraints survive optimizer reruns.
 
 ### Optimizer settings
 
@@ -79,7 +79,7 @@ The optimizer proposes **maximum translation velocity** caps from path geometry 
 
 These are editor defaults, not measured robot limits. Tune the project defaults and factors to your chassis and testing process.
 
-## Refresh stale automatic ranges
+## Refresh stale automatic ranged constraints
 
 Automatic caps can become stale after changes to:
 
@@ -96,14 +96,14 @@ Refresh the optimizer after those changes. A stale marker means “this value wa
 The optimizer is a geometry-based authoring assistant. It does not model the complete drivetrain, voltage, center of mass, wheel friction, carpet, battery state, pose noise, game-piece contact, or mechanism motion.
 
 !!! warning "Review every generated cap"
-    Automatic does not mean validated. Use the optimizer to reduce repetitive first-pass work, then confirm range placement, simulate structure, inspect robot logs, and keep manual caps where field behavior requires them.
+    Automatic does not mean validated. Use the optimizer to reduce repetitive first-pass work, then confirm ranged-constraint placement, simulate structure, inspect robot logs, and keep manual caps where field behavior requires them.
 
 ## Minimum velocity constraints
 
 The UI marks minimum constraints as advanced because they deliberately reshape the controller's low-output domain. They are not needed for ordinary path creation.
 
 - Start with no minimum.
-- Tune the controllers and shape the path with maximum-velocity ranges first.
+- Tune the controllers and shape the path with maximum-velocity ranged constraints first.
 - Consider a minimum only for an intentional nonzero arrival into a chained path, endpoint-domain shaping, or another tested edge case.
 - Add the smallest floor that produces the intended behavior.
 - Keep it below the active maximum.
@@ -115,9 +115,9 @@ The UI marks minimum constraints as advanced because they deliberately reshape t
 
 For each difficult turn or mechanism-sensitive region:
 
-1. Select the relevant range and confirm its highlighted path section.
+1. Select the relevant ranged constraint and confirm its highlighted path section.
 2. Identify whether the problem is route geometry, maximum velocity, handoff behavior, or a robot-control issue.
-3. Change one range, anchor, or optimizer factor.
+3. Change one ranged constraint, anchor, or optimizer factor.
 4. Re-run simulation for structural sanity.
 5. Run the robot under the same test conditions.
 6. Keep or revert the change based on the observed behavior.

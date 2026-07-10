@@ -34,7 +34,7 @@ Open **Path → Linked Elements…**. Create a translation or waypoint, edit it 
 
 The manager shows each linked element's type, lock state, and use count. Moving or editing an unlocked linked element synchronizes every linked use across project paths.
 
-Use collection overlays to inspect the result in context. A shared coordinate can still produce different motion because each path has its own surrounding geometry, handoff radii, and constraint ranges.
+Use collection overlays to inspect the result in context. A shared coordinate can still produce different motion because each path has its own surrounding geometry, handoff radii, and ranged constraints.
 
 ## Lock stable targets
 

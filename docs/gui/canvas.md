@@ -49,7 +49,7 @@ Reordering an anchor changes the segment that surrounding rotation targets and e
 
 ## Draw a curve
 
-Choose **Add curve**, draw the intended centerline on the field, and release. BLine Web simplifies the stroke into no more than 18 translation targets and applies automatic max-velocity caps over the inserted range.
+Choose **Add curve**, draw the intended centerline on the field, and release. BLine Web simplifies the stroke into no more than 18 translation targets and applies automatic maximum-velocity ranged constraints across the inserted ordinal span.
 
 ![Drawing a curve on the 2026 field and converting it into editable BLine elements](../assets/images/gif-posters/draw-curve-start.png){ .gif-demo data-gif-source="/assets/gifs/web/draw-curve.gif" data-gif-poster="/assets/images/gif-posters/draw-curve-start.png" data-gif-end="/assets/images/gif-posters/draw-curve-end.png" data-gif-duration="7580" }
 ![Static result of the curve converted into editable BLine elements](../assets/images/gif-posters/draw-curve-end.png){ .gif-print-poster }
@@ -58,7 +58,7 @@ After drawing:
 
 1. Remove points that do not materially improve the shape.
 2. Move points away from obstacles and handoff locations that are hard to reach.
-3. Review every automatic velocity range.
+3. Review every automatic maximum-velocity ranged constraint.
 4. Replace an endpoint translation with a waypoint when final heading matters.
 5. Simulate, then validate in WPILib simulation and on the robot.
 
@@ -84,7 +84,7 @@ For a coordinate that must remain identical across paths, use a [linked element]
 - First and last elements still represent the intended poses.
 - Rotation/event markers belong to the intended segment.
 - Translation and rotation constraint ordinals still cover the intended elements.
-- Automatic optimizer ranges are not stale.
+- Automatic ranged constraints from the optimizer are not stale.
 - Simulation starts, finishes, and shows the intended headings.
 
 Next: [Constraints & Optimizer](sidebar.md).

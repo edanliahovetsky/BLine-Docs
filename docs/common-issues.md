@@ -65,7 +65,7 @@ See [Alliance Flip & Mirror](lib/flip-and-mirror.md).
 The robot is likely moving too fast to enter the handoff radius.
 
 1. Plot `translationHandoffOccurred` and active max velocity.
-2. Lower the velocity over the approach range.
+2. Add a lower maximum-velocity ranged constraint over the approach ordinals.
 3. Confirm the radius is realistic for pose error and stopping distance.
 4. Enable t-ratio-based handoffs for ordinary pass-through intermediate anchors. They advance on circle entry **or** sufficient projected progress.
 
@@ -73,7 +73,7 @@ Keep radius-only behavior only when the robot must physically visit the anchor. 
 
 ## The robot stalls or slows on a bump
 
-Avoid an anchor or small handoff circle on top of the obstacle. Place anchors before and after it, preserve an intentional approach speed, and keep the range/geometry simple while the chassis is disturbed.
+Avoid an anchor or small handoff circle on top of the obstacle. Place anchors before and after it, preserve an intentional approach speed, and keep the ranged constraints and geometry simple while the chassis is disturbed.
 
 The editor simulation cannot predict traction or beaching.
 
@@ -96,7 +96,7 @@ Use the [translation tuning plots](getting-started/tuning.md#1-tune-translation)
 
 BLine-Lib v0.9.1 has no final measured-velocity criterion. If the robot enters both tolerances with momentum, the command finishes and sends zero speeds.
 
-Add a lower max-velocity range before the final anchor and validate measured velocity at the finish. Tightening tolerance alone may make the behavior slower or less stable without producing a gentle arrival.
+Add a lower maximum-velocity ranged constraint before the final anchor and validate measured velocity at the finish. Tightening tolerance alone may make the behavior slower or less stable without producing a gentle arrival.
 
 ## A physically blocked path never finishes
 
@@ -145,9 +145,9 @@ Also remember that editor ordinals are one-based while runtime JSON ordinals are
 
 ## Optimizer values are marked stale
 
-Geometry, handoff, rotation, path-default, or optimizer-setting inputs changed after generation. Re-run **Auto all**, then confirm manual ranges were preserved and inspect the new caps. “Refreshed” still does not mean robot-validated.
+Geometry, handoff, rotation, path-default, or optimizer-setting inputs changed after generation. Re-run **Auto all**, then confirm manual ranged constraints were preserved and inspect the new caps. “Refreshed” still does not mean robot-validated.
 
-The optimizer is part of the normal path-authoring loop. Refresh it after geometry or handoff changes, then review the proposed maximum-velocity ranges before simulation and robot testing.
+The optimizer is part of the normal path-authoring loop. Refresh it after geometry or handoff changes, then review the proposed maximum-velocity ranged constraints before simulation and robot testing.
 
 ## Editor preview differs from the robot
 
