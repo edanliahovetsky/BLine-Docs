@@ -156,7 +156,7 @@ Return `firstAuto` from the robot's autonomous selection code.
 
 ## 7. Pre-orient a swerve drivetrain
 
-Before enabling, point all swerve modules along the first direction of travel. Otherwise the robot spends the beginning of the path steering its modules and may make a small unwanted movement before it can drive forward. This matters on every autonomous path and becomes more important as the start gets more aggressive.
+For this first path, point all swerve modules along the first direction of travel before enabling. Otherwise the robot spends the beginning of the path steering its modules and may make a small unwanted movement before it can drive forward. Pre-orientation is useful for most paths and becomes especially important as the start gets more aggressive, although a gentle, tested path may not need a separate orientation step.
 
 BLine can calculate the initial direction for the loaded path:
 

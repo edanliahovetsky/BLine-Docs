@@ -1,8 +1,10 @@
 # Pre-Match Module Orientation for Swerve
 
-Every BLine swerve team should make the starting wheel direction an explicit part of autonomous preparation. Pointing the modules toward the first intended translation direction before the follower accelerates reduces the initial sideways twitch and avoids spending the first control cycles rotating modules under load.
+For most BLine swerve paths, make the starting wheel direction an explicit part of autonomous preparation. Pointing the modules toward the first intended translation direction before the follower accelerates reduces the initial sideways twitch and avoids spending the first control cycles rotating modules under load.
 
-Choose one tested method:
+Pre-orientation matters most when the path starts aggressively, the first movement differs substantially from the modules' resting direction, or the robot must clear a nearby obstacle precisely. It may be unnecessary for a gentle start that has been tested repeatedly and already begins with suitably aligned modules. Treat it as a path-by-path reliability decision, not a requirement to add an orientation step to every routine.
+
+When the path benefits from pre-orientation, choose one tested method:
 
 - **Commanded orientation:** ask the drivetrain to steer to the calculated direction, confirm it arrived, then start `FollowPath`.
 - **Manual orientation:** safely align the wheel tread directions during robot staging using a marked or documented direction for each starting configuration.

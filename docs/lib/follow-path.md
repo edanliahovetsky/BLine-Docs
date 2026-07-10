@@ -191,6 +191,6 @@ Use the logging consumers for controller output, target, constraint, event, and 
 - Fixed paths are loaded before they are needed.
 - Runtime paths are constructed when scheduled.
 - T-ratio-based handoff is enabled for normal pass-through anchors, or radius-only behavior is a deliberate choice.
-- Swerve modules are [pre-oriented](pre-match.md) before an autonomous path begins.
+- Swerve modules are [pre-oriented when the path benefits from it](pre-match.md), especially for an aggressive or direction-sensitive start.
 - A physically blocked path has an intentional timeout/fallback policy.
 - Rotation overrides are cleared before a conflicting final heading check.

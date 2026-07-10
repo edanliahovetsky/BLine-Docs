@@ -68,7 +68,7 @@ Confirm that:
 - individual swerve-module velocity and steering control are stable;
 - the test path uses the intended maximum velocity and acceleration;
 - minimum-velocity constraints are disabled;
-- the swerve modules are pre-oriented before each run; and
+- the swerve modules are pre-oriented before each tuning run so the starting condition stays consistent; and
 - the test area is clear and controlled.
 
 A controller cannot compensate for an incorrect wheel radius, gear ratio, coordinate frame, or noisy pose estimate.
@@ -257,7 +257,7 @@ If a minimum exceeds the resolved maximum, BLine warns, falls back to the global
 - Rotation follows immediate and profiled targets without sustained lag or repeated overshoot.
 - CTE removes a lateral offset from either side without snaking.
 - The command finishes consistently at the intended tolerance and with a safe final velocity.
-- Pre-match module orientation is part of the autonomous setup.
+- Pre-match module orientation is part of the setup for paths that benefit from it, especially aggressive or direction-sensitive starts.
 - Blue and red alliance transforms have both been tested.
 - Odometry-only routines have been expanded incrementally; complex routines use the best localization available.
 

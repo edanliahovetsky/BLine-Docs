@@ -71,7 +71,7 @@ FRC robots can change speed or direction suddenly while tuning autonomous code.
 - Announce before enabling and confirm the Robot Signal Light is visible.
 - Begin with the slow straight path in the next tutorial.
 - Verify pose, coordinate frames, direction, and stopping behavior before tuning at the robot's intended motion limits.
-- Pre-orient swerve modules before each autonomous test, either in code or manually. This is especially important when a path starts aggressively.
+- For most swerve paths, pre-orient the modules before testing, either in code or manually. Prioritize this when a path starts aggressively or must clear a nearby obstacle precisely; a gentle, repeatedly tested start may not need a separate orientation step.
 
 ## Recommended learning path
 
