@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+"""Generate the cross-track response comparison used by the tuning guide."""
+
+from pathlib import Path
+from textwrap import dedent
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+OUTPUT = REPO_ROOT / "docs/assets/images/tuning/cross-track-response.svg"
+
+
+SVG = dedent(
+    """\
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+      <title id="title">Cross-track proportional gain response examples</title>
+      <desc id="desc">Three plots compare lateral path error after starting offset from a straight segment: correction too slow, smooth convergence, and oscillation around the line.</desc>
+      <rect width="1200" height="520" rx="18" fill="#f8fafc"/>
+      <text x="60" y="48" fill="#0f172a" font-family="system-ui, sans-serif" font-size="26" font-weight="700">Cross-track P: return to the segment without fishtailing</text>
+      <text x="1140" y="46" text-anchor="end" fill="#475569" font-family="system-ui, sans-serif" font-size="15">Illustrative lateral-error response</text>
+      <g font-family="system-ui, sans-serif">
+        <g transform="translate(55 80)">
+          <rect width="340" height="350" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+          <text x="170" y="34" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="700">Correction too low</text>
+          <line x1="52" y1="62" x2="52" y2="295" stroke="#64748b" stroke-width="2"/><line x1="52" y1="230" x2="315" y2="230" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 7"/>
+          <path d="M52 90 C115 115 170 150 220 182 C260 207 288 218 315 222" fill="none" stroke="#2563eb" stroke-width="6"/>
+          <text x="157" y="85" fill="#334155" font-size="15">error remains for too long</text>
+          <text x="182" y="324" text-anchor="middle" fill="#475569" font-size="14">time</text><text transform="translate(19 183) rotate(-90)" text-anchor="middle" fill="#475569" font-size="14">cross-track error</text>
+        </g>
+        <g transform="translate(430 80)">
+          <rect width="340" height="350" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+          <text x="170" y="34" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="700">Smooth convergence</text>
+          <line x1="52" y1="62" x2="52" y2="295" stroke="#64748b" stroke-width="2"/><line x1="52" y1="230" x2="315" y2="230" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 7"/>
+          <path d="M52 90 C105 128 150 192 205 220 C245 238 280 231 315 230" fill="none" stroke="#2563eb" stroke-width="6"/>
+          <circle cx="278" cy="230" r="7" fill="#16a34a"/>
+          <text x="160" y="153" fill="#334155" font-size="15">one controlled return</text>
+          <text x="182" y="324" text-anchor="middle" fill="#475569" font-size="14">time</text><text transform="translate(19 183) rotate(-90)" text-anchor="middle" fill="#475569" font-size="14">cross-track error</text>
+        </g>
+        <g transform="translate(805 80)">
+          <rect width="340" height="350" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+          <text x="170" y="34" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="700">Correction too high</text>
+          <line x1="52" y1="62" x2="52" y2="295" stroke="#64748b" stroke-width="2"/><line x1="52" y1="230" x2="315" y2="230" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 7"/>
+          <path d="M52 90 C98 125 128 215 165 262 C196 300 222 178 252 209 C274 233 292 253 315 228" fill="none" stroke="#2563eb" stroke-width="6"/>
+          <text x="157" y="151" fill="#334155" font-size="15">crosses and recrosses line</text>
+          <text x="182" y="324" text-anchor="middle" fill="#475569" font-size="14">time</text><text transform="translate(19 183) rotate(-90)" text-anchor="middle" fill="#475569" font-size="14">cross-track error</text>
+        </g>
+      </g>
+      <g transform="translate(60 466)" font-family="system-ui, sans-serif" font-size="15"><line x1="0" y1="0" x2="42" y2="0" stroke="#2563eb" stroke-width="6"/><text x="54" y="5" fill="#334155">measured cross-track error</text><line x1="292" y1="0" x2="334" y2="0" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 7"/><text x="346" y="5" fill="#334155">path centerline / zero error</text></g>
+    </svg>
+    """
+)
+
+
+def main() -> None:
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT.write_text(SVG, encoding="utf-8")
+    print(f"Wrote {OUTPUT.relative_to(REPO_ROOT)}")
+
+
+if __name__ == "__main__":
+    main()

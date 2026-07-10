@@ -10,7 +10,7 @@
       <text x="170" y="34" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="700">Correction too low</text>
       <line x1="52" y1="62" x2="52" y2="295" stroke="#64748b" stroke-width="2"/><line x1="52" y1="230" x2="315" y2="230" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 7"/>
       <path d="M52 90 C115 115 170 150 220 182 C260 207 288 218 315 222" fill="none" stroke="#2563eb" stroke-width="6"/>
-      <text x="157" y="144" fill="#334155" font-size="15">error remains for too long</text>
+      <text x="157" y="85" fill="#334155" font-size="15">error remains for too long</text>
       <text x="182" y="324" text-anchor="middle" fill="#475569" font-size="14">time</text><text transform="translate(19 183) rotate(-90)" text-anchor="middle" fill="#475569" font-size="14">cross-track error</text>
     </g>
     <g transform="translate(430 80)">

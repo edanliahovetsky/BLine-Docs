@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+"""Generate the translation proportional response comparison used by the tuning guide."""
+
+from pathlib import Path
+from textwrap import dedent
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+OUTPUT = REPO_ROOT / "docs/assets/images/tuning/translation-p-response.svg"
+
+
+SVG = dedent(
+    """\
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+      <title id="title">Translation proportional gain response examples</title>
+      <desc id="desc">Three aligned plots compare remaining path distance for translation proportional gain that is too low, useful, and too high. A green band marks the configured endpoint tolerance above zero remaining distance.</desc>
+      <rect width="1200" height="520" rx="18" fill="#f8fafc"/>
+      <text x="60" y="48" fill="#0f172a" font-family="system-ui, sans-serif" font-size="26" font-weight="700">Translation P: read the endpoint shape</text>
+      <text x="1140" y="46" text-anchor="end" fill="#475569" font-family="system-ui, sans-serif" font-size="15">Illustrative — use identical axes for robot logs</text>
+
+      <g font-family="system-ui, sans-serif">
+        <g transform="translate(55 80)">
+          <rect width="340" height="350" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+          <text x="170" y="34" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="700">P too low</text>
+          <line x1="52" y1="62" x2="52" y2="295" stroke="#64748b" stroke-width="2"/>
+          <line x1="52" y1="295" x2="315" y2="295" stroke="#64748b" stroke-width="2"/>
+          <rect x="52" y="281" width="263" height="14" fill="#dcfce7"/>
+          <line x1="52" y1="281" x2="315" y2="281" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 7"/>
+          <path d="M52 82 C120 125 166 195 205 245 C238 273 269 284 315 288" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round"/>
+          <text x="184" y="198" fill="#334155" font-size="15">long, shallow tail</text>
+          <text x="182" y="324" text-anchor="middle" fill="#475569" font-size="14">time</text>
+          <text transform="translate(19 183) rotate(-90)" text-anchor="middle" fill="#475569" font-size="14">remaining distance</text>
+        </g>
+
+        <g transform="translate(430 80)">
+          <rect width="340" height="350" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+          <text x="170" y="34" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="700">Useful range</text>
+          <line x1="52" y1="62" x2="52" y2="295" stroke="#64748b" stroke-width="2"/>
+          <line x1="52" y1="295" x2="315" y2="295" stroke="#64748b" stroke-width="2"/>
+          <rect x="52" y="281" width="263" height="14" fill="#dcfce7"/>
+          <line x1="52" y1="281" x2="315" y2="281" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 7"/>
+          <path d="M52 82 C118 109 164 172 198 238 C221 279 249 294 315 295" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="268" cy="294" r="7" fill="#16a34a"/>
+          <text x="168" y="115" fill="#334155" font-size="15">fast, clean settling</text>
+          <text x="182" y="324" text-anchor="middle" fill="#475569" font-size="14">time</text>
+          <text transform="translate(19 183) rotate(-90)" text-anchor="middle" fill="#475569" font-size="14">remaining distance</text>
+        </g>
+
+        <g transform="translate(805 80)">
+          <rect width="340" height="350" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+          <text x="170" y="34" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="700">P too high</text>
+          <line x1="52" y1="62" x2="52" y2="295" stroke="#64748b" stroke-width="2"/>
+          <line x1="52" y1="295" x2="315" y2="295" stroke="#64748b" stroke-width="2"/>
+          <rect x="52" y="281" width="263" height="14" fill="#dcfce7"/>
+          <line x1="52" y1="281" x2="315" y2="281" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 7"/>
+          <path d="M52 82 C118 116 160 208 194 284 C213 296 229 260 248 286 C266 296 282 270 315 292" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round"/>
+          <text x="176" y="185" fill="#334155" font-size="15">rebound or chatter</text>
+          <text x="182" y="324" text-anchor="middle" fill="#475569" font-size="14">time</text>
+          <text transform="translate(19 183) rotate(-90)" text-anchor="middle" fill="#475569" font-size="14">remaining distance</text>
+        </g>
+      </g>
+
+      <g transform="translate(60 466)" font-family="system-ui, sans-serif" font-size="15">
+        <line x1="0" y1="0" x2="42" y2="0" stroke="#2563eb" stroke-width="6" stroke-linecap="round"/>
+        <text x="54" y="5" fill="#334155">remaining path distance</text>
+        <rect x="270" y="-7" width="42" height="14" fill="#dcfce7"/>
+        <line x1="270" y1="-7" x2="312" y2="-7" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 7"/>
+        <text x="324" y="5" fill="#334155">configured endpoint-tolerance band</text>
+      </g>
+    </svg>
+    """
+)
+
+
+def main() -> None:
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT.write_text(SVG, encoding="utf-8")
+    print(f"Wrote {OUTPUT.relative_to(REPO_ROOT)}")
+
+
+if __name__ == "__main__":
+    main()

@@ -22,8 +22,7 @@
     <path d="M80 92 L420 92 C505 94 550 136 590 178 C625 215 658 234 702 235 C740 237 767 258 795 270 C835 284 875 270 950 243" fill="none" stroke="#16a34a" stroke-width="7" stroke-linecap="round"/>
     <path d="M80 92 L480 92 C570 94 650 120 720 168 C780 208 832 244 900 260 C925 264 942 260 950 254" fill="none" stroke="#dc2626" stroke-width="7" stroke-linecap="round"/>
 
-    <line x1="745" y1="118" x2="790" y2="196" stroke="#dc2626" stroke-width="2"/>
-    <text x="630" y="111" fill="#b91c1c" font-size="16" font-weight="700">low limit: command cannot change quickly enough</text>
+    <text x="630" y="40" fill="#b91c1c" font-size="16" font-weight="700">low limit: command cannot change quickly enough</text>
     <line x1="817" y1="309" x2="830" y2="279" stroke="#16a34a" stroke-width="2"/>
     <text x="650" y="330" fill="#15803d" font-size="16" font-weight="700">higher limit: PID correction remains responsive</text>
   </g>

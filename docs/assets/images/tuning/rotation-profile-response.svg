@@ -29,7 +29,7 @@
       <line x1="52" y1="62" x2="52" y2="295" stroke="#64748b" stroke-width="2"/><line x1="52" y1="295" x2="315" y2="295" stroke="#64748b" stroke-width="2"/>
       <path d="M52 282 C100 278 155 235 210 155 C245 105 280 86 315 82" fill="none" stroke="#0f172a" stroke-width="4" stroke-dasharray="9 7"/>
       <path d="M52 284 C103 281 150 230 195 142 C230 75 252 61 268 91 C282 122 293 65 315 84" fill="none" stroke="#2563eb" stroke-width="6"/>
-      <text x="165" y="196" fill="#b91c1c" font-size="15">actual heading crosses target</text>
+      <text x="165" y="265" fill="#b91c1c" font-size="15">actual heading crosses target</text>
       <text x="182" y="324" text-anchor="middle" fill="#475569" font-size="14">path progress</text><text transform="translate(19 183) rotate(-90)" text-anchor="middle" fill="#475569" font-size="14">heading (deg)</text>
     </g>
   </g>

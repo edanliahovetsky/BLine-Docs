@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+"""Generate the three-controller mental-model diagram used by the tuning guide."""
+
+from pathlib import Path
+from textwrap import dedent
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+OUTPUT = REPO_ROOT / "docs/assets/images/tuning/controller-mental-model.svg"
+
+
+SVG = dedent(
+    """\
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+      <title id="title">How BLine's three controllers steer the robot</title>
+      <desc id="desc">A robot offset from a path is shown with an along-path translation arrow, a perpendicular cross-track correction arrow, and a curved rotation arrow toward the target heading.</desc>
+      <defs>
+        <marker id="blue-arrow" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#2563eb"/></marker>
+        <marker id="green-arrow" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#16a34a"/></marker>
+        <marker id="red-arrow" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#dc2626"/></marker>
+      </defs>
+      <rect width="1200" height="650" rx="18" fill="#f8fafc"/>
+      <text x="60" y="52" fill="#0f172a" font-family="system-ui, sans-serif" font-size="28" font-weight="700">Three controllers, three different errors</text>
+
+      <g transform="translate(60 92)" font-family="system-ui, sans-serif">
+        <rect width="1080" height="420" rx="16" fill="#ffffff" stroke="#cbd5e1"/>
+        <path d="M95 320 L410 320 L690 175 L985 175" fill="none" stroke="#94a3b8" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M95 320 L410 320 L690 175 L985 175" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-dasharray="12 10"/>
+        <circle cx="95" cy="320" r="13" fill="#0f172a"/>
+        <circle cx="985" cy="175" r="13" fill="#0f172a"/>
+        <text x="95" y="357" text-anchor="middle" fill="#475569" font-size="16">path start</text>
+        <text x="985" y="212" text-anchor="middle" fill="#475569" font-size="16">active target</text>
+
+        <g transform="translate(515 300) rotate(-13)">
+          <rect x="-44" y="-44" width="88" height="88" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="4"/>
+          <path d="M12 0 L36 0" stroke="#1d4ed8" stroke-width="4" marker-end="url(#blue-arrow)"/>
+          <text x="0" y="68" text-anchor="middle" fill="#0f172a" font-size="16" transform="rotate(13)">live robot pose</text>
+        </g>
+
+        <line x1="520" y1="288" x2="790" y2="195" stroke="#2563eb" stroke-width="5" marker-end="url(#blue-arrow)"/>
+        <text x="710" y="272" fill="#1d4ed8" font-size="19" font-weight="700">Translation controller</text>
+        <text x="710" y="296" fill="#334155" font-size="16">remaining path distance → forward speed</text>
+
+        <line x1="520" y1="288" x2="475" y2="225" stroke="#16a34a" stroke-width="5" marker-end="url(#green-arrow)"/>
+        <line x1="475" y1="225" x2="540" y2="191" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 6"/>
+        <text x="215" y="205" fill="#15803d" font-size="19" font-weight="700">Cross-track controller</text>
+        <text x="215" y="229" fill="#334155" font-size="16">lateral error → sideways speed</text>
+
+        <path d="M500 276 A78 78 0 0 1 570 226" fill="none" stroke="#dc2626" stroke-width="5" marker-end="url(#red-arrow)"/>
+        <text x="680" y="90" fill="#b91c1c" font-size="19" font-weight="700">Rotation controller</text>
+        <text x="680" y="114" fill="#334155" font-size="16">target heading − measured heading → angular speed</text>
+        <line x1="695" y1="135" x2="574" y2="215" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 6"/>
+      </g>
+
+      <g transform="translate(60 558)" font-family="system-ui, sans-serif">
+        <rect width="1080" height="58" rx="12" fill="#e2e8f0"/>
+        <text x="24" y="36" fill="#0f172a" font-size="18"><tspan font-weight="700">Tune in order:</tspan> translation first, rotation second, cross-track last—so each new correction builds on a stable one.</text>
+      </g>
+    </svg>
+    """
+)
+
+
+def main() -> None:
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT.write_text(SVG, encoding="utf-8")
+    print(f"Wrote {OUTPUT.relative_to(REPO_ROOT)}")
+
+
+if __name__ == "__main__":
+    main()

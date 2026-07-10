@@ -28,7 +28,7 @@
       <line x1="52" y1="281" x2="315" y2="281" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 7"/>
       <path d="M52 82 C118 109 164 172 198 238 C221 279 249 294 315 295" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round"/>
       <circle cx="268" cy="294" r="7" fill="#16a34a"/>
-      <text x="168" y="198" fill="#334155" font-size="15">fast, clean settling</text>
+      <text x="168" y="115" fill="#334155" font-size="15">fast, clean settling</text>
       <text x="182" y="324" text-anchor="middle" fill="#475569" font-size="14">time</text>
       <text transform="translate(19 183) rotate(-90)" text-anchor="middle" fill="#475569" font-size="14">remaining distance</text>
     </g>

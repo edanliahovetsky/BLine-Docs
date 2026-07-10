@@ -105,10 +105,12 @@ Use screenshots and short animations when they make a workflow, UI state, spatia
 - Make the first frame and final stable frame useful enough that entering or leaving the viewport does not produce a confusing state.
 - Crop and optimize media so labels remain legible without imposing unnecessary page weight. Prefer a static image when animation adds little instructional value.
 - Use only project-owned media or third-party media whose license permits inclusion and attribution.
+- Keep the source used to generate a programmatic SVG diagram under `scripts/diagrams` in the public documentation repository. The checked-in generator and rendered SVG must be updated together and regenerate deterministically.
 
 ### Visual Validation
 
 - Inspect each new or changed visual in the rendered site at desktop and narrow-screen widths.
+- For every diagram, inspect each text label, arrowhead, leader line, plotted curve, and diagram boundary for overlap or clipping at both widths. Do not rely only on SVG validity or source coordinates.
 - Confirm that the visual matches the current documented UI and that its alt text, placement, first frame, and loading behavior are useful.
 - Confirm that an animated demonstration starts without a button when it enters the viewport, returns to its poster when it leaves, and stays static under `prefers-reduced-motion`.
 - Verify GIF duration, pixel dimensions, frame rate, playback speed, and file size from the generated file rather than judging them by eye.
