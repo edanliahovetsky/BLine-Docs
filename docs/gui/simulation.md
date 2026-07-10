@@ -1,77 +1,72 @@
 # Simulation
 
-BLine-GUI includes a built-in simulation that previews how your robot will follow the current path. Use it for quick structural checks — does the path flow in the order you expect, do constraints land where you meant them to — before pushing to hardware.
+BLine Web provides an idealized kinematic preview for checking path structure, rotation timing, constraints, marker placement, protrusion state, and footprint clearance.
 
-![Simulation Demo](../assets/gifs/robot-demos/simulation-demo.gif)
+![Playing the current path simulation on the 2026 REBUILT field](../assets/gifs/web/simulation-playback.gif){ .gif-demo data-gif-poster="/assets/images/gif-posters/simulation-playback-start.png" data-gif-end="/assets/images/gif-posters/simulation-playback-end.png" data-gif-duration="6830" }
+![Static final state of the simulated path on the 2026 REBUILT field](../assets/images/gif-posters/simulation-playback-end.png){ .gif-print-poster }
 
 ## Transport controls
 
-The simulation controls sit at the bottom-left of the canvas:
+| Control | Action |
+| --- | --- |
+| Reset | Return to the beginning |
+| Play / Pause | Start or stop playback |
+| Fast forward | Jump to the end |
+| Timeline | Scrub to a specific time |
 
-| Control | Function |
-|---------|----------|
-| **▶ / ⏸** | Play / pause simulation (`Space` on the canvas). |
-| **Timeline slider** | Scrub to any point in the path. |
-| **Time display** | Current time / total duration in seconds. |
+When no dialog, menu, input, or other interactive control has keyboard focus:
 
-Scrubbing the timeline while paused is the fastest way to inspect exactly where on the path something happens (a handoff, a rotation target, an event trigger).
+- `Space` or `K` toggles play/pause.
+- `Left Arrow` or `Home` returns to the beginning.
+- `Right Arrow` or `End` jumps to the end.
 
-## What the simulation shows
+## What the preview models
 
-- **Simulated robot footprint** — rendered from the configured Robot Length / Robot Width in project config, rotating to match the simulated heading.
-- **Trajectory trail** — orange trail along the path the sim actually walked.
-- **Rotation evolution** — the footprint rotates according to profiled/non-profiled rotation targets.
-- **Constraint effects** — ranged velocity caps visibly slow the footprint through their ordinal ranges.
-- **Event-trigger fires** — the sim visually reacts to `show_on_event_keys` / `hide_on_event_keys` for protrusions.
-- **Protrusion footprint** — if protrusions are enabled, the simulated robot footprint *changes size as protrusions toggle*, not just the dashed overlay.
+The simulator uses the path's:
 
-## What the simulation does **not** show
+- translation and rotation elements;
+- global/path velocity and acceleration constraints;
+- handoff radii and `t_ratio` targets;
+- robot footprint; and
+- an editor-only protrusion schedule derived from show/hide event-key positions.
 
-!!! warning "Limitations"
-    The simulation uses simplified kinematics — it is **not** a drivetrain physics simulator.
+Use it to answer:
 
-    - **No PID dynamics.** The sim doesn't run the three PID controllers; it uses a simplified `v = √(2·a·d)` profile to step along the path. Real-robot timing and behavior will differ, especially near path endpoints.
-    - **Perfect traction.** No wheel slip, no battery sag, no motor limits.
-    - **No disturbances.** Nothing pushes the robot; it just follows the plan.
-    - **Instant acceleration response.** No motor time constants, no voltage saturation.
+- Did I order the elements correctly?
+- Does the robot rotate during the intended segment?
+- Does the slowdown cover the intended anchors?
+- Are event markers placed at the intended segment positions?
+- Does the protrusion preview change at the intended geometric point?
+- Does the idealized footprint intersect a field feature?
 
-    The sim's total path duration is a **rough estimate**, not a precise prediction. Treat it like a wireframe preview.
+## What it does not model
 
-For accurate dynamics, use a WPILib physics simulation with your drive code, or test on hardware.
+The editor preview is not a WPILib physics simulation and does not use the robot's three PID controllers. It does not model:
 
-## How to use it effectively
+- swerve-module steering or velocity loops;
+- wheel slip, current limits, battery sag, or carpet;
+- center of mass or mechanism motion;
+- pose-estimator noise and latency;
+- collisions, game pieces, or another robot;
+- controller gain quality;
+- BLine-Lib event iteration, WPILib command scheduling, or subsystem requirements; or
+- the exact runtime end behavior under measured momentum.
 
-### Structural validation
+For a path with no rotation target, the Web preview initially points along the first segment. BLine-Lib instead holds the live starting heading as its fallback. Add an explicit waypoint/rotation target whenever orientation or footprint clearance matters.
 
-Use the sim to confirm path structure is correct before real-robot testing:
+!!! warning "A clean preview is not a robot validation"
+    The preview can reject obvious structural mistakes, but it cannot prove timing, accuracy, or dynamic feasibility. Run WPILib simulation where available, then validate with conservative robot constraints and logs.
 
-- Do the segments connect where you expected?
-- Are rotations happening at the right points in the path?
-- Do constraint ranges cover the right ordinals? (Click a constraint segment — the canvas overlay confirms.)
-- Do event triggers fire in the right order?
+## A three-stage validation loop
 
-### Constraint sanity check
+1. **Editor:** check geometry, element order, ranges, rotations, marker placement, protrusion preview, and footprint.
+2. **WPILib simulation:** exercise actual robot code, command scheduling, pose reset, transforms, and logging.
+3. **Robot:** validate localization, module response, traction, endpoint behavior, and safety.
 
-Play the sim while adjusting ranged velocity constraints. The simulated footprint visibly decelerates through capped ranges — if the slowdown happens in the wrong place, you've indexed the wrong ordinals.
+If the editor and robot differ, start with the live pose, coordinate frames, active constraints, and measured drivetrain speed—not by forcing the editor preview to match.
 
-### Identifying design smells
+## Use the timeline for marker and protrusion review
 
-Things to watch for in sim:
+Scrub just before and after each event marker to inspect its geometric placement and any editor protrusion change. The protrusion preview is ordered by geometric path position; it does not reproduce BLine-Lib's path-list event cursor or WPILib command behavior. Run the actual robot event at low speed and inspect `eventTriggerElementIndex` and `eventTriggersFiredCount`.
 
-- **Robot deceleration lingers mid-segment** — your velocity constraint range is too wide, or you want handoff radii instead.
-- **Robot cuts a corner visibly** — handoff radii too large, or you need an extra TranslationTarget.
-- **Rotation finishes too late (near the end of the segment)** — reduce the RotationTarget's t_ratio.
-- **The sim footprint doesn't match the robot's bumper/intake geometry** — update Robot Length/Width or enable protrusions in **Settings → Edit Config…**.
-
-## Keyboard shortcuts
-
-| Shortcut | Action |
-|----------|--------|
-| `Space` (canvas focus) | Play / pause simulation |
-| Drag timeline slider | Scrub |
-
-## Next
-
-- [Canvas](canvas.md) — reading the canvas during sim.
-- [Protrusions](protrusions.md) — how the simulated footprint grows/shrinks with event triggers.
-- [Tuning & Usage Tips](../usage-tips.md) — turning sim intuition into real-robot tuning.
+Related: [Fields, Footprint & Protrusions](protrusions.md), [Events](../concepts/event-triggers.md), and [Logging & AdvantageScope](../lib/logging.md).

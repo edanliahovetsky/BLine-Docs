@@ -1,96 +1,90 @@
-# Canvas
+# Draw & Edit Paths
 
-The canvas is the main visual workspace. It displays the FRC field with your path drawn on top and lets you directly manipulate path elements — drag to reposition, rotate handles for heading, click to select.
+Start with a small number of anchors, then add detail only when the path needs it. Every extra element creates another geometric or behavioral decision to test.
 
-## Navigation
+## Add elements
 
-### Zoom
+The **Path Elements** header provides two authoring actions:
 
-Use the **scroll wheel** to zoom in and out. Zoom is centered on the mouse cursor.
+- **Add element** inserts a waypoint, translation target, rotation target, or event trigger after the current selection.
+- **Add curve** records a stroke on the field and converts it into simplified translation targets.
 
-![Zoom Navigation](../assets/gifs/canvas/canvas-zoom.gif)
+If nothing is selected, new elements are appended. The first and last elements are restricted to waypoint or translation types so the path begins and ends with a valid position.
 
-### Pan
+## Select and edit
 
-**Click and drag on empty field space** to pan the view. Clicking on an element selects it instead, so pan works as long as your initial click isn't on top of anything.
+Click an element on the canvas or in the list. The **Element Properties** section then exposes the fields relevant to its type:
 
-![Pan Navigation](../assets/gifs/canvas/canvas-pan.gif)
+| Element | Current editor fields |
+| --- | --- |
+| Waypoint | X, Y, Handoff Radius, Rotation, Profiled Rotation, linked-element controls |
+| Translation | X, Y, Handoff Radius, linked-element controls |
+| Rotation | Rotation, Profiled Rotation, Rotation Pos (0-1) |
+| Event Trigger | Event Pos (0-1), Lib Key |
 
-## Selecting elements
+Typing a coordinate is best for a known scoring pose. Dragging is best for quick geometry iteration. Use both: drag for the shape, then enter the exact final value.
 
-Click an element to select it. The selected element animates a selection indicator (v0.4.0+) and its properties appear in the sidebar. Clicking **empty field space** clears the selection.
+## Canvas interactions
 
-Selection is preserved across drag, reorder, undo, and redo operations so you don't lose your place while editing.
+| Interaction | Result |
+| --- | --- |
+| Mouse wheel/trackpad scroll | Zoom around the pointer |
+| Drag empty field space | Pan |
+| Click an element | Select it and reveal properties |
+| Drag an anchor | Change its X/Y position |
+| Drag a selected rotation handle | Change heading |
+| Click empty canvas | Clear selection |
+| Right-click empty field or an anchor | Open linked-element actions |
 
-## Moving elements
+Locked linked elements cannot be moved from an individual path. Edit them in the linked-element manager or unlock them intentionally.
 
-Drag a **Waypoint** or **TranslationTarget** by its body to reposition it on the field. The sidebar's X/Y properties update live while you drag.
+## Reorder or remove
 
-![Drag Elements](../assets/gifs/canvas/canvas-drag.gif)
+Drag an element row in **Path Elements** to reorder it. With a row selected:
 
-## Adjusting rotation
+- `Arrow Up` / `Arrow Down` moves it in path order.
+- `Delete` / `Backspace` removes it.
 
-Waypoints and RotationTargets have **rotation handles** — arrows extending from the element pointing in the current heading direction. Drag a handle to change the rotation. The sidebar's degree display updates live.
+Reordering an anchor changes the segment that surrounding rotation targets and events belong to. Re-check every `t_ratio` marker and ranged constraint after a structural edit.
 
-![Rotation Handle](../assets/gifs/canvas/rotation-handle.gif)
+## Draw a curve
 
-## Moving rotation targets along a segment
+Choose **Add curve**, draw the intended centerline on the field, and release. BLine Web simplifies the stroke into no more than 18 translation targets and applies automatic max-velocity caps over the inserted range.
 
-A RotationTarget lives on the line between two translation elements. Drag it along that line to change its `t_ratio` — the position along the segment where the rotation is achieved.
+![Drawing a curve on the 2026 field and converting it into editable BLine elements](../assets/gifs/web/draw-curve.gif){ .gif-demo data-gif-poster="/assets/images/gif-posters/draw-curve-start.png" data-gif-end="/assets/images/gif-posters/draw-curve-end.png" data-gif-duration="7580" }
+![Static result of the curve converted into editable BLine elements](../assets/images/gif-posters/draw-curve-end.png){ .gif-print-poster }
 
-![Rotation Target Position](../assets/gifs/canvas/rotation-target-drag.gif)
+After drawing:
 
-Dragging is constrained to the segment — you can't move a RotationTarget off its line. To move a RotationTarget to a different segment, either reorder it in the sidebar list or change the surrounding translation elements.
+1. Remove points that do not materially improve the shape.
+2. Move points away from obstacles and handoff locations that are hard to reach.
+3. Review every automatic velocity range.
+4. Replace an endpoint translation with a waypoint when final heading matters.
+5. Simulate, then validate in WPILib simulation and on the robot.
 
-## Path visuals
+The curve tool is an authoring shortcut, not a spline runtime. The exported path is still a polyline.
 
-### Line between translation elements
+## Use the collection context
 
-The straight line connecting consecutive translation elements is the **path segment** — the nominal line the robot will follow. Rotation targets and event triggers appear as markers along this line.
+Other paths in the active collection appear as ghost outlines. Use them to align shared starts/endpoints or avoid overlapping route families. Hover an outline for its name and click to make it active.
 
-### Handoff radius
+For a coordinate that must remain identical across paths, use a [linked element](linked-elements.md) instead of visually aligning two independent points.
 
-A **magenta dashed circle** is drawn around each translation element. When the robot enters this circle, `FollowPath` advances to the next translation target.
+## Path-design habits
 
-![Handoff Radius](../assets/gifs/canvas/handoff-radius-canvas.gif)
+- Use translation targets to shape motion when heading does not matter.
+- Keep intermediate anchors away from bumps or objects where the robot should preserve momentum.
+- Slow before sharp direction changes; geometry alone does not create a feasible turn.
+- Use a waypoint at a scoring endpoint where both pose components matter.
+- Keep event markers in increasing `t_ratio` order within each segment.
+- Prefer a few meaningful anchors over many tiny segments.
 
-Radii can be set per-element (sidebar → **Handoff Radius (m)**) or globally (**Settings → Edit Config…** → **Default Handoff Radius**).
+## Verify after every structural edit
 
-### Constraint overlay
+- First and last elements still represent the intended poses.
+- Rotation/event markers belong to the intended segment.
+- Translation and rotation constraint ordinals still cover the intended elements.
+- Automatic optimizer ranges are not stale.
+- Simulation starts, finishes, and shows the intended headings.
 
-Click a ranged constraint in the sidebar's **Path Constraints** section and the canvas paints a **green overlay** over the segments the constraint applies to. This is the visual confirmation for which ordinals a given constraint covers.
-
-![Constraint Overlay](../assets/gifs/canvas/constraint-overlay.gif)
-
-### Protrusions (optional)
-
-If protrusions are enabled in project config, waypoint and rotation-target elements render a **dashed offset perimeter** on the chosen side (left, right, front, or back). Waypoint protrusions are dashed orange; rotation-target protrusions are dashed green. The main element perimeter is unchanged. See [Protrusions](protrusions.md).
-
-## Simulation view
-
-When you press Play, the canvas shows:
-
-- **Simulated robot** moving along the path, respecting constraints.
-- **Robot footprint** (from the Robot Length / Robot Width config fields).
-- **Protrusions** if enabled — their visibility respects Default Protrusion State plus any Show/Hide event keys that fire during sim.
-- **Rotation** indicated by the robot's orientation.
-
-See [Simulation](simulation.md) for what the sim does and doesn't model.
-
-## Keyboard shortcuts
-
-| Shortcut | Action |
-|----------|--------|
-| `Delete` / `Backspace` | Delete the selected element |
-| `Space` | Play / pause simulation |
-| `Ctrl/Cmd + Z` | Undo |
-| `Ctrl/Cmd + Y` / `Ctrl/Cmd + Shift + Z` | Redo |
-| `Ctrl/Cmd + S` | Save current path |
-
-Segment-bar shortcuts (arrow keys, `S` to split) are covered in [Sidebar](sidebar.md#keyboard-shortcuts-in-the-segment-bar).
-
-## Recent changes
-
-- **v0.5.0** — Added animated selection indicator throughout canvas items (waypoints, translations, rotation targets, event triggers).
-- **v0.4.0** — Clicking empty field space now clears selection. Drag/rotation undo no longer creates spurious move entries for simple clicks.
-- **v0.3.0** — Simulated robot footprint changes size as protrusions toggle during sim playback.
+Next: [Constraints & Optimizer](sidebar.md).

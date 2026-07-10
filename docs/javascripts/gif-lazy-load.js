@@ -1,91 +1,75 @@
 /**
- * Lazy-load GIFs - only play when scrolled into view
- * Uses Intersection Observer API for efficient detection
+ * Turn documentation GIFs into user-controlled, single-play demonstrations.
+ * Each source image supplies start/end posters and its duration through data attributes.
  */
 
-function initGifLazyLoad() {
-  // Find all GIF images that haven't been processed
-  const gifs = document.querySelectorAll('img[src$=".gif"]:not([data-gif-processed])');
-  
-  if (gifs.length === 0) return;
+function initGifDemos() {
+  document.querySelectorAll('img.gif-demo:not([data-gif-processed])').forEach((gif) => {
+    const originalSrc = gif.currentSrc || gif.src;
+    const posterSrc = gif.dataset.gifPoster;
+    const endSrc = gif.dataset.gifEnd || posterSrc;
+    const durationMs = Number.parseInt(gif.dataset.gifDuration || '0', 10);
 
-  gifs.forEach(gif => {
-    // Mark as processed
+    if (!originalSrc || !posterSrc || !endSrc || !Number.isFinite(durationMs) || durationMs <= 0) {
+      return;
+    }
+
     gif.dataset.gifProcessed = 'true';
-    
-    // Store original src
-    const originalSrc = gif.src;
-    gif.dataset.gifSrc = originalSrc;
-    
-    // Clear the src to stop the GIF from loading/playing
-    gif.removeAttribute('src');
-    gif.classList.add('gif-lazy');
-    
-    // Create wrapper for loading state
-    const wrapper = document.createElement('div');
-    wrapper.classList.add('gif-wrapper');
+    gif.dataset.gifSource = originalSrc;
+    gif.src = posterSrc;
+
+    const wrapper = document.createElement('span');
+    wrapper.className = 'gif-wrapper';
+    wrapper.setAttribute('role', 'group');
+    wrapper.setAttribute('aria-label', `Animation: ${gif.alt || 'BLine Web demonstration'}`);
     gif.parentNode.insertBefore(wrapper, gif);
     wrapper.appendChild(gif);
-    
-    // Add play icon overlay
-    const playIcon = document.createElement('div');
-    playIcon.classList.add('gif-play-icon');
-    playIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
-    wrapper.appendChild(playIcon);
-  });
 
-  // Set up Intersection Observer
-  const observerOptions = {
-    root: null,
-    rootMargin: '100px',
-    threshold: 0
-  };
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'gif-control';
+    button.textContent = 'Play demo';
+    button.setAttribute('aria-label', `Play animation: ${gif.alt || 'BLine Web demonstration'}`);
+    wrapper.appendChild(button);
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const wrapper = entry.target;
-        const gif = wrapper.querySelector('img.gif-lazy');
-        
-        if (gif && gif.dataset.gifSrc && !gif.dataset.gifLoaded) {
-          // Mark as loaded to prevent re-triggering
-          gif.dataset.gifLoaded = 'true';
-          
-          // Set the src to start loading/playing
-          gif.src = gif.dataset.gifSrc;
-          gif.classList.add('gif-loaded');
-          wrapper.classList.add('gif-playing');
-          
-          // Stop observing this element
-          observer.unobserve(wrapper);
-        }
+    let stopTimer;
+
+    const showEndState = () => {
+      window.clearTimeout(stopTimer);
+      gif.src = endSrc;
+      wrapper.dataset.gifState = 'finished';
+      button.textContent = 'Replay demo';
+      button.setAttribute('aria-label', `Replay animation: ${gif.alt || 'BLine Web demonstration'}`);
+    };
+
+    const play = () => {
+      window.clearTimeout(stopTimer);
+      const separator = originalSrc.includes('?') ? '&' : '?';
+      gif.src = `${originalSrc}${separator}replay=${Date.now()}`;
+      wrapper.dataset.gifState = 'playing';
+      button.textContent = 'Stop demo';
+      button.setAttribute('aria-label', `Stop animation: ${gif.alt || 'BLine Web demonstration'}`);
+      stopTimer = window.setTimeout(showEndState, durationMs);
+    };
+
+    button.addEventListener('click', () => {
+      if (wrapper.dataset.gifState === 'playing') {
+        showEndState();
+      } else {
+        play();
       }
     });
-  }, observerOptions);
-
-  // Observe all GIF wrappers
-  document.querySelectorAll('.gif-wrapper').forEach(wrapper => {
-    if (!wrapper.querySelector('img[data-gif-loaded]')) {
-      observer.observe(wrapper);
-    }
   });
 }
 
-// Run on initial page load
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initGifLazyLoad);
+  document.addEventListener('DOMContentLoaded', initGifDemos);
 } else {
-  initGifLazyLoad();
+  initGifDemos();
 }
 
-// Re-run on MkDocs instant navigation
-document.addEventListener('DOMContentSwitch', function() {
-  setTimeout(initGifLazyLoad, 50);
-});
+document.addEventListener('DOMContentSwitch', initGifDemos);
 
-// Also listen for the location change event (MkDocs Material)
 if (typeof location$ !== 'undefined') {
-  location$.subscribe(() => {
-    setTimeout(initGifLazyLoad, 50);
-  });
+  location$.subscribe(initGifDemos);
 }

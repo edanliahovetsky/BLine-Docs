@@ -1,124 +1,105 @@
 # Alliance Flip & Mirror
 
-BLine offers two related transformations for reusing a single authored path on a different side of the field: **flip** (for opposite-alliance symmetry) and **mirror** (for reflecting across the field width centerline). They are similar but not interchangeable — pick the one that matches the symmetry of this year's field.
+Author one path in WPILib's blue-origin field coordinates, then choose the single transform policy that matches the route you want to run. BLine provides an opposite-alliance **flip** and a same-origin **mirror**; they are not interchangeable.
 
-## The two transformations
+## Transform definitions
 
-### `Path.flip()` — opposite-alliance rotational symmetry
+| Transform | Position | Heading | Typical use |
+| --- | --- | --- | --- |
+| `Path.flip()` | `(x, y) → (fieldLength − x, fieldWidth − y)` | `θ → θ − π` | Blue-authored route on the opposite alliance under rotational symmetry |
+| `Path.mirror()` | `(x, y) → (x, fieldWidth − y)` | `θ → −θ` | Left/right route family reflected across the field-width centerline |
 
-Most FRC fields are rotationally symmetric: the red alliance side is the blue alliance side rotated 180° around the field center. `Path.flip()` uses this convention:
+Verify the intended symmetry against the current game manual and your own Field2d preview. A visually similar field image is not enough evidence.
 
-- `(x, y) → (fieldSizeX − x, fieldSizeY − y)`
-- `θ → θ − π` (same orientation relative to the alliance station)
+## Recommended alliance policy
 
-Call this when you've authored paths from the blue alliance's perspective and want them to work for the red alliance.
-
-```java
-Path myPath = new Path("scoreFirst");  // authored blue-side
-myPath.flip();                         // now red-side
-```
-
-`flip()` is **idempotent-within-a-path**: calling `flip()` a second time is a no-op; call `undoFlip()` to restore the original coordinates.
-
-`FollowPath.Builder.withDefaultShouldFlip()` wires this up automatically from `DriverStation.getAlliance()`, so in almost all cases you don't need to call `flip()` manually.
-
-### `Path.mirror()` — vertical reflection across the field width centerline
-
-Some years the field isn't rotationally symmetric — it's **mirrored**: the red side is the blue side reflected across the field's vertical centerline. Added in BLine-Lib **v0.8.2** to support this case:
-
-- `(x, y) → (x, fieldSizeY − y)`
-- `θ → −θ` (note: **not** `θ ± π`)
+For ordinary opposite-alliance reuse:
 
 ```java
-Path myPath = new Path("leftAuto");
-myPath.mirror();   // reflected across field width
+FollowPath.Builder pathBuilder = new FollowPath.Builder(/* ... */)
+    .withDefaultShouldFlip();
 ```
 
-Unlike `flip()`, `mirror()` does not track a boolean state — each call re-applies the mirror. This is deliberate: mirror is often used for left-side / right-side path families where you want an explicit, repeatable transformation.
+At command initialization, this checks `DriverStation.getAlliance()` and flips the builder's private path copy for red. Author the source path once from the blue-origin perspective and do not also call `Path.flip()` manually.
 
-### Which one do I want?
-
-| Symmetry of this year's field | Transformation |
-|--------------------------------|---------------|
-| Rotational (blue ↔ red by 180° rotation) | `flip()` / `withDefaultShouldFlip()` |
-| Vertical mirror (blue ↔ red by y-flip) | `mirror()` / `withShouldMirror(...)` |
-| "Left vs right" autos on the same alliance | `mirror()` — keep one authored path per alliance, mirror at runtime for the other side |
-
-If the game manual describes the red side as a "180° rotation of the blue side," use `flip()`. If it describes the sides as mirror images across the length of the field, use `mirror()`.
-
-!!! info "Heading behavior differs"
-    Flip shifts heading by π (so a blue-side 90° becomes a red-side 270°, keeping the robot pointing the same relative direction on the field). Mirror negates heading (so a blue-side 90° becomes a red-side −90° / 270°). For side-mounted mechanisms, a mirrored path can still end with a heading that points the *wrong* way relative to the mechanism — see the gotcha below.
-
-## Wiring via the builder
-
-The builder has two independent policies:
+For custom decisions:
 
 ```java
 pathBuilder
-    .withDefaultShouldFlip()                  // alliance-aware flip
-    .withShouldMirror(() -> leftAutoSelected);  // arbitrary mirror policy
+    .withShouldFlip(shouldFlip)
+    .withShouldMirror(shouldMirror);
 ```
 
-When the command initializes:
+When both return true, BLine applies **flip first, then mirror**.
 
-1. If the flip supplier returns true, `path.flip()` is called.
-2. If the mirror supplier returns true, `path.mirror()` is called.
+## Reset to the transformed start
 
-Both transformations can be applied in the same command if needed; they operate on a **copy** of the original path so the source `Path` object is not mutated.
-
-Use `withShouldFlip(Supplier<Boolean>)` for custom flip logic beyond `DriverStation.getAlliance()`.
-
-## Manually flipping / mirroring
+The pose reset must use the same transform policy as the followed path. `FollowPath` applies flip/mirror before invoking its captured reset consumer:
 
 ```java
-Path red = blue.copy();
-red.flip();
+Command first = pathBuilder
+    .withPoseReset(driveSubsystem::resetPose)
+    .build(firstPath);
 
-Path rightSide = leftSide.copy();
-rightSide.mirror();
+pathBuilder.withPoseReset(ignored -> {});
 ```
 
-Always `copy()` first if you intend to use both versions of the path — `flip()` and `mirror()` mutate the instance they are called on.
+Do not pair automatic builder transforms with an earlier `resetPose(firstPath.getStartPose())`; that expression reads the original authored pose. See [Follow Paths](follow-path.md#pose-reset) for the one-build reset pattern.
 
-## Known gotchas
+## Manual transformations
 
-### Mirrored path + side-mounted mechanism
+Make a copy when code needs an explicit transformed object for a dashboard preview or another calculation:
 
-Because `mirror()` maps `θ → −θ` (not `θ + π`), a side-mounted shooter or side intake can end up pointing the wrong way on the mirrored side of the field. Options:
+```java
+Path preview = authoredPath.copy();
+if (shouldFlip.get()) {
+    preview.flip();
+}
+if (shouldMirror.get()) {
+    preview.mirror();
+}
 
-1. **Override the final rotation target** after mirroring: `path.setElement(lastIndex, new Waypoint(pos, mechanismHeading))`.
-2. **Use `flip()` if it matches the field** — it maps `θ → θ − π`, which preserves a side-mechanism's alliance-relative orientation.
-3. **Keep separate authored paths for each side** when the mechanism orientation matters asymmetrically.
+BLineField.drawPath(field, "SelectedAuto", preview);
+```
 
-### Flip + mirror + manual flip = confusion
+Pass the original path to a builder that applies the same policy once. Keeping preview and command transformation decisions in one helper reduces double-transform mistakes.
 
-If you also call `flip()` manually inside code and the builder has `withDefaultShouldFlip()` enabled, you can end up double-flipping. Stick with one policy per project:
+## State behavior in v0.9.1
 
-- **Builder does the flipping** (recommended) — never call `flip()` manually.
-- **Or you do it manually** — disable `withDefaultShouldFlip()` in the builder.
+- `flip()` mutates the `Path` and is guarded: a second call is a no-op until `undoFlip()`.
+- `mirror()` mutates the `Path` every time. Two calls restore the original geometry.
+- `FollowPath.Builder.build(...)` copies the source path, so its initialization transform does not mutate the object you supplied.
+- Builder transform suppliers persist and are captured by every later `build(...)` call.
 
-### Global symmetry state
+!!! warning "Build a fresh command when transform state may change"
+    `mirror()` has no applied-state guard in v0.9.1, so reinitializing one mirrored `FollowPath` instance can reflect its internal path again. A flipped command also remains flipped if its supplier changes from true to false before a later initialization. Build a fresh command whenever repeating a transformed run or changing the flip/mirror decision, then verify the displayed route.
 
-`FlippingUtil.symmetryType` is a static global. As of v0.8.2, `Path.flip()` explicitly forces `kRotational` for its own work and restores the previous value afterward — so it can no longer accidentally change global symmetry state for other callers. If you use `FlippingUtil` directly elsewhere in your code, that's still your responsibility.
+## Field dimensions
 
-## `FlippingUtil` helpers
+`FlippingUtil` defaults to `16.54 m × 8.07 m`, matching the current BLine Web 2026 REBUILT calibration. If a future field uses different dimensions, update `FlippingUtil.fieldSizeX` and `fieldSizeY` from authoritative field data before constructing or initializing paths.
 
-All coordinate math is exposed as static methods you can use directly (for custom vision transforms, etc.):
+```java
+FlippingUtil.fieldSizeX = officialFieldLengthMeters;
+FlippingUtil.fieldSizeY = officialFieldWidthMeters;
+```
 
-| Method | Description |
-|--------|-------------|
-| `flipFieldPosition(Translation2d)` | Alliance flip (honors current `symmetryType`). |
-| `flipFieldRotation(Rotation2d)` | Same, for rotation. |
-| `flipFieldPose(Pose2d)` | Combined. |
-| `mirrorFieldPosition(Translation2d)` | y → fieldSizeY − y. |
-| `mirrorFieldRotation(Rotation2d)` | θ → −θ. |
-| `mirrorFieldPose(Pose2d)` | Combined. |
-| `flipFieldSpeeds(ChassisSpeeds)` | Flip field-relative speeds. |
-| `flipFeedforwards(double[])` | Flip swerve feedforwards (only matters for `kMirrored`). |
+Do not derive these values by measuring a screenshot.
 
-Field dimensions default to 16.54 m × 8.07 m — the 2024+ FRC field dimensions. Override by setting `FlippingUtil.fieldSizeX` / `fieldSizeY` if a future field differs.
+## Mechanism and heading checks
 
-## Related
+A mirrored side-mounted intake or shooter may face the wrong task direction even when the translation geometry looks correct. Check:
 
-- [FollowPath Builder → withDefaultShouldFlip / withShouldMirror](follow-path.md#fluent-builder-methods)
-- [Path Construction → Utilities](path-construction.md#utilities-for-preparing-a-path)
+1. final robot heading;
+2. side-mounted mechanism orientation;
+3. pose reset after the same transform;
+4. event order and event keys;
+5. initial module direction; and
+6. the planned and live pose on both alliance selections.
+
+Keep separate authored paths when the game geometry or mechanism behavior is genuinely asymmetric.
+
+## Utility methods
+
+`FlippingUtil` also exposes `flipFieldPosition`, `flipFieldRotation`, `flipFieldPose`, `mirrorFieldPosition`, `mirrorFieldRotation`, `mirrorFieldPose`, `flipFieldSpeeds`, and feedforward helpers. `Path.flip()` temporarily forces rotational symmetry for its work; direct `FlippingUtil` use honors the process-wide `symmetryType`.
+
+Related: [Field2d Preview](field-visualization.md) and [Pre-Match Module Orientation](pre-match.md).

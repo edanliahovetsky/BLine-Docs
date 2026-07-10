@@ -1,91 +1,74 @@
-# Protrusions
+# Fields, Footprint & Protrusions
 
-**Protrusions** are a path-visualization feature added in BLine-GUI **v0.3.0**. They let you draw offsets around path elements to represent asymmetric robot geometry — an intake out front, a bumper on one side, an arm extension during scoring — without changing the underlying path.
+Open **Settings** to configure the editor's field and robot visualization. These settings help inspect clearance; BLine-Lib does not use them for collision avoidance.
 
-Protrusions are **GUI-only**. They do not affect path following on the robot at all. Their purpose is to make it obvious at design time that the *extended* geometry of the robot will fit where you've placed the path.
+## Field
 
-## When to use them
+BLine Web includes FRC fields from 2022 through the current season plus a blank meter grid. New projects default to the latest officially released season—currently **REBUILT 2026**.
 
-Typical scenarios:
+Use the current field for general documentation, tutorials, and active-season paths. Select an older field only for a path that actually belongs to that season.
 
-- Your intake hangs ~0.3 m in front of the bumper, and you want to see whether it'll clear a game-piece structure at a specific waypoint.
-- Your robot has a side-mounted shooter; you want visual confirmation that the shooter muzzle isn't pointing into a wall.
-- The robot grows visibly during scoring (elevator deployed, arm extended) and you want to see that in the simulation preview of the scoring pose.
+### Custom field image
 
-If your robot has a symmetric footprint and nothing protruding, leave protrusions off — the baseline Robot Length / Robot Width rendering is sufficient.
+The **Field** settings tab can upload a custom image and define its metric geometry. Confirm:
 
-## Enabling protrusions
+- field length and width;
+- coordinate offset/margin;
+- image orientation; and
+- a known landmark coordinate after loading.
 
-Open **Settings → Edit Config…** and check **Enable Protrusions**. The following fields then become active:
+Filenames ending in a numeric suffix such as `_200` can be interpreted using PathPlanner-style pixels-per-meter metadata. Verify inferred values rather than relying on the filename alone.
 
-| Field | Description |
-|-------|-------------|
-| **Protrusion Distance (m)** | How far the protrusion extends beyond the robot perimeter. |
-| **Protrusion Side** | Which side the protrusion is on: `left`, `right`, `front`, `back`, or `none`. |
-| **Default Protrusion State** | `shown` or `hidden` — the default visibility for new elements. |
-| **Show On Event Keys** | Comma-separated event-trigger keys that flip the protrusion to **shown** when fired during simulation. |
-| **Hide On Event Keys** | Comma-separated event-trigger keys that flip the protrusion to **hidden** when fired during simulation. |
+Custom field assets and the selected field are editor data under `.bline-web`; they are not written into runtime `config.json`.
 
-These settings are project-wide and live in `config.json` alongside kinematic defaults.
+## Robot footprint
 
-## Visual behavior
+Under **Robot**, enter the full bumper-to-bumper length and width. The simulator draws this rectangle at the idealized robot pose.
 
-Protrusions only render for **Waypoints** and **RotationTargets** — the elements that carry a rotation, and therefore a notion of "which side." They do not render for TranslationTargets or EventTriggers.
+The footprint helps identify obvious clearance problems, but it does not account for flex, pose error, wheel slip, or mechanism motion. Leave real safety margin around fixed field geometry.
 
-| Element | Protrusion appearance |
-|---------|-----------------------|
-| **Waypoint** | Dashed **orange** offset perimeter on the chosen side |
-| **RotationTarget** | Dashed **green** offset perimeter on the chosen side |
+## Protrusions
 
-Both use the same dashed-line family as rotation targets themselves, so it's clear at a glance that you're looking at a *visualization overlay* and not a second path element.
+A protrusion represents a temporary extension such as an intake. Configure:
 
-## Per-element visibility
+- enabled/disabled;
+- extension distance;
+- side: front, back, left, right, or none;
+- default shown/hidden state;
+- event keys that show it; and
+- event keys that hide it.
 
-Beyond the project-wide default visibility state, you can override visibility per-element:
+The simulator derives a visual show/hide schedule from the geometric positions of matching event keys. This is an editor clearance preview, not execution of the robot event registry.
 
-- **Set the element's protrusion coverage** — each element remembers its own `shown` / `hidden` state.
-- **Drive visibility with event keys.** Add a key to **Show On Event Keys** or **Hide On Event Keys** to make the simulation toggle protrusion visibility when that event fires.
+Example intent:
 
-When the simulation is **not** running, each element renders its own individual protrusion state. When the simulation **is** running, the footprint's protrusion follows the rules driven by the event keys — matching the state the robot would be in mid-path.
-
-## Simulation interaction
-
-During sim playback:
-
-1. Start: the simulated footprint uses **Default Protrusion State**.
-2. When a Show event fires (`lib_key` in **Show On Event Keys**), the footprint expands to include the protrusion.
-3. When a Hide event fires (`lib_key` in **Hide On Event Keys**), the footprint retracts.
-4. The simulated footprint renders with the currently active state — you can visually confirm that the intake is deployed exactly when you expected.
-
-This lets you, for example, register a single event trigger `"deployIntake"` on the robot **and** wire it as a Show On Event Key for protrusions — and the GUI sim will then show the intake "deploying" at the same point in the path where the code would actually deploy it.
-
-## Example config
-
-```json
-{
-    "robot_length_meters": 0.78,
-    "robot_width_meters": 0.85,
-
-    "protrusion_enabled": true,
-    "protrusion_distance_meters": 0.30,
-    "protrusion_side": "front",
-    "protrusion_default_state": "hidden",
-    "protrusion_show_on_event_keys": ["deployIntake"],
-    "protrusion_hide_on_event_keys": ["retractIntake"]
-}
+```text
+default: hidden
+show on: deployIntake
+hide on: stowIntake
 ```
 
-With this config, a front intake sits hidden by default. When an `EventTrigger` with `lib_key: "deployIntake"` fires, the simulated footprint grows forward by 0.30 m. When `"retractIntake"` fires, it retracts.
+There is no independent saved visibility choice on every path element in current BLine Web. Visibility comes from the default plus the event-key schedule.
 
-## Good practices
+## Configure the matching robot events
 
-- **Keep protrusions honest.** If your measured intake sits 0.28 m out, don't round to 0.1 m to make paths "fit." Measure, enter, and redesign paths as needed.
-- **Use the default state that matches match-start.** If the intake is retracted at match start, default state should be `hidden`. Deploy during the first relevant segment.
-- **Name event keys by action, not by state.** `"deployIntake"` is self-documenting and works symmetrically with `"retractIntake"`.
-- **Protrusions don't replace collision checking.** They're a visualization aid, not a physics engine. Confirm clearances on the actual robot before trusting a tight path.
+The editor visual does not deploy a real mechanism. Register matching `lib_key` actions in robot code:
 
-## Related
+```java
+FollowPath.registerEventTrigger("deployIntake", intake::deploy);
+FollowPath.registerEventTrigger("stowIntake", intake::stow);
+```
 
-- [Event Triggers](../concepts/event-triggers.md) — the mechanism that drives protrusion show/hide during sim.
-- [Menu Bar → Settings](menu-bar.md#settings) — config dialog reference.
-- [Simulation](simulation.md) — how the simulated footprint responds to protrusion state.
+The editor may show the intended clearance even if robot code forgot to register the event or would process an unusual hand-authored event list differently. Keep same-segment runtime events in ascending `t_ratio`, then test the event logs and mechanism behavior separately.
+
+## Validation checklist
+
+- Current-season field selected for current paths and demos.
+- Field coordinates match WPILib/BLine coordinates.
+- Footprint includes bumpers, not only the frame.
+- Protrusion distance and side match the real mechanism.
+- Show/hide keys exactly match robot registrations.
+- Timeline shows the expected state changes.
+- Robot test leaves additional clearance beyond the idealized drawing.
+
+See [Simulation](simulation.md) and [Events & Command Groups](../lib/event-triggers.md).

@@ -1,209 +1,176 @@
-# FollowPath Builder
+# Follow Paths
 
-`FollowPath.Builder` captures the per-robot configuration you need once and builds fresh `FollowPath` commands for every path you want to run. Configure it in `RobotContainer` and reuse.
+Build one configured `FollowPath.Builder`, then use it to create commands for fixed or runtime-generated paths.
 
-## Minimal setup
+## Builder
 
 ```java
-import frc.robot.lib.BLine.*;
-import edu.wpi.first.math.controller.PIDController;
-
-FollowPath.Builder pathBuilder = new FollowPath.Builder(
-    driveSubsystem,                     // Subsystem requirement
-    driveSubsystem::getPose,            // Supplier<Pose2d>  (field-frame)
-    driveSubsystem::getChassisSpeeds,   // Supplier<ChassisSpeeds>  (robot-relative)
-    driveSubsystem::drive,              // Consumer<ChassisSpeeds>  (robot-relative)
-    new PIDController(5.0, 0.0, 0.0),   // translation controller
-    new PIDController(3.0, 0.0, 0.0),   // rotation controller
-    new PIDController(2.0, 0.0, 0.0)    // cross-track controller
+FollowPath.Builder builder = new FollowPath.Builder(
+    driveSubsystem,
+    driveSubsystem::getPose,
+    driveSubsystem::getRobotRelativeSpeeds,
+    driveSubsystem::driveRobotRelative,
+    translationPid,
+    rotationPid,
+    crossTrackPid
 );
 ```
 
-## Constructor parameters
+| Argument | Contract |
+| --- | --- |
+| Subsystem | Required by every built command |
+| Pose supplier | Current field-relative `Pose2d` |
+| Speed supplier | Current robot-relative `ChassisSpeeds` |
+| Speed consumer | Accepts robot-relative `ChassisSpeeds` |
+| Translation PID | Error is remaining polyline distance |
+| Rotation PID | Error is heading; continuous input is enabled internally |
+| Cross-track PID | Error is signed perpendicular distance from active segment |
 
-| Parameter | Type | Purpose |
-|-----------|------|---------|
-| `driveSubsystem` | `Subsystem` | Command requirement. BLine accepts any `Subsystem`, not just `SubsystemBase` (widened in v0.4.1+). |
-| `poseSupplier` | `Supplier<Pose2d>` | Field-frame pose each cycle. Must match the alliance-origin convention you used to author the path (blue-origin convention is standard; BLine flips at runtime). |
-| `robotRelativeSpeedsSupplier` | `Supplier<ChassisSpeeds>` | Current chassis speeds, **robot-relative**. |
-| `robotRelativeSpeedsConsumer` | `Consumer<ChassisSpeeds>` | Commanded chassis speeds, **robot-relative**. BLine does the field↔robot conversion internally. |
-| `translationController` | `PIDController` | Minimizes remaining path distance. |
-| `rotationController` | `PIDController` | Minimizes holonomic heading error. Continuous input enabled by BLine (−π, π). |
-| `crossTrackController` | `PIDController` | Minimizes perpendicular deviation from the current segment line. |
+The controllers are supplied as objects and reused by built commands. Do not run multiple commands from the same builder concurrently.
 
-!!! warning "Speeds must be robot-relative"
-    `FollowPath` computes a field-relative `ChassisSpeeds` internally, converts it to robot-relative using the current pose's rotation, and hands that to your consumer. If your drive subsystem's `drive()` expects field-relative speeds, either wrap the consumer to convert back, or expose a robot-relative method and pass that instead. CTRE Swerve Templates and most YAGSL configurations already use robot-relative `ApplyRequest` / robot-relative speeds.
+## Builder options
 
-## PID controllers
-
-| Controller | Input | Output | Typical starting gain |
-|------------|-------|--------|----------------------|
-| **Translation** | Remaining path distance (m) | Speed magnitude (m/s) | `P = 5.0` |
-| **Rotation** | Heading error (rad) | Angular velocity (rad/s) | `P = 3.0` |
-| **Cross-Track** | Signed perpendicular distance from segment line (m) | Correction velocity (m/s) | `P = 2.0` |
-
-All three are `edu.wpi.first.math.controller.PIDController`. BLine sets their tolerances from the active path's end tolerances on each command init and enables continuous input on the rotation controller.
-
-Tuning order is **translation → rotation → cross-track**. See [Tuning & Usage Tips](../usage-tips.md#pid-tuning) for the full procedure.
-
-!!! warning "Don't use the integral term on the translation controller"
-    The translation controller's setpoint is zero remaining distance. An integrator accumulates while the robot is far from the endpoint and drives instability. Use P-only (or P + D if needed) for translation. Integrators on rotation and CTE are fine.
-
-## Fluent builder methods
-
-Each method returns the builder so you can chain them. Settings persist across `build(...)` calls until you change them.
-
-### `withDefaultShouldFlip()`
+### Alliance flip
 
 ```java
-pathBuilder.withDefaultShouldFlip();
+builder.withDefaultShouldFlip();
 ```
 
-Automatically flips the path for the red alliance using `DriverStation.getAlliance()`. Wire this if you're authoring every path from the blue-origin perspective (the convention). Uses rotational field symmetry by default via `FlippingUtil`.
+Uses the Driver Station alliance to apply BLine's default opposite-alliance transform. Author the base path from the blue-origin perspective.
 
-### `withShouldFlip(Supplier<Boolean>)`
+For custom policy:
 
 ```java
-pathBuilder.withShouldFlip(() -> SmartDashboard.getBoolean("FlipPath", false));
+builder.withShouldFlip(this::shouldFlip);
+builder.withShouldMirror(this::shouldMirror);
 ```
 
-Custom flip logic if the default alliance rule doesn't fit (e.g., dashboard toggle for testing, alternate origin conventions).
+Do not also mutate the same path manually unless you have intentionally accounted for both transformations.
 
-### `withShouldMirror(Supplier<Boolean>)`
+### Pose reset
 
 ```java
-pathBuilder.withShouldMirror(() -> fieldConfiguration.shouldMirror());
+builder.withPoseReset(driveSubsystem::resetPose);
 ```
 
-Applies `Path.mirror()` when the supplier returns true. Mirroring reflects the path across the field width centerline (`y → fieldSizeY − y`) and maps `θ → −θ`. This is **not** the same as `flip()` — see [Alliance Flip & Mirror](flip-and-mirror.md) for when each makes sense.
+The reset consumer is captured by every command built while this option is set. Builder options persist.
 
-Flip and mirror both apply at command init time and can be combined.
-
-### `withPoseReset(Consumer<Pose2d>)`
+For most autonomous routines, set this option only while building the first path command, then clear it:
 
 ```java
-pathBuilder.withPoseReset(driveSubsystem::resetPose);
+Command first = builder
+    .withPoseReset(driveSubsystem::resetPose)
+    .build(firstPath);
+
+builder.withPoseReset(ignored -> {});
+Command second = builder.build(secondPath);
+
+Command auto = Commands.sequence(first, second);
 ```
 
-When set, `FollowPath.initialize()` calls the consumer with the path's start pose. Useful for the first path in auto (so odometry starts at the known location).
+The first command retains the reset consumer it captured during `build`. At initialization, `FollowPath` applies its configured alliance flip and mirror before supplying the start pose to that consumer.
 
-Set once, it applies to **every** subsequent `build(...)`. To turn it off on a per-path basis while reusing the same builder, override with a no-op: `.withPoseReset(p -> {})`.
+!!! warning "An explicit reset needs the same transform policy"
+    `driveSubsystem.resetPose(firstPath.getStartPose())` uses the original authored pose. When the builder later flips or mirrors its private path copy, the reset and followed path disagree. Use the one-build pattern above, or explicitly transform a copied path once and use that same policy for both reset and following.
 
-### `withTRatioBasedTranslationHandoffs(boolean)`
+### Projection-based translation handoff
 
 ```java
-pathBuilder.withTRatioBasedTranslationHandoffs(true);
+builder.withTRatioBasedTranslationHandoffs(true);
 ```
 
-When enabled, translation handoffs fire as soon as **either**:
+Adds a projected-progress threshold, calculated as `clamp(1 − handoffRadius / segmentLength, 0, 1)`, as an alternative to entering the handoff circle. See [Handoffs, t-ratio & Completion](../concepts/key-parameters.md#optional-projection-based-handoff).
 
-- The robot is within the current target's handoff radius (normal behavior), or
-- The robot's projection onto the current segment passes `1 − handoff_radius / segment_length`.
-
-This is more robust on high-speed paths where a collision or aggressive initial target could push the robot outside the radius and stall the handoff. Default is `false` (radius-only handoffs).
-
-Use it for specific high-risk paths; leave it off for general-purpose paths. See v0.8.4 release notes if you're comparing against older behavior — an initialization edge case at the very start of a path was fixed in v0.8.4 so you can safely enable t-ratio handoffs even when the robot starts close to the first target.
-
-## Building a command
+## Build a fixed path
 
 ```java
-Path path = new Path("scoreFirst");
-Command cmd = pathBuilder.build(path);
-cmd.schedule();
+Path score = new Path("score-left");
+Command followScore = builder.build(score);
 ```
 
-`build(path)`:
+`build` captures a copy of the supplied path. Later mutations of the original do not change the built command.
 
-- Deep-copies the path so the command can safely flip/mirror without mutating the original.
-- Wires the required subsystem, flip/mirror/pose-reset policies, and PID controllers.
-- Returns a fresh `FollowPath` command.
+## Build a runtime path at schedule time
 
-Each call produces an independent command; safe to build the same path multiple times if needed.
-
-### What the command does
-
-When scheduled:
-
-1. `initialize()` — optionally flip/mirror the path, optionally reset odometry to the start pose, reset PID controller internal state and tolerances, clear traversal cursors, and log `FollowPath/pathTranslations`.
-2. `execute()` — advances translation cursor, selects rotation target, fires any due event triggers, computes and rate-limits the commanded `ChassisSpeeds`, logs state.
-3. `isFinished()` — returns true when the robot is on the last translation element, past the last rotation target, with translation and rotation both at their setpoints.
-4. `end(interrupted)` — sends a zeroed `ChassisSpeeds` to the drive consumer. This was added in v0.7.2 after reports of the last commanded speed latching past command completion.
-
-### No mid-path stopping
-
-BLine paths run to completion (end tolerances satisfied) unless interrupted. For routines that need to stop mid-route, split into separate paths and chain them:
+Do not evaluate a live pose while configuring controller bindings at robot startup:
 
 ```java
-return Commands.sequence(
-    pathBuilder.build(toFirstScore),
-    new ScoreCommand(),
-    pathBuilder.build(toIntake),
-    new IntakeCommand(),
-    pathBuilder.build(toSecondScore),
-    new ScoreCommand()
+// Wrong: getPose() runs while RobotContainer is being constructed.
+controller.a().whileTrue(
+    runtimeBuilder.build(new Path(
+        new Path.Waypoint(driveSubsystem.getPose()),
+        new Path.Waypoint(targetPose)
+    ))
 );
 ```
 
-For actions that fire *during* a path, use [Event Triggers](event-triggers.md).
-
-## Diagnostic getters
-
-`FollowPath` exposes a few getters for dashboards or custom logic:
+Defer construction:
 
 ```java
-int getCurrentTranslationElementIndex();
-int getCurrentRotationElementIndex();     // -1 when no active rotation target remains
-double getRemainingPathDistanceMeters();  // 0.0 when not in a valid traversal state
+controller.a().whileTrue(
+    Commands.deferredProxy(() ->
+        runtimeBuilder.build(new Path(new Path.Waypoint(targetPose)))
+    )
+);
 ```
 
-`getRemainingPathDistanceMeters()` was added in v0.8.1 for dashboards and auto sequencing that want to display or react to progress.
+A single final waypoint is enough for drive-to-pose. `FollowPath` starts from the live supplied pose and holds the live starting heading only when the path has no rotation target.
 
-## A complete `RobotContainer` skeleton
+Here, `runtimeBuilder` is a dedicated `FollowPath.Builder` with no flip, mirror, or pose-reset option because `targetPose` already uses the current WPILib field coordinate frame. Give a runtime builder its own controller objects, or otherwise guarantee it cannot run concurrently with commands that reuse the same controllers.
+
+If a target is instead a canonical blue-authored pose that should move to the opposite alliance, use the transforming builder intentionally. Do not transform a live pose or an already alliance-specific target a second time.
+
+## Add a timeout or fallback
+
+BLine follows physical progress. If the robot is blocked and cannot reach the next element, the command can continue indefinitely.
+
+Choose a policy appropriate to the routine:
 
 ```java
-public class RobotContainer {
-    private final DriveSubsystem drive = new DriveSubsystem();
-    private final FollowPath.Builder pathBuilder;
+AtomicBoolean timedOut = new AtomicBoolean(false);
 
-    public RobotContainer() {
-        Path.setDefaultGlobalConstraints(new Path.DefaultGlobalConstraints(
-            4.5, 10.0, 600, 2000, 0.03, 2.0, 0.25
-        ));
+Command timeout = Commands.waitSeconds(3.0)
+    .andThen(Commands.runOnce(() -> timedOut.set(true)));
 
-        FollowPath.registerEventTrigger("deployIntake", intake::deploy);
-        FollowPath.registerEventTrigger("shoot", new ShootCommand(shooter));
-
-        pathBuilder = new FollowPath.Builder(
-            drive,
-            drive::getPose,
-            drive::getChassisSpeeds,
-            drive::drive,
-            new PIDController(5.0, 0.0, 0.0),
-            new PIDController(3.0, 0.0, 0.0),
-            new PIDController(2.0, 0.0, 0.0)
-        )
-        .withDefaultShouldFlip()
-        .withPoseReset(drive::resetPose);
-
-        // AdvantageKit logging
-        FollowPath.setDoubleLoggingConsumer(p -> Logger.recordOutput(p.getFirst(), p.getSecond()));
-        FollowPath.setBooleanLoggingConsumer(p -> Logger.recordOutput(p.getFirst(), p.getSecond()));
-        FollowPath.setPoseLoggingConsumer(p -> Logger.recordOutput(p.getFirst(), p.getSecond()));
-        FollowPath.setTranslationListLoggingConsumer(p -> Logger.recordOutput(p.getFirst(), p.getSecond()));
-    }
-
-    public Command getAutonomousCommand() {
-        Path first = new Path("scoreFirst");
-        drive.setModuleOrientations(first.getInitialModuleDirection());
-        return pathBuilder.build(first);
-    }
-}
+Command guardedPath = Commands.sequence(
+    Commands.runOnce(() -> timedOut.set(false)),
+    Commands.race(
+        builder.build(path),
+        timeout
+    )
+).finallyDo(interrupted ->
+    Logger.recordOutput("Auto/PathTimedOut", timedOut.get())
+);
 ```
 
-## Related
+Reset the flag at initialization so state cannot leak across schedules. A plain `.withTimeout(3.0)` is enough when you do not need to distinguish a timeout in logs; the outer decorator's `finallyDo` interruption flag does **not** identify which side of that race won. A timeout trades recovery opportunity for schedule certainty, so use it where getting stuck would make the rest of the auto unsafe or meaningless.
 
-- [Event Triggers](event-triggers.md) — registering actions for triggers referenced by paths.
-- [Alliance Flip & Mirror](flip-and-mirror.md) — `withDefaultShouldFlip`, `withShouldMirror`, symmetry choices.
-- [Pre-Match Module Orientation](pre-match.md) — `getInitialModuleDirection()` for optimal auto starts.
-- [Logging](logging.md) — what keys the follower publishes.
-- [Tuning & Usage Tips](../usage-tips.md) — PID tuning procedure.
+## Completion and interruption
+
+The command finishes when the final translation and rotation elements are active and both errors are inside their tolerances. v0.9.1 has no measured final-velocity criterion.
+
+On normal end, interruption, or defensive invalid-path exit, the follower sends zero robot-relative `ChassisSpeeds`.
+
+## Diagnostics
+
+Each command exposes:
+
+```java
+follow.getCurrentTranslationElementIndex();
+follow.getCurrentRotationElementIndex();
+follow.getRemainingPathDistanceMeters();
+```
+
+The indices refer to the expanded internal element list, not the separate constraint ordinals shown in BLine Web.
+
+Use the logging consumers for controller output, target, constraint, event, and finish-state detail. See [Logging & AdvantageScope](logging.md).
+
+## Common integration checks
+
+- Supplier and consumer are robot-relative.
+- Human driver-perspective transforms are not applied to autonomous output.
+- Pose reset happens once, at the intended transformed start.
+- Fixed paths are loaded before they are needed.
+- Runtime paths are constructed when scheduled.
+- A physically blocked path has an intentional timeout/fallback policy.
+- Rotation overrides are cleared before a conflicting final heading check.

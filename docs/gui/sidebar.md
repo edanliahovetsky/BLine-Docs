@@ -1,140 +1,109 @@
-# Sidebar
+# Constraints & Optimizer
 
-The sidebar is where per-element editing and path-level constraint configuration happen. It's split into three panels: the element list, the element properties editor, and the constraint editor.
+The **Constraints** section contains path-specific tolerances and ranged motion limits. Use it after the basic geometry is correct.
 
-## Path Elements panel
+## Add a constraint
 
-Lists every element in the current path in order. Each row shows a colored type chip, the element type, and its key property (coordinates, rotation, or lib key). A red ⊖ button deletes the row; numeric row indices give you a quick reference for ranged-constraint ordinals.
+Choose **Add constraint** and select:
 
-![Elements Panel](../assets/gifs/sidebar/sidebar-elements.gif)
+- Max Velocity or Max Acceleration
+- Min Velocity
+- Max Rot Velocity or Max Rot Acceleration
+- Min Rot Velocity
+- End Translation Tolerance
+- End Rotation Tolerance
 
-### Add an element
+End tolerances are one scalar for the path. Velocity and acceleration constraints use ordinal ranges.
 
-Click **Add element** to insert a new element **after the currently selected one**. If nothing is selected, it's appended to the end of the path.
+## Read the range bar
 
-![Add Element](../assets/gifs/sidebar/add-element.gif)
+The cells above a range use editor ordinals starting at **1**. Translation cards count waypoints and translation targets; rotation cards count waypoints and rotation targets. Event triggers are not part of either constraint ordinal track.
 
-Newly added elements default to a sensible type based on the path's current state, but you can change the type immediately via the properties panel's **Type** dropdown.
+Each cell either shows a ranged value or remains **Open**. For maximum constraints, Open falls back to the matching global default. For minimum constraints, which have no global baseline, Open resolves to `0`.
 
-### Reorder elements
+!!! warning "Exported ordinals are zero-based"
+    The editor's first ordinal is `1`; runtime JSON and Java call it `0`. Let BLine Web serialize ranges instead of transcribing the screen numbers by hand.
 
-Drag list rows to reorder them. The canvas updates instantly.
+## Edit ranges
 
-![Reorder Elements](../assets/gifs/sidebar/reorder-elements.gif)
+| Task | Action |
+| --- | --- |
+| Select a range | Click its colored bar or cell |
+| Change its value | Enter a value in the selected-range control |
+| Extend/shrink it | Drag a range boundary across cells |
+| Split it | Select it and choose **Split** |
+| Add a range | Choose **+**, or insert into an open gap |
+| Delete one range | Select it and use the delete action or `Delete`/`Backspace` |
+| Use a larger surface | Choose **Editor** to open the movable modeless Constraint Editor |
 
-!!! note "RotationTargets are segment-scoped"
-    A RotationTarget is logically "between" two translation elements. Reordering can change which segment it belongs to. The same applies to EventTriggers. Reorder consciously when these elements are in the path.
+Dragging or editing an automatic range converts it to **Manual**, because the value no longer represents the optimizer output.
 
-### Remove an element
+The editor warns when a maximum is above the global value or a minimum is above the paired maximum. Resolve warnings rather than assuming the runtime will clamp them as intended.
 
-Click the red ⊖ next to any row, or select it and press `Delete` / `Backspace` in the canvas or sidebar.
+## Use the path optimizer
 
-## Element Properties panel
+The optimizer proposes **maximum translation velocity** caps from path geometry and current settings.
 
-Appears when an element is selected. Fields vary by element type.
+![Applying the automatic velocity optimizer and reviewing generated caps](../assets/gifs/web/auto-velocity-optimizer.gif){ .gif-demo data-gif-poster="/assets/images/gif-posters/auto-velocity-optimizer-start.png" data-gif-end="/assets/images/gif-posters/auto-velocity-optimizer-end.png" data-gif-duration="7410" }
+![Static result of automatic maximum-velocity caps](../assets/images/gif-posters/auto-velocity-optimizer-end.png){ .gif-print-poster }
 
-### Type dropdown
+1. Open the Max Velocity card.
+2. Review the **Optimizer** settings.
+3. Choose **Auto all** to fill eligible open segments.
+4. Inspect the generated ranges and their coverage.
+5. Simulate the path.
+6. Test on the robot and convert/edit any range that needs manual control.
 
-All elements expose a **Type** dropdown that converts between types:
+**Clear auto** removes automatic ranges only. Manual ranges survive optimizer reruns.
 
-- **Waypoint ↔ TranslationTarget** — adds or removes the rotation data.
-- **Waypoint ↔ RotationTarget** — adds or removes the translation data.
-- **TranslationTarget ↔ RotationTarget** — swaps translation for rotation.
-- **↔ EventTrigger** — replaces with an event trigger (resets fields).
+### Optimizer settings
 
-![Convert Type](../assets/gifs/sidebar/convert-element.gif)
+| Setting | Current default | Meaning |
+| --- | ---: | --- |
+| Velocity factor | `0.9` | Safety factor applied to candidate velocity caps |
+| Acceleration factor | `0.8` | Headroom applied while estimating achievable changes |
+| Merge difference | `0.3 m/s` | Similar adjacent caps within this difference may be merged |
 
-### Translation properties
+These are editor defaults, not measured robot limits. Tune the project defaults and factors to your chassis and testing process.
 
-For Waypoints and TranslationTargets:
+## Refresh stale automatic ranges
 
-| Field | Description |
-|-------|-------------|
-| **X (m)** | Field-coordinate x in meters. |
-| **Y (m)** | Field-coordinate y in meters. |
-| **Handoff Radius (m)** | Radius at which the follower advances from this target. Leave at 0 to inherit the global default. |
+Automatic caps can become stale after changes to:
 
-### Rotation properties
+- anchor geometry;
+- handoff radii;
+- rotation elements or rotation limits;
+- project path defaults; or
+- optimizer factors.
 
-For Waypoints and RotationTargets:
+Refresh the optimizer after those changes. A stale marker means “this value was generated from older inputs,” not that the path is necessarily unsafe or safe.
 
-| Field | Description |
-|-------|-------------|
-| **Rotation (deg)** | Holonomic heading target in degrees. |
-| **Profiled Rotation** | When checked, the rotation interpolates from the previous target across the segment. When unchecked, the setpoint snaps. |
+## Optimizer limitations
 
-For standalone RotationTargets there's also:
+The optimizer is a geometry-based authoring assistant. It does not model the complete drivetrain, voltage, center of mass, wheel friction, carpet, battery state, pose noise, game-piece contact, or mechanism motion.
 
-| Field | Description |
-|-------|-------------|
-| **t_ratio** | Position along the segment (0.0 – 1.0) where the rotation target is evaluated. Also adjustable by dragging the target on the canvas. |
+!!! warning "Review every generated cap"
+    Automatic does not mean validated. Use the optimizer to reduce repetitive first-pass work, then confirm range placement, simulate structure, inspect robot logs, and keep manual caps where field behavior requires them.
 
-### Event-trigger properties
+## Minimum velocity constraints
 
-For EventTriggers:
+The UI marks minimum constraints as advanced. They can overcome static friction when PID output is too small outside the final tolerance, but they can also force overshoot.
 
-| Field | Description |
-|-------|-------------|
-| **Event Pos (0–1)** | The `t_ratio` along the segment at which the trigger fires. |
-| **Lib Key** | The string key your robot code registered an action under via `FollowPath.registerEventTrigger(...)`. |
+- Start with no minimum.
+- Tune controllers and inspect measured speed first.
+- Add the smallest baseline that fixes a demonstrated deadband problem.
+- Keep it below the active maximum.
+- Re-test the endpoint at full configured speed.
 
-See [Event Triggers](../concepts/event-triggers.md) for the full model and patterns.
+## A repeatable workflow
 
-![Edit Properties](../assets/gifs/sidebar/edit-properties.gif)
+For each difficult turn or mechanism-sensitive region:
 
-## Path Constraints panel
+1. Select the relevant range and confirm its highlighted path section.
+2. Write down the current value and symptom.
+3. Change one range or factor.
+4. Re-run simulation for structural sanity.
+5. Run the robot and compare the same log keys.
+6. Keep or revert based on evidence.
 
-Configure the ranged velocity/acceleration constraints for the path. End tolerances live in project config (not here).
-
-![Add Constraint](../assets/gifs/sidebar/add-constraint.gif)
-
-### Add a constraint
-
-Click **Add constraint**, choose the type (max translational velocity, max translational acceleration, max rotational velocity, max rotational acceleration), and pick a value.
-
-### Constraint rows (v0.5.0 SegmentBar)
-
-Each constraint is rendered as a **SegmentBar**: a horizontal bar with one colored segment per range, with value labels on top and drag handles between them. The ordinal axis on the bar corresponds to the translation or rotation ordinal sequence of the path (depending on which constraint type you're editing).
-
-| Action | How |
-|--------|-----|
-| **Adjust a value** | Click inside the segment and edit the value label inline, or drag its SpinBox. |
-| **Resize a range** | Drag the handle between two segments left or right. |
-| **Add a new range** | Click **+ Add** next to the bar, or split an existing segment (see shortcuts below). |
-| **Delete a range** | Click its **×** button or select it and press `Delete` / `Backspace`. |
-| **Navigate between segments** | Click a segment, then use `←` / `→`. |
-
-![Constraint Range](../assets/gifs/sidebar/constraint-range.gif)
-
-### Pop-out constraint editor (v0.5.0)
-
-For paths with many constraints, open the **pop-out constraint editor** via the icon on the right side of the constraint section header. The pop-out window gives you a larger editing surface for all constraints simultaneously, with the same SegmentBar widgets. Edits sync bidirectionally with the sidebar in real time.
-
-The pop-out also honors standard undo/redo (`Ctrl/Cmd + Z` / `Ctrl/Cmd + Shift + Z`).
-
-### Visual feedback on the canvas
-
-Click any constraint segment to highlight the **segments of the path** that constraint covers with a green overlay on the canvas. This is the fastest way to confirm an ordinal range matches what you intended.
-
-### Removing a constraint
-
-Click the red ⊖ on a constraint row to remove all of its ranges at once. To delete a single range within a constraint, use the per-segment × or `Delete` shortcut.
-
-## Keyboard shortcuts in the segment bar
-
-With a constraint segment focused (click it first):
-
-| Shortcut | Action |
-|----------|--------|
-| `←` / `→` | Navigate between adjacent segments |
-| `Home` / `End` | Jump to first / last segment |
-| `Delete` / `Backspace` | Delete the focused segment |
-| `S` | Split the focused segment at its midpoint |
-
-Also works inside the pop-out editor.
-
-## Recent changes
-
-- **v0.5.0** — Introduced `SegmentBar` constraint widget, pop-out editor, indexed list items, adaptive-height sidebar, inline units, and tooltips.
-- **v0.5.0 under the hood** — Ordinal remapping keeps ranged constraints correct when path structure changes; EventTrigger elements are now properly counted against the rotation ordinal sequence on project load.
-- **v0.4.0** — Clicking empty space clears selection. Drag/rotation undo no longer records redundant entries for simple clicks.
+See [Constraints & Ordinals](../concepts/constraints.md) for runtime precedence and JSON form, and [Tune Your Robot](../getting-started/tuning.md) for the log workflow.

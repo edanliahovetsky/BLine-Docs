@@ -53,6 +53,8 @@ Use screenshots and short animations when they make a workflow, UI state, spatia
 ### Freshness And Provenance
 
 - Capture current editor visuals from the public BLine-Web version that the documentation describes. Do not use the legacy BLine-GUI as a source for current workflows.
+- Use the latest officially released FRC season field image supported by the current public BLine-Web version for general-purpose screenshots, GIFs, and demos.
+- Use an older field only when the season itself is relevant to a historical or compatibility example. Label that season next to the visual and do not reuse the asset to demonstrate a current workflow.
 - Do not show unreleased UI in general documentation. It is acceptable on a clearly labeled prerelease page when the source revision is identified.
 - When a UI change affects a visible label, layout, control, sequence, or result shown in an asset, review every affected screenshot and animation. Replace stale assets in the same documentation change.
 - Remove superseded and unreferenced assets instead of retaining indistinguishable old versions.

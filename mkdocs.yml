@@ -1,6 +1,10 @@
 site_name: BLine Documentation
-site_description: Open-source path generation and tracking suite for FRC holonomic drivetrains
+site_description: Tutorial and reference documentation for BLine autonomous path planning and tracking
 site_url: https://bline-docs.pages.dev/
+site_author: BLine contributors
+copyright: BLine documentation is licensed under the BSD 3-Clause License.
+repo_url: https://github.com/edanliahovetsky/BLine-Docs
+repo_name: Docs
 
 theme:
   name: material
@@ -48,9 +52,6 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/edanliahovetsky/BLine-Web
       name: BLine Web (GitHub)
-    - icon: fontawesome/brands/github
-      link: https://github.com/edanliahovetsky/BLine-GUI
-      name: BLine-GUI (GitHub)
 
 extra_css:
   - stylesheets/extra.css
@@ -77,35 +78,45 @@ plugins:
   - with-pdf:
       output_path: BLine-Docs.pdf
       cover_title: BLine Documentation
-      cover_subtitle: Open-source path generation and tracking suite for FRC holonomic drivetrains
+      cover_subtitle: Tutorial and reference guide for BLine Web and BLine-Lib
       enabled_if_env: ENABLE_PDF_EXPORT
 
 nav:
   - Home: index.md
-  - Getting Started:
+  - Start Here:
+    - Before You Begin: getting-started/prerequisites.md
     - Installation: getting-started/installation.md
-    - Quick Start: getting-started/quick-start.md
-  - Concepts:
+    - First Path Tutorial: getting-started/quick-start.md
+    - Tune Your Robot: getting-started/tuning.md
+  - Understand BLine:
+    - How BLine Works: concepts/design-philosophy.md
     - Path Elements: concepts/path-elements.md
-    - Constraints: concepts/constraints.md
-    - Event Triggers: concepts/event-triggers.md
-    - Key Parameters: concepts/key-parameters.md
-    - Design Philosophy: concepts/design-philosophy.md
-  - GUI:
-    - Overview: gui/index.md
-    - Menu Bar: gui/menu-bar.md
-    - Canvas: gui/canvas.md
-    - Sidebar: gui/sidebar.md
+    - Constraints & Ordinals: concepts/constraints.md
+    - Handoffs, t-ratio & Completion: concepts/key-parameters.md
+    - Events: concepts/event-triggers.md
+  - BLine Web:
+    - Editor Overview: gui/index.md
+    - Projects, Paths & Collections: gui/menu-bar.md
+    - Draw & Edit Paths: gui/canvas.md
+    - Constraints & Optimizer: gui/sidebar.md
+    - Linked Elements: gui/linked-elements.md
     - Simulation: gui/simulation.md
-    - Protrusions: gui/protrusions.md
-  - Library:
+    - Fields, Footprint & Protrusions: gui/protrusions.md
+    - Import, Export & Backups: gui/exporting.md
+  - BLine Lib:
     - Overview: lib/index.md
-    - Path Construction: lib/path-construction.md
-    - FollowPath Builder: lib/follow-path.md
-    - Event Triggers: lib/event-triggers.md
+    - Follow Paths: lib/follow-path.md
+    - Construct Paths & JSON: lib/path-construction.md
+    - Events & Command Groups: lib/event-triggers.md
+    - Rotation Overrides: lib/rotation-overrides.md
+    - Field2d Preview: lib/field-visualization.md
     - Alliance Flip & Mirror: lib/flip-and-mirror.md
     - Pre-Match Module Orientation: lib/pre-match.md
-    - Logging: lib/logging.md
+    - Logging & AdvantageScope: lib/logging.md
+  - Recipes & Troubleshooting:
+    - Practical Recipes: usage-tips.md
+    - Common Issues: common-issues.md
+  - Reference:
     - API Reference: lib/api-reference.md
-  - Tuning & Usage Tips: usage-tips.md
-  - Common Issues: common-issues.md
+    - Versions & Support: reference/versions.md
+    - Keyboard Shortcuts: reference/keyboard-shortcuts.md

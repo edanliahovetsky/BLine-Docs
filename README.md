@@ -3,145 +3,67 @@
 [![Built with MkDocs Material](https://img.shields.io/badge/Built%20with-MkDocs%20Material-526CFE?logo=material-for-mkdocs&logoColor=white)](https://squidfunk.github.io/mkdocs-material/)
 [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](./LICENSE)
 
-> **This repository contains the documentation website for BLine.**  
-> Looking for the actual code? See [BLine-Lib](https://github.com/edanliahovetsky/BLine-Lib), [BLine Web](https://github.com/edanliahovetsky/BLine-Web), and [BLine-GUI](https://github.com/edanliahovetsky/BLine-GUI).
+Tutorial and reference documentation for [BLine Web](https://github.com/edanliahovetsky/BLine-Web) and [BLine-Lib](https://github.com/edanliahovetsky/BLine-Lib), an FRC geometric path-authoring and following workflow for holonomic drivetrains.
 
-## 📖 Live Documentation
+- [Read the live documentation](https://bline-docs.pages.dev/)
+- [Open BLine Web](https://bline-web.pages.dev/)
+- [Download the latest documentation PDF](https://github.com/edanliahovetsky/BLine-Docs/releases/latest/download/BLine-Docs.pdf)
+- [Join the Chief Delphi discussion](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778)
 
-**[View the Documentation →](https://bline-docs.pages.dev/)**
+## Documentation approach
 
-**[Download PDF (offline copy) →](https://github.com/edanliahovetsky/BLine-Docs/releases/latest/download/BLine-Docs.pdf)**
+The site is organized around a first-path tutorial, controller tuning, current BLine Web workflows, source-grounded BLine-Lib integration, practical recipes, and exact reference material. Current UI media uses the latest supported BLine Web release and latest officially released FRC field.
 
----
+See [DOCS_SPEC.md](DOCS_SPEC.md) for the maintenance standard, including source verification and GIF size/accessibility requirements.
 
-## What is BLine?
+## Local development
 
-**BLine** is an open-source path generation and tracking suite designed for **holonomic drivetrains** (swerve, mecanum, etc.) in FRC. Built by students for students, it prioritizes simplicity and performance in time-constrained environments where quick iteration and rapid empirical testing prove advantageous.
-
-### The BLine Suite
-
-| Component | Description | Repository |
-|-----------|-------------|------------|
-| **BLine Web** | Browser and desktop path planning interface with real-time simulation | [App](https://bline-web.pages.dev/) / [GitHub](https://github.com/edanliahovetsky/BLine-Web) |
-| **BLine-GUI** | Legacy visual path planning interface | [GitHub](https://github.com/edanliahovetsky/BLine-GUI) |
-| **BLine-Lib** | Java library for FRC robots with path-following algorithm | [GitHub](https://github.com/edanliahovetsky/BLine-Lib) |
-
-### Key Advantages
-
-- **97% reduction** in path computation time vs PathPlanner
-- **66% reduction** in cross-track error at waypoints
-- No precomputation required — paths execute immediately
-- **Quick, forgiving and easy** controller tuning — works well even when sub-optimally tuned
-
-📄 [Read the Full White Paper](https://docs.google.com/document/d/1Tc87YKWHtsEMEvmVDBD1Ww4e7vIUO2FyK3lwwuf-ZL4/edit?usp=sharing)
-
----
-
-## 🛠️ Local Development
-
-### Prerequisites
-
-- Python 3.9+
-- pip or pipx
-
-### Setup
+Python 3.9 or newer is required.
 
 ```bash
-# Clone the repository
-git clone https://github.com/edanliahovetsky/BLine-Docs.git
-cd BLine-Docs
-
-# Create a virtual environment (recommended)
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
+source venv/bin/activate
 pip install -r requirements.txt
-```
-
-### Serve Locally
-
-```bash
 mkdocs serve
 ```
 
-Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
+Open `http://127.0.0.1:8000`.
 
-### Build Static Site
+Build the static site without PDF export:
 
 ```bash
 mkdocs build
 ```
 
-The static site will be generated in the `site/` directory.
+Build the site and PDF:
 
-### Cloudflare Pages
+```bash
+ENABLE_PDF_EXPORT=1 mkdocs build
+```
 
-The documentation site is intended to deploy through Cloudflare Pages.
+`site/` is generated output and must remain untracked. Cloudflare Pages builds it from `main`; the GitHub workflow publishes `site/BLine-Docs.pdf` to the rolling `latest` release.
 
-Use these project settings:
+## Project structure
 
 ```text
-Production branch: main
-Build command: pip install -r requirements.txt && mkdocs build
-Output directory: site
-```
-
-Keep the GitHub Action enabled for the rolling `BLine-Docs.pdf` release asset.
-
----
-
-## 📁 Project Structure
-
-```
 BLine-Docs/
-├── docs/                    # Documentation source files
-│   ├── index.md             # Homepage
-│   ├── getting-started/     # Installation & quick start guides
-│   ├── concepts/            # Core concepts (elements, constraints, etc.)
-│   ├── gui/                 # GUI documentation
-│   ├── lib/                 # Library documentation
-│   ├── assets/              # Images and GIFs
-│   │   └── gifs/            # Demo GIFs organized by section
-│   ├── stylesheets/         # Custom CSS
-│   └── javascripts/         # Custom JavaScript
-├── overrides/               # MkDocs theme overrides
-├── mkdocs.yml               # MkDocs configuration
-├── requirements.txt         # Python dependencies
-└── site/                    # Generated static site (gitignored in production)
+├── docs/               # Markdown, current screenshots/GIFs, CSS, and JavaScript
+├── overrides/          # MkDocs theme overrides
+├── DOCS_SPEC.md        # Public documentation quality standard
+├── mkdocs.yml          # Site navigation and build configuration
+└── requirements.txt    # Python documentation dependencies
 ```
 
----
+## Contributing
 
-## 🤝 Contributing
+1. Read [DOCS_SPEC.md](DOCS_SPEC.md).
+2. Verify public API, JSON, and runtime behavior against BLine-Lib source.
+3. Verify labels and workflows against the current public BLine Web source/build.
+4. Update affected visuals in the same change and remove superseded media.
+5. Run `mkdocs build` and check changed pages at desktop and narrow widths.
 
-Contributions to improve the documentation are welcome!
+The previous PySide `BLine-GUI` repository is legacy context only; current documentation and media cover BLine Web.
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b improve-docs`)
-3. Make your changes
-4. Test locally with `mkdocs serve`
-5. Submit a pull request
+## License
 
-### Documentation Guidelines
-
-- Use clear, concise language
-- Include code examples where helpful
-- Add GIFs for visual features (place in `docs/assets/gifs/`)
-- Follow the existing structure and formatting
-
----
-
-## 🔗 Related Resources
-
-- **[BLine-Lib on GitHub](https://github.com/edanliahovetsky/BLine-Lib)** — Java library source code
-- **[BLine Web on GitHub](https://github.com/edanliahovetsky/BLine-Web)** — browser and desktop editor source code
-- **[BLine-GUI on GitHub](https://github.com/edanliahovetsky/BLine-GUI)** — legacy GUI application source code
-- **[Full Javadoc](https://edanliahovetsky.github.io/BLine-Lib/)** — API reference
-- **[Chief Delphi Discussion](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778)** — Community discussion thread
-
----
-
-## 📜 License
-
-BLine is released under the **BSD 3-Clause License**.
+BLine documentation is released under the BSD 3-Clause License.

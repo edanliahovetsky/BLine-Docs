@@ -1,119 +1,143 @@
-# Logging
+# Logging & AdvantageScope
 
-`FollowPath` publishes a rich set of internal state through four pluggable static logging consumers. Wire them to your logger of choice (AdvantageKit, WPILog, SmartDashboard, etc.) once, and every `FollowPath` command run emits telemetry.
+Wire BLine logging before tuning. `FollowPath` publishes internal values through four process-wide consumers; by default they are no-ops.
 
-All four consumers default to no-op, so logging is zero-cost until you opt in.
+## AdvantageKit setup
 
-## Wiring
-
-Register all four at robot init. For AdvantageKit, a one-liner per consumer is typical:
+Register once during robot initialization:
 
 ```java
-import edu.wpi.first.math.Pair;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import frc.robot.lib.BLine.FollowPath;
 import org.littletonrobotics.junction.Logger;
 
 FollowPath.setDoubleLoggingConsumer(
-    p -> Logger.recordOutput(p.getFirst(), p.getSecond()));
+    value -> Logger.recordOutput(value.getFirst(), value.getSecond()));
 FollowPath.setBooleanLoggingConsumer(
-    p -> Logger.recordOutput(p.getFirst(), p.getSecond()));
+    value -> Logger.recordOutput(value.getFirst(), value.getSecond()));
 FollowPath.setPoseLoggingConsumer(
-    p -> Logger.recordOutput(p.getFirst(), p.getSecond()));
+    value -> Logger.recordOutput(value.getFirst(), value.getSecond()));
 FollowPath.setTranslationListLoggingConsumer(
-    p -> Logger.recordOutput(p.getFirst(), p.getSecond()));
+    value -> Logger.recordOutput(value.getFirst(), value.getSecond()));
 ```
 
-For plain NetworkTables:
+All keys begin with `FollowPath/`. Their full AdvantageScope location depends on the logger/output configuration, commonly under AdvantageKit real outputs.
+
+### Disable a consumer
+
+Passing `null` does **not** clear an existing consumer in v0.9.1; the setter ignores it. Replace it with a no-op:
 
 ```java
-FollowPath.setDoubleLoggingConsumer(p -> NetworkTableInstance.getDefault()
-    .getTable("FollowPath").getEntry(keyTail(p.getFirst())).setDouble(p.getSecond()));
-// ... similar for the others
+FollowPath.setDoubleLoggingConsumer(ignored -> {});
 ```
 
-!!! info "Consumers are set **on the FollowPath class, not the command**"
-    In the very first releases, examples showed consumers being passed to `FollowPath.Builder`. They moved to static setters on `FollowPath` itself (etherex clarified this early on the Chief Delphi thread). There is no per-command override — all running `FollowPath` instances share the same consumers.
+## Recommended tuning layouts
 
-## Published keys
+### Translation
 
-All keys are prefixed with `FollowPath/`.
+Plot together:
 
-### Double
+- `remainingPathDistanceMeters`
+- `rawTranslationControllerOutput`
+- `clampedTranslationControllerOutput`
+- `translationControllerOutput`
+- `minTranslationVelocityMetersPerSec`
+- `maxTranslationVelocityMetersPerSec`
+- your drivetrain's measured translation speed
+- `finishedTranslationAtSetpoint`
 
-| Key | Units | Meaning |
-|-----|-------|---------|
-| `FollowPath/dtSeconds` | s | Time delta between successive `execute()` calls. |
-| `FollowPath/remainingPathDistanceMeters` | m | Remaining straight-line path distance from robot to end. |
-| `FollowPath/currentSegmentLengthMeters` | m | Length of the current translation segment. |
-| `FollowPath/currentSegmentProgress` | 0–1 | Robot's projection progress along the current segment. |
-| `FollowPath/translationElementIndex` | — | Current translation cursor index. |
-| `FollowPath/rotationElementIndex` | — | Current rotation cursor index (−1 when inactive). |
-| `FollowPath/rotationPreviousElementIndex` | — | Last completed rotation target index. |
-| `FollowPath/translationControllerOutput` | m/s | Clamped output of the translation PID. |
-| `FollowPath/crossTrackControllerOutput` | m/s | CTE PID output (unclamped). |
-| `FollowPath/crossTrackError` | m | Signed cross-track error (`+` = right of path). |
-| `FollowPath/rotationControllerOutput` | rad/s | Rotation PID output. |
-| `FollowPath/targetRotationDeg` | deg | Current rotation setpoint sent to the rotation PID. |
-| `FollowPath/rotationErrorDeg` | deg | Shortest-angle heading error. |
-| `FollowPath/currentRotationTargetInitRad` | rad | Heading at the start of the active rotation segment (for profile interpolation). |
-| `FollowPath/segmentProgress` | 0–1 | Progress used for the rotation profile. |
-| `FollowPath/translationHandoffFromIndex` / `...ToIndex` | — | Emitted on each handoff cycle. |
-| `FollowPath/eventTriggerElementIndex` | — | Current event-trigger walk cursor. |
-| `FollowPath/eventTriggersFiredCount` | — | Number of triggers fired so far in this run. |
+BLine does not publish measured chassis speed. Use the key already produced by the drivetrain or add one.
 
-### Boolean
+### Rotation
 
-| Key | Meaning |
-|-----|---------|
-| `FollowPath/finished` | True when `isFinished()` returns true. |
-| `FollowPath/finishedIsLastRotationElement` | True when rotation cursor is past the last rotation target. |
-| `FollowPath/finishedIsLastTranslationElement` | True when translation cursor is on the last translation element. |
-| `FollowPath/finishedTranslationAtSetpoint` | True when translation PID reports at-setpoint (remaining distance within end tolerance). |
-| `FollowPath/finishedRotationAtSetpoint` | True when heading is within end rotation tolerance. |
-| `FollowPath/translationHandoffOccurred` | True on the cycle a translation handoff happened. |
-| `FollowPath/currentSegmentDegenerate` | True if the current segment is effectively zero-length. |
-| `FollowPath/rotationHasActiveTarget` | True when a rotation target is currently being tracked. |
-| `FollowPath/useTRatioBasedTranslationHandoffs` | Echoes the builder setting for the current run. |
+Plot:
 
-### Pose
+- `targetRotationDeg`
+- measured robot heading
+- `rotationPidOutputRadPerSec`
+- `outputOmegaRadPerSec`
+- `rotationErrorDeg`
+- `finishedRotationAtSetpoint`
 
-| Key | Meaning |
-|-----|---------|
-| `FollowPath/closestPoint` | Closest point on the current segment to the robot, packaged as a `Pose2d` with the robot's heading. |
-| `FollowPath/rotationTargetPose` | Where the active rotation target lives on the segment (translation on the segment line + the target heading). |
+### Geometry
 
-### Translation2d[]
+Add `pathTranslations` and `robotTranslations` to a field view, then plot `crossTrackError` and `crossTrackControllerOutput`.
 
-| Key | Meaning |
-|-----|---------|
-| `FollowPath/pathTranslations` | All translation targets in order. Emitted once at `initialize()`. |
-| `FollowPath/robotTranslations` | Robot position samples collected during the run. Sampled every 3rd `execute()` cycle, capped at the most recent 300 samples. |
+See [Tune Your Robot](../getting-started/tuning.md) for the low/correct/high gain workflow.
 
-## Viewing in AdvantageScope
+## Double keys
 
-With AdvantageKit wired to the consumers above, the keys appear under `NT:/AdvantageKit/RealOutputs/FollowPath/...`. Three useful visualizations:
+| Key suffix | Units | Meaning |
+| --- | --- | --- |
+| `dtSeconds` | s | Time since the prior execute cycle |
+| `remainingPathDistanceMeters` | m | Robot-to-current-target distance plus all remaining polyline segments |
+| `currentSegmentLengthMeters` | m | Active translation segment length |
+| `currentSegmentProgress` | 0–1 | Projection progress on active translation segment |
+| `translationElementIndex` | index | Active index in the expanded runtime element list |
+| `rotationElementIndex` | index | Active expanded-list rotation index, or `-1` when none |
+| `rotationPreviousElementIndex` | index | Prior expanded-list rotation index |
+| `translationHandoffFromIndex` | index | Source index on a handoff cycle |
+| `translationHandoffToIndex` | index | Destination index on a handoff cycle |
+| `rawTranslationControllerOutput` | m/s | Translation PID output before max clamp |
+| `clampedTranslationControllerOutput` | m/s | Output after maximum-velocity clamp |
+| `translationControllerOutput` | m/s | Output after clamp and minimum baseline, before CTE and chassis rate limiting |
+| `minTranslationVelocityMetersPerSec` | m/s | Active resolved minimum baseline |
+| `maxTranslationVelocityMetersPerSec` | m/s | Active resolved maximum |
+| `crossTrackError` | m | Signed perpendicular distance from directed active segment |
+| `crossTrackControllerOutput` | m/s | Unclamped CTE correction magnitude |
+| `segmentProgress` | 0–1 | Progress used for profiled rotation; emitted when applicable |
+| `targetRotationDeg` | deg | Current interpolated/snap rotation setpoint |
+| `rawRotationControllerOutput` | rad/s | Rotation controller result before max clamp |
+| `clampedRotationControllerOutput` | rad/s | Rotation result after max clamp |
+| `rotationPidOutputRadPerSec` | rad/s | Rotation PID contribution before override replacement |
+| `rotationControllerOutput` | rad/s | Post-minimum/override rotation command before final chassis limiting |
+| `rotationOverrideOmegaRadPerSec` | rad/s | Active external override value, otherwise zero |
+| `outputOmegaRadPerSec` | rad/s | Final omega sent by the follower after limiting or bypass |
+| `minRotationVelocityDegPerSec` | deg/s | Active resolved minimum rotation baseline |
+| `maxRotationVelocityDegPerSec` | deg/s | Active resolved maximum rotation velocity |
+| `rotationErrorDeg` | deg | Error to the full active rotation target, not always the interpolated target |
+| `currentRotationTargetInitRad` | rad | Starting heading for the active rotation interpolation |
+| `eventTriggerElementIndex` | index | Event-processing cursor in expanded path order |
+| `eventTriggersFiredCount` | count | Reached/consumed event elements in this run, including keys with no registered action |
 
-- **Robot trail.** Drop `FollowPath/robotTranslations` onto the 2D/3D field viewer to see the actual traversed path as a trail.
-- **Path outline.** Drop `FollowPath/pathTranslations` onto the same field viewer for the nominal path.
-- **Remaining distance curve.** Chart `FollowPath/remainingPathDistanceMeters` over time — a clean monotonic decay is what you want to see. Oscillations near the end are a PID tuning signal.
+!!! note "Indices are not constraint ordinals"
+    Element-index keys refer to the expanded runtime list where a waypoint becomes separate translation and rotation entries. The editor's translation/rotation constraint ordinals are separate domains.
 
-When debugging, a screenshot of the remaining-distance graph is typically the single most useful piece of evidence. (Etherex asked for exactly this on the Chief Delphi thread more than once.)
+In v0.9.1, the implemented cross-track sign is positive on the geometric left of a directed segment under standard WPILib coordinates. Confirm this on your plots before using the sign in robot logic.
 
-## Testing tips
+## Boolean keys
 
-- **Log `FollowPath/translationHandoffOccurred` + index keys** to spot unexpected handoffs or stalls.
-- **Log `FollowPath/currentSegmentDegenerate`** when debugging zero-length-segment bugs (which were fixed in v0.8.0 but a useful sanity-check signal).
-- **Log `FollowPath/crossTrackError`** during CTE tuning — under-tuned will show sustained error, over-tuned will show oscillation.
-- **Log `FollowPath/rotationErrorDeg`** during rotation tuning to spot overshoot / oscillation at the endpoint.
+| Key suffix | Meaning |
+| --- | --- |
+| `useTRatioBasedTranslationHandoffs` | Builder's optional projection-handoff setting |
+| `translationHandoffOccurred` | A translation target changed on this cycle |
+| `currentSegmentDegenerate` | Active segment length is effectively zero |
+| `rotationHasActiveTarget` | A rotation target is being tracked |
+| `translationMinimumApplied` | Minimum translation baseline raised the clamped output |
+| `rotationMinimumApplied` | Minimum rotation baseline raised the clamped output |
+| `rotationOverrideActive` | A static rotation override supplier is active |
+| `rotationOverrideBypassesConstraints` | Override uses bypass mode |
+| `finished` | Full finish predicate is true |
+| `finishedIsLastTranslationElement` | No later translation target remains |
+| `finishedIsLastRotationElement` | No later rotation target remains |
+| `finishedTranslationAtSetpoint` | Translation PID is inside end tolerance |
+| `finishedRotationAtSetpoint` | Heading is inside end rotation tolerance |
 
-## Disabling logging
+## Pose and array keys
 
-Pass `null` to any setter to restore the no-op. Recommended in a competition build if you're logging a *lot* and want to cut NT/log volume:
+| Key | Type | Meaning |
+| --- | --- | --- |
+| `FollowPath/closestPoint` | `Pose2d` | Closest point on active segment, with live robot heading |
+| `FollowPath/rotationTargetPose` | `Pose2d` | Active rotation target's segment position and full target heading |
+| `FollowPath/pathTranslations` | `Translation2d[]` | Planned translation anchors, emitted at initialize |
+| `FollowPath/robotTranslations` | `Translation2d[]` | Sampled robot trail; every third loop, capped to recent samples |
 
-```java
-FollowPath.setDoubleLoggingConsumer(null);  // reverts to no-op
-```
+## What to attach to a useful bug report
 
-Or be selective — keep `boolean` + `pose` keys, skip the high-frequency `double` keys.
+- BLine-Lib version and robot-code commit
+- path JSON and `config.json`
+- plot with identical time axes for target/error/controller/constraint/measured speed
+- live and planned field traces
+- pose-estimator source and update rate
+- the exact observed symptom and whether the command finished, timed out, or was interrupted
+
+This evidence separates controller tuning, active constraints, localization, event scheduling, and drivetrain response much faster than a video alone.

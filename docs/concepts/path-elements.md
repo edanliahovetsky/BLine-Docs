@@ -1,201 +1,133 @@
 # Path Elements
 
-A BLine `Path` is an ordered sequence of **path elements**. Understanding the four element types — and the rules they follow together — is essential for designing reliable paths, whether you build them in the GUI or in code.
+A BLine path is an ordered list of translation anchors plus optional rotation targets and events between them.
 
-## The four element types
+## Element summary
 
-| Element | Role | Canvas appearance |
-|---------|------|-------------------|
-| **Waypoint** | Position **and** holonomic rotation target | Orange rectangle with rotation handle |
-| **TranslationTarget** | Position-only target (shapes the path) | Blue circle |
-| **RotationTarget** | Rotation-only target interpolated along a segment | Green dashed rectangle with rotation handle |
-| **EventTrigger** | Fires a registered action at a point along a segment | Yellow line marker |
+| Element | Contains | Use it for |
+| --- | --- | --- |
+| **Waypoint** | Position and rotation | A point where both field position and heading matter |
+| **Translation Target** | Position | Shaping the route without introducing a new heading target |
+| **Rotation Target** | Rotation and `t_ratio` | Changing heading at a position along a translation segment |
+| **Event Trigger** | Library key and `t_ratio` | Starting robot behavior as geometric progress passes a marker |
 
-![Element Types](../assets/gifs/concepts/element-types.gif)
+Waypoints and translation targets are **anchors**. Rotation targets and event triggers are **segment elements**: their `t_ratio` places them between surrounding anchors.
 
-**Translation elements** (Waypoints and TranslationTargets) form the backbone of the path. The robot drives through each in sequence along straight-line segments. **Rotation elements** (Waypoints and RotationTargets) define how the holonomic heading evolves. **Event triggers** fire a user-registered `Runnable` or `Command` when the robot's projection onto the path crosses a configured position along a segment.
+## Waypoint
 
-!!! info "Path endpoints"
-    The first and last elements of a path must both be a `Waypoint` or a `TranslationTarget`. A path that begins or ends with a standalone `RotationTarget` or `EventTrigger` is invalid and will be refused. A single-element path consisting of only one `Waypoint` or `TranslationTarget` is valid — this is how you do a simple drive-to-pose.
-
----
-
-## Waypoints
-
-A `Waypoint` carries both a translation target and a rotation target. Use one wherever the robot needs to **be at a location** *and* **face a particular direction** — scoring pockets, intake stations, final alignment poses.
+A waypoint combines a translation target and rotation target.
 
 ```java
-// From Translation2d + Rotation2d
-new Path.Waypoint(new Translation2d(1.0, 1.0), Rotation2d.fromDegrees(0));
-
-// From Pose2d
-new Path.Waypoint(new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-
-// With a custom handoff radius (meters)
-new Path.Waypoint(new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)), 0.3);
-
-// Non-profiled rotation (robot snaps to heading instead of interpolating)
-new Path.Waypoint(pose, /*profiledRotation=*/ false);
+new Path.Waypoint(
+    new Translation2d(6.2, 3.1),
+    Rotation2d.fromDegrees(90)
+)
 ```
 
-JSON form:
+Use a waypoint when heading has meaning at that location, especially at the start or end of a scoring move. Do not use one merely because you need the path to bend; a translation target is clearer when rotation should continue from another target.
 
-```json
-{
-    "type": "waypoint",
-    "translation_target": {
-        "x_meters": 1.0,
-        "y_meters": 1.0,
-        "intermediate_handoff_radius_meters": 0.2
-    },
-    "rotation_target": {
-        "rotation_radians": 0.0,
-        "profiled_rotation": true
-    }
-}
-```
+In BLine Web, select a waypoint to edit **X**, **Y**, **Handoff Radius**, **Rotation**, and **Profiled Rotation**.
 
----
+## Translation target
 
-## Translation targets
-
-A `TranslationTarget` only commands position — it shapes the path the robot takes without pinning a specific holonomic heading there.
+A translation target shapes the polyline without adding a heading target.
 
 ```java
-new Path.TranslationTarget(new Translation2d(2.0, 2.0));
-new Path.TranslationTarget(2.0, 2.0);
-new Path.TranslationTarget(2.0, 2.0, 0.3); // custom handoff radius
+new Path.TranslationTarget(new Translation2d(7.4, 4.0))
 ```
 
-JSON form:
+Use translation targets to:
 
-```json
-{
-    "type": "translation",
-    "x_meters": 2.5,
-    "y_meters": 2.0,
-    "intermediate_handoff_radius_meters": 0.2
-}
-```
+- route around a field feature;
+- approximate a curve;
+- create a range boundary for local translation constraints; or
+- build a one-target drive-to-position command that holds the current heading.
 
-**When to reach for one:** intermediate points that only exist to curve the path around an obstacle, keep the robot on a corridor, or break a long straight into pieces where you want per-section velocity limits.
+The optional handoff radius controls when the follower may advance to the next anchor. The final anchor is completed by tolerance rather than an intermediate handoff.
 
-!!! tip "Prefer TranslationTargets over Waypoints for path shaping"
-    Every waypoint pins rotation, which costs rotation bandwidth. If you don't actually need the robot to face a specific way at an intermediate point, use a TranslationTarget — the rotation controller is then free to smoothly transition between the waypoints that *do* matter.
+## Rotation target
 
----
-
-## Rotation targets
-
-A `RotationTarget` lives **between** two translation elements and specifies a heading the robot should reach partway along that segment. The **t_ratio** parameter (0.0–1.0) fixes where along the segment the target is evaluated.
+A standalone rotation target changes heading along a translation segment without changing the route.
 
 ```java
-// Rotate to 90° by the midpoint of the segment
-new Path.RotationTarget(Rotation2d.fromDegrees(90), 0.5);
-
-// Snap instantly instead of interpolating
-new Path.RotationTarget(Rotation2d.fromDegrees(90), 0.5, /*profiledRotation=*/ false);
+new Path.RotationTarget(
+    Rotation2d.fromDegrees(135),
+    0.55,
+    true
+)
 ```
 
-JSON form:
+`t_ratio = 0` is the beginning of the segment and `t_ratio = 1` is the end. BLine Web labels this field **Rotation Pos (0-1)**.
 
-```json
-{
-    "type": "rotation",
-    "rotation_radians": 1.5708,
-    "t_ratio": 0.5,
-    "profiled_rotation": true
-}
-```
+- **Profiled rotation** interpolates from the prior rotation target as the robot progresses.
+- **Non-profiled rotation** exposes the full new target when it becomes active.
 
-In the GUI, drag a RotationTarget along its segment to adjust its `t_ratio` visually.
+!!! warning "Java and hand-authored JSON have different omission defaults"
+    The common Java `RotationTarget` constructor defaults profiled rotation to `true`. If hand-authored JSON omits `profiled_rotation`, BLine-Lib v0.9.1 reads it as `false`. Write the field explicitly in JSON.
 
-![Rotation Target t_ratio](../assets/gifs/concepts/rotation-t-ratio.gif)
+## Event trigger
 
-### Profiled vs non-profiled rotation
-
-Rotation targets (and the rotation embedded in a Waypoint) carry a `profiled_rotation` flag:
-
-| Mode | Behavior |
-|------|----------|
-| `profiled_rotation = true` *(default)* | The rotation setpoint **interpolates** between the previous rotation target and this one, following the robot's progress along the segment. Produces smooth sweep-style turns. |
-| `profiled_rotation = false` | The rotation setpoint **snaps** to this heading immediately. Use for sharp, intentional reorientations that shouldn't be spread across the segment. |
-
-In both cases the rotation PID still enforces the configured max rotational velocity and acceleration.
-
----
-
-## Event triggers
-
-An `EventTrigger` is a zero-width element that fires a registered action when the robot's projection onto the current segment reaches the trigger's `t_ratio`. See [Event Triggers](event-triggers.md) for the full guide. Minimal example:
+An event trigger identifies a registered robot action and a geometric segment position.
 
 ```java
-// Register once, at robot init
-FollowPath.registerEventTrigger("shoot", () -> shooter.shoot());
+new Path.EventTrigger(0.65, "deployIntake")
+```
 
-// Place it in a path
-new Path(
-    new Path.Waypoint(new Translation2d(1, 1), Rotation2d.fromDegrees(0)),
-    new Path.EventTrigger(0.5, "shoot"),
-    new Path.Waypoint(new Translation2d(3, 1), Rotation2d.fromDegrees(0))
+The trigger fires once when the robot's projection onto the segment passes its `t_ratio`; it does not wait for the robot center to touch a screen marker.
+
+Keep event triggers in ascending `t_ratio` order within a segment. The runtime processes them in path order and stops at the first marker not yet reached.
+
+See [Events](event-triggers.md) for registration, command scheduling, and requirement conflicts.
+
+## Valid ordering
+
+Use these rules when building paths in code or JSON:
+
+- The first and final elements should be a waypoint or translation target.
+- A standalone rotation target or event trigger must belong between translation anchors.
+- Keep rotation/event markers ordered by their `t_ratio` within the segment.
+- Avoid consecutive anchors at exactly the same position unless a tested behavior specifically needs a degenerate segment.
+- A one-element path should contain a waypoint or translation target, never only an event or rotation target.
+
+BLine Web enforces the allowed first/last element types when adding or converting elements.
+
+## Draw a curve
+
+BLine Web's **Add curve** action records a field stroke, simplifies it, and inserts up to 18 translation targets. It also creates automatic max-velocity constraints for the inserted range.
+
+![Drawing a curve and converting it into editable translation targets](../assets/gifs/web/draw-curve.gif){ .gif-demo data-gif-poster="/assets/images/gif-posters/draw-curve-start.png" data-gif-end="/assets/images/gif-posters/draw-curve-end.png" data-gif-duration="7580" }
+![Static result of a drawn curve converted into editable translation targets](../assets/images/gif-posters/draw-curve-end.png){ .gif-print-poster }
+
+The result is ordinary editable BLine geometry. Remove unnecessary targets and review the automatic caps before robot testing.
+
+## Reuse geometry with linked elements
+
+Collections organize paths; linked elements keep shared positions synchronized. A linked translation or waypoint can be used by multiple paths, such as a common scoring pose or route handoff.
+
+Linked-element identities are editor metadata. BLine-Lib still receives independent path JSON files with ordinary element coordinates. See [Linked Elements](../gui/linked-elements.md).
+
+## Example path
+
+```java
+Path pickup = new Path(
+    new Path.Waypoint(
+        new Translation2d(3.0, 2.0),
+        Rotation2d.fromDegrees(0)
+    ),
+    new Path.TranslationTarget(new Translation2d(5.5, 2.8)),
+    new Path.RotationTarget(Rotation2d.fromDegrees(45), 0.5, true),
+    new Path.EventTrigger(0.7, "startIntake"),
+    new Path.Waypoint(
+        new Translation2d(7.2, 3.6),
+        Rotation2d.fromDegrees(90)
+    )
 );
 ```
 
-JSON form:
-
-```json
-{
-    "type": "event_trigger",
-    "t_ratio": 0.5,
-    "lib_key": "shoot"
-}
-```
-
-The trigger fires once per run, based on the robot's projected position along the segment — it fires even if the robot is off the nominal path line.
-
----
-
-## Building complete paths
-
-The four element types compose freely:
-
-```java
-Path myPath = new Path(
-    // Start at (1,1) facing 0°
-    new Path.Waypoint(new Translation2d(1.0, 1.0), Rotation2d.fromDegrees(0)),
-
-    // Fire the intake action halfway through the first segment
-    new Path.EventTrigger(0.5, "deployIntake"),
-
-    // Curve through (2,2)
-    new Path.TranslationTarget(new Translation2d(2.0, 2.0)),
-
-    // Spin to 90° at the midpoint of the next segment
-    new Path.RotationTarget(Rotation2d.fromDegrees(90), 0.5),
-
-    // End at (3,1) facing 180°
-    new Path.Waypoint(new Translation2d(3.0, 1.0), Rotation2d.fromDegrees(180))
-);
-```
-
-!!! info "Ordinals and constraints"
-    Each translation element gets a **translation ordinal**; each rotation element gets a **rotation ordinal**. Waypoints increment both. These ordinals are what [ranged constraints](constraints.md#ranged-constraints) refer to when you want per-section velocity/acceleration limits.
-
-### Single-element paths
-
-A single `Waypoint` path is a valid, useful construct — it turns BLine into a clean drive-to-pose command:
-
-```java
-Path alignToReef = new Path(
-    new Path.Waypoint(reefScoringPose)
-);
-pathBuilder.build(alignToReef).schedule();
-```
-
-This is often the simplest way to do teleop auto-align: build the path on button press, schedule the command, and let BLine handle acceleration limiting, rotation, and tolerances.
+The route is defined by three anchors. Rotation and intake behavior happen along the second translation segment without adding corners.
 
 ## Next
 
-- [Constraints](constraints.md) — global vs path-specific vs ranged.
-- [Event Triggers](event-triggers.md) — registering actions and placing triggers.
-- [Key Parameters](key-parameters.md) — handoff radii, t_ratio, tolerances.
+- [Constraints & Ordinals](constraints.md)
+- [Handoffs, t-ratio & Completion](key-parameters.md)
+- [Draw & Edit Paths](../gui/canvas.md)

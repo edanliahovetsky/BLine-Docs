@@ -1,105 +1,69 @@
-# GUI Overview
+# BLine Web Overview
 
-BLine-GUI is a visual path editor for designing autonomous routines. It writes JSON files in your robot project's `deploy/autos/` directory, which BLine-Lib loads at runtime. Paths can be iterated visually, simulated for rough timing and trajectory preview, and versioned in Git like any other source file.
+BLine Web is the current editor for browser and desktop workflows. It replaces the legacy PySide BLine-GUI in all current tutorials.
 
-![BLine GUI Demo](../assets/gifs/robot-demos/gui-demo.gif)
+![Current BLine Web interface on the latest FRC field](../assets/images/editor-overview.png)
 
-The current release is **BLine-GUI v0.5.0**, which added macOS binaries, a new constraint editing experience, and a revamped selection/editor workflow.
-
-## Launching
-
-| Install method | How to start |
-|----------------|--------------|
-| Prebuilt binary (Windows / macOS / Linux) | Start Menu, Applications folder, or double-click the executable |
-| Source install (pip/pipx) | Run `bline` from a terminal |
-
-See [Installation](../getting-started/installation.md#bline-web-editor) if you haven't installed it yet. To create a desktop shortcut when using the legacy source install, run `bline --create-shortcut`.
-
-## Interface layout
-
-![Interface overview]()
+## Interface map
 
 | Area | Purpose |
-|------|---------|
-| **Menu bar** (top) | Project management, path operations, edit actions, settings. See [Menu Bar](menu-bar.md). |
-| **Canvas** (center) | The field with your path drawn on top. Drag elements, zoom/pan, scrub simulation. See [Canvas](canvas.md). |
-| **Sidebar** (right) | Element list, per-element properties, path constraints. See [Sidebar](sidebar.md). |
-| **Transport controls** (bottom-left of canvas) | Play/pause simulation + timeline scrubber. See [Simulation](simulation.md). |
+| --- | --- |
+| **Project / Path / Edit / Settings** | Workspace transfer, path management, undo/redo, and project configuration |
+| **Collection and Path selectors** | Filter related paths and switch the active path |
+| **Canvas** | Current FRC field, active path, collection overlays, linked elements, footprint, and direct manipulation |
+| **Path Elements** | Ordered element list plus add-curve and add-element actions |
+| **Element Properties** | Coordinates, rotation, handoff radius, event key, and linked-element controls for the selection |
+| **Constraints** | Path tolerance and ranged min/max velocity/acceleration controls plus optimizer actions |
+| **Transport** | Reset, play/pause, fast-forward, and timeline scrubbing for idealized simulation |
+| **Status bar** | Current path/project, selection, storage target, autosave state, and errors |
 
-## Project structure
+## Projects and runtime files
 
-BLine-GUI operates on a **project directory** — any directory containing a `config.json` and a `paths/` subfolder. The idiomatic layout is to point it at your robot project's `src/main/deploy/autos`:
+A BLine Web project contains shared configuration, multiple paths, collections, linked-element metadata, and optional custom field assets.
 
-```
-src/main/deploy/autos/
-├── config.json         # Global constraints, robot footprint, protrusion settings
+The robot-facing portion is still simple:
+
+```text
+autos/
+├── config.json
 └── paths/
-    ├── scoreFirst.json
-    ├── toIntake.json
-    └── ...
+    ├── score-one.json
+    └── collect-and-return.json
 ```
 
-Every file in `paths/` is a single path. BLine-Lib loads them by name (without the `.json` extension):
+The editor stores collections and other editor-only state under `.bline-web/` when exporting or using desktop folder storage. Browser autos exports/project archives include linked identities too. Current desktop prereleases should not be assumed to restore every linked identity after reopening; verify links/use counts and keep a project archive before broad link edits. BLine-Lib loads the individual runtime JSON files and does not load editor organization or rerun the optimizer.
 
-```java
-Path scoreFirst = new Path("scoreFirst");
-```
+## Browser and desktop are different storage surfaces
 
-!!! tip "Open your FRC project directly"
-    Open the `autos/` directory inside your robot project (not a separate folder). The JSONs that the GUI writes are the same JSONs BLine-Lib reads on the robot. No copy step.
+=== "Browser"
 
-## Element colors on the canvas
+    Projects persist in browser storage. **Save** updates that browser workspace. Export an autos folder to move files into the robot repository and export a project archive for a portable complete backup.
 
-| Color | Element |
-|-------|---------|
-| 🟠 Orange rectangle + rotation handle | **Waypoint** (position + rotation) |
-| 🔵 Blue circle | **TranslationTarget** (position only) |
-| 🟢 Green dashed rectangle + rotation handle | **RotationTarget** (rotation only) |
-| 🟡 Yellow line marker | **EventTrigger** (action at a t_ratio) |
-| 🟣 Magenta dashed circle around translation elements | **Handoff radius** |
-| 🟢 Green overlay | **Ranged constraint domain** (shown when slider focused) |
-| 🟧 Dashed orange/green offsets around waypoints/rotation targets | **Protrusions** (if enabled). See [Protrusions](protrusions.md). |
+=== "Desktop"
 
-## Typical workflow
+    The app can open the robot repository or `src/main/deploy/autos` and write the project there. Autosave is deferred while canvas interaction is active, then writes after the edit.
 
-1. **Open your project** (**Project → Open Project…**), pointed at `src/main/deploy/autos`.
-2. **Configure the robot** (**Settings → Edit Config…**): robot size, kinematic defaults, optional protrusions.
-3. **Create or open a path** from the **Path** menu.
-4. **Add path elements** — click **Add element** in the sidebar or use the canvas.
-5. **Position and rotate** elements by dragging them on the canvas.
-6. **Add ranged constraints** in the sidebar's **Path Constraints** section for per-section velocity/acceleration limits.
-7. **Preview** using the transport controls at the bottom-left of the canvas.
-8. **Save** — the GUI writes the JSON on save, so your path is immediately available to robot code.
+Always read the storage label and **Saved** state in the lower-right status area before closing or deploying.
 
-## Keyboard shortcuts
+## Recommended editor workflow
 
-| Shortcut | Context | Action |
-|----------|---------|--------|
-| `Ctrl/Cmd + Z` | Global | Undo |
-| `Ctrl/Cmd + Y` / `Ctrl/Cmd + Shift + Z` | Global | Redo |
-| `Ctrl/Cmd + S` | Global | Save current path |
-| `Space` | Canvas focus | Play / pause simulation |
-| `Delete` / `Backspace` | Element selected | Remove the selected element |
-| `←` / `→` | Constraint segment focused | Navigate between segments on a ranged constraint |
-| `Delete` / `Backspace` | Constraint segment focused | Delete the selected constraint segment |
-| `S` | Constraint segment focused | Split the selected constraint segment at its midpoint |
+1. Open or create the project.
+2. Configure robot dimensions, path defaults, field, and optimizer settings.
+3. Create a path and add anchor elements.
+4. Draw/edit geometry and rotation.
+5. Add local constraints or review optimizer output.
+6. Preview structure and event timing.
+7. Save, export when needed, and verify the runtime files.
+8. Test in WPILib simulation and on the robot with logs.
 
-The segment-bar shortcuts were added in v0.5.0 alongside the new constraint editor. The arrow/Delete behavior also works inside the pop-out constraint editor.
+## Learn the editor by task
 
-## What was recently added
+- [Projects, Paths & Collections](menu-bar.md)
+- [Draw & Edit Paths](canvas.md)
+- [Constraints & Optimizer](sidebar.md)
+- [Linked Elements](linked-elements.md)
+- [Simulation](simulation.md)
+- [Fields, Footprint & Protrusions](protrusions.md)
+- [Import, Export & Backups](exporting.md)
 
-Highlights since the initial BLine-GUI release:
-
-- **v0.5.0 — macOS support + constraint editor overhaul.** First macOS `.dmg` (Apple Silicon). Introduces the `SegmentBar` widget, pop-out constraint editor, sharper sidebar typography, and segment-bar keyboard shortcuts.
-- **v0.4.0 — Selection clarity.** Animated selection indicator on the canvas. Better sync between canvas/sidebar selection. Clicking empty field space clears selection. Drag/reorder/undo preserve selection more reliably.
-- **v0.3.0 — Protrusions.** New per-element protrusion rendering (left/right/front/back/none) with event-trigger-driven show/hide. Reorganized config dialog. See [Protrusions](protrusions.md).
-
-For the full release history, see the [Chief Delphi thread](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778) or the [BLine Web releases page](https://github.com/edanliahovetsky/BLine-Web/releases/latest).
-
-## Learn more
-
-- [Menu Bar](menu-bar.md) — project, path, edit, settings menus.
-- [Canvas](canvas.md) — zoom/pan, dragging, rotation handles, selection.
-- [Sidebar](sidebar.md) — element properties, constraint editor, segment bar.
-- [Simulation](simulation.md) — previewing robot motion and reading the timeline.
-- [Protrusions](protrusions.md) — visualizing bumpers, intakes, and appendages.
+For an end-to-end walkthrough, use the [First Path Tutorial](../getting-started/quick-start.md) instead of reading these reference pages in order.

@@ -1,129 +1,107 @@
-# Design Philosophy
+# How BLine Works
 
-BLine takes a fundamentally different approach to path tracking compared to Bézier- and clock-driven systems like PathPlanner and Choreo. This page spells out the rationale behind the polyline architecture and where BLine earns its advantages.
+BLine is a geometric, state-based path follower. A path describes **where** the robot should travel and the limits to respect; the follower calculates the next chassis-speed request from the robot's current pose each loop.
 
-## Why polylines?
+## The control loop
 
-### Computational efficiency
+When `FollowPath` initializes, it applies configured transforms, optionally resets pose, reads the live starting pose, and samples robot-relative speed once to seed its rate limiter. Each execute cycle then:
 
-Bézier-based planners discretize trajectories into timestamped setpoints before the controller can follow them. BLine doesn't: the `Path` object is fed directly to the tracking controller, which acts on geometric state each cycle.
+1. Reads the live field pose.
+2. Determines the active translation, rotation, and event elements.
+3. Calculates remaining polyline distance.
+4. Uses the translation PID to request a speed magnitude toward the current target.
+5. Adds cross-track correction toward the active segment line.
+6. Resolves the active rotation target or rotation override.
+7. Applies active minimum/maximum velocity and acceleration constraints against the prior commanded speeds.
+8. Converts the result to robot-relative `ChassisSpeeds` and calls the drivetrain consumer.
 
-That design buys two concrete things:
+The command finishes only after it reaches the final translation and rotation elements and both errors are inside their end tolerances. BLine-Lib v0.9.1 does not add a final measured-velocity requirement.
 
-1. **No precomputation delay for runtime-generated paths.** Useful for teleop auto-align and anything dynamic.
-2. **Cheap loop-cycle cost** during execution. Each control cycle is a handful of distance/projection calculations, not a table lookup into a precomputed trajectory.
+## A polyline, not a spline
 
-For pre-baked competition autos, the difference is smaller than it looks — most of the compute in any system happens at path-creation time regardless of the tool. The effect shows up most clearly when paths are generated on the fly.
+A BLine path connects translation elements with straight segments. Additional translation targets approximate a curve where needed. Rotation targets and events are positioned independently along those segments with `t_ratio`.
 
-!!! info "Measured result"
-    Monte Carlo simulation validation reported a **97% reduction** in path computation time vs. PathPlanner.
+This representation makes the important decisions visible:
 
-### Ease of controller tuning
+- **elements** define the geometry;
+- **handoff radii** define when the follower may advance to the next translation target;
+- **ranged constraints** define where the robot must slow down or may speed up; and
+- **end tolerances** define when the command is allowed to finish.
 
-Tuning a time-parameterized PID to follow a Bézier trajectory is tuning *follow the clock*:
+The editor's curve tool can turn a drawn stroke into a simplified series of translation targets, but the exported runtime path is still a polyline.
 
-- Over-tuned gains cause erratic behavior and jittering.
-- Under-tuned gains make the robot fall behind during acceleration — once behind, the follower can struggle to recover.
-- Drivetrain imperfections make it hard to push the chassis to its true max velocity and acceleration.
-- Many teams end up running a second profiled PID alignment routine after every path to recover the accuracy time-parameterized tracking gave up.
+## Geometric and time-parameterized tracking
 
-BLine sidesteps this entirely. The translation controller's setpoint is **zero remaining path distance** — the controller output is high at the start, tapers to zero at the endpoint, and naturally behaves like a trapezoidal profile once clamped by the velocity/acceleration constraints. The robot hits max velocity irrespective of drivetrain tuning, and the only tuning that really matters is the deceleration near the end of the path.
+Neither model is universally better. They optimize different assumptions.
 
-!!! tip "5-minute tuning window"
-    Etherex's real-world tuning experience: a good translation-controller config was achieved in about 5 minutes. The reason is simple — the controller only does meaningful work at the very end of the path, so there's less surface area to tune against.
+| | Geometric/state-based following (BLine) | Time-parameterized trajectory following |
+| --- | --- | --- |
+| Desired state | Progress and targets derived from current pose | Pose/velocity state indexed by elapsed time |
+| After a delay or collision | Continues from current geometric progress | May chase a desired state that has moved ahead unless the implementation pauses or replans |
+| Dynamic feasibility | User and editor constraints guide behavior; not proven by the follower | A dynamics-aware generator can produce a feasible trajectory when its model and constraints are accurate |
+| Sharp turns | Need deliberate geometry, velocity limits, and achievable handoffs | Generator can plan deceleration before the turn |
+| Completion | Actual target/tolerance state | Often tied to trajectory or command time, depending on implementation |
+| Runtime-created move | Lightweight, including a one-waypoint drive-to-pose | May require generation or pathfinding before following |
 
-### Forgiving performance
+### Where BLine is useful
 
-There's **no large performance penalty for under-tuning**. The difference between optimally and sub-optimally tuned controllers is only noticeable in the last few centimeters before the endpoint. A time-parameterized controller's response is apparent along the *entire* path, and poor tuning is obvious everywhere.
+- Rapid empirical iteration when the team wants direct control over points and local limits.
+- Paths that should wait for physical progress rather than a clock.
+- Disturbance-prone movement where returning to the intended geometry matters.
+- Runtime drive-to-pose or short generated paths.
+- Teams that prefer a small set of inspectable controller and constraint concepts.
 
-### Robustness to disturbances
+### Where its tradeoffs matter
 
-Because BLine is geometric rather than time-parameterized, it reacts naturally to disturbances (collisions, vision jumps, temporary stalls):
+- A sharp corner is not automatically slowed just because it is sharp. Add an appropriate range or review the optimizer output.
+- A physically blocked robot may keep trying forever unless the command composition adds a timeout or fallback.
+- The drawn polyline is not proof that the chassis can follow it at the requested acceleration.
+- A large handoff radius can cut geometry; a small one can be impossible to enter at speed.
+- The idealized editor simulation cannot predict wheel slip, battery voltage, module response, or localization error.
+- End velocity is not a path constraint in v0.9.1.
 
-- Speed magnitude = f(remaining distance). A push backward simply raises remaining distance; the controller naturally commands more speed.
-- Speed direction = pointing toward the current target. A push sideways just steers the robot back.
-- The control cycle is **greedy** — each cycle computes the best command for *now*, with no expectation about what time it is.
+!!! info "Hybrid routines are valid"
+    A team can use BLine for disturbance-tolerant or precise geometric moves and another tool for a dynamics-optimized open-field trajectory. Choose per task rather than forcing one follower to solve every motion problem.
 
-A time-parameterized follower that was pushed off course will keep chasing its schedule rather than returning to the path. P2P-style followers (like BLine) return to the setpoint geometry, which matches how teams think about auto behavior.
+For the current workflows and guarantees of those alternatives, use the projects' own [PathPlanner documentation](https://pathplanner.dev/home.html) and [Choreo documentation](https://choreo.autos/). Do not assume one tool's terms or constraints map directly onto another's.
 
-!!! warning "Known edge case"
-    When the robot is at high velocity relative to max acceleration *and* close to a handoff radius boundary *and* a significant disturbance occurs, the combination can still fault. The standard mitigations are (a) use a forgiving handoff radius on high-speed segments, (b) enable [t-ratio based handoffs](key-parameters.md#t-ratio-based-handoffs-optional), or (c) tighten velocity limits through the disturbance-prone region.
+## The three controllers
 
-### Path simplicity
+| Controller | Error | Output role |
+| --- | --- | --- |
+| **Translation** | Remaining polyline distance | Translational speed magnitude toward the active target |
+| **Rotation** | Heading error | Angular velocity |
+| **Cross-track (CTE)** | Signed perpendicular distance from the active segment | Lateral correction added to the translation vector |
 
-BLine paths are simple to reason about: a list of points. A single-element BLine path with one waypoint is a valid, useful path — essentially a drive-to-pose command without the overhead of a separate solution. That matters for teleop auto-align (Reefscape reef, Crescendo amp, etc.) and for any "go to this pose" workflow.
+The translation output commonly saturates at the active maximum velocity for most of a long path. Its gain becomes most visible near the endpoint. This is why the recommended tuning order is translation, rotation, then CTE.
 
-For more complex paths, BLine uses path elements, handoff radii, and ranged velocity limits as the primary motion-control primitives — analogous to Bézier control points, anchors, and optimizer output but with direct, visual meaning.
+See [Tune Your Robot](../getting-started/tuning.md) for a measured workflow and plot interpretation.
 
----
+## Localization is a separate layer
 
-## Control architecture
+BLine accepts a `Pose2d` supplier and trusts it. It does not know whether the pose came from wheel odometry, AprilTags, a Limelight, PhotonVision, QuestNav, or another estimator.
 
-### Three PID controllers
+- Bad scale or coordinate frames produce bad path tracking.
+- Wheel slip changes odometry unless vision or another absolute measurement corrects it.
+- A vision jump changes the pose seen by the follower; constraints limit how abruptly commanded speeds can react.
+- Better localization improves both geometric and time-parameterized followers.
 
-| Controller | Purpose | Input | Output |
-|------------|---------|-------|--------|
-| **Translation** | Drive to the final path element | Remaining path distance (m) | Desired translational speed magnitude (m/s) |
-| **Rotation** | Track current rotation target | Heading error (rad) | Angular velocity (rad/s) |
-| **Cross-track (CTE)** | Stay on the line between path segments | Perpendicular distance from line (m) | Correction velocity (m/s) |
+## Path following is not pathfinding
 
-Each cycle: translation controller produces a speed magnitude, direction is set by pointing at the current translation target, CTE adds a perpendicular nudge, rotation is resolved from profiled/non-profiled interpolation, and the combined `ChassisSpeeds` is rate-limited before being sent to the drivetrain.
+BLine follows the elements it receives. It does not currently choose a collision-free route around a new obstacle. An external pathfinder can generate translation points for BLine, but that planner owns obstacle geometry and route selection.
 
-### Why the CTE controller earns its keep
+## Read the broader discussion
 
-The translation controller is maxed out for most of a path (its output saturates to the active velocity constraint). That means the path the robot actually takes between two elements depends mostly on *how the direction vector evolves*, which is determined by the geometry of the next target. Over long segments, small position errors from the nominal line don't get corrected — the robot just drives "toward the point from here," not "back to the line, then toward the point."
+The FRC community has documented useful evidence and counterexamples for both approaches:
 
-The CTE controller explicitly minimizes the perpendicular distance from the current path segment and is additive with the translation output. It pulls the robot back onto the segment line over time.
+- [BLine announcement and field feedback](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778)
+- [Time-parameterized path-following tradeoffs](https://www.chiefdelphi.com/t/time-parameterized-auto-path-following-has-huge-tradeoffs/518444)
+- [Reflection on Choreo](https://www.chiefdelphi.com/t/reflection-on-choreo/464205)
 
-!!! warning "Don't over-tune CTE"
-    An aggressively tuned CTE controller can overpower the translation controller during turns, especially at high speeds — you'll see the robot "fishtailing" into turns. Tune translation first, then rotation, then CTE. CTE gains should feel *gentle*.
+Treat team reports as field experience, not controlled universal proof. Your robot, localization, game geometry, and available test time determine which tradeoffs matter most.
 
-### Algorithm robustness
+## Next
 
-The tracking algorithm is robust in its response to sharp changes in positional data:
-
-- Speed magnitude depends on distance to the path's end — a vision jump "backward" increases remaining distance, naturally commanding more speed.
-- Direction depends on the next available waypoint — independent of transient position errors along the segment.
-- All outputs are **acceleration-limited in 2D** via `ChassisRateLimiter`, keeping commanded chassis motion smooth even when the underlying pose estimate is noisy.
-- The control cycle is greedy — the response is uniform regardless of path completion or "lag" behind any idealized path.
-
----
-
-## Where BLine shines (and where it doesn't)
-
-| Feature | BLine | PathPlanner / Choreo | AutoPilot |
-|---------|-------|---------------------|-----------|
-| Path type | Polyline | Bézier curves | Drive-to-point |
-| Time-parameterized | No | Yes | No |
-| Precomputation required | No | Yes | No |
-| Tuning difficulty | Low | Medium–High | Low |
-| Intermediary element control | Full | Full | Limited (best at 1–2 translation elements) |
-| Real-time path creation | Excellent | Limited | Excellent |
-| Complex multi-element paths | Yes | Yes | Limited |
-| Single-point moves | Yes | Overkill | Yes |
-
-**vs. PathPlanner / Choreo:** if you want the smoothest possible curvature and you're willing to invest heavily in time-parameterized PID tuning, Bézier systems can win on paper. In practice, tuning and robustness issues often make them behave worse on the field. BLine is designed to give up a little theoretical optimality for a lot of practical tunability.
-
-**vs. AutoPilot:** AutoPilot is excellent for single-point and two-point moves. BLine is designed for longer routines with meaningful intermediate-element control — 3+ translation elements is where BLine starts to decisively pull ahead.
-
----
-
-## Localization is orthogonal
-
-BLine takes a `Pose2d` supplier and trusts it. How you produce that pose is entirely your call:
-
-- **Wheel odometry only.** Works fine in auto if your drivetrain is well-tuned (correct gear ratios, wheel size, filters) and slip is controlled (stator current limits, sane velocity/acceleration limits).
-- **Vision + wheel odometry.** Strongly recommended for any multi-path routine or anything that could get bumped, since wheel odometry drifts and never self-corrects. Use PhotonVision, Limelight MegaTag, QuestNav, etc.
-- **Vision-only.** Also fine, subject to the same caveats as any vision-driven autonomy.
-
-BLine has no opinion here — the library just receives whatever pose you hand it, and quality of localization puts an upper bound on the accuracy of path following regardless of the follower you use.
-
----
-
-## Future direction
-
-- **On-the-fly path planning.** BLine currently leaves A*/Theta*-style obstacle-aware planning to the user. It's possible to pair BLine with a simple obstacle-aware planner (using translational velocity limits and forgiving handoff radii as the primary tuning knobs), and a first-class integration is on the roadmap.
-- **End-velocity control.** Ending a path at a non-zero translational velocity is not currently supported; it's a planned feature.
-- **Dynamic handoff radii.** Radii that scale with cross-track error or segment completion are under consideration as a mitigation for the high-speed/near-handoff-boundary edge case.
-
-See the [Chief Delphi thread](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778) for ongoing discussion and release notes.
+- [Path Elements](path-elements.md) explains the geometry.
+- [Constraints & Ordinals](constraints.md) explains local motion limits.
+- [Handoffs, t-ratio & Completion](key-parameters.md) explains progress transitions.

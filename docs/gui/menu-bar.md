@@ -1,103 +1,111 @@
-# Menu Bar
+# Projects, Paths & Collections
 
-The menu bar is the entry point for project management, path operations, undo/redo, and robot configuration.
+Use a **project** for one robot/team configuration, a **path** for one runtime movement file, and a **collection** to group related paths in the editor.
 
-## Project
+## The hierarchy
 
-| Action | Description |
-|--------|-------------|
-| **Open Project…** | Select a BLine project directory (any directory with `config.json` + a `paths/` subfolder). Typically your robot project's `src/main/deploy/autos`. |
-| **Recent Projects** | Quick access to recently opened project directories. |
-
-!!! tip "Always point BLine at your robot project's `autos/` directory"
-    The GUI reads and writes the same JSON files BLine-Lib loads at runtime. There's no "export to robot" step — saving is the export.
-
-## Path
-
-| Action | Description |
-|--------|-------------|
-| **Current: [name]** | Shows the currently loaded path (read-only label). |
-| **Load Path ▸** | Submenu listing every `.json` file under `paths/`. Click to load. |
-| **Create New Path** | Starts a fresh path with zero elements. Save As… when ready. |
-| **Save Path As…** | Write the current path to a new `.json` file under `paths/`. |
-| **Rename Path…** | Rename the current path's `.json` file. |
-| **Delete Paths…** | Multi-select delete dialog across the project's paths. |
-
-## Edit
-
-| Action | Shortcut | Description |
-|--------|----------|-------------|
-| **Undo** | `Ctrl/Cmd + Z` | Undo the last action. |
-| **Redo** | `Ctrl/Cmd + Y` / `Ctrl/Cmd + Shift + Z` | Redo the last undone action. |
-
-The undo stack covers element moves, rotations, additions, deletions, reorders, constraint edits, and type conversions. Trivial actions like simple element selections are coalesced so a plain click doesn't create a spurious undo entry (v0.4.0+).
-
-## Settings
-
-**Settings → Edit Config…** opens the project configuration dialog. Values are saved to `config.json` as you edit them — click **OK** to accept or **Cancel** to revert.
-
-The dialog is organized into two groups:
-
-### GUI
-
-These fields affect only the GUI's visual rendering. BLine-Lib ignores them.
-
-| Field | Units | Description |
-|-------|-------|-------------|
-| **Robot Length (m)** | meters | Length used to draw the simulated robot footprint. |
-| **Robot Width (m)** | meters | Width used to draw the simulated robot footprint. |
-| **Enable Protrusions** | bool | Turn the protrusion rendering system on. See [Protrusions](protrusions.md). |
-| **Protrusion Distance (m)** | meters | How far the protrusion extends from the robot perimeter. |
-| **Protrusion Side** | enum | `none` / `left` / `right` / `front` / `back`. |
-| **Default Protrusion State** | enum | `shown` / `hidden` — the state each element uses unless overridden by event keys. |
-| **Show On Event Keys** | csv | Event-trigger keys that flip protrusions to **shown** during sim. |
-| **Hide On Event Keys** | csv | Event-trigger keys that flip protrusions to **hidden** during sim. |
-
-!!! info "Why robot size/protrusions are GUI-only"
-    BLine-Lib does its own tracking math — it doesn't need to know the robot's bumper perimeter. The dialog fields only control what the canvas draws. That means the size and protrusion configuration cost nothing at runtime, so use them liberally for visualization.
-
-### Kinematic Constraints
-
-These fields are written to `config.json` and **are** read by BLine-Lib. They form the global defaults every `Path` falls back to when the path itself doesn't override them.
-
-| Field | Units | Description |
-|-------|-------|-------------|
-| **Default Max Velocity** | m/s | Default translational velocity cap. |
-| **Default Max Accel** | m/s² | Default translational acceleration cap. |
-| **Default Handoff Radius** | meters | Default radius at which the follower advances to the next translation target. |
-| **Default Max Rot Vel** | deg/s | Default holonomic rotational velocity cap. |
-| **Default Max Rot Accel** | deg/s² | Default holonomic rotational acceleration cap. |
-| **End Translation Tolerance** | meters | Global position tolerance for declaring a path complete. |
-| **End Rotation Tolerance** | degrees | Global rotation tolerance for declaring a path complete. |
-
-See [Constraints](../concepts/constraints.md) for how these values interact with path-specific constraints, and [Key Parameters](../concepts/key-parameters.md) for guidance on picking good values.
-
-!!! warning "Set constraints before designing paths"
-    Robot configuration is global state for the project. If you design paths first and then change global defaults, the velocity profile of every path changes. Configure once, then design.
-
-## Config file schema
-
-For reference, the dialog persists values like this:
-
-```json
-{
-    "robot_length_meters": 0.78,
-    "robot_width_meters": 0.85,
-    "protrusion_enabled": true,
-    "protrusion_distance_meters": 0.30,
-    "protrusion_side": "front",
-    "protrusion_default_state": "hidden",
-    "protrusion_show_on_event_keys": ["deploy"],
-    "protrusion_hide_on_event_keys": ["retract"],
-
-    "default_max_velocity_meters_per_sec": 4.5,
-    "default_max_acceleration_meters_per_sec2": 10.0,
-    "default_intermediate_handoff_radius_meters": 0.25,
-    "default_max_velocity_deg_per_sec": 600,
-    "default_max_acceleration_deg_per_sec2": 2000,
-    "default_end_translation_tolerance_meters": 0.03,
-    "default_end_rotation_tolerance_deg": 2.0
-}
+```text
+Project
+├── shared config
+├── linked elements
+├── Collection: Center Autos
+│   ├── leave-start
+│   └── collect-center
+├── Collection: Source-Side Autos
+│   ├── leave-start
+│   └── collect-source
+└── All Paths (permanent view)
 ```
 
-Older config files produced by earlier GUI releases are migrated automatically when opened. You can also hand-author this file if you prefer — BLine-Lib accepts both the flat layout and the nested `kinematic_constraints` shape the newer GUI uses.
+A path can belong to multiple collections. Collections are filters, not filesystem folders; deleting a collection can keep its paths in **All Paths**.
+
+## Create or open a project
+
+The **Project** menu adapts to the environment.
+
+=== "Browser"
+
+    - **New Project** creates a browser-persisted workspace.
+    - **Open Project…** opens another saved browser workspace.
+    - **Delete Projects…** removes selected browser workspaces.
+    - Import/export actions move data across the browser boundary.
+
+=== "Desktop"
+
+    - **Open Project Folder…** selects an existing repository or `autos` folder.
+    - **Create Project Folder…** creates a folder-backed project.
+    - Recent folders reopen direct storage targets.
+
+When given a robot repository containing `src/main/deploy`, the desktop app resolves it to `src/main/deploy/autos`.
+
+## Create and manage paths
+
+Use **Path → Manage Paths** to:
+
+- create a blank path;
+- save the active path as a copy;
+- rename it; or
+- delete one or more paths.
+
+The toolbar's **Path** selector switches within the selected collection. Choose **All Paths** in the **Collection** selector when a path seems to be missing.
+
+The runtime filename ends in `.json`. BLine-Lib loads it without the extension:
+
+```java
+Path collectCenter = new Path("collect-center");
+```
+
+## Use the Path Library
+
+Open **Path Library** from the toolbar or Path menu. The dialog has three working areas:
+
+1. **Collections** — choose, create, rename, or delete a group.
+2. **Paths in selected collection** — open, duplicate, or delete a path.
+3. **Collection membership** — add the selected path to one or more collections.
+
+![Creating a collection and organizing paths in the Path Library](../assets/gifs/web/path-collections.gif){ .gif-demo data-gif-poster="/assets/images/gif-posters/path-collections-start.png" data-gif-end="/assets/images/gif-posters/path-collections-end.png" data-gif-duration="7910" }
+![Static result of paths organized in a collection](../assets/images/gif-posters/path-collections-end.png){ .gif-print-poster }
+
+### Collection overlays
+
+When a collection is selected, its other paths appear as muted outlines on the field. Hover an outline to identify it; click it to switch the active path. This is useful for checking shared starts, handoffs, and crowded autonomous routes without merging them into one path.
+
+## Save and autosave
+
+The lower-right status reports the storage target and state:
+
+- **Browser persistent storage** or direct folder access;
+- autosave pending/saving;
+- saved time; or
+- an error.
+
+Autosave waits while a canvas drag is active, then writes after the interaction. `Ctrl/Cmd + S` or **Save** forces a save of the current workspace.
+
+!!! warning "Save is not always deploy"
+    Browser Save updates browser storage. It does not write into the robot repository. Use [Export Autos Folder](exporting.md#export-an-autos-folder) for that transfer.
+
+## Undo and redo
+
+`Ctrl/Cmd + Z` and redo cover path geometry, properties, constraints, collection membership, and other content edits. Selecting a row does not create a history entry.
+
+After a destructive library edit, verify the active path and collection before continuing; undo can restore content, but it is easier to catch a mistaken deletion immediately.
+
+## Project data versus runtime data
+
+| Data | Used by BLine-Lib | Editor-only |
+| --- | ---: | ---: |
+| `config.json` kinematic defaults | Yes | No |
+| `paths/*.json` | Yes | No |
+| Collections | No | Yes |
+| Linked-element identities | No | Yes |
+| Robot footprint/protrusion rendering | No | Yes |
+| Custom field image and selection | No | Yes |
+| Optimizer settings and automatic-range metadata | No | Yes |
+
+Export a project archive before major restructuring. BLine Web is still alpha; reopen the exported/folder-backed project and verify collection and linked-element state as part of your team workflow.
+
+## Next
+
+- [Draw & Edit Paths](canvas.md)
+- [Linked Elements](linked-elements.md)
+- [Import, Export & Backups](exporting.md)

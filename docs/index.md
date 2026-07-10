@@ -1,71 +1,57 @@
 # BLine
 
-**BLine** is an open-source path generation and tracking suite for FRC **holonomic drivetrains** (swerve, mecanum, etc.), built by students for students. It prioritizes simplicity, easy tuning, and excellent real-time performance, trading theoretical optimality for practical tunability and iteration speed.
+Build, test, and tune geometric autonomous paths for FRC holonomic drivetrains.
 
-BLine was created by **FRC Team 2638 (Rebel Robotics)**.
+[Start with your first path](getting-started/prerequisites.md){ .md-button .md-button--primary }
+[Open BLine Web](https://bline-web.pages.dev/){ .md-button }
 
-![Robot Demo](assets/gifs/robot-demos/cone-demo.gif)
+![BLine Web editing a path on the current FRC field](assets/images/editor-overview.png)
 
-## The BLine Suite
+## A path workflow from editor to robot
 
-BLine ships as two cooperating components:
+| Component | What you do there |
+| --- | --- |
+| **BLine Web** | Draw and organize paths, apply constraints, preview idealized motion, and export robot-ready JSON. |
+| **BLine-Lib** | Load paths in Java, follow them from the live robot pose, run events, transform for alliance/side, and publish diagnostics. |
 
-| Component | Purpose | Repository |
-|-----------|---------|------------|
-| **BLine-GUI** | Visual path editor with live simulation preview. Paths are saved as JSON. | [edanliahovetsky/BLine-GUI](https://github.com/edanliahovetsky/BLine-GUI) |
-| **BLine-Lib** | Java library for the robot. Loads paths (JSON or code), runs the path-following command. | [edanliahovetsky/BLine-Lib](https://github.com/edanliahovetsky/BLine-Lib) |
+The current documentation is verified against **BLine Web v0.1.0-alpha.10** and **BLine-Lib v0.9.1**. See [Versions & Support](reference/versions.md).
 
-You can use both together, use the library with hand-written JSON, or build paths entirely in code. All three are first-class workflows — see [Quick Start](getting-started/quick-start.md).
+## Choose your route
 
-## Key Features
+| Goal | Start here |
+| --- | --- |
+| Get one path running | [First Path Tutorial](getting-started/quick-start.md) |
+| Understand the approach | [How BLine Works](concepts/design-philosophy.md) |
+| Tune a real robot | [Tune Your Robot](getting-started/tuning.md) |
+| Learn the current editor | [BLine Web Overview](gui/index.md) |
+| Integrate the Java library | [BLine-Lib Overview](lib/index.md) |
+| Diagnose a failure | [Common Issues](common-issues.md) |
 
-- **Polyline paths.** Paths are sequences of connected straight-line segments instead of Bézier curves. Simple, visual, fast to edit.
-- **Path elements.** Three types — `Waypoint` (position + rotation), `TranslationTarget` (position only), `RotationTarget` (rotation only). Plus `EventTrigger` for firing actions mid-path.
-- **Handoff radii + velocity limiting.** Per-element handoff radii and ranged velocity/acceleration constraints control robot behavior through turns and intermediate elements.
-- **Forgiving PID tuning.** The translation controller minimizes *remaining path distance*, not time. Optimally and sub-optimally tuned controllers differ only near the end of the path — about 5 minutes of tuning usually gets you there.
-- **Real-time path creation.** No precomputation; paths are followed the instant they are constructed. Well-suited to on-the-fly teleop auto-align and dynamic autonomous.
-- **Alliance flipping and mirroring.** Built-in helpers for the opposite-alliance side (rotational symmetry) and for the field-width centerline (horizontal mirror).
-- **Event triggers.** Register a `Runnable` or WPILib `Command` against a key, then place `EventTrigger` elements in paths to fire at a specific t-ratio along a segment.
-- **AdvantageKit-friendly logging.** The follower pushes a rich set of keys (target indices, remaining distance, controller outputs, handoff state, event-trigger progress) through pluggable consumers.
+## What makes BLine different
 
-## Why Polylines?
+BLine follows current geometric progress rather than asking the robot to match a timestamped trajectory state. Every control loop uses the live pose, remaining polyline distance, active target, constraints, and cross-track error.
 
-A Bézier-based path follower must discretize the trajectory into timestamped setpoints and then chase the clock. Two things get hard:
+That makes physical progress—not a clock—the source of truth. It can be easier to tune and more tolerant of delays or disturbances, but it does not prove that every drawn turn is dynamically feasible. Teams still need accurate localization, sensible velocity/acceleration limits, achievable handoff radii, and an intentional timeout or fallback policy for a physically blocked robot.
 
-1. **Tuning.** You are tuning *follow the clock*, not *reach the point*. Under-tuned gains fall behind and never recover; over-tuned gains jitter.
-2. **Robustness.** If the robot is bumped or pushed off course, a time-parameterized follower keeps marching along its schedule. P2P-style followers work the position domain directly and tend to recover more gracefully.
+Read [Geometric and time-parameterized tracking](concepts/design-philosophy.md#geometric-and-time-parameterized-tracking) for a balanced explanation of when each approach fits.
 
-BLine sets the translation controller's setpoint to the path endpoint (via remaining-distance error) and applies velocity/acceleration limits on the controller output. The robot hits max velocity irrespective of drivetrain tuning, and the only tuning that really matters is the deceleration near the end of the path.
+## Learn by building
 
-For the full argument, see [Design Philosophy](concepts/design-philosophy.md).
+The recommended progression is:
 
-## Performance
+1. Verify pose and drivetrain frames.
+2. Create one straight path on the latest FRC field.
+3. Export and load it on the robot.
+4. Wire logs before changing controller gains.
+5. Tune translation, rotation, then cross-track control.
+6. Shape competition paths with constraints and handoff radii.
+7. Add collections, linked elements, events, overrides, and other advanced features.
 
-Monte-Carlo simulation validation (WPILib physics sim, Theta\* initial pathfinding, Artificial Bee Colony optimizer benchmarking against PathPlanner):
+## Project links
 
-- **97% reduction** in path computation time
-- **66% reduction** in cross-track error at waypoints
-- **2.6% increase** in total path tracking time (negligible; measured with an idealized time-parameterized controller — likely flips sign in the real world where tuning is never ideal)
+- [BLine Web](https://github.com/edanliahovetsky/BLine-Web) — current browser and desktop editor
+- [BLine-Lib](https://github.com/edanliahovetsky/BLine-Lib) — Java robot library and Javadocs
+- [Chief Delphi discussion](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778) — questions, field experience, releases, and community feedback
+- [Full Javadocs](https://edanliahovetsky.github.io/BLine-Lib/) — generated API detail
 
-[Read the Full White Paper →](https://docs.google.com/document/d/1Tc87YKWHtsEMEvmVDBD1Ww4e7vIUO2FyK3lwwuf-ZL4/edit?usp=sharing)
-
-## Quick Links
-
-- [Installation](getting-started/installation.md) — Install the GUI and/or library
-- [Quick Start](getting-started/quick-start.md) — Follow your first path end-to-end
-- [Path Elements](concepts/path-elements.md) — Waypoints, translation targets, rotation targets, event triggers
-- [Tuning & Usage Tips](usage-tips.md) — PID tuning order, tolerances, handoff radii, real-world tips
-- [Common Issues](common-issues.md) — Field-tested fixes for the things that bite teams
-- [API Reference](lib/api-reference.md) — Library surface at a glance
-
-## External Resources
-
-- **[BLine-Lib on GitHub](https://github.com/edanliahovetsky/BLine-Lib)** — Java library source
-- **[BLine Web](https://bline-web.pages.dev/)** — browser editor and desktop downloads for Windows, macOS, and Linux
-- **[BLine-GUI on GitHub](https://github.com/edanliahovetsky/BLine-GUI)** — legacy GUI source and releases
-- **[Full Javadoc](https://edanliahovetsky.github.io/BLine-Lib/)** — Generated API reference
-- **[Chief Delphi Thread](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778)** — Discussion, release notes, community tips
-
-## License
-
-BLine is released under the BSD 3-Clause License.
+BLine is open source under the BSD 3-Clause License.

@@ -1,108 +1,78 @@
 # Pre-Match Module Orientation
 
-Before an autonomous path starts running, the swerve modules are pointed somewhere — whatever direction they happened to land on during enable, or whatever the default was when the robot was last disabled. If that's **not** the direction the robot is about to drive, the modules have to pivot under load during the first control cycle. You'll see the robot drift a few cm laterally, and position error accumulates from frame zero.
+Pointing swerve modules toward the first intended translation direction before autonomous can reduce the sideways twitch while modules rotate under load.
 
-BLine exposes a helper to get the direction the modules should be pre-oriented to, so you can set them *before* the match timer starts.
-
-## The API
+## Helper
 
 ```java
-Rotation2d dir = path.getInitialModuleDirection();
+Rotation2d moduleDirection =
+    firstPath.getInitialModuleDirection(driveSubsystem::getPose);
 ```
 
-Returns the direction the modules should face to minimize initial drift. Walks the path's translation targets and:
+The live-pose overload walks translation targets and selects the first target outside its handoff radius. A one-target path points toward that target.
 
-1. If there's exactly one translation target, returns the direction from the robot's current pose to that target.
-2. If there are multiple, returns the direction to the first target whose handoff radius doesn't already contain the robot's current pose.
-3. Falls back to the last translation target if everything is already within handoff.
+The returned angle is documented relative to robot rotation. Vendor APIs differ in azimuth sign and reference direction, so verify the value on blocks before passing it directly into a module-orientation request.
 
-The returned rotation is **relative to the robot's current heading**, so it's ready to pass straight to your drive subsystem's module orientation setter.
+## Require the drivetrain when commanding modules
 
-### Overloads
-
-| Signature | Use when |
-|-----------|----------|
-| `getInitialModuleDirection()` | Default — uses `path.getStartPose()` (rotation 0 if no rotation target). |
-| `getInitialModuleDirection(Rotation2d fallbackRotation)` | Provides a fallback rotation for the start pose calculation. |
-| `getInitialModuleDirection(Supplier<Pose2d> poseSupplier)` | Uses an arbitrary pose supplier — useful for live robot pose rather than path start pose. |
-
-For pre-match orientation, the live-pose overload is often what you want: you're pointing modules based on where the robot *currently* is, not where the path's start says it should be.
-
-## Typical wiring
-
-### Option A: In disabled-periodic
-
-Keep modules pointed at the first target while the robot is disabled on the field:
+If orientation is part of the autonomous command:
 
 ```java
-@Override
-public void disabledPeriodic() {
-    Path first = autoChooser.getSelected().getFirstPath();
-    if (first != null) {
-        driveSubsystem.setModuleOrientations(
-            first.getInitialModuleDirection(driveSubsystem::getPose)
-        );
-    }
+Command orientModules = Commands.runOnce(
+    () -> driveSubsystem.setModuleOrientations(
+        firstPathForRun.getInitialModuleDirection(driveSubsystem::getPose)
+    ),
+    driveSubsystem
+);
+
+Command auto = Commands.sequence(
+    orientModules,
+    pathBuilder.build(authoredFirstPath)
+);
+```
+
+The `runOnce` should require the drivetrain because it changes drivetrain state.
+
+## Account for alliance transforms
+
+`FollowPath.Builder` flips/mirrors an internal copy when the command initializes. Calling `getInitialModuleDirection` earlier on the original blue path does not see that internal transform.
+
+Create a separate preview copy using the same policy:
+
+```java
+Path firstPathForRun = authoredFirstPath.copy();
+if (shouldFlip.get()) {
+    firstPathForRun.flip();
+}
+if (shouldMirror.get()) {
+    firstPathForRun.mirror();
 }
 ```
 
-This keeps the orientation current as the robot's pose updates from vision.
+Use that copy only for orientation/preview. Pass the original authored path to a builder that applies the corresponding transforms once.
 
-### Option B: In auto-init
+## Disabled-periodic option
 
-Orient once at the start of autonomous, right before the follow command runs:
+Some drivetrains can hold module azimuth while disabled. If your hardware/vendor implementation supports that safely, recalculate after alliance and auto selection are known:
 
 ```java
-public Command getAutonomousCommand() {
-    Path first = new Path("scoreFirst");
-    return Commands.sequence(
-        Commands.runOnce(() -> driveSubsystem.setModuleOrientations(
-            first.getInitialModuleDirection(driveSubsystem::getPose)
-        )),
-        pathBuilder.build(first),
-        // ... rest of auto
+public void disabledPeriodic() {
+    Path selected = transformedPreviewOfSelectedFirstPath();
+    driveSubsystem.setModuleOrientations(
+        selected.getInitialModuleDirection(driveSubsystem::getPose)
     );
 }
 ```
 
-The `runOnce` doesn't require the drive subsystem, so it runs before the `FollowPath` command acquires the subsystem on its first cycle.
+Do not assume every module API accepts commands while disabled. Test the exact drivetrain behavior and avoid repeatedly allocating/loading path files in a periodic callback.
 
-### Option C: In the command sequence
+## Verification
 
-Put the orientation call inside a `deadline` so any vision updates happen right up until the follow command schedules:
+1. Put the robot on blocks.
+2. Select the same alliance and auto policy used in a match.
+3. Display the planned path with `BLineField`.
+4. Run the orientation action.
+5. Confirm all module wheels point along the intended first field movement after conversion into the vendor's azimuth convention.
+6. Test both alliances and any mirror option.
 
-```java
-Commands.deadline(
-    pathBuilder.build(first),
-    Commands.run(() -> driveSubsystem.setModuleOrientations(
-        first.getInitialModuleDirection(driveSubsystem::getPose)
-    )).withTimeout(0.0)
-);
-```
-
-This is overkill for most teams — Option A or B is the recommended pattern.
-
-## Why it matters
-
-For a typical swerve under load, rotating all four modules 90° takes tens of milliseconds. That's:
-
-- A cross-track error that compounds as the robot starts accelerating.
-- A non-deterministic start — the amount of drift depends on how close the starting orientation happened to be.
-- Trouble for routines that begin near a scoring element (reef, amp, speaker) where those first few centimeters matter.
-
-Pre-orienting modules means by the time the match starts, every wheel is already pointing in the direction of the first commanded motion vector. Frame zero looks clean.
-
-## Physical orientation vs. commanded orientation
-
-Two approaches work:
-
-- **Commanded** — tell the drive subsystem to hold the modules at a heading. Requires the subsystem to expose a `setModuleOrientations(Rotation2d)` method (or equivalent).
-- **Physical** — at robot setup, physically rotate the modules to the correct heading before enabling.
-
-Commanded is easier to automate and handles vision-updated pose. Physical is more reliable when you don't have a module-orientation method available. Either works.
-
-## Caveats
-
-- **`getInitialModuleDirection()` can return the wrong direction if the robot is already "past" the first target.** The fallback to the last target is defensive, not always useful. Always pass the live pose supplier when calling this in pre-match — it handles paths whose start pose isn't exactly where the robot is.
-- **Do not call this after the path has already been flipped manually.** If you call `getInitialModuleDirection()` before `flip()`, then flip, the stored direction is stale. If you're using `withDefaultShouldFlip()`, either flip the path manually first or compute the direction in auto-init *after* alliance is known.
-- **For single-waypoint paths** (drive-to-pose), the returned direction points at the single waypoint, which is exactly what you want.
+Pre-orientation improves the first control cycles; it does not fix an incorrect pose, frame transform, or path start.
