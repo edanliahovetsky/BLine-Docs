@@ -2,7 +2,7 @@
 
 ## Build fast autos. Tune what the robot actually does.
 
-BLine is an open-source point-to-point path planning suite for FRC holonomic drivetrains. Draw a route in the browser, preview it on the current field, export robot-ready JSON, and follow it from the robot's live pose with a Java library built for rapid testing.
+BLine is an open-source point-to-point path planning suite for FRC holonomic drivetrains. Draw a route in BLine Web—using the hosted editor or desktop app—preview it on the current field, export robot-ready JSON, and follow it from the robot's live pose with a Java library built for rapid testing.
 
 [Build your first BLine auto](getting-started/prerequisites.md){ .md-button .md-button--primary }
 [Try BLine Web](https://bline-web.pages.dev/){ .md-button }
@@ -33,7 +33,7 @@ Handoff radii say when to leave an intermediate target. Ranged constraints say w
 
 ## A proven point-to-point idea, packaged for more teams
 
-BLine shares the broad [point-to-point philosophy used in custom systems from top programs](https://www.chiefdelphi.com/t/introducing-autopilot-a-novel-solution-to-holonomic-motion-control/504244) such as **2910 Jack in the Bot** and **2056 OP Robotics**: steer from the live robot state toward geometric goals instead of treating a pre-timed trajectory as the source of truth. BLine turns that approach into a public Web editor, reusable Java library, logging surface, and documented workflow rather than requiring every team to build its own follower.
+BLine shares the broad [point-to-point philosophy used in custom systems from top programs](https://www.chiefdelphi.com/t/introducing-autopilot-a-novel-solution-to-holonomic-motion-control/504244) such as **2910 Jack in the Bot** and **2056 OP Robotics**: steer from the live robot state toward geometric goals instead of treating a pre-timed trajectory as the source of truth. BLine turns that approach into a public browser-and-desktop editor, reusable Java library, logging surface, and documented workflow rather than requiring every team to build its own follower.
 
 !!! info "The tradeoff is intentional"
     BLine prioritizes fast authoring, empirical tunability, and live-pose correction. It is not a time-optimal drivetrain dynamics optimizer, and a drawn polyline is not automatically physically feasible. Teams still need a trustworthy pose estimate, stable module control, safe geometry, realistic constraints, and robot testing. See [Geometric and time-parameterized tracking](concepts/design-philosophy.md#geometric-and-time-parameterized-tracking) for when each approach fits.
@@ -42,7 +42,7 @@ BLine shares the broad [point-to-point philosophy used in custom systems from to
 
 | Component | What you do there |
 | --- | --- |
-| **BLine Web** | Draw and organize paths, apply constraints, preview idealized motion, and export robot-ready JSON. |
+| **BLine Web** | Draw and organize paths in the hosted editor or desktop app, apply constraints, preview idealized motion, and produce robot-ready JSON. |
 | **BLine-Lib** | Load paths in Java, follow them from the live robot pose, run events, transform for alliance/side, and publish diagnostics. |
 
 The current documentation is verified against **BLine Web v0.1.0-alpha.10** and **BLine-Lib v0.9.1**. See [Versions & Support](reference/versions.md).
