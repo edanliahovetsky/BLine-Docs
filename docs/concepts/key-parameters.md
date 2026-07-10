@@ -2,6 +2,8 @@
 
 Three progress rules determine when BLine moves between elements and when a command ends.
 
+The key mental model is that an intermediate anchor is usually a **pass-through target**, not a stop. A handoff tells BLine when to stop steering toward that anchor and begin steering toward the next one.
+
 ## Intermediate translation handoff
 
 For every translation anchor except the final one, the handoff radius is a circle around the target. When the live robot position enters that circle, BLine advances to the next translation target.
@@ -19,9 +21,9 @@ The resolved radius comes from:
 | Robot passes the point, reverses, and repeats | Velocity/stopping distance is too high for the radius |
 | Robot pauses at every intermediate point | Radius is small, local velocity is low, or too many anchors were added |
 
-Lower the velocity into a difficult handoff before making the circle larger. A larger radius changes the route; a lower cap preserves the intended point and gives the chassis time to reach it.
+Lower the maximum velocity into a difficult handoff before making the circle larger. A larger radius changes **where the route turns**; a lower velocity cap keeps the intended turn location while making it easier for the robot to reach.
 
-## Optional projection-based handoff
+## Recommended for pass-through anchors: t-ratio handoff
 
 `FollowPath.Builder.withTRatioBasedTranslationHandoffs(true)` adds a second handoff condition. For a segment of length `L` and handoff radius `r`, BLine computes a projected-progress threshold of `clamp(1 − r/L, 0, 1)`. The follower may advance when either:
 
@@ -33,7 +35,23 @@ FollowPath.Builder builder = new FollowPath.Builder(/* ... */)
     .withTRatioBasedTranslationHandoffs(true);
 ```
 
-The threshold is the progress of a point one handoff radius before the target along the segment centerline. This can hand off while the robot is laterally outside the circle, so enable it only for a tested pass-through where forward progress is the intended signal. It does not remove the need for achievable velocity and acceleration limits.
+This option is **off by default** in BLine-Lib v0.9.1 and persists on the builder after you enable it. For most paths whose intermediate anchors are pass-through points, enabling it is the recommended starting behavior.
+
+The threshold is the progress of a point one handoff radius before the target along the segment centerline:
+
+![Comparison of a laterally offset robot missing a radius-only handoff circle and the same robot advancing after crossing the t-ratio projection threshold](../assets/images/concepts/handoff-comparison.svg)
+
+With radius-only handoff, that offset robot continues steering back toward the circle and can reverse after passing it. With t-ratio handoff enabled, passing either test advances the target:
+
+| Mode | Advances when | Best fit |
+| --- | --- | --- |
+| Radius only | Robot position enters the handoff circle | An anchor the robot must physically visit |
+| T-ratio enabled | Circle entry **or** projected progress reaches the threshold | Most ordinary pass-through intermediate anchors |
+
+Projection-based handoff can advance while the robot is laterally outside the circle. Keep radius-only behavior for the uncommon case where physically reaching that point is essential, and test t-ratio paths around narrow clearances where lateral error matters. Neither mode removes the need for achievable velocity caps and a realistic handoff radius.
+
+!!! note "Two different uses of t-ratio"
+    Translation handoff derives a threshold from segment length and handoff radius. You do not author that number. Rotation targets and events use an authored `t_ratio`, described below.
 
 ## `t_ratio` for rotation and events
 
@@ -74,9 +92,9 @@ The final translation anchor does not use an intermediate handoff. `FollowPath` 
 
 ### Tolerance tradeoff
 
-- Tighter values increase precision but make noise, deadband, and controller tuning more visible.
+- Tighter values increase precision but make localization noise and controller tuning more visible.
 - Looser values finish sooner but may accept a pose that is not sufficient for scoring.
-- A minimum-velocity baseline is disabled inside the corresponding tolerance, but an overly large baseline can still carry the robot through it.
+- An advanced minimum-velocity baseline is disabled inside the corresponding tolerance, but an overly large baseline can still carry the robot through it.
 
 Choose the tolerance from the task requirement, then tune and constrain the approach to meet it repeatably.
 

@@ -31,12 +31,28 @@ Do not force every page into the same heading template. Match the structure to t
 - Write for FRC students and mentors.
 - Prefer concrete robot/path examples over abstract prose.
 - Define terms before relying on them.
+- Build the relevant mental model before asking the reader to tune, diagnose, or optimize behavior.
 - Separate "what to do" from "why it works".
+- Distinguish shipped product defaults, tutorial starting values, full-speed tuning values, and advanced overrides. State the context whenever publishing a recommended number.
+- Explain the intended supported workflow in tutorials and how-to pages. Keep exact incidental mechanics in concept or reference material when foregrounding them would distract from the normal workflow.
 - Keep tutorials linear and avoid side quests.
 - Keep reference pages compact and table-friendly.
 - Keep troubleshooting pages symptom-first.
+- Give a secondary feature one canonical explanatory page. Link to it briefly elsewhere instead of repeating the same checklist across unrelated workflows.
 - Avoid marketing language inside technical pages.
 - Avoid undocumented claims about performance, adoption, versions, or compatibility.
+
+## Learning Progression
+
+Organize beginner material in this order:
+
+1. achieve one safe, observable success;
+2. understand the controller or path concept involved;
+3. tune at the intended operating envelope;
+4. shape real paths with normal authoring tools; and
+5. introduce advanced overrides and edge-case controls.
+
+Do not send a new reader directly from first success into controller tuning without first defining PID at an FRC-appropriate level and explaining the separate jobs of BLine's translation, rotation, and cross-track controllers. Link to the relevant WPILib fundamentals instead of duplicating the complete WPILib controls curriculum.
 
 ## Visual Media
 
@@ -46,6 +62,10 @@ Use screenshots and short animations when they make a workflow, UI state, spatia
 
 - Use a screenshot for a stable location, control, configuration, or result.
 - Use a GIF or other short animation when motion, sequencing, simulation, or direct manipulation is the point.
+- Use aligned plots when controller response, constraint effects, or tuning comparisons are the point. Keep axes and test conditions consistent across the compared cases.
+- Label synthetic controller plots as illustrative rather than measured robot data. Preserve the real signal's units, sign convention, and mathematical domain even when the curve is schematic.
+- Give introductory spatial and control concepts a diagram, annotated screenshot, animation, or plot when prose alone would require the reader to invent the mental model.
+- When a tutorial introduces a current GUI workflow, show the exact starting configuration and the resulting state with a screenshot or focused animation when those states are not obvious from text alone.
 - Give each visual one clear teaching goal and place it next to the text it supports.
 - Keep the surrounding instructions complete enough that the visual is helpful but not the only way to understand an essential step.
 - Reuse an asset only when it demonstrates the same current behavior in every context where it appears.
@@ -79,7 +99,9 @@ Use screenshots and short animations when they make a workflow, UI state, spatia
 - Exclude personal information, secrets, debug overlays, notifications, unrelated browser chrome, and other temporary UI.
 - Write alt text that describes the visual's instructional purpose rather than repeating its filename or a generic label such as "demo."
 - Do not rely on motion, color, or audio alone to communicate required information. Avoid rapid flashing and respect reduced-motion preferences.
-- Make the first frame and adjacent prose useful in static output such as the generated PDF. Provide playback controls or a static alternative when a longer or continuously looping animation is necessary.
+- Let short documentation GIFs loop automatically only while they are in the viewport. Do not add bespoke Play, Stop, or Replay controls to ordinary demonstrations.
+- Show a useful static poster when motion is outside the viewport, when the reader prefers reduced motion, and in print/PDF output. For reduced motion and print, prefer the informative stable result rather than an empty pre-action frame. The adjacent prose must remain sufficient without animation.
+- Make the first frame and final stable frame useful enough that entering or leaving the viewport does not produce a confusing state.
 - Crop and optimize media so labels remain legible without imposing unnecessary page weight. Prefer a static image when animation adds little instructional value.
 - Use only project-owned media or third-party media whose license permits inclusion and attribution.
 
@@ -87,6 +109,7 @@ Use screenshots and short animations when they make a workflow, UI state, spatia
 
 - Inspect each new or changed visual in the rendered site at desktop and narrow-screen widths.
 - Confirm that the visual matches the current documented UI and that its alt text, placement, first frame, and loading behavior are useful.
+- Confirm that an animated demonstration starts without a button when it enters the viewport, returns to its poster when it leaves, and stays static under `prefers-reduced-motion`.
 - Verify GIF duration, pixel dimensions, frame rate, playback speed, and file size from the generated file rather than judging them by eye.
 - Inspect the frame after each key action as well as the first, transition, and final frames. Each action's result must be visible before the next action begins.
 - Check for empty or broken media references and remove obsolete assets after replacements.
@@ -102,6 +125,8 @@ Use the relevant source before changing docs:
 - **BLine-Docs:** public documentation structure, navigation, examples, and current claims.
 
 If source and docs disagree, fix the docs or clearly mark the uncertainty before merging.
+
+Source establishes what the software does. Maintainer guidance may establish the recommended way to use that behavior. When those differ, document the mechanics accurately while presenting the maintainer-approved workflow as a recommendation rather than an undocumented runtime guarantee.
 
 ## Docs-Required Changes
 

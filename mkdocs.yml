@@ -109,7 +109,7 @@ nav:
     - Construct Paths & JSON: lib/path-construction.md
     - Events & Command Groups: lib/event-triggers.md
     - Rotation Overrides: lib/rotation-overrides.md
-    - Field2d Preview: lib/field-visualization.md
+    - Optional Field2d Visualization: lib/field-visualization.md
     - Alliance Flip & Mirror: lib/flip-and-mirror.md
     - Pre-Match Module Orientation: lib/pre-match.md
     - Logging & AdvantageScope: lib/logging.md

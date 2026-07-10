@@ -51,7 +51,7 @@ Reordering an anchor changes the segment that surrounding rotation targets and e
 
 Choose **Add curve**, draw the intended centerline on the field, and release. BLine Web simplifies the stroke into no more than 18 translation targets and applies automatic max-velocity caps over the inserted range.
 
-![Drawing a curve on the 2026 field and converting it into editable BLine elements](../assets/gifs/web/draw-curve.gif){ .gif-demo data-gif-poster="/assets/images/gif-posters/draw-curve-start.png" data-gif-end="/assets/images/gif-posters/draw-curve-end.png" data-gif-duration="7580" }
+![Drawing a curve on the 2026 field and converting it into editable BLine elements](../assets/images/gif-posters/draw-curve-start.png){ .gif-demo data-gif-source="/assets/gifs/web/draw-curve.gif" data-gif-poster="/assets/images/gif-posters/draw-curve-start.png" data-gif-end="/assets/images/gif-posters/draw-curve-end.png" data-gif-duration="7580" }
 ![Static result of the curve converted into editable BLine elements](../assets/images/gif-posters/draw-curve-end.png){ .gif-print-poster }
 
 After drawing:

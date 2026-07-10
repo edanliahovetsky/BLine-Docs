@@ -204,8 +204,14 @@ Use these overloads for tooling/tests. Normal robot projects should keep the exp
 if (!path.isValid()) {
     DriverStation.reportError("Invalid BLine path", false);
 }
-
-BLineField.drawPath(field, "ScoreLeft", path);
 ```
 
 Also check file-loading errors during robot initialization rather than discovering them when autonomous starts.
+
+If the team uses Elastic, Glass, or another Field2d-compatible dashboard, it may also publish the loaded geometry as an optional visual check:
+
+```java
+BLineField.drawPath(field, "ScoreLeft", path);
+```
+
+Path validity and load-error handling do not depend on this visualization.

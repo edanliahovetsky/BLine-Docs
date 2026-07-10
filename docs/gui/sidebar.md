@@ -1,17 +1,29 @@
 # Constraints & Optimizer
 
-The **Constraints** section contains path-specific tolerances and ranged motion limits. Use it after the basic geometry is correct.
+The **Constraints** section turns path geometry into a practical velocity plan. Maximum translation velocity is the main authoring control: it determines how quickly the robot may approach each anchor, corner, clearance, and endpoint.
+
+## Use constraints while creating the path
+
+For a normal path:
+
+1. Draw the geometry.
+2. Identify the open travel, turns, narrow clearances, and precision approaches.
+3. Run the maximum-velocity optimizer.
+4. Review the proposed ranges and edit them where the optimizer lacks robot or game-task context.
+5. Simulate the result.
+6. Test the path incrementally on the robot.
+
+Do not postpone velocity planning until the path fails on the robot. Geometry and local maximum velocity work together: geometry selects the route, while the caps determine how aggressively BLine follows it.
 
 ## Add a constraint
 
 Choose **Add constraint** and select:
 
 - Max Velocity or Max Acceleration
-- Min Velocity
 - Max Rot Velocity or Max Rot Acceleration
-- Min Rot Velocity
 - End Translation Tolerance
 - End Rotation Tolerance
+- Min Velocity or Min Rot Velocity (advanced)
 
 End tolerances are one scalar for the path. Velocity and acceleration constraints use ordinal ranges.
 
@@ -42,17 +54,18 @@ The editor warns when a maximum is above the global value or a minimum is above 
 
 ## Use the path optimizer
 
-The optimizer proposes **maximum translation velocity** caps from path geometry and current settings.
+The optimizer proposes **maximum translation velocity** caps from path geometry and current settings. It is the normal starting point for a velocity plan, not merely a repair tool for difficult paths.
 
-![Applying the automatic velocity optimizer and reviewing generated caps](../assets/gifs/web/auto-velocity-optimizer.gif){ .gif-demo data-gif-poster="/assets/images/gif-posters/auto-velocity-optimizer-start.png" data-gif-end="/assets/images/gif-posters/auto-velocity-optimizer-end.png" data-gif-duration="7410" }
+![Applying the automatic velocity optimizer and reviewing generated caps](../assets/images/gif-posters/auto-velocity-optimizer-start.png){ .gif-demo data-gif-source="/assets/gifs/web/auto-velocity-optimizer.gif" data-gif-poster="/assets/images/gif-posters/auto-velocity-optimizer-start.png" data-gif-end="/assets/images/gif-posters/auto-velocity-optimizer-end.png" data-gif-duration="7410" }
 ![Static result of automatic maximum-velocity caps](../assets/images/gif-posters/auto-velocity-optimizer-end.png){ .gif-print-poster }
 
 1. Open the Max Velocity card.
 2. Review the **Optimizer** settings.
 3. Choose **Auto all** to fill eligible open segments.
-4. Inspect the generated ranges and their coverage.
-5. Simulate the path.
-6. Test on the robot and convert/edit any range that needs manual control.
+4. Inspect the generated ranges and the field sections they cover.
+5. Adjust caps for mechanisms, clearances, pickup stability, or scoring approaches the geometry alone cannot describe.
+6. Simulate the path.
+7. Test on the robot and convert/edit any range that needs manual control.
 
 **Clear auto** removes automatic ranges only. Manual ranges survive optimizer reruns.
 
@@ -87,23 +100,26 @@ The optimizer is a geometry-based authoring assistant. It does not model the com
 
 ## Minimum velocity constraints
 
-The UI marks minimum constraints as advanced. They can overcome static friction when PID output is too small outside the final tolerance, but they can also force overshoot.
+The UI marks minimum constraints as advanced because they deliberately reshape the controller's low-output domain. They are not needed for ordinary path creation.
 
 - Start with no minimum.
-- Tune controllers and inspect measured speed first.
-- Add the smallest baseline that fixes a demonstrated deadband problem.
+- Tune the controllers and shape the path with maximum-velocity ranges first.
+- Consider a minimum only for an intentional nonzero arrival into a chained path, endpoint-domain shaping, or another tested edge case.
+- Add the smallest floor that produces the intended behavior.
 - Keep it below the active maximum.
-- Re-test the endpoint at full configured speed.
+- Re-test the entire endpoint and command transition at the configured path speed.
+
+`FollowPath` disables the minimum after the corresponding error enters tolerance and sends zero speeds when the command ends. A minimum can make the robot enter that tolerance with nonzero motion, but it does not by itself guarantee continuous velocity between commands.
 
 ## A repeatable workflow
 
 For each difficult turn or mechanism-sensitive region:
 
 1. Select the relevant range and confirm its highlighted path section.
-2. Write down the current value and symptom.
-3. Change one range or factor.
+2. Identify whether the problem is route geometry, maximum velocity, handoff behavior, or a robot-control issue.
+3. Change one range, anchor, or optimizer factor.
 4. Re-run simulation for structural sanity.
-5. Run the robot and compare the same log keys.
-6. Keep or revert based on evidence.
+5. Run the robot under the same test conditions.
+6. Keep or revert the change based on the observed behavior.
 
-See [Constraints & Ordinals](../concepts/constraints.md) for runtime precedence and JSON form, and [Tune Your Robot](../getting-started/tuning.md) for the log workflow.
+See [Constraints & Ordinals](../concepts/constraints.md) for the authoring mental model, runtime precedence, and JSON form. Tune the three controllers before using path constraints to compensate for a control problem; see [Tune Your Robot](../getting-started/tuning.md).

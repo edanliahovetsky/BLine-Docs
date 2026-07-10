@@ -12,7 +12,7 @@ When `FollowPath` initializes, it applies configured transforms, optionally rese
 4. Uses the translation PID to request a speed magnitude toward the current target.
 5. Adds cross-track correction toward the active segment line.
 6. Resolves the active rotation target or rotation override.
-7. Applies active minimum/maximum velocity and acceleration constraints against the prior commanded speeds.
+7. Applies active velocity floors and ceilings, then limits the change from the prior commanded speeds with the active acceleration constraints.
 8. Converts the result to robot-relative `ChassisSpeeds` and calls the drivetrain consumer.
 
 The command finishes only after it reaches the final translation and rotation elements and both errors are inside their end tolerances. BLine-Lib v0.9.1 does not add a final measured-velocity requirement.
@@ -29,6 +29,8 @@ This representation makes the important decisions visible:
 - **end tolerances** define when the command is allowed to finish.
 
 The editor's curve tool can turn a drawn stroke into a simplified series of translation targets, but the exported runtime path is still a polyline.
+
+For most intermediate targets that only shape a pass-through route, enable projection-based translation handoff and validate it on the robot. It keeps the handoff radius as one valid condition and adds a progress-based condition, which avoids forcing a robot that has passed a target to reverse toward a missed circle. BLine-Lib leaves the option off by default, so teams must enable it explicitly on the builder. Radius-only behavior remains useful for a deliberate must-enter gate, and neither policy replaces final-target tolerances.
 
 ## Geometric and time-parameterized tracking
 
@@ -73,7 +75,25 @@ For the current workflows and guarantees of those alternatives, use the projects
 | **Rotation** | Heading error | Angular velocity |
 | **Cross-track (CTE)** | Signed perpendicular distance from the active segment | Lateral correction added to the translation vector |
 
-The translation output commonly saturates at the active maximum velocity for most of a long path. Its gain becomes most visible near the endpoint. This is why the recommended tuning order is translation, rotation, then CTE.
+On a sufficiently long path with a well-tuned controller, the translation request commonly reaches the active maximum velocity before tapering near the endpoint. A low gain, a short path, or a drivetrain that cannot realize the request may never reach that ceiling. This is why tuning must compare remaining distance, requested speed, and measured drivetrain speed rather than assuming saturation.
+
+Tune translation first, rotation second, and CTE last so each plot has one main unknown.
+
+### Controller gains and constraints have different jobs
+
+- **Controller gains** turn geometric error into a requested speed.
+- **Maximum velocity** clips that request to an upper magnitude.
+- **Maximum acceleration** limits the change from BLine's previous commanded velocity; it does not measure or close the loop on actual chassis acceleration.
+- **Minimum velocity** can raise a small request to a configured floor while outside tolerance. It is an advanced controller-domain shaping tool for a demonstrated edge case, not a normal path default or a replacement for controller tuning, maximum-velocity planning, or deliberate command composition.
+- **End tolerances** decide when positional and rotational error are acceptable. v0.9.1 does not also require low measured velocity before finishing.
+
+The rate limiter makes the request consistent with configured command limits. Real acceleration and top speed still depend on battery voltage, motor control, gearing, mass, traction, mechanism motion, and contact with the field.
+
+### Low velocity does not require low acceleration
+
+Maximum velocity limits how fast the follower may command the robot. Maximum acceleration limits how quickly that command may change; it does not force the robot to accelerate at that rate on every loop. A slow first test can therefore use a low maximum velocity while retaining a high acceleration ceiling so the commanded speed can respond promptly when the PID asks it to brake near the endpoint.
+
+Reducing maximum acceleration changes the controller's effective behavior because the final command can lag behind the PID request in both directions. Tune at the velocity and acceleration envelope you intend to deploy. If a path needs a lower acceleration to control slip or protect a mechanism, validate that complete path again rather than assuming the original endpoint response is preserved.
 
 See [Tune Your Robot](../getting-started/tuning.md) for a measured workflow and plot interpretation.
 
@@ -83,7 +103,10 @@ BLine accepts a `Pose2d` supplier and trusts it. It does not know whether the po
 
 - Bad scale or coordinate frames produce bad path tracking.
 - Wheel slip changes odometry unless vision or another absolute measurement corrects it.
-- A vision jump changes the pose seen by the follower; constraints limit how abruptly commanded speeds can react.
+- Cameras are not required by BLine. Well-calibrated wheel odometry and a gyro may be sufficient for a short, controlled routine. Odometry-only teams should begin with lower velocity and acceleration and add faster, turn-heavy, or multi-segment motion incrementally so slip and drift remain observable.
+- Vision-corrected localization is strongly recommended for longer routines, repeated direction changes, aggressive movement, teleoperated alignment, and recovery after contact. It is not a substitute for correct module calibration or odometry.
+- A delayed or rejected vision measurement should be handled by the robot's pose estimator. BLine consumes the estimator's result; it does not fuse, gate, or assign uncertainty to measurements itself.
+- A pose jump changes the progress seen by translation handoffs, rotation targets, and events. Constraints limit how abruptly commanded speeds can react, but they cannot undo an incorrect progress transition.
 - Better localization improves both geometric and time-parameterized followers.
 
 ## Path following is not pathfinding

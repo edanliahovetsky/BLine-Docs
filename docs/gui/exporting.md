@@ -41,7 +41,7 @@ Then load the path by its filename without `.json`:
 Path path = new Path("your-path");
 ```
 
-Use `BLineField.drawPath(...)` to verify the deployed polyline in Field2d-compatible dashboards.
+If the team uses a Field2d-compatible dashboard, `BLineField.drawPath(...)` can optionally visualize the deployed polyline after loading.
 
 ## Runtime and editor files
 
@@ -88,9 +88,9 @@ Robot footprint, protrusion rendering, field selection, custom fields, and optim
 2. Export the appropriate format.
 3. Inspect the destination filenames and Git diff.
 4. Build/deploy the robot project.
-5. Load and draw the path on `Field2d`.
+5. Load the path in robot code; optionally visualize it on `Field2d` if that is part of the team's dashboard workflow.
 6. Keep a project archive before large editor-only changes.
 
 BLine Web normalizes non-integer runtime numeric values to at most five decimal places when writing JSON, while schema versions and ordinals remain integers.
 
-Related: [Projects, Paths & Collections](menu-bar.md), [Construct Paths & JSON](../lib/path-construction.md), and [Field2d Preview](../lib/field-visualization.md).
+Related: [Projects, Paths & Collections](menu-bar.md), [Construct Paths & JSON](../lib/path-construction.md), and [Optional Field2d Visualization](../lib/field-visualization.md).

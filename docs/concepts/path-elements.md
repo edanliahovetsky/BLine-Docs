@@ -2,6 +2,17 @@
 
 A BLine path is an ordered list of translation anchors plus optional rotation targets and events between them.
 
+## Build the mental model
+
+Think of a path as two layers:
+
+1. **Anchors draw the route.** BLine drives from one translation anchor toward the next, so each anchor can introduce a new straight segment.
+2. **Segment elements schedule behavior by geometric progress.** Rotation targets and events sit between anchors without bending the route.
+
+![Diagram showing translation anchors defining straight segments while rotation targets and event triggers are placed by geometric progress without bending the route](../assets/images/concepts/path-element-layers.svg)
+
+The path elements define shape and sequencing, but they do not create a time schedule. **Maximum translation velocity** ranges determine how aggressively the robot travels through each part of that shape.
+
 ## Element summary
 
 | Element | Contains | Use it for |
@@ -44,6 +55,8 @@ Use translation targets to:
 - build a one-target drive-to-position command that holds the current heading.
 
 The optional handoff radius controls when the follower may advance to the next anchor. The final anchor is completed by tolerance rather than an intermediate handoff.
+
+For most pass-through intermediate targets, enable [t-ratio-based translation handoffs](key-parameters.md#recommended-for-pass-through-anchors-t-ratio-handoff) on the `FollowPath.Builder`. That mode advances on circle entry **or** sufficient projected segment progress, which avoids steering backward toward a missed circle. Keep radius-only behavior when the robot must physically visit the anchor.
 
 ## Rotation target
 
@@ -95,10 +108,18 @@ BLine Web enforces the allowed first/last element types when adding or convertin
 
 BLine Web's **Add curve** action records a field stroke, simplifies it, and inserts up to 18 translation targets. It also creates automatic max-velocity constraints for the inserted range.
 
-![Drawing a curve and converting it into editable translation targets](../assets/gifs/web/draw-curve.gif){ .gif-demo data-gif-poster="/assets/images/gif-posters/draw-curve-start.png" data-gif-end="/assets/images/gif-posters/draw-curve-end.png" data-gif-duration="7580" }
+![Drawing a curve and converting it into editable translation targets](../assets/images/gif-posters/draw-curve-start.png){ .gif-demo data-gif-source="/assets/gifs/web/draw-curve.gif" data-gif-poster="/assets/images/gif-posters/draw-curve-start.png" data-gif-end="/assets/images/gif-posters/draw-curve-end.png" data-gif-duration="7580" }
 ![Static result of a drawn curve converted into editable translation targets](../assets/images/gif-posters/draw-curve-end.png){ .gif-print-poster }
 
-The result is ordinary editable BLine geometry. Remove unnecessary targets and review the automatic caps before robot testing.
+The result is ordinary editable BLine geometry. Remove unnecessary targets, then treat the maximum-velocity caps as part of authoring:
+
+1. inspect the automatically created caps;
+2. run or refresh the optimizer after changing the anchors;
+3. review where the path slows for each direction change;
+4. simulate; and
+5. test incrementally on the robot.
+
+More anchors do not automatically make a better curve. Every added anchor creates another handoff and another place where the local velocity plan may need review.
 
 ## Reuse geometry with linked elements
 
@@ -124,7 +145,7 @@ Path pickup = new Path(
 );
 ```
 
-The route is defined by three anchors. Rotation and intake behavior happen along the second translation segment without adding corners.
+The route is defined by three anchors. Rotation and intake behavior happen along the second translation segment without adding corners. Before testing, use the optimizer as an initial velocity plan and review whether the middle anchor needs a lower cap.
 
 ## Next
 

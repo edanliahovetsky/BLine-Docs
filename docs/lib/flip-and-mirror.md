@@ -9,7 +9,7 @@ Author one path in WPILib's blue-origin field coordinates, then choose the singl
 | `Path.flip()` | `(x, y) → (fieldLength − x, fieldWidth − y)` | `θ → θ − π` | Blue-authored route on the opposite alliance under rotational symmetry |
 | `Path.mirror()` | `(x, y) → (x, fieldWidth − y)` | `θ → −θ` | Left/right route family reflected across the field-width centerline |
 
-Verify the intended symmetry against the current game manual and your own Field2d preview. A visually similar field image is not enough evidence.
+Verify the intended symmetry against the current game manual and a trusted transformed-geometry check. An optional Field2d display is one way to do that; a visually similar field image by itself is not enough evidence.
 
 ## Recommended alliance policy
 
@@ -102,4 +102,4 @@ Keep separate authored paths when the game geometry or mechanism behavior is gen
 
 `FlippingUtil` also exposes `flipFieldPosition`, `flipFieldRotation`, `flipFieldPose`, `mirrorFieldPosition`, `mirrorFieldRotation`, `mirrorFieldPose`, `flipFieldSpeeds`, and feedforward helpers. `Path.flip()` temporarily forces rotational symmetry for its work; direct `FlippingUtil` use honors the process-wide `symmetryType`.
 
-Related: [Field2d Preview](field-visualization.md) and [Pre-Match Module Orientation](pre-match.md).
+Related: [Optional Field2d Visualization](field-visualization.md) and [Pre-Match Module Orientation](pre-match.md).

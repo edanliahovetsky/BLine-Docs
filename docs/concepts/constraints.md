@@ -1,6 +1,27 @@
 # Constraints & Ordinals
 
-Constraints limit the chassis command BLine produces. Global defaults establish the normal envelope; path constraints override selected parts of one path.
+Path geometry says **where** the robot should travel. Constraints say **how quickly** BLine may command it to travel. Global defaults establish the normal envelope; path constraints override selected parts of one path.
+
+Of these controls, **maximum translation velocity is the one you will use most while authoring paths**. It controls how aggressively the robot approaches corners, handoffs, obstacles, and the final pose. Maximum acceleration controls how quickly the commanded velocity may change; it is not a substitute for choosing an appropriate velocity along the route.
+
+## The normal authoring loop
+
+Use constraints as part of path creation, not as a cleanup step after the geometry is finished:
+
+1. Draw the route with the fewest anchors that describe it clearly.
+2. Decide where the robot may travel quickly and where it must slow down.
+3. Run the maximum-velocity optimizer for an initial set of local caps.
+4. Review the generated ranges and edit any region with a mechanism, clearance, or scoring requirement the optimizer cannot know.
+5. Simulate to check the structure and sequencing.
+6. Test incrementally on the robot and refine local **maximum velocity** ranges.
+
+```text
+geometry  →  velocity plan  →  optimizer  →  simulate  →  robot test
+   ↑                                                        |
+   └─────────────── refine geometry or local caps ─────────┘
+```
+
+The optimizer makes a geometry-based first proposal. The author still owns the velocity plan.
 
 ## Constraint types
 
@@ -16,6 +37,18 @@ Constraints limit the chassis command BLine produces. Global defaults establish 
 | End rotation tolerance | deg | Yes | One scalar per path |
 
 Handoff radius is configured globally or per translation element; it is not a path-range constraint. See [Handoffs, t-ratio & Completion](key-parameters.md).
+
+## Maximum translation velocity shapes the path
+
+A polyline does not encode a time schedule. BLine continuously drives toward the active translation target, and the active maximum-velocity constraint caps that command. This makes local maximum velocity central to normal path design:
+
+- keep open, straight travel near the tested chassis envelope;
+- lower the cap before a tight direction change or constrained opening;
+- lower it while a mechanism is extended or a game piece must remain stable;
+- lower it on the approach to a precise final pose; and
+- leave enough distance at the lower cap for the real robot to respond.
+
+Changing only a handoff radius changes **where** the next segment becomes active. Changing maximum velocity changes **how fast** the robot reaches that transition. Decide the intended route first, then use velocity ranges to make that route achievable.
 
 ## Resolution order
 
@@ -67,9 +100,9 @@ For a path with four translation anchors:
 
 1. Leave the open straight at the global maximum.
 2. Add a max-translation-velocity range covering the anchor before the turn and the turn anchor.
-3. Run the optimizer or choose a conservative manual cap.
+3. Run the optimizer for an initial cap.
 4. Simulate to confirm the slowdown occurs in the intended section.
-5. Test on the robot and adjust from logs.
+5. Test on the robot and adjust the cap from observed behavior.
 
 Do not shrink the handoff radius as the first response to high-speed overshoot. Lower the velocity into the handoff so the robot can physically enter it.
 
@@ -113,9 +146,6 @@ In BLine-Lib v0.9.1, all six velocity/acceleration constraint fields must be arr
   "max_acceleration_meters_per_sec2": [
     { "value": 4.0, "start_ordinal": 0, "end_ordinal": 3 }
   ],
-  "min_velocity_meters_per_sec": [
-    { "value": 0.3, "start_ordinal": 0, "end_ordinal": 1 }
-  ],
   "end_translation_tolerance_meters": 0.05,
   "end_rotation_tolerance_deg": 2.0
 }
@@ -127,18 +157,39 @@ Do not hand-write a numeric scalar for a max/min velocity or acceleration field;
 
 ## Minimum velocity constraints
 
-Minimum baselines are an advanced tool for static friction or drivetrain deadband. They apply only while the corresponding error is outside its end tolerance.
+Minimum baselines are an **advanced controller-domain tool**, not part of the normal path-authoring workflow. They force the magnitude of BLine's translation or rotation command up to a floor while the corresponding error remains outside its end tolerance.
 
-Start at zero. A value that is too high can cause overshoot or chatter. If the resolved minimum exceeds the resolved maximum at an ordinal, BLine warns, falls back to the global maximum, and disables the minimum there.
+Possible advanced uses include:
+
+- intentionally carrying a nonzero command into the tolerance region before a chained path begins;
+- shaping the portion of the endpoint approach in which the controller can request very small outputs; or
+- a tested edge case that specifically requires a nonzero command floor.
+
+Start at zero and first solve ordinary path behavior with controller tuning, maximum-velocity ranges, handoff behavior, and tolerances. A minimum that is too high can carry the robot through the tolerance, create overshoot, or produce chatter.
+
+!!! warning "A minimum does not create continuous path chaining by itself"
+    `FollowPath` still sends zero chassis speeds when the command ends in BLine-Lib v0.9.1. If a composed routine uses a minimum to arrive at the final tolerance with nonzero motion, test the entire command transition and its requirements rather than assuming velocity continuity.
+
+If the resolved minimum exceeds the resolved maximum at an ordinal, BLine warns, falls back to the global maximum, and disables the minimum there.
+
+When an advanced use is intentional, minimum constraints use the same ranged array form:
+
+```json
+{
+  "min_velocity_meters_per_sec": [
+    { "value": 0.3, "start_ordinal": 2, "end_ordinal": 3 }
+  ]
+}
+```
 
 ## Constraints are not guarantees
 
 - A velocity cap does not prove the path is collision-free.
 - An acceleration cap limits command changes; it does not model every wheel-force or voltage limit.
-- The Web optimizer uses path geometry and settings to propose caps; it is not a full drivetrain dynamics optimizer.
+- The Web optimizer uses path geometry and settings to propose maximum-velocity caps; it is not a full drivetrain dynamics optimizer.
 - Real motion still depends on the module controller, battery, carpet, mass distribution, pose estimate, and contact with game pieces.
 
-Validate with [robot tuning logs](../getting-started/tuning.md), not the editor preview alone.
+Validate on the robot after completing [controller tuning](../getting-started/tuning.md); the editor preview alone is not a dynamics test.
 
 ## Next
 

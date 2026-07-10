@@ -75,7 +75,7 @@ Configure them intentionally during robot initialization and clear rotation over
 - [Construct Paths & JSON](path-construction.md)
 - [Events & Command Groups](event-triggers.md)
 - [Rotation Overrides](rotation-overrides.md)
-- [Field2d Preview](field-visualization.md)
+- [Optional Field2d Visualization](field-visualization.md)
 - [Alliance Flip & Mirror](flip-and-mirror.md)
 - [Logging & AdvantageScope](logging.md)
 - [API Reference](api-reference.md)

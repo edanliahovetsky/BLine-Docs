@@ -2,7 +2,7 @@
 
 BLine Web provides an idealized kinematic preview for checking path structure, rotation timing, constraints, marker placement, protrusion state, and footprint clearance.
 
-![Playing the current path simulation on the 2026 REBUILT field](../assets/gifs/web/simulation-playback.gif){ .gif-demo data-gif-poster="/assets/images/gif-posters/simulation-playback-start.png" data-gif-end="/assets/images/gif-posters/simulation-playback-end.png" data-gif-duration="6830" }
+![Playing the current path simulation on the 2026 REBUILT field](../assets/images/gif-posters/simulation-playback-start.png){ .gif-demo data-gif-source="/assets/gifs/web/simulation-playback.gif" data-gif-poster="/assets/images/gif-posters/simulation-playback-start.png" data-gif-end="/assets/images/gif-posters/simulation-playback-end.png" data-gif-duration="6830" }
 ![Static final state of the simulated path on the 2026 REBUILT field](../assets/images/gif-posters/simulation-playback-end.png){ .gif-print-poster }
 
 ## Transport controls

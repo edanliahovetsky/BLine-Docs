@@ -1,6 +1,6 @@
 # Common Issues
 
-Start from the symptom. Change one thing at a time and save the matching log.
+Start from the symptom. Change one thing at a time. Use the matching log keys when the behavior cannot be distinguished by observation alone.
 
 ## The BLine-Lib dependency does not resolve
 
@@ -55,7 +55,8 @@ Most cases are a transform applied zero or two times.
 - If resetting pose, let the first `FollowPath` command supply its transformed start pose through `withPoseReset(...)`; do not explicitly reset to the unflipped authored start.
 - Keep driver-input alliance negation outside the BLine speed consumer.
 - Verify whether the task needs alliance flip, same-alliance mirror, or separate paths.
-- Draw the transformed preview on Field2d before enable.
+
+The optional [Field2d preview](lib/field-visualization.md) can help compare authored and transformed geometry, but the transform policy in code is the source of truth.
 
 See [Alliance Flip & Mirror](lib/flip-and-mirror.md).
 
@@ -66,9 +67,9 @@ The robot is likely moving too fast to enter the handoff radius.
 1. Plot `translationHandoffOccurred` and active max velocity.
 2. Lower the velocity over the approach range.
 3. Confirm the radius is realistic for pose error and stopping distance.
-4. Consider projection-based handoffs for a tested high-speed pass-through.
+4. Enable t-ratio-based handoffs for ordinary pass-through intermediate anchors. They advance on circle entry **or** sufficient projected progress.
 
-Do not start by raising CTE gain; orbiting a target is usually a handoff/velocity problem.
+Keep radius-only behavior only when the robot must physically visit the anchor. Do not start by raising cross-track P; orbiting a target is usually a handoff/velocity problem.
 
 ## The robot stalls or slows on a bump
 
@@ -84,8 +85,8 @@ Check:
 
 - translation `P` too high;
 - end tolerance tighter than pose noise/physical need;
-- minimum velocity baseline too high;
-- measured drivetrain deadband or module response;
+- an advanced minimum velocity baseline carrying the command through the tolerance;
+- module response that does not match the tuned controller behavior;
 - entry velocity too high; and
 - localization jumps near the target.
 
@@ -145,6 +146,8 @@ Also remember that editor ordinals are one-based while runtime JSON ordinals are
 ## Optimizer values are marked stale
 
 Geometry, handoff, rotation, path-default, or optimizer-setting inputs changed after generation. Re-run **Auto all**, then confirm manual ranges were preserved and inspect the new caps. “Refreshed” still does not mean robot-validated.
+
+The optimizer is part of the normal path-authoring loop. Refresh it after geometry or handoff changes, then review the proposed maximum-velocity ranges before simulation and robot testing.
 
 ## Editor preview differs from the robot
 

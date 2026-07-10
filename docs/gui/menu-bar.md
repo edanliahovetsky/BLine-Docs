@@ -63,7 +63,7 @@ Open **Path Library** from the toolbar or Path menu. The dialog has three workin
 2. **Paths in selected collection** — open, duplicate, or delete a path.
 3. **Collection membership** — add the selected path to one or more collections.
 
-![Creating a collection and organizing paths in the Path Library](../assets/gifs/web/path-collections.gif){ .gif-demo data-gif-poster="/assets/images/gif-posters/path-collections-start.png" data-gif-end="/assets/images/gif-posters/path-collections-end.png" data-gif-duration="7910" }
+![Creating a collection and organizing paths in the Path Library](../assets/images/gif-posters/path-collections-start.png){ .gif-demo data-gif-source="/assets/gifs/web/path-collections.gif" data-gif-poster="/assets/images/gif-posters/path-collections-start.png" data-gif-end="/assets/images/gif-posters/path-collections-end.png" data-gif-duration="7910" }
 ![Static result of paths organized in a collection](../assets/images/gif-posters/path-collections-end.png){ .gif-print-poster }
 
 ### Collection overlays

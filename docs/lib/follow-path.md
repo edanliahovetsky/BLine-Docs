@@ -13,8 +13,10 @@ FollowPath.Builder builder = new FollowPath.Builder(
     translationPid,
     rotationPid,
     crossTrackPid
-);
+).withTRatioBasedTranslationHandoffs(true);
 ```
+
+Enabling t-ratio-based handoffs is the recommended starting policy when intermediate translation targets are pass-through shaping points. The option is still off by default in BLine-Lib, so the call above is explicit. Use radius-only behavior intentionally for a target the robot must physically enter.
 
 | Argument | Contract |
 | --- | --- |
@@ -27,6 +29,18 @@ FollowPath.Builder builder = new FollowPath.Builder(
 | Cross-track PID | Error is signed perpendicular distance from active segment |
 
 The controllers are supplied as objects and reused by built commands. Do not run multiple commands from the same builder concurrently.
+
+### How controller output becomes a drivetrain request
+
+The three PIDs do not directly control motors:
+
+1. The translation PID requests a field-relative speed magnitude from remaining polyline distance.
+2. BLine points that magnitude toward the active translation target and adds the CTE correction perpendicular to the active segment.
+3. The rotation PID (or an active override) requests angular velocity.
+4. Active maximum velocities cap the request. Active maximum accelerations limit how quickly it may change from the follower's previous commanded speeds, including while the controller is trying to decelerate near the endpoint.
+5. BLine converts the resulting request to robot-relative `ChassisSpeeds`; the drivetrain then has to realize it.
+
+A velocity constraint is a ceiling, not a promise that the robot reaches that speed. It is also a primary path-authoring control: use local maximum-velocity ranges to slow turns and precision approaches. An acceleration constraint is a command slew limit, not a drivetrain model or proof of traction. Setting it much lower can delay both acceleration and braking and can change the apparent controller tune. Compare BLine's requested outputs with measured drivetrain speed when tuning.
 
 ## Builder options
 
@@ -79,7 +93,11 @@ The first command retains the reset consumer it captured during `build`. At init
 builder.withTRatioBasedTranslationHandoffs(true);
 ```
 
-Adds a projected-progress threshold, calculated as `clamp(1 − handoffRadius / segmentLength, 0, 1)`, as an alternative to entering the handoff circle. See [Handoffs, t-ratio & Completion](../concepts/key-parameters.md#optional-projection-based-handoff).
+This option is **off by default** and must be enabled on the builder. When enabled, it adds a projected-progress threshold, calculated as `clamp(1 − handoffRadius / segmentLength, 0, 1)`, as an alternative to entering the handoff circle. The distance-to-target condition remains active; BLine advances when either condition is satisfied.
+
+Enable it for most paths whose intermediate translation targets are **pass-through shaping points**, then validate the behavior on the robot. It prevents a disturbed or fast-moving robot from getting stuck trying to re-enter a handoff circle after its projected progress has already passed the intended transition. Radius-only handoff can still be appropriate when an intermediate target represents a deliberate must-enter gate and the robot is constrained to approach it reliably. The option does not change completion at the final target because there is no later translation target to hand off to.
+
+See [Handoffs, t-ratio & Completion](../concepts/key-parameters.md#recommended-for-pass-through-anchors-t-ratio-handoff).
 
 ## Build a fixed path
 
@@ -172,5 +190,7 @@ Use the logging consumers for controller output, target, constraint, event, and 
 - Pose reset happens once, at the intended transformed start.
 - Fixed paths are loaded before they are needed.
 - Runtime paths are constructed when scheduled.
+- T-ratio-based handoff is enabled for normal pass-through anchors, or radius-only behavior is a deliberate choice.
+- Swerve modules are [pre-oriented](pre-match.md) before an autonomous path begins.
 - A physically blocked path has an intentional timeout/fallback policy.
 - Rotation overrides are cleared before a conflicting final heading check.

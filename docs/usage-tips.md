@@ -52,9 +52,11 @@ Keep translation tolerance reasonable so pose noise does not turn rotation-in-pl
 
 ## Chain paths without repeated pose resets
 
-Load the fixed paths once, capture a reset only on the first path command, and use `BLineCommands` if path events schedule commands whose subsystems also appear elsewhere in the sequence:
+Load the fixed paths once, capture a reset only on the first path command, and enable t-ratio handoffs for ordinary pass-through intermediate anchors. Use `BLineCommands` if path events schedule commands whose subsystems also appear elsewhere in the sequence:
 
 ```java
+pathBuilder.withTRatioBasedTranslationHandoffs(true);
+
 Command firstCommand = pathBuilder
     .withPoseReset(driveSubsystem::resetPose)
     .build(first);
@@ -71,6 +73,12 @@ Command auto = BLineCommands.sequence(
 
 Do not keep `withPoseReset(driveSubsystem::resetPose)` on the reused builder for every segment. Using the builder for the first reset also ensures its alliance flip/mirror is applied before the reset pose is supplied.
 
+### Advanced: arrive with a nonzero command
+
+A minimum-velocity range can deliberately keep the translation command above zero until the final tolerance is entered. This can be useful when one path should arrive moving into the next path, but it is controller-domain shaping—not a normal path default.
+
+Use it only after the controllers, maximum-velocity plan, endpoint tolerance, and command composition already behave correctly. In BLine-Lib v0.9.1, `FollowPath.end()` still sends zero speeds, so test the whole path-to-path transition rather than assuming the minimum creates mathematically continuous motion.
+
 ## Cross a bump or trench
 
 For a region where the robot should preserve momentum:
@@ -79,7 +87,8 @@ For a region where the robot should preserve momentum:
 2. Avoid a handoff point on top of the disturbance.
 3. Use a range to control approach speed without forcing a stop on the feature.
 4. Use a handoff radius the robot can enter with expected pose error.
-5. Add an intentional timeout/fallback if becoming stuck should abort the remaining routine.
+5. Enable t-ratio handoffs when the intermediate anchors are pass-through targets, so missing a handoff circle does not make the robot reverse on the disturbance.
+6. Add an intentional timeout/fallback if becoming stuck should abort the remaining routine.
 
 Test the path in the real direction and payload state. The editor simulation does not model traction or chassis contact.
 
@@ -89,11 +98,11 @@ When the final pose must be accurate:
 
 1. Keep controller gains that already work globally.
 2. Add a lower max-velocity range over the final translation ordinals.
-3. Confirm the max-acceleration constraint allows the robot to decelerate before the tolerance region.
+3. Keep the maximum-acceleration limit at the value used to tune and validate the controller unless the robot's physical operating condition requires a different tested envelope.
 4. Choose a tolerance based on the scoring requirement.
 5. Plot measured speed because v0.9.1 has no final-velocity finish criterion.
 
-Do not use an extremely tight tolerance to compensate for a path that enters the endpoint too quickly.
+Shape a gentle arrival primarily with the local maximum-velocity range. Lowering maximum acceleration after tuning can delay BLine's commanded velocity changes near the endpoint, while an extremely tight tolerance does not fix an approach that is too fast.
 
 ## Aim while translating
 
@@ -134,15 +143,15 @@ In BLine Web:
 
 Linked identities are editor metadata; robot paths receive ordinary copied coordinates.
 
-## Display the selected auto
+## Optional: display the selected auto
 
-Update one explicit Field2d slot when the chooser changes:
+If the team uses Elastic or Glass, update one explicit Field2d slot when the chooser changes:
 
 ```java
 BLineField.drawPath(field, "SelectedAuto", selectedPath);
 ```
 
-Show the live robot pose on the same field and verify the alliance transform policy before enable.
+This is a dashboard aid, not a requirement for following a path. The dedicated [optional Field2d visualization](lib/field-visualization.md) page covers publishing authored paths and the live robot pose.
 
 ## Add an intentional fallback
 
@@ -157,7 +166,7 @@ Decide what follows a timeout: stop safely, try a retreat, skip a score, or bran
 
 ## Build a useful auto chooser
 
-BLine-Lib loads one named path at a time and does not provide a collection-aware auto builder. Keep a code-side map from readable chooser names to composed commands/paths, and draw the selected path with `BLineField`.
+BLine-Lib loads one named path at a time and does not provide a collection-aware auto builder. Keep a code-side map from readable chooser names to composed commands or paths. If the team uses a Field2d dashboard, optionally update one stable `BLineField` slot when the selection changes.
 
 Editor collections can inform this organization, but they are not loaded by the robot.
 
