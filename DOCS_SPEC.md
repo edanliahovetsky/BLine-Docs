@@ -93,6 +93,8 @@ Use screenshots and short animations when they make a workflow, UI state, spatia
 | File size | Keep the final GIF below 15 MB. Treat 15 MB as a rejection threshold, not a target, and prefer the smallest readable result. |
 | Playback speed | Keep playback close to real time. If adjusted, stay between 0.75x and 1.25x. |
 
+The primary homepage overview is a deliberate duration-only exception: it may use the full project README demonstration even when that sequence exceeds 12 seconds. Preserve the complete sequence instead of trimming it solely to meet the normal duration target. Width, frame rate, file size, playback speed, freshness, poster, lazy-looping, reduced-motion, and accessibility requirements still apply.
+
 - Begin with useful context, show the key action and its result, and end on a stable confirmation frame.
 - Leave about 0.7-1.4 seconds between visible pointer or keyboard actions and 0.8-2 seconds after a state-changing action so the result can be read.
 - Never compress the gap between user actions below 0.5 seconds. Avoid more than 2.5 seconds of static dead time unless a real processing delay is part of the behavior being demonstrated.
