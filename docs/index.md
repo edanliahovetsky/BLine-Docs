@@ -10,26 +10,54 @@ BLine is an open-source point-to-point path planning suite for FRC holonomic dri
 ![BLine Web simulating a multi-element path around the 2026 REBUILT field from the robot's live geometric progress](assets/images/gif-posters/homepage-simulation-start.png){ .gif-demo data-gif-source="/assets/gifs/web/homepage-simulation.gif" data-gif-poster="/assets/images/gif-posters/homepage-simulation-start.png" data-gif-end="/assets/images/gif-posters/homepage-simulation-end.png" data-gif-duration="26330" }
 ![Static final state of the BLine Web simulation on the 2026 REBUILT field](assets/images/gif-posters/homepage-simulation-end.png){ .gif-print-poster }
 
-!!! success "Competition-tested in 2026"
-    BLine was used during the 2026 season by **Code Orange**, **The Crusaders**, **Team SCREAM**, **The Blair Robot Project**, and other highly competitive programs. [Code Orange described its season experience](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/113) after running BLine through real events, collisions, and recovery cases.
+## Competition-tested. Recommended by teams.
 
-## Why teams choose BLine
+In 2026, teams including **Code Orange**, **The Crusaders**, **Team SCREAM**, **The Blair Robot Project**, **Spartronics**, and **Tiger Trons** put BLine into real robot workflows. Here is what team members reported publicly after trying it or running it in competition.
 
-### Tune the endpoint, not an entire timeline
+<section class="team-voices" aria-label="Team experiences with BLine">
+  <figure class="team-quote team-quote--featured">
+    <span class="team-quote__mark" aria-hidden="true">“</span>
+    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/113">We at Code Orange firmly believe BLine is pure magic.</blockquote>
+    <figcaption class="team-quote__source">
+      <strong>Code Orange</strong>
+      <span>Team 3476 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/113" target="_blank" rel="noopener" aria-label="Read Code Orange's BLine report on Chief Delphi">Read on Chief Delphi ↗</a></span>
+    </figcaption>
+  </figure>
+  <figure class="team-quote">
+    <span class="team-quote__mark" aria-hidden="true">“</span>
+    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/104">The tracking was super stable.</blockquote>
+    <figcaption class="team-quote__source">
+      <strong>The Blair Robot Project</strong>
+      <span>Team 449 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/104" target="_blank" rel="noopener" aria-label="Read The Blair Robot Project's BLine report on Chief Delphi">Read on Chief Delphi ↗</a></span>
+    </figcaption>
+  </figure>
+  <figure class="team-quote">
+    <span class="team-quote__mark" aria-hidden="true">“</span>
+    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/106">Considering how little time we had to tune our auto at home, it was super accurate.</blockquote>
+    <figcaption class="team-quote__source">
+      <strong>The Crusaders</strong>
+      <span>Team 6989 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/106" target="_blank" rel="noopener" aria-label="Read The Crusaders' BLine report on Chief Delphi">Read on Chief Delphi ↗</a></span>
+    </figcaption>
+  </figure>
+  <figure class="team-quote">
+    <span class="team-quote__mark" aria-hidden="true">“</span>
+    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/176">Everything afterwards made up for it, being a breeze to use. BLine would allow seamless transitions.</blockquote>
+    <figcaption class="team-quote__source">
+      <strong>Spartronics</strong>
+      <span>Team 4915 · 2026 Einstein participant · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/176" target="_blank" rel="noopener" aria-label="Read Spartronics' BLine season report on Chief Delphi">Read on Chief Delphi ↗</a></span>
+    </figcaption>
+  </figure>
+  <figure class="team-quote">
+    <span class="team-quote__mark" aria-hidden="true">“</span>
+    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/188">Easy to work with for someone of my…unfamiliarity with auto planning.</blockquote>
+    <figcaption class="team-quote__source">
+      <strong>Tiger Trons</strong>
+      <span>Team 5503 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/188" target="_blank" rel="noopener" aria-label="Read Tiger Trons' first impressions of BLine on Chief Delphi">Read on Chief Delphi ↗</a></span>
+    </figcaption>
+  </figure>
+</section>
 
-BLine's translation controller works from remaining path distance. Maximum velocity and acceleration constraints shape the fast part of the move; the translation gain matters most as the robot approaches its endpoint. That gives teams a focused, understandable tuning problem instead of asking the chassis to stay synchronized with a timestamp at every instant.
-
-### Keep correcting from the live pose
-
-The target does not run ahead because a clock kept moving during wheel slip, defense, a bump, or a delayed mechanism action. Every loop starts from where the pose estimator says the robot is now and advances through the route by geometric progress. [FRC teams have highlighted](https://www.chiefdelphi.com/t/time-parameterized-auto-path-following-has-huge-tradeoffs/518444/11) that practical recovery behavior as a major reason to use point-to-point control.
-
-### Go from idea to robot quickly
-
-BLine Web makes waypoints, handoffs, ranged constraints, events, collections, linked elements, and idealized simulation visible. BLine-Lib loads the exported path directly on the robot. You can begin without building a detailed drivetrain dynamics model, then add as much local control as the routine needs.
-
-### Keep complex paths understandable
-
-Handoff radii say when to leave an intermediate target. Ranged constraints say where to slow down. Rotation targets and events are placed by geometric progress. Those controls stay explicit, testable, and easy to adjust between practice runs.
+<p class="team-voices__note">These excerpts describe individual teams' experiences. Results still depend on localization, drivetrain control, path design, constraints, and robot testing.</p>
 
 ## A proven point-to-point idea, packaged for more teams
 

@@ -41,6 +41,7 @@ Do not force every page into the same heading template. Match the structure to t
 - Keep troubleshooting pages symptom-first.
 - Give a secondary feature one canonical explanatory page. Link to it briefly elsewhere instead of repeating the same checklist across unrelated workflows.
 - Avoid marketing language inside technical pages. The homepage may use concise, evidence-backed positioning and adoption context, but it must state the important tradeoffs and avoid unverifiable superlatives.
+- Homepage testimonials must be short, verifiable excerpts from firsthand public reports. Link each excerpt to the exact source, preserve its meaning and relevant context, confirm the team attribution, represent more than one team's experience, and keep a nearby reminder that robot results still depend on localization, control, path design, and testing.
 - Avoid undocumented claims about performance, adoption, versions, or compatibility.
 
 ## Learning Progression
