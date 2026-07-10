@@ -38,14 +38,14 @@ They still need to be tested and tuned on your robot.
 
 ## Tune at the intended motion envelope
 
-After the slow [first-path test](quick-start.md) proves that coordinates, frames, and stopping behavior are correct, tune with the velocity and acceleration you intend to use for ordinary competition paths. A practical starting envelope for a capable FRC swerve is approximately:
+After the slow [first-path test](quick-start.md) proves that coordinates, frames, and stopping behavior are correct, tune with the velocity and acceleration you intend to use for ordinary competition paths. Ideally, begin with the maximum velocity and acceleration your drivetrain has already handled well during teleop testing. If the team does not have a proven operating envelope yet, a practical starting point for a capable FRC swerve is approximately:
 
-| Constraint | Tuning value |
+| Constraint | Example starting value |
 | --- | ---: |
 | Maximum translation velocity | `4.5 m/s` |
 | Maximum translation acceleration | `12 m/s²` |
 
-These are recommendations, not promises that every robot or test space can safely reach them. If your drivetrain cannot achieve them repeatably, use its measured physical capability. Teams using odometry alone may choose lower velocity and acceleration to limit slip, then add faster, turn-heavy, and multi-segment tests incrementally. Tune and validate at that chosen operating envelope rather than transferring gains from different constraints. Vision-corrected localization is strongly recommended for long or movement-heavy routines, but it does not replace drivetrain characterization.
+These numbers are a starting point, not a target every team should force. Prefer the envelope that already produced stable, repeatable module response and traction in teleop; it is better evidence than a generic recommendation. Teams using odometry alone may choose lower velocity and acceleration to limit slip, then add faster, turn-heavy, and multi-segment tests incrementally. Tune and validate at that chosen operating envelope rather than transferring gains from different constraints. Vision-corrected localization is strongly recommended for long or movement-heavy routines, but it does not replace drivetrain characterization.
 
 !!! warning "Do not tune fast in an undersized test area"
     The translation test needs enough clear distance to reach the velocity ceiling and return to the endpoint-control region. If your space cannot support that safely, use a larger controlled area or tune to the lower motion envelope you will actually deploy.
@@ -97,7 +97,7 @@ start waypoint, 0° ────────────────────
 - Keep start and end headings equal.
 - Set rotation P and CTE P to zero for this pass.
 - Set translation I and D to zero.
-- Use approximately `4.5 m/s` maximum velocity and `12 m/s²` maximum acceleration.
+- Use the maximum velocity and acceleration that already worked well during teleop drivetrain testing. If those values are not known yet, begin around `4.5 m/s` and `12 m/s²` as a starting point.
 - Pre-orient the modules along the segment before enabling.
 
 ![BLine Web translation tuning path using one long straight segment in a clear corridor of the 2026 REBUILT field](../assets/images/tuning/translation-test-path.png)
