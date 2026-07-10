@@ -61,7 +61,7 @@ In 2026, teams including **Code Orange**, **The Crusaders**, **Team SCREAM**, **
 
 ## A proven point-to-point idea, packaged for more teams
 
-BLine shares the broad [point-to-point philosophy used in custom systems from top programs](https://www.chiefdelphi.com/t/introducing-autopilot-a-novel-solution-to-holonomic-motion-control/504244) such as **2910 Jack in the Bot** and **2056 OP Robotics**: steer from the live robot state toward geometric goals instead of treating a pre-timed trajectory as the source of truth. BLine turns that approach into a public browser-and-desktop editor, reusable Java library, logging surface, and documented workflow rather than requiring every team to build its own follower.
+BLine shares the broad point-to-point philosophy used in custom systems from top programs such as **2910 Jack in the Bot** and **2056 OP Robotics**: steer from the live robot state toward geometric goals instead of treating a pre-timed trajectory as the source of truth. BLine turns that approach into a public browser-and-desktop editor, reusable Java library, logging surface, and documented workflow rather than requiring every team to build its own follower.
 
 !!! info "The tradeoff is intentional"
     BLine prioritizes fast authoring, empirical tunability, and live-pose correction. It is not a time-optimal drivetrain dynamics optimizer, and a drawn polyline is not automatically physically feasible. Teams still need a trustworthy pose estimate, stable module control, safe geometry, realistic constraints, and robot testing. See [Geometric and time-parameterized tracking](concepts/design-philosophy.md#geometric-and-time-parameterized-tracking) for when each approach fits.
