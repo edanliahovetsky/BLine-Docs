@@ -62,6 +62,7 @@ Use screenshots and short animations when they make a workflow, UI state, spatia
 
 - Use a screenshot for a stable location, control, configuration, or result.
 - Use a GIF or other short animation when motion, sequencing, simulation, or direct manipulation is the point.
+- In step-by-step GUI instructions, prefer one short, focused GIF to multiple static images when it can show the action, transition, and result within the capture limits. Use a screenshot when the step only asks the reader to locate or read a stable state, or when animation adds no instructional information.
 - Use aligned plots when controller response, constraint effects, or tuning comparisons are the point. Keep axes and test conditions consistent across the compared cases.
 - Label synthetic controller plots as illustrative rather than measured robot data. Preserve the real signal's units, sign convention, and mathematical domain even when the curve is schematic.
 - Give introductory spatial and control concepts a diagram, annotated screenshot, animation, or plot when prose alone would require the reader to invent the mental model.
