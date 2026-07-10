@@ -39,7 +39,7 @@ Do not force every page into the same heading template. Match the structure to t
 - Keep reference pages compact and table-friendly.
 - Keep troubleshooting pages symptom-first.
 - Give a secondary feature one canonical explanatory page. Link to it briefly elsewhere instead of repeating the same checklist across unrelated workflows.
-- Avoid marketing language inside technical pages.
+- Avoid marketing language inside technical pages. The homepage may use concise, evidence-backed positioning and adoption context, but it must state the important tradeoffs and avoid unverifiable superlatives.
 - Avoid undocumented claims about performance, adoption, versions, or compatibility.
 
 ## Learning Progression

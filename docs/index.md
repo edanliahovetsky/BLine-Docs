@@ -1,11 +1,42 @@
 # BLine
 
-Build, test, and tune geometric autonomous paths for FRC holonomic drivetrains.
+## Build fast autos. Tune what the robot actually does.
 
-[Start with your first path](getting-started/prerequisites.md){ .md-button .md-button--primary }
-[Open BLine Web](https://bline-web.pages.dev/){ .md-button }
+BLine is an open-source point-to-point path planning suite for FRC holonomic drivetrains. Draw a route in the browser, preview it on the current field, export robot-ready JSON, and follow it from the robot's live pose with a Java library built for rapid testing.
 
-![BLine Web editing a path on the current FRC field](assets/images/editor-overview.png)
+[Build your first BLine auto](getting-started/prerequisites.md){ .md-button .md-button--primary }
+[Try BLine Web](https://bline-web.pages.dev/){ .md-button }
+
+![BLine Web simulating a multi-element path around the 2026 REBUILT field from the robot's live geometric progress](assets/images/gif-posters/homepage-simulation-start.png){ .gif-demo data-gif-source="/assets/gifs/web/homepage-simulation.gif" data-gif-poster="/assets/images/gif-posters/homepage-simulation-start.png" data-gif-end="/assets/images/gif-posters/homepage-simulation-end.png" data-gif-duration="5000" }
+![Static final state of the BLine Web simulation on the 2026 REBUILT field](assets/images/gif-posters/homepage-simulation-end.png){ .gif-print-poster }
+
+!!! success "Competition-tested in 2026"
+    BLine was used during the 2026 season by **Code Orange**, **The Crusaders**, **Team SCREAM**, **The Blair Robot Project**, and other highly competitive programs. [Code Orange described its season experience](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/113) after running BLine through real events, collisions, and recovery cases.
+
+## Why teams choose BLine
+
+### Tune the endpoint, not an entire timeline
+
+BLine's translation controller works from remaining path distance. Maximum velocity and acceleration constraints shape the fast part of the move; the translation gain matters most as the robot approaches its endpoint. That gives teams a focused, understandable tuning problem instead of asking the chassis to stay synchronized with a timestamp at every instant.
+
+### Keep correcting from the live pose
+
+The target does not run ahead because a clock kept moving during wheel slip, defense, a bump, or a delayed mechanism action. Every loop starts from where the pose estimator says the robot is now and advances through the route by geometric progress. [FRC teams have highlighted](https://www.chiefdelphi.com/t/time-parameterized-auto-path-following-has-huge-tradeoffs/518444/11) that practical recovery behavior as a major reason to use point-to-point control.
+
+### Go from idea to robot quickly
+
+BLine Web makes waypoints, handoffs, ranged constraints, events, collections, linked elements, and idealized simulation visible. BLine-Lib loads the exported path directly on the robot. You can begin without building a detailed drivetrain dynamics model, then add as much local control as the routine needs.
+
+### Keep complex paths understandable
+
+Handoff radii say when to leave an intermediate target. Ranged constraints say where to slow down. Rotation targets and events are placed by geometric progress. Those controls stay explicit, testable, and easy to adjust between practice runs.
+
+## A proven point-to-point idea, packaged for more teams
+
+BLine shares the broad [point-to-point philosophy used in custom systems from top programs](https://www.chiefdelphi.com/t/introducing-autopilot-a-novel-solution-to-holonomic-motion-control/504244) such as **2910 Jack in the Bot** and **2056 OP Robotics**: steer from the live robot state toward geometric goals instead of treating a pre-timed trajectory as the source of truth. BLine turns that approach into a public Web editor, reusable Java library, logging surface, and documented workflow rather than requiring every team to build its own follower.
+
+!!! info "The tradeoff is intentional"
+    BLine prioritizes fast authoring, empirical tunability, and live-pose correction. It is not a time-optimal drivetrain dynamics optimizer, and a drawn polyline is not automatically physically feasible. Teams still need a trustworthy pose estimate, stable module control, safe geometry, realistic constraints, and robot testing. See [Geometric and time-parameterized tracking](concepts/design-philosophy.md#geometric-and-time-parameterized-tracking) for when each approach fits.
 
 ## A path workflow from editor to robot
 
@@ -26,14 +57,6 @@ The current documentation is verified against **BLine Web v0.1.0-alpha.10** and 
 | Learn the current editor | [BLine Web Overview](gui/index.md) |
 | Integrate the Java library | [BLine-Lib Overview](lib/index.md) |
 | Diagnose a failure | [Common Issues](common-issues.md) |
-
-## What makes BLine different
-
-BLine follows current geometric progress rather than asking the robot to match a timestamped trajectory state. Every control loop uses the live pose, remaining polyline distance, active target, constraints, and cross-track error.
-
-That makes physical progress—not a clock—the source of truth. It can be easier to tune and more tolerant of delays or disturbances, but it does not prove that every drawn turn is dynamically feasible. Teams still need accurate localization, sensible velocity/acceleration limits, achievable handoff radii, and an intentional timeout or fallback policy for a physically blocked robot.
-
-Read [Geometric and time-parameterized tracking](concepts/design-philosophy.md#geometric-and-time-parameterized-tracking) for a balanced explanation of when each approach fits.
 
 ## Learn by building
 
