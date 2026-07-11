@@ -3,6 +3,58 @@
    =========================================== */
 
 /* -----------------------------------------
+   CODE SYNTAX HIGHLIGHTING
+   ----------------------------------------- */
+
+/* Material's stock Slate palette renders many Java token classes at nearly
+   the same gray. Keep code readable while making structure easy to scan. */
+[data-md-color-scheme="slate"] {
+  --md-code-hl-color: rgba(125, 211, 252, 0.14);
+  --md-code-hl-number-color: #f9a8d4;
+  --md-code-hl-special-color: #c4b5fd;
+  --md-code-hl-function-color: #7dd3fc;
+  --md-code-hl-constant-color: #f9a8d4;
+  --md-code-hl-keyword-color: #fb7185;
+  --md-code-hl-string-color: #86efac;
+  --md-code-hl-name-color: #e2e8f0;
+  --md-code-hl-operator-color: #fdba74;
+  --md-code-hl-punctuation-color: #cbd5e1;
+  --md-code-hl-comment-color: #94a3b8;
+  --md-code-hl-generic-color: #e2e8f0;
+  --md-code-hl-variable-color: #e2e8f0;
+}
+
+[data-md-color-scheme="default"] {
+  --md-code-hl-color: rgba(2, 132, 199, 0.12);
+  --md-code-hl-number-color: #be185d;
+  --md-code-hl-special-color: #6d28d9;
+  --md-code-hl-function-color: #0369a1;
+  --md-code-hl-constant-color: #be185d;
+  --md-code-hl-keyword-color: #be123c;
+  --md-code-hl-string-color: #15803d;
+  --md-code-hl-name-color: #1e293b;
+  --md-code-hl-operator-color: #c2410c;
+  --md-code-hl-punctuation-color: #475569;
+  --md-code-hl-comment-color: #64748b;
+  --md-code-hl-generic-color: #1e293b;
+  --md-code-hl-variable-color: #1e293b;
+}
+
+/* Pygments classifies Java method access as a name attribute (`na`). Give
+   method calls the function color so fluent command code remains scannable. */
+.highlight .na,
+.highlight .nf,
+.highlight .fm {
+  color: var(--md-code-hl-function-color);
+}
+
+.highlight .nc,
+.highlight .nn,
+.highlight .nd {
+  color: var(--md-code-hl-special-color);
+}
+
+/* -----------------------------------------
    LEFT SIDEBAR NAVIGATION
    ----------------------------------------- */
 
