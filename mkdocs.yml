@@ -9,12 +9,6 @@ repo_name: Docs
 theme:
   name: material
   custom_dir: overrides
-  highlightjs: true
-  hljs_languages:
-    - java
-    - json
-    - yaml
-    - bash
   palette:
     - scheme: slate
       primary: deep orange
@@ -60,6 +54,8 @@ extra_javascript:
   - javascripts/gif-lazy-load.js
 
 markdown_extensions:
+  - pymdownx.highlight:
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
