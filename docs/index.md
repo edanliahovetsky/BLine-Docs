@@ -24,7 +24,7 @@ BLine shares the broad point-to-point philosophy used in custom systems from top
 | **BLine Web** | Draw and organize paths in the hosted editor or desktop app, apply constraints, preview idealized motion, and produce robot-ready JSON. |
 | **BLine-Lib** | Load paths in Java, follow them from the live robot pose, run events, transform for alliance/side, and publish diagnostics. |
 
-The current documentation is verified against **BLine Web v0.1.0-alpha.10** and **BLine-Lib v0.9.1**. See [Versions & Support](reference/versions.md).
+The current documentation is verified against **BLine Web v0.1.0-alpha.11** and **BLine-Lib v0.9.1**. See [Versions & Support](reference/versions.md).
 
 ## Choose your route
 

@@ -49,7 +49,7 @@ If the team uses a Field2d-compatible dashboard, `BLineField.drawPath(...)` can 
 | --- | --- |
 | `config.json` | Seven runtime kinematic/default values read by BLine-Lib |
 | `paths/*.json` | Individual runtime paths read by BLine-Lib |
-| `.bline-web/state.json` | Collections and other editor state; browser exports include linked identities, while current desktop reopen behavior for links must be verified |
+| `.bline-web/state.json` | Collections, linked-target definitions, per-path editor metadata, active selection, and other editor state |
 | `.bline-web/assets/fields/` | Custom field assets |
 
 Do not delete `.bline-web` merely because the robot ignores it; that directory preserves authoring features. Do not make robot code depend on it.

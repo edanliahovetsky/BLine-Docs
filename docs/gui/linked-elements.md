@@ -53,9 +53,6 @@ After either action, verify every affected path and its ranged-constraint ordina
 
 BLine-Lib does not load linked-element identities. Exported `paths/*.json` contain ordinary coordinates for each path. The identities and relationships are editor metadata used to keep those files aligned while authoring.
 
-!!! warning "Back up alpha editor metadata"
-    Export a project archive before restructuring linked elements. After reopening a folder-backed project, verify shared links and use counts before making broad edits; current BLine Web releases are still alpha.
-
 ## Good naming
 
 Prefer names that describe field intent rather than one auto:

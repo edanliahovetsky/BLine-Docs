@@ -31,7 +31,7 @@ autos/
     └── collect-and-return.json
 ```
 
-The editor stores collections and other editor-only state under `.bline-web/` when exporting or using desktop folder storage. Browser autos exports/project archives include linked identities too. Current desktop prereleases should not be assumed to restore every linked identity after reopening; verify links/use counts and keep a project archive before broad link edits. BLine-Lib loads the individual runtime JSON files and does not load editor organization or rerun the optimizer.
+The editor stores collections, linked-element identities, and other editor-only state under `.bline-web/` when exporting or using desktop folder storage. Browser autos exports and project archives preserve the same identities. BLine-Lib loads the individual runtime JSON files and does not load editor organization or rerun the optimizer.
 
 ## Browser and desktop are different storage surfaces
 

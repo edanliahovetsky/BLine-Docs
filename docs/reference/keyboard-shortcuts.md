@@ -1,6 +1,6 @@
 # Keyboard Shortcuts
 
-Current BLine Web shortcuts for v0.1.0-alpha.10.
+Current BLine Web shortcuts for v0.1.0-alpha.11.
 
 ## Global
 
