@@ -41,7 +41,7 @@ In 2026, teams including **Code Orange**, **KAISER**, **Team SCREAM**, **The Bla
   </figure>
   <figure class="team-quote">
     <span class="team-quote__mark" aria-hidden="true">“</span>
-    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/176">BLine would allow seamless transitions.</blockquote>
+    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/176">All of the autos used during playoffs at worlds were custom coded in the pits thanks to the ease of on-the-fly waypoints.</blockquote>
     <figcaption class="team-quote__source">
       <strong>Spartronics</strong>
       <span>Daniil Ivanov · Team 4915 · 2026 Einstein participant · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/176" target="_blank" rel="noopener" aria-label="Read Spartronics' BLine season report on Chief Delphi">Read on Chief Delphi ↗</a></span>
