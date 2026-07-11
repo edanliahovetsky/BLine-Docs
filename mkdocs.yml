@@ -62,7 +62,7 @@ watch:
 markdown_extensions:
   - pymdownx.highlight:
       noclasses: true
-      pygments_style: one-dark
+      pygments_style: material
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
