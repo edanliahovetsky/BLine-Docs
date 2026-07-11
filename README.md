@@ -24,10 +24,14 @@ Python 3.9 or newer is required.
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-mkdocs serve
+mkdocs serve --livereload
 ```
 
 Open `http://127.0.0.1:8000`.
+
+The explicit live-reload mode also enables the repository's preview-only
+no-cache headers and watches theme overrides, preventing Safari and other
+browsers from reusing stale generated pages while documentation is changing.
 
 Build the static site without PDF export:
 

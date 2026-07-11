@@ -53,8 +53,16 @@ extra_css:
 extra_javascript:
   - javascripts/gif-lazy-load.js
 
+hooks:
+  - hooks/no_cache.py
+
+watch:
+  - overrides
+
 markdown_extensions:
   - pymdownx.highlight:
+      noclasses: true
+      pygments_style: material
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
