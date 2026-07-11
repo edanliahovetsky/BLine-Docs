@@ -45,6 +45,67 @@
     color: var(--md-code-hl-special-color);
   }
 
+  /* Safari can defer repainting token colors inherited through custom
+     properties after a full reload. Assign concrete colors to Pygments token
+     classes so syntax rendering does not depend on that repaint lifecycle. */
+  .highlight span {
+    -webkit-text-fill-color: currentColor;
+  }
+  [data-md-color-scheme="slate"] .highlight :is(.c, .ch, .cm, .cp, .cpf, .c1, .cs) {
+    color: #94a3b8;
+  }
+  [data-md-color-scheme="slate"] .highlight :is(.k, .kc, .kd, .kn, .kp, .kr, .kt) {
+    color: #fb7185;
+  }
+  [data-md-color-scheme="slate"] .highlight :is(.o, .ow) {
+    color: #fdba74;
+  }
+  [data-md-color-scheme="slate"] .highlight .p {
+    color: #cbd5e1;
+  }
+  [data-md-color-scheme="slate"] .highlight :is(.s, .sa, .sb, .sc, .dl, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss) {
+    color: #86efac;
+  }
+  [data-md-color-scheme="slate"] .highlight :is(.na, .nf, .fm) {
+    color: #7dd3fc;
+  }
+  [data-md-color-scheme="slate"] .highlight :is(.nc, .nn, .nd) {
+    color: #c4b5fd;
+  }
+  [data-md-color-scheme="slate"] .highlight :is(.m, .mb, .mf, .mh, .mi, .mo, .il, .no) {
+    color: #f9a8d4;
+  }
+  [data-md-color-scheme="slate"] .highlight :is(.n, .nb, .bp, .ni, .ne, .nl, .nt, .nv, .vc, .vg, .vi, .vm) {
+    color: #e2e8f0;
+  }
+  [data-md-color-scheme="default"] .highlight :is(.c, .ch, .cm, .cp, .cpf, .c1, .cs) {
+    color: #64748b;
+  }
+  [data-md-color-scheme="default"] .highlight :is(.k, .kc, .kd, .kn, .kp, .kr, .kt) {
+    color: #be123c;
+  }
+  [data-md-color-scheme="default"] .highlight :is(.o, .ow) {
+    color: #c2410c;
+  }
+  [data-md-color-scheme="default"] .highlight .p {
+    color: #475569;
+  }
+  [data-md-color-scheme="default"] .highlight :is(.s, .sa, .sb, .sc, .dl, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss) {
+    color: #15803d;
+  }
+  [data-md-color-scheme="default"] .highlight :is(.na, .nf, .fm) {
+    color: #0369a1;
+  }
+  [data-md-color-scheme="default"] .highlight :is(.nc, .nn, .nd) {
+    color: #6d28d9;
+  }
+  [data-md-color-scheme="default"] .highlight :is(.m, .mb, .mf, .mh, .mi, .mo, .il, .no) {
+    color: #be185d;
+  }
+  [data-md-color-scheme="default"] .highlight :is(.n, .nb, .bp, .ni, .ne, .nl, .nt, .nv, .vc, .vg, .vi, .vm) {
+    color: #1e293b;
+  }
+
   /* Custom header links */
   .custom-header-links {
     display: flex;
