@@ -12,7 +12,7 @@ BLine is an open-source point-to-point path planning suite for FRC holonomic dri
 
 ## Competition-tested. Recommended by teams.
 
-In 2026, teams including **Code Orange**, **KAISER**, **Team SCREAM**, **The Blair Robot Project**, **Spartronics**, and **Tiger Trons** put BLine into real robot workflows. Here is what team members reported publicly after trying it or running it in competition.
+In 2026, teams including **Code Orange**, **KAISER**, **Team SCREAM**, **The Blair Robot Project**, **Spartronics**, and **Smithville Tiger Trons** put BLine into real robot workflows. Here is what team members reported publicly after trying it or running it in competition.
 
 <section class="team-voices" aria-label="Team experiences with BLine">
   <figure class="team-quote team-quote--featured">
@@ -20,7 +20,7 @@ In 2026, teams including **Code Orange**, **KAISER**, **Team SCREAM**, **The Bla
     <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/113">We at Code Orange firmly believe BLine is pure magic.</blockquote>
     <figcaption class="team-quote__source">
       <strong>Code Orange</strong>
-      <span>Team 3476 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/113" target="_blank" rel="noopener" aria-label="Read Code Orange's BLine report on Chief Delphi">Read on Chief Delphi ↗</a></span>
+      <span>John Fogarty · Team 3476 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/113" target="_blank" rel="noopener" aria-label="Read Code Orange's BLine report on Chief Delphi">Read on Chief Delphi ↗</a></span>
     </figcaption>
   </figure>
   <figure class="team-quote">
@@ -28,7 +28,7 @@ In 2026, teams including **Code Orange**, **KAISER**, **Team SCREAM**, **The Bla
     <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/104">The tracking was super stable.</blockquote>
     <figcaption class="team-quote__source">
       <strong>The Blair Robot Project</strong>
-      <span>Team 449 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/104" target="_blank" rel="noopener" aria-label="Read The Blair Robot Project's BLine report on Chief Delphi">Read on Chief Delphi ↗</a></span>
+      <span>jamzDoge · Team 449 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/104" target="_blank" rel="noopener" aria-label="Read The Blair Robot Project's BLine report on Chief Delphi">Read on Chief Delphi ↗</a></span>
     </figcaption>
   </figure>
   <figure class="team-quote">
@@ -36,23 +36,23 @@ In 2026, teams including **Code Orange**, **KAISER**, **Team SCREAM**, **The Bla
     <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/106">Considering how little time we had to tune our auto at home, it was super accurate.</blockquote>
     <figcaption class="team-quote__source">
       <strong>KAISER</strong>
-      <span>Team 6989 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/106" target="_blank" rel="noopener" aria-label="Read KAISER's BLine report on Chief Delphi">Read on Chief Delphi ↗</a></span>
+      <span>Haluk I. · Team 6989 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/106" target="_blank" rel="noopener" aria-label="Read KAISER's BLine report on Chief Delphi">Read on Chief Delphi ↗</a></span>
     </figcaption>
   </figure>
   <figure class="team-quote">
     <span class="team-quote__mark" aria-hidden="true">“</span>
-    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/176">Everything afterwards made up for it, being a breeze to use. BLine would allow seamless transitions.</blockquote>
+    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/176">BLine would allow seamless transitions.</blockquote>
     <figcaption class="team-quote__source">
       <strong>Spartronics</strong>
-      <span>Team 4915 · 2026 Einstein participant · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/176" target="_blank" rel="noopener" aria-label="Read Spartronics' BLine season report on Chief Delphi">Read on Chief Delphi ↗</a></span>
+      <span>Daniil Ivanov · Team 4915 · 2026 Einstein participant · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/176" target="_blank" rel="noopener" aria-label="Read Spartronics' BLine season report on Chief Delphi">Read on Chief Delphi ↗</a></span>
     </figcaption>
   </figure>
   <figure class="team-quote">
     <span class="team-quote__mark" aria-hidden="true">“</span>
     <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/188">Easy to work with for someone of my…unfamiliarity with auto planning.</blockquote>
     <figcaption class="team-quote__source">
-      <strong>Tiger Trons</strong>
-      <span>Team 5503 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/188" target="_blank" rel="noopener" aria-label="Read Tiger Trons' first impressions of BLine on Chief Delphi">Read on Chief Delphi ↗</a></span>
+      <strong>Smithville Tiger Trons</strong>
+      <span>Ric Ferrell · Team 5503 mentor · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/188" target="_blank" rel="noopener" aria-label="Read Smithville Tiger Trons' first impressions of BLine on Chief Delphi">Read on Chief Delphi ↗</a></span>
     </figcaption>
   </figure>
 </section>
