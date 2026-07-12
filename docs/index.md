@@ -10,6 +10,55 @@ BLine is an open-source point-to-point path planning suite for FRC holonomic dri
 ![BLine Web simulating a multi-element path around the 2026 REBUILT field from the robot's live geometric progress](assets/images/gif-posters/homepage-simulation-start.png){ .gif-demo data-gif-source="/assets/gifs/web/homepage-simulation.gif" data-gif-poster="/assets/images/gif-posters/homepage-simulation-start.png" data-gif-end="/assets/images/gif-posters/homepage-simulation-end.png" data-gif-duration="26330" }
 ![Static final state of the BLine Web simulation on the 2026 REBUILT field](assets/images/gif-posters/homepage-simulation-end.png){ .gif-print-poster }
 
+## Competition-tested. Recommended by teams.
+
+In 2026, teams including **Code Orange**, **KAISER**, **Team SCREAM**, **The Blair Robot Project**, **Spartronics**, and **Smithville Tiger Trons** put BLine into real robot workflows. Here is what team members reported publicly after trying it or running it in competition.
+
+<section class="team-voices" aria-label="Team experiences with BLine">
+  <figure class="team-quote team-quote--featured">
+    <span class="team-quote__mark" aria-hidden="true">“</span>
+    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/113">We at Code Orange firmly believe BLine is pure magic.</blockquote>
+    <figcaption class="team-quote__source">
+      <strong>Code Orange</strong>
+      <span>John Fogarty · Team 3476 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/113" target="_blank" rel="noopener" aria-label="Read Code Orange's BLine report on Chief Delphi">Read on Chief Delphi ↗</a></span>
+    </figcaption>
+  </figure>
+  <figure class="team-quote">
+    <span class="team-quote__mark" aria-hidden="true">“</span>
+    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/104">The tracking was super stable.</blockquote>
+    <figcaption class="team-quote__source">
+      <strong>The Blair Robot Project</strong>
+      <span>jamzDoge · Team 449 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/104" target="_blank" rel="noopener" aria-label="Read The Blair Robot Project's BLine report on Chief Delphi">Read on Chief Delphi ↗</a></span>
+    </figcaption>
+  </figure>
+  <figure class="team-quote">
+    <span class="team-quote__mark" aria-hidden="true">“</span>
+    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/106">Considering how little time we had to tune our auto at home, it was super accurate.</blockquote>
+    <figcaption class="team-quote__source">
+      <strong>KAISER</strong>
+      <span>Haluk I. · Team 6989 · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/106" target="_blank" rel="noopener" aria-label="Read KAISER's BLine report on Chief Delphi">Read on Chief Delphi ↗</a></span>
+    </figcaption>
+  </figure>
+  <figure class="team-quote">
+    <span class="team-quote__mark" aria-hidden="true">“</span>
+    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/176">Plus many more miracles that wouldn’t have been possible without BLine.</blockquote>
+    <figcaption class="team-quote__source">
+      <strong>Spartronics</strong>
+      <span>Daniil Ivanov · Team 4915 · 2026 Einstein participant · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/176" target="_blank" rel="noopener" aria-label="Read Spartronics' BLine season report on Chief Delphi">Read on Chief Delphi ↗</a></span>
+    </figcaption>
+  </figure>
+  <figure class="team-quote">
+    <span class="team-quote__mark" aria-hidden="true">“</span>
+    <blockquote cite="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/188">Easy to work with for someone of my…unfamiliarity with auto planning.</blockquote>
+    <figcaption class="team-quote__source">
+      <strong>Smithville Tiger Trons</strong>
+      <span>Ric Ferrell · Team 5503 mentor · <a href="https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778/188" target="_blank" rel="noopener" aria-label="Read Smithville Tiger Trons' first impressions of BLine on Chief Delphi">Read on Chief Delphi ↗</a></span>
+    </figcaption>
+  </figure>
+</section>
+
+<p class="team-voices__note">These excerpts describe individual teams' experiences. Results still depend on localization, drivetrain control, path design, constraints, and robot testing.</p>
+
 ## A proven point-to-point idea, packaged for more teams
 
 BLine shares the broad point-to-point philosophy used in custom systems from top programs such as **2910 Jack in the Bot** and **2056 OP Robotics**: steer from the live robot state toward geometric goals instead of treating a pre-timed trajectory as the source of truth. BLine turns that approach into a public browser-and-desktop editor, reusable Java library, logging surface, and documented workflow rather than requiring every team to build its own follower.
