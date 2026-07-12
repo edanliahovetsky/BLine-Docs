@@ -109,7 +109,7 @@ nav:
   - BLine Lib:
     - Overview: lib/index.md
     - Follow Paths: lib/follow-path.md
-    - Construct Paths & JSON: lib/path-construction.md
+    - Create Paths in Java or Load JSON: lib/path-construction.md
     - Events & Command Groups: lib/event-triggers.md
     - Rotation Overrides: lib/rotation-overrides.md
     - Optional Field2d Visualization: lib/field-visualization.md

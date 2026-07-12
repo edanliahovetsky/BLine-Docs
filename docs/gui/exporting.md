@@ -93,4 +93,4 @@ Robot footprint, protrusion rendering, field selection, custom fields, and optim
 
 BLine Web normalizes non-integer runtime numeric values to at most five decimal places when writing JSON, while schema versions and ordinals remain integers.
 
-Related: [Projects, Paths & Collections](menu-bar.md), [Construct Paths & JSON](../lib/path-construction.md), and [Optional Field2d Visualization](../lib/field-visualization.md).
+Related: [Projects, Paths & Collections](menu-bar.md), [Create Paths in Java or Load JSON](../lib/path-construction.md), and [Optional Field2d Visualization](../lib/field-visualization.md).

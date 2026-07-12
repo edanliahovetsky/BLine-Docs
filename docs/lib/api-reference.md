@@ -198,7 +198,7 @@ flipFeedforwardYs(...)
 ## Related guides
 
 - [Follow Paths](follow-path.md)
-- [Construct Paths & JSON](path-construction.md)
+- [Create Paths in Java or Load JSON](path-construction.md)
 - [Events & Command Groups](event-triggers.md)
 - [Rotation Overrides](rotation-overrides.md)
 - [Logging & AdvantageScope](logging.md)

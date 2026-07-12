@@ -151,7 +151,7 @@ In BLine-Lib v0.9.1, all six velocity/acceleration constraint fields must be arr
 }
 ```
 
-Place this object under the path's top-level `constraints` key. Its ordinals must correspond to real elements in that path; see [Construct Paths & JSON](../lib/path-construction.md#complete-path-json) for a complete valid file.
+Place this object under the path's top-level `constraints` key. Its ordinals must correspond to real elements in that path; see [Create Paths in Java or Load JSON](../lib/path-construction.md#complete-path-json) for a complete valid file.
 
 Do not hand-write a numeric scalar for a max/min velocity or acceleration field; v0.9.1 ignores that unsupported form.
 
@@ -194,5 +194,5 @@ Validate on the robot after completing [controller tuning](../getting-started/tu
 ## Next
 
 - [Constraints & Optimizer in BLine Web](../gui/sidebar.md)
-- [Construct Paths & JSON](../lib/path-construction.md)
+- [Create Paths in Java or Load JSON](../lib/path-construction.md)
 - [Practical Recipes](../usage-tips.md)

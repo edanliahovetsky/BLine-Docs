@@ -2,6 +2,8 @@
 
 BLine-Lib v0.9.1 is the Java/WPILib 2026 robot-side library. It loads or constructs paths and exposes `FollowPath`, a WPILib command for holonomic drivetrains.
 
+The editor is optional. Robot code can either load an exported path JSON file or construct a custom `Path` directly from Java elements and constraints. Both forms are passed to the same `FollowPath.Builder.build(Path)` method.
+
 ## Drivetrain contract
 
 `FollowPath.Builder` needs:
@@ -26,7 +28,9 @@ The library returns ordinary robot-relative chassis-speed requests. Converting t
 | `FlippingUtil` | Field flip/mirror helpers for poses, rotations, translations, speeds, and feedforwards |
 | `ChassisRateLimiter` | Translation/rotation acceleration limiting used by the follower |
 
-## Minimal pattern
+## Minimal patterns
+
+Configure one reusable follower builder:
 
 ```java
 FollowPath.Builder builder = new FollowPath.Builder(
@@ -38,10 +42,32 @@ FollowPath.Builder builder = new FollowPath.Builder(
     rotationPid,
     crossTrackPid
 ).withDefaultShouldFlip();
-
-Path path = new Path("first-straight");
-Command follow = builder.build(path);
 ```
+
+Then choose either source for the path:
+
+=== "Construct in Java"
+
+    ```java
+    Path path = new Path(
+        new Path.Waypoint(1.0, 0.8, Rotation2d.fromDegrees(0)),
+        new Path.TranslationTarget(1.5, 1.1),
+        new Path.Waypoint(2.0, 0.8, Rotation2d.fromDegrees(0))
+    );
+
+    Command follow = builder.build(path);
+    ```
+
+    No editor or path JSON is involved. Configure the global defaults in Java as well if this project does not deploy `autos/config.json`; see [Create Paths in Java or Load JSON](path-construction.md#construct-a-path-directly-in-java).
+
+=== "Load exported JSON"
+
+    ```java
+    Path path = new Path("first-straight");
+    Command follow = builder.build(path);
+    ```
+
+    This loads `autos/paths/first-straight.json` and the adjacent `autos/config.json`.
 
 Reset localization once at the transformed start of an autonomous routine. See [First Path Tutorial](../getting-started/quick-start.md#one-time-pose-reset).
 
@@ -72,7 +98,7 @@ Configure them intentionally during robot initialization and clear rotation over
 ## Learn by task
 
 - [Follow Paths](follow-path.md)
-- [Construct Paths & JSON](path-construction.md)
+- [Create Paths in Java or Load JSON](path-construction.md)
 - [Events & Command Groups](event-triggers.md)
 - [Rotation Overrides](rotation-overrides.md)
 - [Optional Field2d Visualization](field-visualization.md)

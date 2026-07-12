@@ -1,6 +1,13 @@
-# Construct Paths & JSON
+# Create Paths in Java or Load JSON
 
-Create paths from exported runtime JSON or directly in Java. Both produce the same `Path` model used by `FollowPath`.
+Create a `Path` directly in robot code or load one from runtime JSON. Both approaches produce the same model used by `FollowPath`.
+
+| If you want to… | Use |
+| --- | --- |
+| Generate a target from robot state, build a reusable path in code, or avoid file deployment | [Java construction](#construct-a-path-directly-in-java) |
+| Draw and simulate on a field, share paths without recompiling, or use BLine Web's authoring tools | [Runtime JSON](#runtime-folder) |
+
+**BLine Web is not required by BLine-Lib.** A Java-constructed path can define its elements, path constraints, and global defaults without importing or exporting a path JSON file.
 
 ## Runtime folder
 
@@ -144,7 +151,25 @@ Only `end_translation_tolerance_meters` and `end_rotation_tolerance_deg` are sca
 
 See [Constraints & Ordinals](../concepts/constraints.md) for the separate zero-based translation/rotation domains.
 
-## Build in Java
+## Construct a path directly in Java
+
+Set global defaults once during robot initialization if the project will not deploy `autos/config.json`:
+
+```java
+Path.setDefaultGlobalConstraints(new Path.DefaultGlobalConstraints(
+    4.5,   // maximum translation velocity (m/s)
+    12.0,  // maximum translation acceleration (m/s²)
+    720.0, // maximum rotation velocity (deg/s)
+    1500.0,// maximum rotation acceleration (deg/s²)
+    0.03,  // end translation tolerance (m)
+    2.0,   // end rotation tolerance (deg)
+    0.45   // intermediate handoff radius (m)
+));
+```
+
+These values are examples matching the current BLine Web project defaults, not universal limits for every robot. Tune and constrain them for the real drivetrain.
+
+Then assemble the custom path from Java elements:
 
 ```java
 Path path = new Path(

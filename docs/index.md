@@ -2,7 +2,7 @@
 
 ## Build fast autos. Tune what the robot actually does.
 
-BLine is an open-source point-to-point path planning suite for FRC holonomic drivetrains. Draw a route in BLine Web—using the hosted editor or desktop app—preview it on the current field, export robot-ready JSON, and follow it from the robot's live pose with a Java library built for rapid testing.
+BLine is an open-source point-to-point path planning suite for FRC holonomic drivetrains. Create paths visually in BLine Web or construct them directly in Java, then follow them from the robot's live pose with a library built for rapid testing. The editor and exported JSON are a convenient authoring workflow, not a requirement.
 
 [Build your first BLine auto](getting-started/prerequisites.md){ .md-button .md-button--primary }
 [Try BLine Web](https://bline-web.pages.dev/){ .md-button }
@@ -17,12 +17,14 @@ BLine shares the broad point-to-point philosophy used in custom systems from top
 !!! info "The tradeoff is intentional"
     BLine prioritizes fast authoring, empirical tunability, and live-pose correction. It is not a time-optimal drivetrain dynamics optimizer, and a drawn polyline is not automatically physically feasible. Teams still need a trustworthy pose estimate, stable module control, safe geometry, realistic constraints, and robot testing. See [Geometric and time-parameterized tracking](concepts/design-philosophy.md#geometric-and-time-parameterized-tracking) for when each approach fits.
 
-## A path workflow from editor to robot
+## Two ways to create a path
 
-| Component | What you do there |
+| Approach | What you do |
 | --- | --- |
-| **BLine Web** | Draw and organize paths in the hosted editor or desktop app, apply constraints, preview idealized motion, and produce robot-ready JSON. |
-| **BLine-Lib** | Load paths in Java, follow them from the live robot pose, run events, transform for alliance/side, and publish diagnostics. |
+| **BLine Web + JSON** | Draw and organize paths in the hosted editor or desktop app, preview idealized motion, export robot-ready JSON, and load it with BLine-Lib. |
+| **Java construction** | Build a `Path` from waypoints, translation targets, rotation targets, events, and constraints in robot code. No editor export or path JSON is required. |
+
+Both approaches create the same BLine-Lib `Path` model and use the same `FollowPath` command. See [Create Paths in Java or Load JSON](lib/path-construction.md) for complete examples.
 
 The current documentation is verified against **BLine Web v0.1.0-alpha.11** and **BLine-Lib v0.9.1**. See [Versions & Support](reference/versions.md).
 
@@ -35,6 +37,7 @@ The current documentation is verified against **BLine Web v0.1.0-alpha.11** and 
 | Tune a real robot | [Tune Your Robot](getting-started/tuning.md) |
 | Learn the current editor | [BLine Web Overview](gui/index.md) |
 | Integrate the Java library | [BLine-Lib Overview](lib/index.md) |
+| Create a path directly in robot code | [Create Paths in Java or Load JSON](lib/path-construction.md#construct-a-path-directly-in-java) |
 | Diagnose a failure | [Common Issues](common-issues.md) |
 
 ## Learn by building

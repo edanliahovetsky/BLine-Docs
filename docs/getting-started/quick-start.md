@@ -2,6 +2,9 @@
 
 This tutorial creates one short path in BLine Web, exports it into a robot project, and follows it with BLine-Lib. The first run is intentionally slow. Its job is to verify the complete editor-to-robot workflow before you tune for competition speed.
 
+!!! info "BLine Web and JSON are optional"
+    This tutorial uses the editor because its field view and simulation make a first path easy to inspect. BLine-Lib can also [construct complete custom paths directly in Java](../lib/path-construction.md#construct-a-path-directly-in-java), including elements and constraints. That workflow does not require BLine Web or an exported path JSON file.
+
 Use a **Blue alliance** Driver Station selection for this first run so the authored coordinates and physical placement match directly. Test automatic red-side transformation only after the blue-origin path works.
 
 ## What you will build
