@@ -15,7 +15,7 @@ BLine Web is the current editor for browser and desktop workflows. It replaces t
 | **Element Properties** | Coordinates, rotation, handoff radius, event key, and linked-element controls for the selection |
 | **Constraints** | Path tolerance and ranged min/max velocity/acceleration controls plus optimizer actions |
 | **Transport** | Reset, play/pause, fast-forward, and timeline scrubbing for idealized simulation |
-| **Status bar** | Current path/project, selection, storage target, autosave state, and errors |
+| **Status bar** | Current path/project, selection, storage target, autosave state, save conflicts, and errors |
 
 ## Projects and runtime files
 

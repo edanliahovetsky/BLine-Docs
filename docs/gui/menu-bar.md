@@ -76,13 +76,27 @@ The lower-right status reports the storage target and state:
 
 - **Browser persistent storage** or direct folder access;
 - autosave pending/saving;
-- saved time; or
+- saved time;
+- **Project changed on disk**; or
 - an error.
 
 Autosave waits while a canvas drag is active, then writes after the interaction. `Ctrl/Cmd + S` or **Save** forces a save of the current workspace.
 
 !!! warning "Save is not always deploy"
     Browser Save updates browser storage. It does not write into the robot repository. Use [Export Autos Folder](exporting.md#export-an-autos-folder) for that transfer.
+
+### Project changed on disk
+
+If the stored project changes outside the editor while you have unsaved edits, autosave pauses, the status reads **Project changed on disk**, and a dialog titled **The project changed on disk** opens. On desktop this usually means git, a GradleRIO deploy, or file sync rewrote the project folder; in the browser it usually means another tab edited the same project.
+
+Your unsaved edits are kept until you choose. The dialog summarizes what differs between your version and the stored copy — paths only in your version, paths only on disk, paths changed on both sides, and whether project settings or linked targets differ — so you can see what each option would replace.
+
+| Action | Result |
+| --- | --- |
+| **Reload from disk** | Discards your unsaved edits and reopens the stored version. |
+| **Keep my changes** | Overwrites the stored version with your unsaved edits. |
+
+Autosave resumes after either choice. If the summary reports no differences, the files were rewritten with matching content and either option is safe.
 
 ## Undo and redo
 

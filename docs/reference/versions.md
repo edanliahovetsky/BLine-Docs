@@ -1,10 +1,10 @@
 # Versions & Support
 
-Last source verification: **July 11, 2026**.
+Last source verification: **July 24, 2026**.
 
 | Component | Documented baseline | Source |
 | --- | --- | --- |
-| BLine Web | `v0.1.0-alpha.11` (`d9ba47b`) | BLine Web release source |
+| BLine Web | `v0.1.0-alpha.12` (`5089393`) | BLine Web release source |
 | BLine-Lib | `v0.9.1` (`fbdc7bf` source; tagged release content) | `BLine-Lib.json` and Gradle project |
 | WPILib | `2026.1.1` dependency baseline | BLine-Lib build configuration |
 | Java | 17 | BLine-Lib build configuration |

@@ -75,7 +75,7 @@ BLine shares the broad point-to-point philosophy used in custom systems from top
 
 Both approaches create the same BLine-Lib `Path` model and use the same `FollowPath` command. See [Create Paths in Java or Load JSON](lib/path-construction.md) for complete examples.
 
-The current documentation is verified against **BLine Web v0.1.0-alpha.11** and **BLine-Lib v0.9.1**. See [Versions & Support](reference/versions.md).
+The current documentation is verified against **BLine Web v0.1.0-alpha.12** and **BLine-Lib v0.9.1**. See [Versions & Support](reference/versions.md).
 
 ## Choose your route
 
