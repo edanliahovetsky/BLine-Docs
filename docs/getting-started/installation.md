@@ -15,22 +15,22 @@ The browser editor stores projects in browser-local persistent storage. Use **Pr
 
 ### Desktop
 
-The desktop build can edit an FRC repository or `autos` folder directly. Current desktop builds are prereleases:
+The desktop build can edit an FRC repository or `autos` folder directly. These downloads are pinned to the current editor, **v0.1.0-alpha.12**, which matches this tutorial. For the separate 2027 preview, see the [Beta 1 guide](../beta/2027-beta-1.md).
 
 === "Windows"
 
-    [Download Windows x64](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/prerelease/windows-x64?source=docs-prerelease)
+    [Download Windows x64](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/v0.1.0-alpha.12/windows-x64?source=docs-current)
 
 === "macOS"
 
-    - [Apple Silicon](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/prerelease/macos-aarch64?source=docs-prerelease)
-    - [Intel](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/prerelease/macos-x64?source=docs-prerelease)
+    - [Apple Silicon](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/v0.1.0-alpha.12/macos-aarch64?source=docs-current)
+    - [Intel](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/v0.1.0-alpha.12/macos-x64?source=docs-current)
 
 === "Linux"
 
-    [Download Linux x64](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/prerelease/linux-x64?source=docs-prerelease)
+    [Download Linux x64](https://bline-metrics.edan-liahovetsky.workers.dev/d/web/v0.1.0-alpha.12/linux-x64?source=docs-current)
 
-Use [GitHub Releases](https://github.com/edanliahovetsky/BLine-Web/releases) if a channel link is unavailable. BLine Web currently warns that mobile support is limited; use a laptop or desktop for path authoring.
+Use the [v0.1.0-alpha.12 release assets](https://github.com/edanliahovetsky/BLine-Web/releases/tag/v0.1.0-alpha.12) if a download link is unavailable. BLine Web currently warns that mobile support is limited; use a laptop or desktop for path authoring.
 
 When the desktop app asks for a folder, choose either:
 

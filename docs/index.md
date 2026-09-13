@@ -77,6 +77,8 @@ Both approaches create the same BLine-Lib `Path` model and use the same `FollowP
 
 The current documentation is verified against **BLine Web v0.1.0-alpha.12** and **BLine-Lib v0.9.1**. See [Versions & Support](reference/versions.md).
 
+The separate [2027 Beta 1 guide](beta/2027-beta-1.md) describes the upcoming editor preview. The tutorials and editor visuals elsewhere on this site continue to cover alpha.12.
+
 ## Choose your route
 
 | Goal | Start here |
