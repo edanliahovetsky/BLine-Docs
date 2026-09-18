@@ -2,6 +2,8 @@
 
 BLine Web is the current editor for browser and desktop workflows. It replaces the legacy PySide BLine-GUI in all current tutorials.
 
+This overview and its visuals cover **v0.1.0-alpha.12**. For the separate 2027 preview, use the [Beta 2 guide](../beta/2027-beta-2.md).
+
 ![Current BLine Web interface on the latest FRC field](../assets/images/editor-overview.png)
 
 ## Interface map

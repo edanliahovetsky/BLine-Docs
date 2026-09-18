@@ -107,6 +107,7 @@ nav:
     - Fields, Footprint & Protrusions: gui/protrusions.md
     - Import, Export & Backups: gui/exporting.md
   - Release Previews:
+    - 2027 Beta 2 Guide: beta/2027-beta-2.md
     - 2027 Beta 1 Guide: beta/2027-beta-1.md
   - BLine Lib:
     - Overview: lib/index.md

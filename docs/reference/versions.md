@@ -1,6 +1,6 @@
 # Versions & Support
 
-Last source verification: **July 24, 2026**.
+Stable baseline source verification: **July 24, 2026**. Preview revisions are identified separately below.
 
 | Component | Documented baseline | Source |
 | --- | --- | --- |
@@ -14,7 +14,9 @@ UI screenshots and GIFs in the current tutorial set were captured from BLine Web
 
 ## Separate 2027 preview
 
-[BLine Web 2027 Beta 1](../beta/2027-beta-1.md) (`v1.0.0-beta.1`) is available as a separate preview. Its guide identifies the release revision and describes the new UI, project format, and storage boundaries. The baseline table, tutorials, and existing editor visuals above remain for the current alpha.12 editor; the preview does not change the documented BLine-Lib version.
+[BLine Web 2027 Beta 2](../beta/2027-beta-2.md) (`v1.0.0-beta.2`, source revision `c1b0777`) is the separate preview. Its guide describes project event keys, Settings lessons, filenames, save recovery, and the editor's storage boundaries. The baseline table, tutorials, and existing editor visuals above remain for the current alpha.12 editor; the preview does not change the documented BLine-Lib version.
+
+The [Beta 1 guide](../beta/2027-beta-1.md) is retained for `v1.0.0-beta.1`. The beta website is a moving preview address; check the displayed version before choosing a guide.
 
 ## Supported workflow
 

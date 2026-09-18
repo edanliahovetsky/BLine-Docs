@@ -2,6 +2,8 @@
 
 An event trigger connects geometric path progress to robot behavior. The path stores a `lib_key`; robot code registers the action for that key.
 
+The [Beta 2 editor's project key list](../beta/2027-beta-2.md#reuse-and-manage-event-lib-keys) helps reuse names across paths. Registration in that list makes a name available in the editor; robot code must still [register its action](../lib/event-triggers.md#register-actions).
+
 ```text
 anchor A ───────── event at t_ratio 0.65 ───────── anchor B
                               │

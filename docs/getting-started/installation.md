@@ -15,7 +15,7 @@ The browser editor stores projects in browser-local persistent storage. Use **Pr
 
 ### Desktop
 
-The desktop build can edit an FRC repository or `autos` folder directly. These downloads are pinned to the current editor, **v0.1.0-alpha.12**, which matches this tutorial. For the separate 2027 preview, see the [Beta 1 guide](../beta/2027-beta-1.md).
+The desktop build can edit an FRC repository or `autos` folder directly. These downloads are pinned to the current editor, **v0.1.0-alpha.12**, which matches this tutorial. For the separate 2027 preview, see the [Beta 2 guide](../beta/2027-beta-2.md).
 
 === "Windows"
 
