@@ -64,7 +64,7 @@ BLineField.drawPath(field, "SelectedAuto", preview);
 
 Pass the original path to a builder that applies the same policy once. Keeping preview and command transformation decisions in one helper reduces double-transform mistakes.
 
-## State behavior in v0.9.1
+## State behavior in v0.9.2
 
 - `flip()` mutates the `Path` and is guarded: a second call is a no-op until `undoFlip()`.
 - `mirror()` mutates the `Path` every time. Two calls restore the original geometry.
@@ -72,7 +72,7 @@ Pass the original path to a builder that applies the same policy once. Keeping p
 - Builder transform suppliers persist and are captured by every later `build(...)` call.
 
 !!! warning "Build a fresh command when transform state may change"
-    `mirror()` has no applied-state guard in v0.9.1, so reinitializing one mirrored `FollowPath` instance can reflect its internal path again. A flipped command also remains flipped if its supplier changes from true to false before a later initialization. Build a fresh command whenever repeating a transformed run or changing the flip/mirror decision, then verify the displayed route.
+    `mirror()` has no applied-state guard in v0.9.2, so reinitializing one mirrored `FollowPath` instance can reflect its internal path again. A flipped command also remains flipped if its supplier changes from true to false before a later initialization. Build a fresh command whenever repeating a transformed run or changing the flip/mirror decision, then verify the displayed route.
 
 ## Field dimensions
 

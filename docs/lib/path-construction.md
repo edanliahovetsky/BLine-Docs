@@ -135,7 +135,7 @@ Global defaults are static. Programmatic element constructors use the current st
 | `event_trigger` | `lib_key` | `t_ratio` |
 | `waypoint` | nested translation and rotation targets | handoff radius, `profiled_rotation` |
 
-Write `profiled_rotation` explicitly. If JSON omits it, v0.9.1 reads `false`; common Java constructors default it to `true`. Omitted rotation/event `t_ratio` defaults to `0.5`.
+Write `profiled_rotation` explicitly. If JSON omits it, v0.9.2 reads `false`; common Java constructors default it to `true`. Omitted rotation/event `t_ratio` defaults to `0.5`.
 
 Keep event `t_ratio` inside `[0,1]` and include a nonempty `lib_key`. A missing key causes the parser to skip the event.
 
@@ -147,7 +147,7 @@ All max/min velocity and acceleration fields must be arrays of:
 { "value": 2.0, "start_ordinal": 0, "end_ordinal": 3 }
 ```
 
-Only `end_translation_tolerance_meters` and `end_rotation_tolerance_deg` are scalar path constraints. A numeric scalar for a velocity/acceleration field is not supported by BLine-Lib v0.9.1.
+Only `end_translation_tolerance_meters` and `end_rotation_tolerance_deg` are scalar path constraints. A numeric scalar for a velocity/acceleration field is not supported by BLine-Lib v0.9.2.
 
 See [Constraints & Ordinals](../concepts/constraints.md) for the separate zero-based translation/rotation domains.
 
@@ -206,7 +206,7 @@ Path constrained = new Path(elements, limits);
 
 ## Prefer construction over mutation
 
-`Path` exposes add/set/remove/reorder methods, but v0.9.1 validates at construction and does not rerun validation after every mutation. Prefer assembling a final list and constructing a new `Path`, especially for runtime-generated paths.
+`Path` exposes add/set/remove/reorder methods, but v0.9.2 validates at construction and does not rerun validation after every mutation. Prefer assembling a final list and constructing a new `Path`, especially for runtime-generated paths.
 
 If mutation is unavoidable, enforce valid first/final anchor types yourself and exercise the exact result before scheduling it.
 

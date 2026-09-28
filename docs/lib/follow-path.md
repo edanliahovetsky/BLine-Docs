@@ -165,7 +165,7 @@ Reset the flag at initialization so state cannot leak across schedules. A plain 
 
 ## Completion and interruption
 
-The command finishes when the final translation and rotation elements are active and both errors are inside their tolerances. v0.9.1 has no measured final-velocity criterion.
+The command finishes when the final translation and rotation elements are active and both errors are inside their tolerances. v0.9.2 has no measured final-velocity criterion.
 
 On normal end, interruption, or defensive invalid-path exit, the follower sends zero robot-relative `ChassisSpeeds`.
 

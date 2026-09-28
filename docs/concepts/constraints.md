@@ -135,7 +135,7 @@ Path path = new Path(elements, constraints);
 
 ## Runtime JSON constraint form
 
-In BLine-Lib v0.9.1, all six velocity/acceleration constraint fields must be arrays of range objects. Only end tolerances are scalar.
+In BLine-Lib v0.9.2, all six velocity/acceleration constraint fields must be arrays of range objects. Only end tolerances are scalar.
 
 ```json
 {
@@ -153,7 +153,7 @@ In BLine-Lib v0.9.1, all six velocity/acceleration constraint fields must be arr
 
 Place this object under the path's top-level `constraints` key. Its ordinals must correspond to real elements in that path; see [Create Paths in Java or Load JSON](../lib/path-construction.md#complete-path-json) for a complete valid file.
 
-Do not hand-write a numeric scalar for a max/min velocity or acceleration field; v0.9.1 ignores that unsupported form.
+Do not hand-write a numeric scalar for a max/min velocity or acceleration field; v0.9.2 ignores that unsupported form.
 
 ## Minimum velocity constraints
 
@@ -168,7 +168,7 @@ Possible advanced uses include:
 Start at zero and first solve ordinary path behavior with controller tuning, maximum-velocity ranged constraints, handoff behavior, and tolerances. A minimum that is too high can carry the robot through the tolerance, create overshoot, or produce chatter.
 
 !!! warning "A minimum does not create continuous path chaining by itself"
-    `FollowPath` still sends zero chassis speeds when the command ends in BLine-Lib v0.9.1. If a composed routine uses a minimum to arrive at the final tolerance with nonzero motion, test the entire command transition and its requirements rather than assuming velocity continuity.
+    `FollowPath` still sends zero chassis speeds when the command ends in BLine-Lib v0.9.2. If a composed routine uses a minimum to arrive at the final tolerance with nonzero motion, test the entire command transition and its requirements rather than assuming velocity continuity.
 
 If the resolved minimum exceeds the resolved maximum at an ordinal, BLine warns, falls back to the global maximum, and disables the minimum there.
 

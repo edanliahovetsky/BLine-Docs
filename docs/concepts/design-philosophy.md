@@ -15,7 +15,7 @@ When `FollowPath` initializes, it applies configured transforms, optionally rese
 7. Applies active velocity floors and ceilings, then limits the change from the prior commanded speeds with the active acceleration constraints.
 8. Converts the result to robot-relative `ChassisSpeeds` and calls the drivetrain consumer.
 
-The command finishes only after it reaches the final translation and rotation elements and both errors are inside their end tolerances. BLine-Lib v0.9.1 does not add a final measured-velocity requirement.
+The command finishes only after it reaches the final translation and rotation elements and both errors are inside their end tolerances. BLine-Lib v0.9.2 does not add a final measured-velocity requirement.
 
 ## A polyline, not a spline
 
@@ -60,7 +60,7 @@ Neither model is universally better. They optimize different assumptions.
 - The drawn polyline is not proof that the chassis can follow it at the requested acceleration.
 - A large handoff radius can cut geometry; a small one can be impossible to enter at speed.
 - The idealized editor simulation cannot predict wheel slip, battery voltage, module response, or localization error.
-- End velocity is not a path constraint in v0.9.1.
+- End velocity is not a path constraint in v0.9.2.
 
 !!! info "Hybrid routines are valid"
     A team can use BLine for disturbance-tolerant or precise geometric moves and another tool for a dynamics-optimized open-field trajectory. Choose per task rather than forcing one follower to solve every motion problem.
@@ -85,7 +85,7 @@ Tune translation first, rotation second, and CTE last so each plot has one main 
 - **Maximum velocity** clips that request to an upper magnitude.
 - **Maximum acceleration** limits the change from BLine's previous commanded velocity; it does not measure or close the loop on actual chassis acceleration.
 - **Minimum velocity** can raise a small request to a configured floor while outside tolerance. It is an advanced controller-domain shaping tool for a demonstrated edge case, not a normal path default or a replacement for controller tuning, maximum-velocity planning, or deliberate command composition.
-- **End tolerances** decide when positional and rotational error are acceptable. v0.9.1 does not also require low measured velocity before finishing.
+- **End tolerances** decide when positional and rotational error are acceptable. v0.9.2 does not also require low measured velocity before finishing.
 
 The rate limiter makes the request consistent with configured command limits. Real acceleration and top speed still depend on battery voltage, motor control, gearing, mass, traction, mechanism motion, and contact with the field.
 

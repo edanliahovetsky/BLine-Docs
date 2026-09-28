@@ -1,6 +1,6 @@
 # BLine-Lib Overview
 
-BLine-Lib v0.9.1 is the Java/WPILib 2026 robot-side library. It loads or constructs paths and exposes `FollowPath`, a WPILib command for holonomic drivetrains.
+BLine-Lib v0.9.2 is the Java/WPILib 2026 robot-side library. It loads or constructs paths and exposes `FollowPath`, a WPILib command for holonomic drivetrains.
 
 The editor is optional. Robot code can either load an exported path JSON file or construct a custom `Path` directly from Java elements and constraints. Both forms are passed to the same `FollowPath.Builder.build(Path)` method.
 

@@ -77,7 +77,7 @@ Do not keep `withPoseReset(driveSubsystem::resetPose)` on the reused builder for
 
 A minimum-velocity ranged constraint can deliberately keep the translation command above zero until the final tolerance is entered. This can be useful when one path should arrive moving into the next path, but it is controller-domain shaping—not a normal path default.
 
-Use it only after the controllers, maximum-velocity plan, endpoint tolerance, and command composition already behave correctly. In BLine-Lib v0.9.1, `FollowPath.end()` still sends zero speeds, so test the whole path-to-path transition rather than assuming the minimum creates mathematically continuous motion.
+Use it only after the controllers, maximum-velocity plan, endpoint tolerance, and command composition already behave correctly. In BLine-Lib v0.9.2, `FollowPath.end()` still sends zero speeds, so test the whole path-to-path transition rather than assuming the minimum creates mathematically continuous motion.
 
 ## Cross a bump or trench
 
@@ -100,7 +100,7 @@ When the final pose must be accurate:
 2. Add a lower maximum-velocity ranged constraint over the final translation ordinals.
 3. Keep the maximum-acceleration limit at the value used to tune and validate the controller unless the robot's physical operating condition requires a different tested envelope.
 4. Choose a tolerance based on the scoring requirement.
-5. Plot measured speed because v0.9.1 has no final-velocity finish criterion.
+5. Plot measured speed because v0.9.2 has no final-velocity finish criterion.
 
 Shape a gentle arrival primarily with the local maximum-velocity ranged constraint. Lowering maximum acceleration after tuning can delay BLine's commanded velocity changes near the endpoint, while an extremely tight tolerance does not fix an approach that is too fast.
 

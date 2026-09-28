@@ -10,7 +10,7 @@ A PID controller compares a **measurement** with a **setpoint** and turns their 
 - **I** responds to error accumulated over time.
 - **D** responds to how quickly the error changes.
 
-Start with P only. Add D only when a repeatable plot shows that damping is needed, and treat I cautiously—especially for cross-track control, whose integral state can persist between path commands in BLine-Lib v0.9.1. If PID is new to you, read WPILib's [Introduction to PID](https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-pid.html) and [`PIDController` documentation](https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/pidcontroller.html) before enabling a tuning path.
+Start with P only. Add D only when a repeatable plot shows that damping is needed, and treat I cautiously—especially for cross-track control, whose integral state can persist between path commands in BLine-Lib v0.9.2. If PID is new to you, read WPILib's [Introduction to PID](https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-pid.html) and [`PIDController` documentation](https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/pidcontroller.html) before enabling a tuning path.
 
 ## Meet BLine's three controllers
 
@@ -147,7 +147,7 @@ For example, at `P = 2.0` and a `4.5 m/s` maximum, the raw request leaves the ve
 The translation PID matters most near the endpoint. Far from the end, its raw output commonly exceeds the maximum-velocity constraint and is intentionally clamped.
 
 !!! warning "Completion does not check final velocity"
-    BLine-Lib v0.9.1 finishes when the final translation and rotation targets are inside tolerance. It does not also require near-zero measured velocity. Entering a loose tolerance at high speed can finish the command and immediately request zero. Validate the endpoint at the full intended motion envelope.
+    BLine-Lib v0.9.2 finishes when the final translation and rotation targets are inside tolerance. It does not also require near-zero measured velocity. Entering a loose tolerance at high speed can finish the command and immediately request zero. Validate the endpoint at the full intended motion envelope.
 
 ## 2. Tune rotation
 
@@ -224,7 +224,7 @@ Begin around CTE `P = 0.2` and adjust in small steps:
 
 ![Illustrative cross-track-error plots comparing correction that is too slow, smooth convergence, and oscillation around the segment](../assets/images/tuning/cross-track-response.svg)
 
-Use P-only CTE as the starting point. In BLine-Lib v0.9.1 the cross-track controller is not reset at every command initialization, so integral state can persist across commands.
+Use P-only CTE as the starting point. In BLine-Lib v0.9.2 the cross-track controller is not reset at every command initialization, so integral state can persist across commands.
 
 !!! note "Orbiting an intermediate target is usually not a CTE problem"
     If the robot overshoots an intermediate element, reverses, and repeats, inspect its handoff behavior and incoming maximum velocity first. Cross-track control corrects lateral distance from the active segment; it should not compensate for an intermediate handoff the robot cannot enter.

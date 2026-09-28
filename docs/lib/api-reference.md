@@ -1,6 +1,6 @@
 # API Reference
 
-This is a task-oriented index for BLine-Lib v0.9.1. Use the [generated Javadocs](https://edanliahovetsky.github.io/BLine-Lib/) for every overload, parameter, and return contract.
+This is a task-oriented index for BLine-Lib v0.9.2. Use the [generated Javadocs](https://edanliahovetsky.github.io/BLine-Lib/) for every overload, parameter, and return contract.
 
 ## `Path`
 
@@ -68,7 +68,7 @@ Path.RotationTargetConstraint
 | `copy()` | Deep path copy |
 | `isValid()` | Construction-time validity state |
 
-In v0.9.1, mutation methods do not recompute validity. Prefer constructing a new finalized `Path` after structural changes.
+In v0.9.2, mutation methods do not recompute validity. Prefer constructing a new finalized `Path` after structural changes.
 
 ## `FollowPath`
 
@@ -125,7 +125,7 @@ setPoseLoggingConsumer(...)
 setTranslationListLoggingConsumer(...)
 ```
 
-Passing `null` leaves the existing consumer unchanged in v0.9.1. Pass `ignored -> {}` to disable.
+Passing `null` leaves the existing consumer unchanged in v0.9.2. Pass `ignored -> {}` to disable.
 
 ### Diagnostics
 

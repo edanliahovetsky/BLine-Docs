@@ -24,7 +24,7 @@ An event is not a continuous zone. For “run while between A and B,” use a st
 
 Keep multiple events on the same segment in ascending `t_ratio` order. BLine processes the list in path order and stops when it reaches the first event whose geometric position has not yet been passed. An out-of-order list can delay a lower-ratio event.
 
-Keep every `t_ratio` inside `[0, 1]`. BLine-Lib v0.9.1 does not clamp event ratios.
+Keep every `t_ratio` inside `[0, 1]`. BLine-Lib v0.9.2 does not clamp event ratios.
 
 ## Decide between an event and another path
 

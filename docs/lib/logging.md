@@ -24,7 +24,7 @@ All keys begin with `FollowPath/`. Their full AdvantageScope location depends on
 
 ### Disable a consumer
 
-Passing `null` does **not** clear an existing consumer in v0.9.1; the setter ignores it. Replace it with a no-op:
+Passing `null` does **not** clear an existing consumer in v0.9.2; the setter ignores it. Replace it with a no-op:
 
 ```java
 FollowPath.setDoubleLoggingConsumer(ignored -> {});
@@ -71,7 +71,7 @@ See [Tune Your Robot](../getting-started/tuning.md) for the low/correct/high gai
 | `dtSeconds` | s | Time since the prior execute cycle |
 | `remainingPathDistanceMeters` | m | Robot-to-current-target distance plus all remaining polyline segments |
 | `currentSegmentLengthMeters` | m | Active translation segment length |
-| `currentSegmentProgress` | 0–1 | Projection progress on active translation segment |
+| `currentSegmentProgress` | 0–1 | Projection progress on active translation segment, clamped to its endpoints |
 | `translationElementIndex` | index | Active index in the expanded runtime element list |
 | `rotationElementIndex` | index | Active expanded-list rotation index, or `-1` when none |
 | `rotationPreviousElementIndex` | index | Prior expanded-list rotation index |
@@ -82,9 +82,9 @@ See [Tune Your Robot](../getting-started/tuning.md) for the low/correct/high gai
 | `translationControllerOutput` | m/s | Output after clamp and minimum baseline, before CTE and chassis rate limiting |
 | `minTranslationVelocityMetersPerSec` | m/s | Active resolved minimum baseline |
 | `maxTranslationVelocityMetersPerSec` | m/s | Active resolved maximum |
-| `crossTrackError` | m | Signed perpendicular distance from directed active segment |
-| `crossTrackControllerOutput` | m/s | Unclamped CTE correction magnitude |
-| `segmentProgress` | 0–1 | Progress used for profiled rotation; emitted when applicable |
+| `crossTrackError` | m | Signed perpendicular distance to the active segment's line |
+| `crossTrackControllerOutput` | m/s | Signed CTE correction along the segment's right normal, before chassis limiting |
+| `segmentProgress` | 0–1 | Geometric progress between rotation targets, independent of the active translation segment |
 | `targetRotationDeg` | deg | Current interpolated/snap rotation setpoint |
 | `rawRotationControllerOutput` | rad/s | Rotation controller result before max clamp |
 | `clampedRotationControllerOutput` | rad/s | Rotation result after max clamp |
@@ -95,14 +95,14 @@ See [Tune Your Robot](../getting-started/tuning.md) for the low/correct/high gai
 | `minRotationVelocityDegPerSec` | deg/s | Active resolved minimum rotation baseline |
 | `maxRotationVelocityDegPerSec` | deg/s | Active resolved maximum rotation velocity |
 | `rotationErrorDeg` | deg | Error to the full active rotation target, not always the interpolated target |
-| `currentRotationTargetInitRad` | rad | Starting heading for the active rotation interpolation |
+| `currentRotationTargetInitRad` | rad | Live heading captured at initialization or when the previous rotation target index changes; diagnostic only |
 | `eventTriggerElementIndex` | index | Event-processing cursor in expanded path order |
 | `eventTriggersFiredCount` | count | Reached/consumed event elements in this run, including keys with no registered action |
 
 !!! note "Indices are not constraint ordinals"
     Element-index keys refer to the expanded runtime list where a waypoint becomes separate translation and rotation entries. The editor's translation/rotation constraint ordinals are separate domains.
 
-In v0.9.1, the implemented cross-track sign is positive on the geometric left of a directed segment under standard WPILib coordinates. Confirm this on your plots before using the sign in robot logic.
+Cross-track error is positive on the geometric left of the directed segment under standard WPILib coordinates. Its projection uses the segment's extended line, so distance before the start or beyond the end does not count as lateral error. Correction acts perpendicular to that line. A segment whose endpoints coincide has zero cross-track error and correction.
 
 ## Boolean keys
 
@@ -126,7 +126,7 @@ In v0.9.1, the implemented cross-track sign is positive on the geometric left of
 
 | Key | Type | Meaning |
 | --- | --- | --- |
-| `FollowPath/closestPoint` | `Pose2d` | Closest point on active segment, with live robot heading |
+| `FollowPath/closestPoint` | `Pose2d` | Perpendicular projection onto the active segment's line, possibly beyond either endpoint, with live robot heading; segment start when endpoints coincide |
 | `FollowPath/rotationTargetPose` | `Pose2d` | Active rotation target's segment position and full target heading |
 | `FollowPath/pathTranslations` | `Translation2d[]` | Planned translation anchors, emitted at initialize |
 | `FollowPath/robotTranslations` | `Translation2d[]` | Sampled robot trail; every third loop, capped to recent samples |

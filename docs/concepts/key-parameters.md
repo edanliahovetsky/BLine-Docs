@@ -35,7 +35,7 @@ FollowPath.Builder builder = new FollowPath.Builder(/* ... */)
     .withTRatioBasedTranslationHandoffs(true);
 ```
 
-This option is **off by default** in BLine-Lib v0.9.1 and persists on the builder after you enable it. For most paths whose intermediate anchors are pass-through points, enabling it is the recommended starting behavior.
+This option is **off by default** in BLine-Lib v0.9.2 and persists on the builder after you enable it. For most paths whose intermediate anchors are pass-through points, enabling it is the recommended starting behavior.
 
 The threshold is the progress of a point one handoff radius before the target along the segment centerline:
 
@@ -63,11 +63,13 @@ Projection-based handoff can advance while the robot is laterally outside the ci
 
 BLine evaluates progress from the robot's geometric projection onto that segment, not elapsed time. A sideways disturbance does not by itself fire a marker unless the projected progress passes it.
 
-Keep hand-authored event ratios inside `[0, 1]`. Rotation ratios are clamped internally in v0.9.1; event ratios are not.
+Keep hand-authored event ratios inside `[0, 1]`. Rotation ratios are clamped internally in v0.9.2; event ratios are not.
 
 ## Profiled rotation
 
-When `profiled_rotation` is true, the target heading interpolates from the previous rotation target as segment progress advances. When false, the full target becomes active immediately.
+When `profiled_rotation` is true, the target heading interpolates along the shortest angular path as geometric progress advances between rotation targets. This progress follows the ordered path independently of early translation handoffs: advancing the translation target does not complete an unfinished rotation. When projection moves onto the next leg at a corner, interpolation continues from the heading requested on the prior leg.
+
+When `profiled_rotation` is false, the full target becomes active immediately. At the final position tolerance, BLine requests the final authored heading so the rotation tolerance can be satisfied.
 
 Use profiled rotation for a gradual heading change. Use non-profiled rotation when the robot should begin driving directly toward a new angle, while still respecting the rotational velocity and acceleration constraints.
 
@@ -87,7 +89,7 @@ The final translation anchor does not use an intermediate handoff. `FollowPath` 
 - translation error is inside the path/global translation tolerance; and
 - rotation error is inside the path/global rotation tolerance.
 
-!!! warning "No final velocity tolerance in v0.9.1"
+!!! warning "No final velocity tolerance in v0.9.2"
     The command can enter both tolerances while still moving. `end()` then sends zero chassis speeds. Test the endpoint at the path's real maximum speed and use a smaller local velocity cap when a gentle arrival matters.
 
 ### Tolerance tradeoff

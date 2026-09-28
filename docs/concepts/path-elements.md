@@ -76,7 +76,7 @@ new Path.RotationTarget(
 - **Non-profiled rotation** exposes the full new target when it becomes active.
 
 !!! warning "Java and hand-authored JSON have different omission defaults"
-    The common Java `RotationTarget` constructor defaults profiled rotation to `true`. If hand-authored JSON omits `profiled_rotation`, BLine-Lib v0.9.1 reads it as `false`. Write the field explicitly in JSON.
+    The common Java `RotationTarget` constructor defaults profiled rotation to `true`. If hand-authored JSON omits `profiled_rotation`, BLine-Lib v0.9.2 reads it as `false`. Write the field explicitly in JSON.
 
 ## Event trigger
 

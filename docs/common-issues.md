@@ -4,10 +4,10 @@ Start from the symptom. Change one thing at a time. Use the matching log keys wh
 
 ## The BLine-Lib dependency does not resolve
 
-Confirm the installed/tagged version exists. Current stable is `v0.9.1`:
+Confirm the installed/tagged version exists. Current stable is `v0.9.2`:
 
 ```gradle
-implementation 'com.github.edanliahovetsky:BLine-Lib:v0.9.1'
+implementation 'com.github.edanliahovetsky:BLine-Lib:v0.9.2'
 ```
 
 Reinstall the vendor URL and refresh Gradle. Use the direct GitHub vendor JSON if the metrics endpoint is temporarily unavailable. See [Installation](getting-started/installation.md#2-install-bline-lib).
@@ -94,7 +94,7 @@ Use the [translation tuning plots](getting-started/tuning.md#1-tune-translation)
 
 ## The command finishes while still moving
 
-BLine-Lib v0.9.1 has no final measured-velocity criterion. If the robot enters both tolerances with momentum, the command finishes and sends zero speeds.
+BLine-Lib v0.9.2 has no final measured-velocity criterion. If the robot enters both tolerances with momentum, the command finishes and sends zero speeds.
 
 Add a lower maximum-velocity ranged constraint before the final anchor and validate measured velocity at the finish. Tightening tolerance alone may make the behavior slower or less stable without producing a gentle arrival.
 
@@ -139,7 +139,7 @@ Plot `eventTriggerElementIndex` and `eventTriggersFiredCount`.
 
 ## A JSON constraint has no effect
 
-In v0.9.1, max/min velocity and acceleration constraints must be arrays of range objects. Numeric scalars for those six fields are ignored. Only end tolerances are scalar. See [Runtime JSON form](concepts/constraints.md#runtime-json-constraint-form).
+In v0.9.2, max/min velocity and acceleration constraints must be arrays of range objects. Numeric scalars for those six fields are ignored. Only end tolerances are scalar. See [Runtime JSON form](concepts/constraints.md#runtime-json-constraint-form).
 
 Also remember that editor ordinals are one-based while runtime JSON ordinals are zero-based.
 
