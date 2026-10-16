@@ -91,15 +91,17 @@ Build the robot project before proceeding. If the dependency does not resolve, s
 
 ## WPILib 2027 beta
 
-BLine-Lib **v2027.0.0-beta.2** is a separate prerelease for **WPILib 2027.0.0-alpha-7 and Java 25**. In that project, install this vendor URL through **WPILib: Manage Vendor Libraries → Install new libraries (online)**:
+BLine-Lib **v2027.0.0-beta.3** is a separate prerelease for **WPILib 2027.0.0-alpha-7 and Java 25**. In that project, install this vendor URL through **WPILib: Manage Vendor Libraries → Install new libraries (online)**:
 
 ```text
 https://raw.githubusercontent.com/edanliahovetsky/BLine-Lib/wpilib-2027/BLine-Lib-2027.json
 ```
 
-Keep only one BLine vendordep: remove the stable `BLine-Lib.json` when migrating. The beta vendor file selects `com.github.edanliahovetsky:BLine-Lib:v2027.0.0-beta.2` from JitPack. Build the robot project after installation.
+Keep only one BLine vendordep: remove the stable `BLine-Lib.json` when migrating. The beta vendor file selects `com.github.edanliahovetsky:BLine-Lib:v2027.0.0-beta.3` from JitPack. Build the robot project after installation.
 
-Follow the [2027 setup and migration guide](https://github.com/edanliahovetsky/BLine-Lib/blob/v2027.0.0-beta.2/WPILIB_2027.md) for its imports, Commands v2/v3 adapters, and drivetrain setup, and use the [2027 beta editor](https://web-beta.bline-web.pages.dev/). The Java examples elsewhere on this site and the [hosted Javadoc](https://edanliahovetsky.github.io/BLine-Lib/) describe the stable 2026 API. Use the beta's packaged Javadoc for its API reference.
+The 2027 beta's root package is `bline`, for example `import bline.commands.FollowPath;`. The stable 2026 line keeps `frc.robot.lib.BLine`. When updating from an earlier 2027 beta, replace `frc.robot.lib.BLine.` with `bline.` in your imports; class names, subpackages, and signatures are unchanged.
+
+Follow the [2027 setup and migration guide](https://github.com/edanliahovetsky/BLine-Lib/blob/v2027.0.0-beta.3/WPILIB_2027.md) for its imports, Commands v2/v3 adapters, and drivetrain setup, and use the [2027 beta editor](https://web-beta.bline-web.pages.dev/). The Java examples elsewhere on this site and the [hosted Javadoc](https://edanliahovetsky.github.io/BLine-Lib/) describe the stable 2026 API. Use the beta's packaged Javadoc for its API reference.
 
 ## Legacy BLine-GUI
 

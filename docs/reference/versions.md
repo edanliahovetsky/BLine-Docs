@@ -16,7 +16,7 @@ UI screenshots and GIFs in the current tutorial set were captured from BLine Web
 
 ### Robot library
 
-BLine-Lib **`v2027.0.0-beta.2`** (source `2f2d0fc`) targets **WPILib `2027.0.0-alpha-7` and Java 25**. Use its [separate installation instructions](../getting-started/installation.md#wpilib-2027-beta) and [versioned setup and migration guide](https://github.com/edanliahovetsky/BLine-Lib/blob/v2027.0.0-beta.2/WPILIB_2027.md). The library tutorials and API reference elsewhere on this site describe the stable 2026 line. The beta guide and its packaged Javadoc describe the 2027 API; the hosted Javadoc remains stable-only.
+BLine-Lib **`v2027.0.0-beta.3`** (source `4402250`) targets **WPILib `2027.0.0-alpha-7` and Java 25**. Use its [separate installation instructions](../getting-started/installation.md#wpilib-2027-beta) and [versioned setup and migration guide](https://github.com/edanliahovetsky/BLine-Lib/blob/v2027.0.0-beta.3/WPILIB_2027.md). The library tutorials and API reference elsewhere on this site describe the stable 2026 line. The beta guide and its packaged Javadoc describe the 2027 API; the hosted Javadoc remains stable-only.
 
 ### Editor
 
