@@ -1,6 +1,6 @@
 site_name: BLine Documentation
 site_description: Tutorial and reference documentation for BLine autonomous path planning and tracking
-site_url: https://bline-docs.pages.dev/
+site_url: https://docs.bline.run/
 site_author: BLine contributors
 copyright: BLine documentation is licensed under the BSD 3-Clause License.
 repo_url: https://github.com/edanliahovetsky/BLine-Docs

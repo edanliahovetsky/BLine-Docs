@@ -5,8 +5,8 @@
 
 Tutorial and reference documentation for [BLine Web](https://github.com/edanliahovetsky/BLine-Web) and [BLine-Lib](https://github.com/edanliahovetsky/BLine-Lib), an FRC geometric path-authoring and following workflow for holonomic drivetrains.
 
-- [Read the live documentation](https://bline-docs.pages.dev/)
-- [Open BLine Web](https://bline-web.pages.dev/)
+- [Read the live documentation](https://docs.bline.run/)
+- [Open BLine Web](https://bline.run/)
 - [Download the latest documentation PDF](https://github.com/edanliahovetsky/BLine-Docs/releases/latest/download/BLine-Docs.pdf)
 - [Join the Chief Delphi discussion](https://www.chiefdelphi.com/t/introducing-bline-a-new-rapid-polyline-autonomous-path-planning-suite/509778)
 

@@ -56,7 +56,7 @@ Read [How BLine Works](../concepts/design-philosophy.md) for a fuller comparison
 
 | Use | Best choice |
 | --- | --- |
-| Try BLine or edit from any laptop | [Hosted BLine Web](https://bline-web.pages.dev/) |
+| Try BLine or edit from any laptop | [Hosted BLine Web](https://bline.run/) |
 | Work directly in a robot repository | BLine Web desktop app |
 | Generate a dynamic path entirely in Java | BLine-Lib without the editor |
 

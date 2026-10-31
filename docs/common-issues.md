@@ -165,7 +165,7 @@ Compare:
 
 ## Windows blocks the desktop build
 
-Current prerelease installers may be unsigned. Verify the download source. If the team cannot approve the desktop build, use the hosted browser editor and export the autos folder.
+Desktop installers may be unsigned. Verify the download source. If the team cannot approve the desktop build, use the hosted browser editor and export the autos folder.
 
 ## How to ask for help
 

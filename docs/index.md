@@ -5,7 +5,7 @@
 BLine is an open-source point-to-point path planning suite for FRC holonomic drivetrains. Create paths visually in BLine Web or construct them directly in Java, then follow them from the robot's live pose with a library built for rapid testing. The editor and exported JSON are a convenient authoring workflow, not a requirement.
 
 [Build your first BLine auto](getting-started/prerequisites.md){ .md-button .md-button--primary }
-[Try BLine Web](https://bline-web.pages.dev/){ .md-button }
+[Try BLine Web](https://bline.run/){ .md-button }
 
 ![BLine Web simulating a multi-element path around the 2026 REBUILT field from the robot's live geometric progress](assets/images/gif-posters/homepage-simulation-start.png){ .gif-demo data-gif-source="/assets/gifs/web/homepage-simulation.gif" data-gif-poster="/assets/images/gif-posters/homepage-simulation-start.png" data-gif-end="/assets/images/gif-posters/homepage-simulation-end.png" data-gif-duration="26330" }
 ![Static final state of the BLine Web simulation on the 2026 REBUILT field](assets/images/gif-posters/homepage-simulation-end.png){ .gif-print-poster }
@@ -75,9 +75,7 @@ BLine shares the broad point-to-point philosophy used in custom systems from top
 
 Both approaches create the same BLine-Lib `Path` model and use the same `FollowPath` command. See [Create Paths in Java or Load JSON](lib/path-construction.md) for complete examples.
 
-The current documentation is verified against **BLine Web v0.1.0-alpha.12** and **BLine-Lib v0.9.2**. See [Versions & Support](reference/versions.md).
-
-The [2027 Beta 2 guide](beta/2027-beta-2.md) describes the separate editor preview; the [Beta 1 guide](beta/2027-beta-1.md) remains available for that release. The tutorials and editor visuals elsewhere on this site continue to cover alpha.12.
+The current editor release is **BLine Web v1.0.0**, the 2027 editor. The tutorials and editor visuals on this site were verified against **v0.1.0-alpha.12**; the [2027 Beta 1](beta/2027-beta-1.md) and [Beta 2](beta/2027-beta-2.md) guides describe the 2027 changes. The robot library is verified against **BLine-Lib v0.9.2**. See [Versions & Support](reference/versions.md).
 
 ## Choose your route
 

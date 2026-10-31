@@ -1,10 +1,10 @@
 # Versions & Support
 
-Editor baseline source verification: **July 24, 2026**. Library source verification: **September 28, 2026**. Preview revisions are identified separately below.
+Editor tutorial source verification: **July 24, 2026**. Editor release check: **October 31, 2026**. Library source verification: **September 28, 2026**. Preview revisions are identified separately below.
 
 | Component | Documented baseline | Source |
 | --- | --- | --- |
-| BLine Web | `v0.1.0-alpha.12` (`5089393`) | BLine Web release source |
+| BLine Web | Current release `v1.0.0` (`6351d6b`); tutorials and visuals `v0.1.0-alpha.12` (`5089393`) | BLine Web release source |
 | BLine-Lib | `v0.9.2` (`c88adfd`) | `BLine-Lib.json` and Gradle project |
 | WPILib | `2026.1.1` dependency baseline | BLine-Lib build configuration |
 | Java | 17 | BLine-Lib build configuration |
@@ -18,11 +18,13 @@ UI screenshots and GIFs in the current tutorial set were captured from BLine Web
 
 BLine-Lib **`v2027.0.0-beta.3`** (source `4402250`) targets **WPILib `2027.0.0-alpha-7` and Java 25**. Use its [separate installation instructions](../getting-started/installation.md#wpilib-2027-beta) and [versioned setup and migration guide](https://github.com/edanliahovetsky/BLine-Lib/blob/v2027.0.0-beta.3/WPILIB_2027.md). The library tutorials and API reference elsewhere on this site describe the stable 2026 line. The beta guide and its packaged Javadoc describe the 2027 API; the hosted Javadoc remains stable-only.
 
-### Editor
+## BLine Web 1.0
 
-[BLine Web 2027 Beta 2](../beta/2027-beta-2.md) (`v1.0.0-beta.2`, source revision `b12be8e`) is the separate preview. Its guide describes project event keys, Settings lessons, filenames, save recovery, and the editor's storage boundaries. The baseline table, tutorials, and existing editor visuals above remain for the current alpha.12 editor; the preview does not change the documented BLine-Lib version.
+BLine Web **v1.0.0** is the 2027 editor. It is hosted at [bline.run](https://bline.run/), and upcoming versions are previewed at [beta.bline.run](https://beta.bline.run/). The former `bline-web.pages.dev` and `web-beta.bline-web.pages.dev` addresses move a browser's saved projects to bline.run once and then redirect; see [Installation](../getting-started/installation.md#browser).
 
-The [Beta 1 guide](../beta/2027-beta-1.md) is retained for `v1.0.0-beta.1`. The beta website is a moving preview address; check the displayed version before choosing a guide.
+The tutorials and existing editor visuals on this site still describe alpha.12. The [2027 Beta 2](../beta/2027-beta-2.md) (`v1.0.0-beta.2`, source revision `b12be8e`) and [Beta 1](../beta/2027-beta-1.md) (`v1.0.0-beta.1`) guides describe the 2027 changes, including project event keys, Settings lessons, filenames, save recovery, and storage boundaries.
+
+BLine-Lib v0.9.2 loads paths exported by v1.0.0. Settings added in the 2027 editor, such as tank-drive settings and **Min Velocity** ranged constraints, take effect only with the 2027 robot library above.
 
 ## Supported workflow
 
@@ -30,7 +32,7 @@ The [Beta 1 guide](../beta/2027-beta-1.md) is retained for `v1.0.0-beta.1`. The 
 - Java robot projects
 - WPILib command-based integration
 - Browser editor on a desktop-class browser
-- BLine Web desktop prerelease builds for supported Windows, macOS, and Linux architectures
+- BLine Web desktop builds for supported Windows, macOS, and Linux architectures
 
 Mobile editing is currently marked as limited/buggy by BLine Web. Use a laptop or desktop for competition path authoring.
 
@@ -41,7 +43,7 @@ Mobile editing is currently marked as limited/buggy by BLine Web. Use a laptop o
 - End constraints do not include nonzero desired end velocity or a final measured-velocity finish check.
 - The editor simulator is idealized kinematics, not drivetrain physics or controller simulation.
 - Collections, linked-element identities, custom fields, and optimizer metadata are editor-only; BLine-Lib loads individual runtime path/config JSON.
-- BLine Web remains an alpha release. Keep exports under version control and retain project archives.
+- Keep editor exports under version control and retain project archives.
 
 ## Legacy editor
 

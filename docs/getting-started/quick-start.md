@@ -42,7 +42,7 @@ These are **tutorial values**, not a universal tune. A new BLine Web project cur
 
 ## 1. Create a project
 
-Open [BLine Web](https://bline-web.pages.dev/).
+Open [BLine Web](https://bline.run/).
 
 - **Browser:** choose **Project → Workspace → New Project**.
 - **Desktop:** choose **Project → Folder → Create Project Folder…**, then select the robot repository or `src/main/deploy/autos`.
