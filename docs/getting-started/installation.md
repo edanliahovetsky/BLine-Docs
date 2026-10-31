@@ -44,7 +44,7 @@ The app resolves a selected robot repository to `src/main/deploy/autos` and crea
 
 ## 2. Install BLine-Lib
 
-The current robot-library release is **v0.9.2** for WPILib 2026 and Java 17. It loads paths exported by BLine Web v1.0.0. Settings added in the 2027 editor, such as tank-drive settings and **Min Velocity** ranged constraints, take effect only with the [2027 library](#wpilib-2027-beta).
+The current robot-library release is **v0.9.2** for WPILib 2026 and Java 17. It loads paths exported by BLine Web v1.0.0. Settings added in the 2027 editor, tank drive direction and **Progress** handoffs, take effect only with the [2027 library](#wpilib-2027-beta).
 
 ### Vendor JSON
 
