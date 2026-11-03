@@ -1,11 +1,11 @@
 # Versions & Support
 
-Editor tutorial source verification: **July 24, 2026**. Editor release check: **October 31, 2026**. Library source verification: **September 28, 2026**. Preview revisions are identified separately below.
+Editor tutorial source verification: **July 24, 2026**. Editor release check: **October 31, 2026**. Library source verification: **September 28, 2026**. Library release check: **November 3, 2026**. Preview revisions are identified separately below.
 
 | Component | Documented baseline | Source |
 | --- | --- | --- |
 | BLine Web | Current release `v1.0.0` (`6351d6b`); tutorials and visuals `v0.1.0-alpha.12` (`5089393`) | BLine Web release source |
-| BLine-Lib | `v0.9.2` (`c88adfd`) | `BLine-Lib.json` and Gradle project |
+| BLine-Lib | `v0.9.3` (`e6e17ec`) | `BLine-Lib.json` and Gradle project |
 | WPILib | `2026.1.1` dependency baseline | BLine-Lib build configuration |
 | Java | 17 | BLine-Lib build configuration |
 | Current demo field | **REBUILT 2026** | BLine Web default field |
@@ -24,7 +24,7 @@ BLine Web **v1.0.0** is the 2027 editor. It is hosted at [bline.run](https://bli
 
 The tutorials and existing editor visuals on this site still describe alpha.12. The [2027 Beta 2](../beta/2027-beta-2.md) (`v1.0.0-beta.2`, source revision `b12be8e`) and [Beta 1](../beta/2027-beta-1.md) (`v1.0.0-beta.1`) guides describe the 2027 changes, including project event keys, Settings lessons, filenames, save recovery, and storage boundaries.
 
-BLine-Lib v0.9.2 loads paths exported by v1.0.0. Settings added in the 2027 editor, tank drive direction and **Progress** handoffs, take effect only with the 2027 robot library above.
+BLine-Lib v0.9.3 loads paths exported by v1.0.0. Settings added in the 2027 editor, tank drive direction and **Progress** handoffs, take effect only with the 2027 robot library above.
 
 ## Supported workflow
 

@@ -75,7 +75,7 @@ BLine shares the broad point-to-point philosophy used in custom systems from top
 
 Both approaches create the same BLine-Lib `Path` model and use the same `FollowPath` command. See [Create Paths in Java or Load JSON](lib/path-construction.md) for complete examples.
 
-The current editor release is **BLine Web v1.0.0**, the 2027 editor. The tutorials and editor visuals on this site were verified against **v0.1.0-alpha.12**; the [2027 Beta 1](beta/2027-beta-1.md) and [Beta 2](beta/2027-beta-2.md) guides describe the 2027 changes. The robot library is verified against **BLine-Lib v0.9.2**. See [Versions & Support](reference/versions.md).
+The current editor release is **BLine Web v1.0.0**, the 2027 editor. The tutorials and editor visuals on this site were verified against **v0.1.0-alpha.12**; the [2027 Beta 1](beta/2027-beta-1.md) and [Beta 2](beta/2027-beta-2.md) guides describe the 2027 changes. The robot-library pages describe the current release, **BLine-Lib v0.9.3**. See [Versions & Support](reference/versions.md).
 
 ## Choose your route
 

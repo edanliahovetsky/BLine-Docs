@@ -20,7 +20,7 @@ FollowPath.Builder pathBuilder = new FollowPath.Builder(/* ... */)
     .withDefaultShouldFlip();
 ```
 
-At command initialization, this checks `DriverStation.getAlliance()` and flips the builder's private path copy for red. Author the source path once from the blue-origin perspective and do not also call `Path.flip()` manually.
+Each time the command initializes, this checks `DriverStation.getAlliance()` and, for red, flips the command's private copy of the path. Author the source path once from the blue-origin perspective and do not also call `Path.flip()` manually.
 
 For custom decisions:
 
@@ -64,15 +64,13 @@ BLineField.drawPath(field, "SelectedAuto", preview);
 
 Pass the original path to a builder that applies the same policy once. Keeping preview and command transformation decisions in one helper reduces double-transform mistakes.
 
-## State behavior in v0.9.2
+## State behavior in v0.9.3
 
 - `flip()` mutates the `Path` and is guarded: a second call is a no-op until `undoFlip()`.
 - `mirror()` mutates the `Path` every time. Two calls restore the original geometry.
-- `FollowPath.Builder.build(...)` copies the source path, so its initialization transform does not mutate the object you supplied.
+- `FollowPath.Builder.build(...)` copies the source path. Later edits to the object you supplied do not affect the command, and the command's transforms never mutate it.
+- Each initialization starts from that build-time copy and applies the current flip and mirror decisions. One built command, such as an auto held in a chooser, can be scheduled again after the alliance or mirror decision changes.
 - Builder transform suppliers persist and are captured by every later `build(...)` call.
-
-!!! warning "Build a fresh command when transform state may change"
-    `mirror()` has no applied-state guard in v0.9.2, so reinitializing one mirrored `FollowPath` instance can reflect its internal path again. A flipped command also remains flipped if its supplier changes from true to false before a later initialization. Build a fresh command whenever repeating a transformed run or changing the flip/mirror decision, then verify the displayed route.
 
 ## Field dimensions
 

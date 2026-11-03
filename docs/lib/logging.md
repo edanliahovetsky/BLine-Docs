@@ -24,7 +24,7 @@ All keys begin with `FollowPath/`. Their full AdvantageScope location depends on
 
 ### Disable a consumer
 
-Passing `null` does **not** clear an existing consumer in v0.9.2; the setter ignores it. Replace it with a no-op:
+Passing `null` does **not** clear an existing consumer in v0.9.3; the setter ignores it. Replace it with a no-op:
 
 ```java
 FollowPath.setDoubleLoggingConsumer(ignored -> {});
